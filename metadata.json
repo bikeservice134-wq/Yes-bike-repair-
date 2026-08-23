@@ -1,0 +1,6 @@
+{
+  "name": "YES Bike Repair",
+  "description": "Professional doorstep bike repair and service landing page.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
