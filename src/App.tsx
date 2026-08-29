@@ -26,7 +26,9 @@ import {
   Battery,
   Droplet,
   Car,
-  SprayCan
+  SprayCan,
+  Share2,
+  Facebook
 } from 'lucide-react';
 
 
@@ -86,7 +88,7 @@ const BookingTrackerModal = ({ onClose }: { onClose: () => void }) => {
               <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                 <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-[#151515] bg-gray-100 dark:bg-[#222] text-gray-400 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-500"
                   style={{
-                    backgroundColor: isCompleted || isActive ? '#dc2626' : '',
+                    backgroundColor: isCompleted || isActive ? '#eab308' : '',
                     color: isCompleted || isActive ? '#fff' : ''
                   }}
                 >
@@ -95,7 +97,7 @@ const BookingTrackerModal = ({ onClose }: { onClose: () => void }) => {
                 
                 <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-100 dark:border-[#2a2a2a] bg-gray-50 dark:bg-[#1a1a1a] shadow-sm transition-all duration-500"
                   style={{
-                    borderColor: isActive ? '#dc2626' : '',
+                    borderColor: isActive ? '#eab308' : '',
                     opacity: currentStep < index ? 0.5 : 1,
                     transform: isActive ? 'scale(1.02)' : 'scale(1)'
                   }}
@@ -250,20 +252,20 @@ export default function App() {
 
   return (
     <div className={`min-h-screen ${isDark ? "dark" : ""} transition-colors duration-300`}>
-      <div className="bg-white dark:bg-[#0b0b0b] text-gray-900 dark:text-white font-sans selection:bg-red-600 selection:text-white min-h-screen">
+      <div className="bg-white dark:bg-[#0b0b0b] text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black min-h-screen">
             {/* NAVBAR */}
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#0b0b0b]/95 border-b border-gray-200 dark:border-[#303030] backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={logoUrl} alt="Yes Bike Service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
-            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-red-600 leading-none text-left">
+            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-yellow-500 leading-none text-left">
               YES <span className="text-gray-900 dark:text-white">BIKE SERVICE</span>
             </button>
           </div>
           <nav className="hidden lg:flex gap-6 items-center">
-            <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-red-700 dark:hover:text-red-600 transition-colors">Home</a>
-            <a href="#pricing" className="text-gray-900 dark:text-white font-semibold hover:text-red-700 dark:hover:text-red-600 transition-colors">Pricing</a>
-            <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-red-700 dark:hover:text-red-600 transition-colors">Book Service</a>
+            <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Home</a>
+            <a href="#pricing" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Pricing</a>
+            <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Book Service</a>
           </nav>
           
           <button 
@@ -271,9 +273,9 @@ export default function App() {
             className="ml-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label="Toggle Theme"
           >
-            {isDark ? <Sun className="w-5 h-5 text-red-500" /> : <Moon className="w-5 h-5 text-gray-600" />}
+            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
           </button>
-          <a href="#home" className="hidden md:inline-flex bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-extrabold transition-colors ml-4">
+          <a href="#home" className="hidden md:inline-flex bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2.5 rounded-lg font-extrabold transition-colors ml-4">
 
             Book Now
           </a>
@@ -293,12 +295,8 @@ export default function App() {
                   <FadeIn>
         <div className="max-w-6xl w-full mx-auto px-5 py-16 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-[72px] font-bold leading-[1.05] mb-5 text-gray-900 dark:text-white">
-              Doorstep Bike & Car<br />
-              <span className="text-red-700 dark:text-red-600">Repair Services.</span>
-            </h1>
             <p className="text-gray-600 dark:text-[#bdbdbd] text-lg md:text-[19px] max-w-[620px] mb-8">
-              Professional bike and car servicing at your home.
+              Professional two-wheeler servicing at your home.
               Book a verified mechanic online and get your vehicle fixed
               without visiting a service center.
             </p>
@@ -309,13 +307,13 @@ export default function App() {
             <h3 className="text-gray-900 dark:text-white text-[25px] font-bold mb-3">Book in 30 Seconds.</h3>
             
             <ul className="text-sm text-gray-600 dark:text-gray-400 mb-5 space-y-2 font-medium">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-red-600" /> Certified mechanic at your doorstep in 30 minutes.</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-red-600" /> Services starting from ₹399.</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-red-600" /> 30-day service warranty for complete peace of mind.</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Certified mechanic at your doorstep in 30 minutes.</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Services starting from ₹399.</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> 30-day service warranty for complete peace of mind.</li>
             </ul>
 
             <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1 rounded-lg mb-5 border border-gray-200 dark:border-[#303030]">
-              {['Bike', 'Scooter', 'Car'].map(type => (
+              {['Bike', 'Scooter'].map(type => (
                 <button
                   key={type}
                   type="button"
@@ -332,12 +330,12 @@ export default function App() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input type="text" name="name" required placeholder="Full Name *" 
-                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]" />
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
                 <div>
                   <input type="tel" name="phone" required placeholder="Mobile No *"
                     pattern="[0-9]{10}" maxLength={10}
-                    className={`w-full p-[13px] rounded-lg border ${heroErrors.phone ? 'border-red-500' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]`} />
-                  {heroErrors.phone && <p className="text-red-500 text-sm mt-1">{heroErrors.phone}</p>}
+                    className={`w-full p-[13px] rounded-lg border ${heroErrors.phone ? 'border-yellow-400' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]`} />
+                  {heroErrors.phone && <p className="text-yellow-400 text-sm mt-1">{heroErrors.phone}</p>}
                 </div>
               </div>
 
@@ -354,8 +352,8 @@ export default function App() {
                   onFocus={() => setIsLocationDropdownOpen(true)}
                   onBlur={() => setTimeout(() => setIsLocationDropdownOpen(false), 200)}
                   autoComplete="off"
-                  className={`w-full p-[13px] rounded-lg border ${heroErrors.location ? 'border-red-500' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]`} />
-                {heroErrors.location && <p className="text-red-500 text-sm mt-1">{heroErrors.location}</p>}
+                  className={`w-full p-[13px] rounded-lg border ${heroErrors.location ? 'border-yellow-400' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]`} />
+                {heroErrors.location && <p className="text-yellow-400 text-sm mt-1">{heroErrors.location}</p>}
                 
                 {isLocationDropdownOpen && locationSearch.trim().length > 0 && (
                   <ul className="absolute z-10 w-full mt-1 bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-lg shadow-xl max-h-48 overflow-y-auto">
@@ -381,16 +379,16 @@ export default function App() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input type="text" name="brand" required placeholder="Brand (e.g. Honda) *" 
-                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]" />
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
                 <input type="text" name="model" required placeholder="Model *" 
-                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]" />
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <select name="service" required
-                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]">
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]">
                   <option value="">Select Service *</option>
-                  {heroVehicle === 'Car' ? (
+                  {heroVehicle === 'Car_Removed' ? (
                     <>
                       <option>₹999 Jump Start</option>
                       <option>₹999 Puncture Repair</option>
@@ -407,7 +405,7 @@ export default function App() {
                 </select>
 
                 <select name="timeSlot" required value={selectedTimeSlot} onChange={(e) => setSelectedTimeSlot(e.target.value)}
-                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all text-[15px]">
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]">
                   <option value="">Select Time *</option>
                   <option>Morning (9-12)</option>
                   <option>Afternoon (12-4)</option>
@@ -428,8 +426,9 @@ export default function App() {
                    </span>
                 </div>
               )}
+              
 
-              <button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors text-[16px] flex justify-center items-center gap-2 mt-2">
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors text-[16px] flex justify-center items-center gap-2 mt-2">
                 <Wrench className="w-5 h-5" /> Book Mechanic Now
               </button>
 
@@ -438,11 +437,11 @@ export default function App() {
             <div className="mt-6 pt-5 border-t border-gray-200 dark:border-[#303030]">
               <h4 className="text-gray-900 dark:text-white font-bold text-[16px] mb-3 text-center">Service Highlights</h4>
               <ul className="grid grid-cols-2 gap-y-2 gap-x-2 text-xs text-gray-600 dark:text-[#bdbdbd] font-medium">
-                <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-red-600" /> Verified Mechanics</li>
-                <li className="flex items-center gap-1.5"><Settings className="w-3.5 h-3.5 text-red-600" /> Genuine Spare Parts</li>
-                <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-red-600" /> 30-Day Warranty</li>
-                <li className="flex items-center gap-1.5"><DollarSign className="w-3.5 h-3.5 text-red-600" /> Transparent Pricing</li>
-                <li className="flex items-center gap-1.5 col-span-2 justify-center mt-1"><Home className="w-3.5 h-3.5 text-red-600" /> Doorstep Service</li>
+                <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-yellow-500" /> Verified Mechanics</li>
+                <li className="flex items-center gap-1.5"><Settings className="w-3.5 h-3.5 text-yellow-500" /> Genuine Spare Parts</li>
+                <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-yellow-500" /> 30-Day Warranty</li>
+                <li className="flex items-center gap-1.5"><DollarSign className="w-3.5 h-3.5 text-yellow-500" /> Transparent Pricing</li>
+                <li className="flex items-center gap-1.5 col-span-2 justify-center mt-1"><Home className="w-3.5 h-3.5 text-yellow-500" /> Doorstep Service</li>
               </ul>
             </div>
           </div>
@@ -457,9 +456,9 @@ export default function App() {
         <FadeIn>
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-[32px] font-bold mb-12 text-gray-900 dark:text-white">
-              Trusted by <span className="text-red-700 dark:text-red-600">Riders</span>
+              Trusted by <span className="text-yellow-600 dark:text-yellow-500">Riders</span>
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
               <div className="flex flex-col items-center">
                 <div className="text-[40px] md:text-[48px] font-black text-gray-900 dark:text-white leading-none mb-3">58,000+</div>
                 <div className="text-gray-600 dark:text-[#bdbdbd] font-bold text-sm tracking-wide">Happy Customers</div>
@@ -483,91 +482,59 @@ export default function App() {
         </FadeIn>
       </section>
 
-      {/* SERVICES LIST */}
-      <section className="py-20 px-5 bg-gray-50 dark:bg-[#101010]">
-        <FadeIn>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-11">
-              <h2 className="text-[36px] md:text-[40px] font-bold mb-4 leading-tight text-gray-900 dark:text-white max-w-3xl mx-auto">
-                Experience the Best <span className="text-red-600 dark:text-red-500">Two-Wheeler Service</span>
-              </h2>
-              <p className="text-gray-600 dark:text-[#bdbdbd] max-w-2xl mx-auto text-[16px] md:text-[18px]">
-                Periodic bike services, two-wheeler batteries, bike inspection, tyre replacement, EV repair, engine oil replacement, full and half engine repair, and much more.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              {[
-                { icon: Calendar, text: 'Periodic Service' },
-                { icon: Settings, text: 'Engine Repair' },
-                { icon: Truck, text: 'RSA Services' },
-                { icon: Battery, text: 'Bike Batteries' },
-                { icon: Droplet, text: 'Wash & Wheel Care' },
-                { icon: Car, text: 'Accidental Repair' },
-                { icon: SprayCan, text: 'Dent & Paint' },
-                { icon: Car, text: 'Car Services' }
-              ].map((item, i) => (
-                <div key={i} className="bg-white dark:bg-[#1d1d1d] aspect-square p-4 md:p-6 rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] dark:shadow-none border border-gray-100 dark:border-[#303030] flex flex-col items-center justify-center text-center group hover:border-red-600 transition-colors cursor-pointer">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#fee2e2] dark:bg-red-900/20 flex items-center justify-center text-red-600 dark:text-red-500 mb-3 group-hover:bg-red-600 group-hover:text-white transition-colors">
-                    <item.icon size={28} className="md:w-8 md:h-8" />
-                  </div>
-                  <div className="font-bold text-gray-900 dark:text-white text-[14px] md:text-[16px] leading-tight">
-                    {item.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-12 text-center">
-               <a href="#home" className="inline-flex bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold transition-colors items-center gap-2 text-lg">
-                  Book Service
-               </a>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
 
-      {/* MECHANIC ON CALL */}
-      <section className="py-20 px-5 bg-white dark:bg-[#1d1d1d] border-t border-gray-200 dark:border-[#303030]">
+      
+
+      {/* ABOUT US */}
+      <section id="about" className="py-20 px-5 bg-white dark:bg-[#1d1d1d] border-t border-gray-200 dark:border-[#303030]">
         <FadeIn>
-          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
             <div className="lg:w-1/2">
+              <span className="text-yellow-500 font-black tracking-widest uppercase text-sm mb-3 block">About YES Bike Service</span>
               <h2 className="text-[36px] md:text-[40px] font-bold mb-6 leading-tight text-gray-900 dark:text-white">
-                Mechanic on <span className="text-red-600 dark:text-red-500">Call Services</span>
+                Reliable Two-Wheeler Service, <span className="text-yellow-500 dark:text-yellow-400">Right at Your Doorstep</span>
               </h2>
+              
               <p className="text-gray-600 dark:text-[#bdbdbd] mb-4 text-[17px] leading-relaxed">
-                No time to visit a bike workshop or scooter service center? Yes Bike Service brings the workshop to your doorstep.
+                At YES Bike Service, we make bike and scooter servicing simple, convenient, and transparent. Our goal is to save riders time by bringing professional two-wheeler service and repair directly to their doorstep.
               </p>
-              <p className="text-gray-600 dark:text-[#bdbdbd] mb-8 text-[17px] leading-relaxed">
-                With just one tap in the Yes Bike Service app, book a trusted mechanic at your home, office, or preferred location. Simply choose Doorstep Services, select the service package you need, and schedule your appointment.
+              <p className="text-gray-600 dark:text-[#bdbdbd] mb-10 text-[17px] leading-relaxed">
+                From routine servicing and brake repairs to battery replacement, tyre services, engine work, and emergency assistance, our experienced mechanics are equipped to handle your bike’s needs with care.
+              </p>
+              
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h3>
+              <p className="text-gray-600 dark:text-[#bdbdbd] mb-6 text-[17px] leading-relaxed border-l-4 border-yellow-500 pl-4">
+                We’re building a better way to maintain two-wheelers—combining professional workmanship, transparent pricing, convenient doorstep service, and a customer-first experience.
               </p>
               
               <p className="font-bold text-gray-900 dark:text-white text-[19px] mb-8">
-                Your bike needs service. We bring the mechanic to you.
+                Your Bike. Our Expertise. Service Made Easy.
               </p>
-              <a href="#home" className="inline-flex justify-center w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold transition-colors items-center gap-2 text-lg">
-                Book your doorstep bike service today!
+              <a href="#home" className="inline-flex justify-center w-full sm:w-auto bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-xl font-bold transition-colors items-center gap-2 text-lg">
+                Book Service Today
               </a>
             </div>
             
-            <div className="lg:w-1/2 w-full">
+            <div className="lg:w-1/2 w-full mt-8 lg:mt-0">
               <div className="bg-gray-50 dark:bg-[#101010] border border-gray-100 dark:border-[#303030] rounded-3xl p-8 md:p-10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Why Choose Yes Bike Service?</h3>
-                <ul className="space-y-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Why Choose YES Bike Service?</h3>
+                <ul className="space-y-6">
                   {[
-                    'Verified mechanics',
-                    'Convenient doorstep service',
-                    'Genuine spare parts',
-                    'Transparent pricing',
-                    'Multiple bike & scooter services',
-                    'Easy online booking',
-                    'Service warranty'
+                    { icon: '🔧', title: 'Verified Mechanics', desc: 'Skilled professionals you can trust.' },
+                    { icon: '🏠', title: 'Doorstep Service', desc: 'Get your bike serviced at home or office.' },
+                    { icon: '🛠️', title: 'Genuine Spare Parts', desc: 'Quality parts for dependable performance.' },
+                    { icon: '💰', title: 'Transparent Pricing', desc: 'Know the cost before approving repairs.' },
+                    { icon: '🛡️', title: 'Service Warranty', desc: 'Added confidence with warranty-backed service.' },
+                    { icon: '📱', title: 'Easy Online Booking', desc: 'Book your service in just a few clicks.' }
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full shrink-0">
-                         <CheckCircle2 className="w-5 h-5 text-red-600 dark:text-red-500" />
+                    <li key={i} className="flex items-start gap-4">
+                      <div className="bg-yellow-100 dark:bg-yellow-900/20 p-3 rounded-xl shrink-0 text-xl flex items-center justify-center">
+                         {item.icon}
                       </div>
-                      <span className="text-gray-800 dark:text-[#e0e0e0] text-[17px] font-medium">{item}</span>
+                      <div>
+                        <span className="block text-gray-900 dark:text-white text-[17px] font-bold mb-1">{item.title}</span>
+                        <span className="block text-gray-600 dark:text-[#bdbdbd] text-[15px]">{item.desc}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -576,14 +543,165 @@ export default function App() {
           </div>
         </FadeIn>
       </section>
+      {/* OUR SERVICES */}
+      <section id="services" className="py-20 px-5 bg-gray-50 dark:bg-[#101010] border-t border-gray-200 dark:border-[#303030]">
+        <FadeIn>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-[36px] md:text-[40px] font-bold mb-4 leading-tight text-gray-900 dark:text-white">
+                Our <span className="text-yellow-500 dark:text-yellow-400">Comprehensive Services</span>
+              </h2>
+              <p className="text-gray-600 dark:text-[#bdbdbd] max-w-2xl mx-auto text-[17px]">
+                From routine maintenance to complete overhauls, we offer a wide range of services to keep your two-wheeler in top condition.
+              </p>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: 'Engine Repair & Overhaul', icon: '🔧', desc: 'Complete engine repair and overhaul, including dismantling, detailed inspection, replacement of worn components, precision assembly, and comprehensive performance testing.' },
+                { title: 'Battery Replacement', icon: '🔋', desc: 'We check battery health, charging performance, and electrical connections before installing a high-quality battery compatible with your motorcycle’s specifications.' },
+                { title: 'Tyre Replacement', icon: '🛞', desc: 'Complete tyre replacement with tyre inspection, professional installation, wheel balancing, air-pressure adjustment, and safety checks for confident riding.' },
+                { title: 'Brake Service', icon: '🛑', desc: 'Thorough brake inspection covering brake pads, discs, drums, brake fluid, and cables, followed by necessary adjustments and performance testing for reliable stopping power.' },
+                { title: 'Clutch Repair', icon: '⚡', desc: 'Experiencing hard gear shifts, clutch slipping, or poor acceleration? Our technicians inspect and adjust the clutch, replace cables when required, and service clutch plates for smoother gear engagement.' },
+                { title: 'Chain & Sprocket Replacement', icon: '⛓️', desc: 'We inspect chain and sprocket wear, lubricate moving components, adjust chain tension, and replace worn parts to improve drivetrain performance and extend component life.' },
+                { title: 'Suspension Repair', icon: '🌀', desc: 'Inspection and repair of front forks, rear shock absorbers, bushings, seals, and other suspension components to provide a smoother, safer, and more controlled ride.' },
+                { title: 'Electrical Repair', icon: '💡', desc: 'Professional diagnosis and repair of wiring, switches, lights, horn, indicators, ignition, charging circuits, and electrical accessories using appropriate diagnostic equipment.' },
+                { title: 'Insurance Claim Assistance', icon: '📄', desc: 'We make the repair process easier by assisting with insurance documentation, vehicle inspection coordination, repair estimates, and quality restoration work.' }
+              ].map((service, idx) => (
+                <div key={idx} className="bg-white dark:bg-[#1d1d1d] p-6 md:p-8 rounded-2xl border border-gray-100 dark:border-[#303030] hover:border-yellow-500 transition-colors shadow-[0_2px_10px_rgba(0,0,0,0.02)] dark:shadow-none group">
+                  <div className="text-4xl mb-4 opacity-90 group-hover:scale-110 transition-transform origin-left">{service.icon}</div>
+                  <h3 className="text-[20px] font-bold text-gray-900 dark:text-white mb-3">{service.title}</h3>
+                  <p className="text-gray-600 dark:text-[#bdbdbd] text-[15px] leading-relaxed">{service.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+      {/* BRANDS WE SERVICE */}
+      <section className="py-20 px-5 bg-white dark:bg-[#1d1d1d] border-t border-gray-200 dark:border-[#303030]">
+        <FadeIn>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-[36px] md:text-[40px] font-bold mb-4 leading-tight text-gray-900 dark:text-white">
+                Brands We <span className="text-yellow-500 dark:text-yellow-400">Service</span>
+              </h2>
+              <p className="text-gray-600 dark:text-[#bdbdbd] max-w-2xl mx-auto text-[17px]">
+                Our expert mechanics are trained to repair and service all major two-wheeler brands with genuine spare parts.
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {[
+                'Honda', 'Hero', 'Bajaj', 'TVS', 'Yamaha', 'Royal Enfield', 'Suzuki', 'KTM', 'Vespa', 'Aprilia', 'Ather', 'Ola'
+              ].map((brand, idx) => (
+                <div key={idx} className="bg-gray-50 dark:bg-[#101010] border border-gray-100 dark:border-[#303030] hover:border-yellow-500 transition-colors rounded-2xl py-4 px-8 flex items-center justify-center min-w-[140px] shadow-[0_2px_10px_rgba(0,0,0,0.02)] dark:shadow-none cursor-default group">
+                  <span className="text-lg font-bold text-gray-700 dark:text-[#e0e0e0] group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
+                    {brand}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+      {/* HOW IT WORKS */}
+      <section className="py-20 px-5 bg-gray-50 dark:bg-[#101010] border-t border-gray-200 dark:border-[#303030]">
+        <FadeIn>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-[36px] md:text-[40px] font-bold mb-4 leading-tight text-gray-900 dark:text-white">
+                How Our <span className="text-yellow-500 dark:text-yellow-400">Bike Service Works</span>
+              </h2>
+              <p className="text-gray-600 dark:text-[#bdbdbd] max-w-2xl mx-auto text-[17px]">
+                A simple, transparent, and hassle-free process from booking to delivery.
+              </p>
+            </div>
+
+            <div className="relative border-l-2 border-yellow-500/30 ml-4 md:ml-8 space-y-10 py-2">
+              {[
+                { icon: '📞', title: 'Book Your Bike Service', desc: 'Call us or connect with us on WhatsApp to schedule your preferred service date and time. Simply share your bike model, service requirements, and pickup location.' },
+                { icon: '🚚', title: 'Free Pickup & Drop', desc: 'Our team collects your motorcycle from your home, office, or any convenient location. No workshop visits, long queues, or unnecessary waiting.' },
+                { icon: '🔍', title: 'Complete Bike Inspection', desc: 'Once your bike reaches our service facility, our trained mechanics conduct a detailed inspection covering the engine, brakes, battery, tyres, and other key components.' },
+                { icon: '📋', title: 'Transparent Estimate & Approval', desc: 'After the inspection, we provide a clear and transparent service estimate. If additional repairs or spare parts are required, we proceed only after your approval.' },
+                { icon: '🔧', title: 'Professional Repair & Servicing', desc: 'Our experienced technicians perform the required servicing and repairs using genuine spare parts and recommended service procedures.' },
+                { icon: '🧪', title: 'Quality Check & Road Test', desc: 'Before delivery, every bike goes through a comprehensive quality inspection and performance check to ensure your bike is ready for the road.' },
+                { icon: '🏍️', title: 'Safe Delivery to Your Door', desc: 'Once the service is complete, your motorcycle is cleaned, inspected, and delivered safely back to your home or office.' }
+              ].map((step, idx) => (
+                <div key={idx} className="relative pl-10 md:pl-12">
+                  <div className="absolute -left-[21px] top-4 w-10 h-10 bg-yellow-500 text-gray-900 rounded-full flex items-center justify-center font-bold text-lg shadow-lg ring-8 ring-gray-50 dark:ring-[#101010]">
+                    {idx + 1}
+                  </div>
+                  <div className="bg-white dark:bg-[#1d1d1d] p-6 md:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none border border-gray-100 dark:border-[#303030] hover:border-yellow-500/30 transition-colors group">
+                    <h3 className="text-[20px] font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-3">
+                      <span className="text-2xl group-hover:scale-110 transition-transform">{step.icon}</span> 
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-[#bdbdbd] text-[16px] leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+      <section className="py-20 px-5 bg-gray-900 dark:bg-[#0a0a0a] border-t border-gray-800 dark:border-[#222]">
+        <FadeIn>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-[36px] md:text-[40px] font-bold mb-4 leading-tight text-white">
+                How We <span className="text-yellow-500">Compare</span>
+              </h2>
+              <p className="text-gray-400 max-w-2xl mx-auto text-[17px]">
+                See why thousands of riders choose our service over local garages and authorized service centers.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr>
+                    <th className="p-4 border-b-2 border-gray-700 text-white font-bold text-lg w-1/4">Feature</th>
+                    <th className="p-4 border-b-2 border-yellow-500 bg-yellow-500/10 text-yellow-500 font-bold text-lg text-center rounded-t-xl w-1/4">YES Bike Service</th>
+                    <th className="p-4 border-b-2 border-gray-700 text-gray-400 font-bold text-lg text-center w-1/4">Local Garage</th>
+                    <th className="p-4 border-b-2 border-gray-700 text-gray-400 font-bold text-lg text-center w-1/4">Authorized Center</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[16px]">
+                  {[
+                    { feature: 'Doorstep Service', apna: true, local: false, auth: false },
+                    { feature: 'Transparent Pricing', apna: true, local: false, auth: 'Partial' },
+                    { feature: 'Genuine Spares', apna: true, local: 'Uncertain', auth: true },
+                    { feature: 'Service Warranty', apna: 'Yes (30 Days)', local: false, auth: 'Yes' },
+                    { feature: 'Time Taken', apna: 'Same Day', local: 'Variable', auth: '1-3 Days' },
+                    { feature: 'Live Updates', apna: true, local: false, auth: false }
+                  ].map((row, idx) => (
+                    <tr key={idx} className="border-b border-gray-800">
+                      <td className="p-4 font-medium text-gray-300">{row.feature}</td>
+                      <td className="p-4 bg-yellow-500/5 text-center">
+                        {row.apna === true ? <CheckCircle2 className="w-6 h-6 text-yellow-500 mx-auto" /> : <span className="font-bold text-yellow-500">{row.apna}</span>}
+                      </td>
+                      <td className="p-4 text-center text-gray-500">
+                        {row.local === false ? <X className="w-6 h-6 text-red-500 mx-auto opacity-50" /> : row.local === true ? <CheckCircle2 className="w-6 h-6 text-green-500 mx-auto opacity-50" /> : <span>{row.local}</span>}
+                      </td>
+                      <td className="p-4 text-center text-gray-500">
+                        {row.auth === false ? <X className="w-6 h-6 text-red-500 mx-auto opacity-50" /> : row.auth === true ? <CheckCircle2 className="w-6 h-6 text-green-500 mx-auto opacity-50" /> : <span>{row.auth}</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
       {/* PRICING */}
-      <section id="pricing" className="py-20 px-5 bg-gray-50 dark:bg-[#101010]">
+      <section id="pricing" className="py-20 px-5 bg-gray-50 dark:bg-[#101010] border-t border-gray-200 dark:border-[#303030]">
         <FadeIn>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-11">
             <h2 className="text-[40px] font-bold mb-2.5 leading-tight text-gray-900 dark:text-white">
-              Service <span className="text-red-700 dark:text-red-600">Packages</span>
+              Service <span className="text-yellow-600 dark:text-yellow-500">Packages</span>
             </h2>
             <p className="text-gray-600 dark:text-[#bdbdbd]">Choose the right package for your vehicle. Expert mechanics handle it all right at your location.</p>
           </div>
@@ -591,7 +709,7 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-[18px] p-[30px] relative flex flex-col shadow-sm dark:shadow-none">
               <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">Basic Service</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹399</div>
+              <div className="text-yellow-600 dark:text-yellow-500 text-[38px] font-black my-[15px]">₹399</div>
               <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
                 <li>✓ Bike Inspection</li>
                 <li>✓ Chain Lubrication</li>
@@ -599,17 +717,17 @@ export default function App() {
                 <li>✓ Battery Check</li>
                 <li>✓ Basic Cleaning</li>
               </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors">
+              <a href="#home" className="block text-center bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors">
                 Book Now
               </a>
             </div>
 
-            <div className="bg-red-50 dark:bg-[#1d1d1d] border-2 border-red-600 rounded-[18px] p-[30px] relative flex flex-col shadow-md dark:shadow-none scale-105 z-10 hidden md:flex">
-              <div className="absolute -top-[14px] right-5 bg-red-600 text-white px-3 py-1 rounded-[20px] text-[12px] font-black">
+            <div className="bg-yellow-50 dark:bg-[#1d1d1d] border-2 border-yellow-500 rounded-[18px] p-[30px] relative flex flex-col shadow-md dark:shadow-none scale-105 z-10 hidden md:flex">
+              <div className="absolute -top-[14px] right-5 bg-yellow-500 text-black px-3 py-1 rounded-[20px] text-[12px] font-black">
                 MOST POPULAR
               </div>
               <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">General Service</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹699</div>
+              <div className="text-yellow-600 dark:text-yellow-500 text-[38px] font-black my-[15px]">₹699</div>
               <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Complete Inspection</li>
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Engine Check</li>
@@ -618,18 +736,18 @@ export default function App() {
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Electrical Check</li>
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Lubrication</li>
               </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors shadow-sm dark:shadow-none">
+              <a href="#home" className="block text-center bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors shadow-sm dark:shadow-none">
                 Book Now
               </a>
             </div>
             
             {/* Mobile version without scale for Most Popular */}
-            <div className="bg-red-50 dark:bg-[#1d1d1d] border-2 border-red-600 rounded-[18px] p-[30px] relative flex flex-col shadow-md dark:shadow-none lg:hidden">
-              <div className="absolute -top-[14px] right-5 bg-red-600 text-white px-3 py-1 rounded-[20px] text-[12px] font-black">
+            <div className="bg-yellow-50 dark:bg-[#1d1d1d] border-2 border-yellow-500 rounded-[18px] p-[30px] relative flex flex-col shadow-md dark:shadow-none lg:hidden">
+              <div className="absolute -top-[14px] right-5 bg-yellow-500 text-black px-3 py-1 rounded-[20px] text-[12px] font-black">
                 MOST POPULAR
               </div>
               <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">General Service</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹699</div>
+              <div className="text-yellow-600 dark:text-yellow-500 text-[38px] font-black my-[15px]">₹699</div>
               <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Complete Inspection</li>
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Engine Check</li>
@@ -638,14 +756,14 @@ export default function App() {
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Electrical Check</li>
                 <li className="font-medium text-gray-800 dark:text-[#ddd]">✓ Lubrication</li>
               </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors shadow-sm dark:shadow-none">
+              <a href="#home" className="block text-center bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors shadow-sm dark:shadow-none">
                 Book Now
               </a>
             </div>
 
             <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-[18px] p-[30px] relative flex flex-col shadow-sm dark:shadow-none">
               <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">Full Service</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹1,339</div>
+              <div className="text-yellow-600 dark:text-yellow-500 text-[38px] font-black my-[15px]">₹1,339</div>
               <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
                 <li>✓ Full Bike Inspection</li>
                 <li>✓ Engine Service</li>
@@ -654,45 +772,11 @@ export default function App() {
                 <li>✓ Chain Service</li>
                 <li>✓ Complete Maintenance</li>
               </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors">
+              <a href="#home" className="block text-center bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors">
                 Book Now
               </a>
             </div>
-            <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-[18px] p-[30px] relative flex flex-col shadow-sm dark:shadow-none">
-              <div className="absolute -top-[14px] left-5 bg-black text-white px-3 py-1 rounded-[20px] text-[12px] font-black">
-                CAR SERVICE
-              </div>
-              <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">Jump Start</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹999</div>
-              <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
-                <li>✓ Quick Response</li>
-                <li>✓ Battery Inspection</li>
-                <li>✓ Jump Start Service</li>
-                <li>✓ Alternator Check</li>
-                <li>✓ At Your Location</li>
-              </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors">
-                Book Now
-              </a>
-            </div>
-
-            <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-[18px] p-[30px] relative flex flex-col shadow-sm dark:shadow-none">
-              <div className="absolute -top-[14px] left-5 bg-black text-white px-3 py-1 rounded-[20px] text-[12px] font-black">
-                CAR SERVICE
-              </div>
-              <h3 className="text-[19px] font-bold text-gray-900 dark:text-white">Puncture Repair</h3>
-              <div className="text-red-700 dark:text-red-600 text-[38px] font-black my-[15px]">₹999</div>
-              <ul className="space-y-[16px] my-5 flex-1 text-gray-600 dark:text-[#bdbdbd]">
-                <li>✓ Professional Tools</li>
-                <li>✓ Tubeless Tyre Repair</li>
-                <li>✓ Air Pressure Check</li>
-                <li>✓ Wheel Inspection</li>
-                <li>✓ At Your Location</li>
-              </ul>
-              <a href="#home" className="block text-center bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-lg font-extrabold transition-colors">
-                Book Now
-              </a>
-            </div>
+            
           </div>
         </div>
                     </FadeIn>
@@ -711,7 +795,7 @@ export default function App() {
               
               <div>
                 <h2 className="text-[36px] font-bold mb-4 leading-tight text-gray-900 dark:text-white">
-                  Our Service <span className="text-red-700 dark:text-red-600">Coverage</span>
+                  Our Service <span className="text-yellow-600 dark:text-yellow-500">Coverage</span>
                 </h2>
                 <p className="text-gray-600 dark:text-[#bdbdbd] mb-8 text-[17px]">
                   We currently provide doorstep repair services across major neighborhoods in Bangalore. Fast, reliable, and right at your location.
@@ -719,8 +803,8 @@ export default function App() {
                 
                 <div className="flex flex-wrap gap-2.5">
                   {AVAILABLE_LOCATIONS.map((loc, idx) => (
-                    <span key={'loc-'+idx} className="bg-gray-50 dark:bg-[#151515] text-gray-800 dark:text-[#ddd] px-4 py-2.5 rounded-full text-sm font-semibold border border-gray-200 dark:border-[#333] shadow-sm flex items-center gap-2 hover:border-red-500 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-default">
-                      <span className="w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span>
+                    <span key={'loc-'+idx} className="bg-gray-50 dark:bg-[#151515] text-gray-800 dark:text-[#ddd] px-4 py-2.5 rounded-full text-sm font-semibold border border-gray-200 dark:border-[#333] shadow-sm flex items-center gap-2 hover:border-yellow-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors cursor-default">
+                      <span className="w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span>
                       {loc}
                     </span>
                   ))}
@@ -739,7 +823,7 @@ export default function App() {
             <div className="flex flex-col md:flex-row justify-between items-center mb-11 gap-4 text-center md:text-left">
               <div>
                 <h2 className="text-[36px] font-bold mb-2 leading-tight text-gray-900 dark:text-white">
-                  Customer <span className="text-red-700 dark:text-red-600">Reviews</span>
+                  Customer <span className="text-yellow-600 dark:text-yellow-500">Reviews</span>
                 </h2>
                 <div className="flex items-center justify-center md:justify-start gap-3 mt-3">
                   <div className="flex bg-white dark:bg-[#1a1a1a] p-1.5 rounded-lg border border-gray-200 dark:border-[#333] shadow-sm">
@@ -771,7 +855,7 @@ export default function App() {
                 {
                   name: "Rahul Sharma",
                   time: "2 days ago",
-                  text: "Arun was very professional. Came to my location in Koramangala and fixed my car's puncture in 20 minutes. Highly recommended for quick service!",
+                  text: "Arun was very professional. Came to my location in Koramangala and fixed my bike's puncture in 20 minutes. Highly recommended for quick service!",
                   initial: "R",
                   color: "bg-blue-600"
                 },
@@ -828,9 +912,9 @@ export default function App() {
                   <FadeIn>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-11">
-            <span className="text-red-600 font-black tracking-widest uppercase text-sm mb-3 block">Got Questions?</span>
+            <span className="text-yellow-500 font-black tracking-widest uppercase text-sm mb-3 block">Got Questions?</span>
             <h2 className="text-[36px] md:text-[40px] font-bold mb-3 leading-tight text-gray-900 dark:text-white">
-              Frequently Asked <span className="text-red-700 dark:text-red-600">Questions</span>
+              Frequently Asked <span className="text-yellow-600 dark:text-yellow-500">Questions</span>
             </h2>
             <p className="text-gray-600 dark:text-[#bdbdbd] text-[17px]">Everything you need to know about our doorstep auto service.</p>
           </div>
@@ -839,7 +923,7 @@ export default function App() {
             {faqs.map((faq, index) => (
               <div 
                 key={index} 
-                className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-xl overflow-hidden transition-colors hover:border-red-600 shadow-sm dark:shadow-none"
+                className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-xl overflow-hidden transition-colors hover:border-yellow-500 shadow-sm dark:shadow-none"
               >
                 <button
                   className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none"
@@ -847,7 +931,7 @@ export default function App() {
                 >
                   <span className="font-bold text-[17px] text-gray-900 dark:text-white">{faq.question}</span>
                   <ChevronDown 
-                    className={`w-5 h-5 text-red-600 transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`} 
+                    className={`w-5 h-5 text-yellow-500 transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`} 
                   />
                 </button>
                 <div 
@@ -865,12 +949,12 @@ export default function App() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-5 text-center bg-red-600">
+      <section className="py-20 px-5 text-center bg-yellow-500">
                   <FadeIn>
         <div className="max-w-4xl mx-auto">
           <h2 className="text-[42px] font-bold mb-[15px] leading-tight text-white">Bike Problem? We've Got You Covered.</h2>
           <p className="text-white/90 font-medium text-lg mb-[25px]">Book a professional bike mechanic at your doorstep.</p>
-          <a href="#home" className="inline-block bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-extrabold transition-colors text-lg shadow-xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:shadow-2xl">
+          <a href="#home" className="inline-block bg-white text-yellow-500 hover:bg-gray-100 px-8 py-4 rounded-xl font-extrabold transition-colors text-lg shadow-xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:shadow-2xl">
             Book Your Service
           </a>
         </div>
@@ -884,14 +968,22 @@ export default function App() {
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-center items-center gap-2 mb-3">
             <img src={logoUrl} alt="Yes Bike Service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
-            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-red-600 leading-none">
+            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-yellow-500 leading-none">
               YES <span className="text-gray-900 dark:text-white">BIKE SERVICE</span>
             </button>
           </div>
-          <p className="text-gray-500 dark:text-[#bdbdbd] text-[14px]">Professional doorstep bike and car repair service.</p>
+          <p className="text-gray-500 dark:text-[#bdbdbd] text-[14px]">Professional doorstep two-wheeler repair service.</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <button onClick={() => { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out YES Bike Service for doorstep two-wheeler repairs! ' + window.location.href)}`, '_blank') }} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#25d366]/10 text-[#25d366] hover:bg-[#25d366]/20 transition-colors text-sm font-bold">
+              <Share2 className="w-4 h-4" /> WhatsApp
+            </button>
+            <button onClick={() => { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank') }} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1877f2]/10 text-[#1877f2] hover:bg-[#1877f2]/20 transition-colors text-sm font-bold">
+              <Facebook className="w-4 h-4" /> Facebook
+            </button>
+          </div>
           <div className="flex justify-center gap-4 mt-3">
-            <button onClick={() => { setCurrentView('terms'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-red-600 transition-colors">Terms & Conditions</button>
-            <button onClick={() => { setCurrentView('privacy'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-red-600 transition-colors">Privacy Policy</button>
+            <button onClick={() => { setCurrentView('terms'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-yellow-500 transition-colors">Terms & Conditions</button>
+            <button onClick={() => { setCurrentView('privacy'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-yellow-500 transition-colors">Privacy Policy</button>
           </div>
           <p className="text-gray-400 dark:text-[#bdbdbd] text-[14px] mt-2.5">© 2026 Yes Bike Service. All Rights Reserved.</p>
         </div>
@@ -940,7 +1032,7 @@ export default function App() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Vehicle Type</label>
                 <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1 rounded-lg border border-gray-200 dark:border-[#303030]">
-                  {['Bike', 'Scooter', 'Car'].map(type => (
+                  {['Bike', 'Scooter'].map(type => (
                     <button
                       key={'quote-'+type}
                       type="button"

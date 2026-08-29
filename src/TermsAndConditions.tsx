@@ -6,7 +6,7 @@ export const TermsAndConditions = () => {
     <div className="py-20 px-5 bg-white dark:bg-[#0b0b0b] min-h-screen">
       <FadeIn>
         <div className="max-w-4xl mx-auto bg-gray-50 dark:bg-[#151515] p-8 md:p-12 rounded-3xl border border-gray-200 dark:border-[#303030]">
-          <h1 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white leading-tight">Terms & <span className="text-red-600">Conditions</span></h1>
+          <h1 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white leading-tight">Terms & <span className="text-yellow-500">Conditions</span></h1>
           <p className="text-gray-500 dark:text-[#888] mb-10 text-sm font-medium">Last Updated: August 24, 2026</p>
           
           <div className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-[#ddd] space-y-8">
@@ -24,7 +24,7 @@ export const TermsAndConditions = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. Booking</h2>
               <p className="mb-3">Customers can book a service through our website, mobile application, phone, WhatsApp, or other available booking channels.</p>
               <p className="mb-3">You agree to provide accurate information, including:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Customer name and contact number</li>
                 <li>Location/address</li>
                 <li>Vehicle brand and model</li>
@@ -38,7 +38,7 @@ export const TermsAndConditions = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Service Charges & Pricing</h2>
               <p className="mb-3">Prices displayed on our website or app are indicative unless specifically stated otherwise.</p>
               <p className="mb-3">Additional charges may apply for:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Spare parts</li>
                 <li>Engine or major repairs</li>
                 <li>Additional labour</li>
@@ -65,7 +65,7 @@ export const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Customer Responsibilities</h2>
               <p className="mb-3">The customer must:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Provide correct vehicle and contact information.</li>
                 <li>Ensure reasonable access to the vehicle.</li>
                 <li>Disclose known vehicle problems when making a booking.</li>
@@ -97,7 +97,7 @@ export const TermsAndConditions = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">10. Service Warranty</h2>
               <p className="mb-3">Where a warranty is offered, it applies only to the specific service or repair covered by the applicable warranty terms.</p>
               <p className="mb-3">Warranty coverage may not apply to:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>New damage or accidents</li>
                 <li>Misuse or negligence</li>
                 <li>Modification of the vehicle</li>
@@ -124,7 +124,7 @@ export const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">13. Communications</h2>
               <p className="mb-3">By making a booking or submitting your contact details, you agree that YES Bike Service may contact you regarding:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Booking confirmations</li>
                 <li>Service updates</li>
                 <li>Mechanic arrival information</li>
@@ -138,7 +138,7 @@ export const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">14. Website & App Usage</h2>
               <p className="mb-3">You must not:</p>
-              <ul className="list-disc pl-5 space-y-2 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 marker:text-yellow-400">
                 <li>Attempt to gain unauthorized access to our systems.</li>
                 <li>Interfere with the website or application.</li>
                 <li>Submit false or misleading information.</li>
@@ -185,8 +185,8 @@ export const TermsAndConditions = () => {
               <p className="mb-4">For questions, complaints, cancellations, or service-related support, please contact YES Bike Service through the contact details provided on our website or app.</p>
               <div className="bg-white dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-[#333]">
                 <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">YES Bike Service</h3>
-                <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-red-600 hover:underline">yesbikeservice.in</a></p>
-                <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-red-600 hover:underline">7090400617</a></p>
+                <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
+                <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-yellow-500 hover:underline">7090400617</a></p>
               </div>
             </section>
 

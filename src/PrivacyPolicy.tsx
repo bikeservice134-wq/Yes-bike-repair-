@@ -6,7 +6,7 @@ export const PrivacyPolicy = () => {
     <div className="py-20 px-5 bg-white dark:bg-[#0b0b0b] min-h-screen">
       <FadeIn>
         <div className="max-w-4xl mx-auto bg-gray-50 dark:bg-[#151515] p-8 md:p-12 rounded-3xl border border-gray-200 dark:border-[#303030]">
-          <h1 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white leading-tight">Privacy <span className="text-red-600">Policy</span></h1>
+          <h1 className="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white leading-tight">Privacy <span className="text-yellow-500">Policy</span></h1>
           <p className="text-gray-500 dark:text-[#888] mb-10 text-sm font-medium">Last Updated: August 24, 2026</p>
           
           <div className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-[#ddd] space-y-8">
@@ -17,7 +17,7 @@ export const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Information We Collect</h2>
               <p className="mb-3">When you use our services, we may collect:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Name</li>
                 <li>Mobile/phone number</li>
                 <li>Email address</li>
@@ -34,7 +34,7 @@ export const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. How We Use Your Information</h2>
               <p className="mb-3">We may use your information to:</p>
-              <ul className="list-disc pl-5 space-y-2 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 marker:text-yellow-400">
                 <li>Process and confirm service bookings</li>
                 <li>Contact you regarding your booking</li>
                 <li>Assign and coordinate mechanics</li>
@@ -52,7 +52,7 @@ export const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Sharing of Information</h2>
               <p className="mb-3 font-medium text-gray-900 dark:text-white">We do not sell or rent your personal information.</p>
               <p className="mb-3">We may share necessary information with:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Mechanics or service partners responsible for completing your booking</li>
                 <li>Payment processors and technology providers</li>
                 <li>Communication providers used for booking notifications</li>
@@ -76,7 +76,7 @@ export const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Cookies and Tracking</h2>
               <p className="mb-3">Our website may use cookies and similar technologies to:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Keep the website functioning properly</li>
                 <li>Remember preferences</li>
                 <li>Understand website usage</li>
@@ -100,7 +100,7 @@ export const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">9. Your Rights</h2>
               <p className="mb-3">Depending on applicable law, you may have rights to:</p>
-              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-red-500">
+              <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Request access to your personal information</li>
                 <li>Request correction of inaccurate information</li>
                 <li>Request deletion where legally permitted</li>
@@ -130,8 +130,8 @@ export const PrivacyPolicy = () => {
               <p className="mb-4">If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact YES BIKE SERVICE through the contact details provided on our website.</p>
               <div className="bg-white dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-[#333]">
                 <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">YES BIKE SERVICE</h3>
-                <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-red-600 hover:underline">yesbikeservice.in</a></p>
-                <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-red-600 hover:underline">7090400617</a></p>
+                <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
+                <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-yellow-500 hover:underline">7090400617</a></p>
               </div>
             </section>
 
