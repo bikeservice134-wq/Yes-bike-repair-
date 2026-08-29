@@ -11,12 +11,12 @@ export const TermsAndConditions = () => {
           
           <div className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-[#ddd] space-y-8">
             <p className="text-[17px] leading-relaxed">
-              Welcome to YES Bike Service. By accessing our website, mobile application, or booking our services, you agree to the following Terms & Conditions. Please read them carefully before making a booking.
+              Welcome to Yes bike service. By accessing our website, mobile application, or booking our services, you agree to the following Terms & Conditions. Please read them carefully before making a booking.
             </p>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. About Our Services</h2>
-              <p className="mb-3">YES Bike Service provides two-wheeler repair and maintenance services, including doorstep bike servicing, scooter servicing, inspection, battery-related services, tyre and puncture services, engine repairs, oil replacement, and other related services.</p>
+              <p className="mb-3">Yes bike service provides two-wheeler repair and maintenance services, including doorstep bike servicing, scooter servicing, inspection, battery-related services, tyre and puncture services, engine repairs, oil replacement, and other related services.</p>
               <p>Service availability may vary depending on your location, vehicle type, mechanic availability, and required service.</p>
             </section>
 
@@ -31,7 +31,7 @@ export const TermsAndConditions = () => {
                 <li>Required service</li>
                 <li>Preferred date and time</li>
               </ul>
-              <p>A booking is considered confirmed only after confirmation from YES Bike Service.</p>
+              <p>A booking is considered confirmed only after confirmation from Yes bike service.</p>
             </section>
 
             <section>
@@ -53,7 +53,7 @@ export const TermsAndConditions = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Inspection & Additional Repairs</h2>
               <p className="mb-3">The initial booking may cover only the selected service/package.</p>
               <p className="mb-3">During inspection, our mechanic may identify additional issues. Any additional repair should be approved by the customer before the work is carried out.</p>
-              <p>YES Bike Service is not responsible for pre-existing vehicle defects that are unrelated to the booked service.</p>
+              <p>Yes bike service is not responsible for pre-existing vehicle defects that are unrelated to the booked service.</p>
             </section>
 
             <section>
@@ -72,7 +72,7 @@ export const TermsAndConditions = () => {
                 <li>Remove valuable personal belongings from the vehicle before service.</li>
                 <li>Make payment for approved services and parts.</li>
               </ul>
-              <p>YES Bike Service is not responsible for personal belongings left inside the vehicle.</p>
+              <p>Yes bike service is not responsible for personal belongings left inside the vehicle.</p>
             </section>
 
             <section>
@@ -90,7 +90,7 @@ export const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">9. Payments</h2>
               <p className="mb-3">Customers agree to pay the applicable charges for services and approved parts.</p>
-              <p>Payment methods may include online payment, UPI, card, cash, or other methods made available by YES Bike Service.</p>
+              <p>Payment methods may include online payment, UPI, card, cash, or other methods made available by Yes bike service.</p>
             </section>
 
             <section>
@@ -103,7 +103,7 @@ export const TermsAndConditions = () => {
                 <li>Modification of the vehicle</li>
                 <li>Normal wear and tear</li>
                 <li>Repairs performed by another mechanic or workshop</li>
-                <li>Parts not supplied or installed by YES Bike Service</li>
+                <li>Parts not supplied or installed by Yes bike service</li>
                 <li>Problems unrelated to the original repair</li>
               </ul>
               <p>The applicable warranty period will be communicated on the relevant service/package.</p>
@@ -112,7 +112,7 @@ export const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">11. Service Delays</h2>
               <p className="mb-3">Service completion times are estimates and may vary depending on the condition of the vehicle, availability of parts, complexity of repairs, and other circumstances.</p>
-              <p>YES Bike Service shall not be liable for delays caused by circumstances beyond its reasonable control.</p>
+              <p>Yes bike service shall not be liable for delays caused by circumstances beyond its reasonable control.</p>
             </section>
 
             <section>
@@ -123,7 +123,7 @@ export const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">13. Communications</h2>
-              <p className="mb-3">By making a booking or submitting your contact details, you agree that YES Bike Service may contact you regarding:</p>
+              <p className="mb-3">By making a booking or submitting your contact details, you agree that Yes bike service may contact you regarding:</p>
               <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-yellow-400">
                 <li>Booking confirmations</li>
                 <li>Service updates</li>
@@ -154,13 +154,13 @@ export const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">16. Limitation of Liability</h2>
-              <p className="mb-3">YES Bike Service will make reasonable efforts to provide professional services. However, to the extent permitted by applicable law, we are not liable for indirect, incidental, consequential, or unforeseeable losses arising from the use of our platform or services.</p>
+              <p className="mb-3">Yes bike service will make reasonable efforts to provide professional services. However, to the extent permitted by applicable law, we are not liable for indirect, incidental, consequential, or unforeseeable losses arising from the use of our platform or services.</p>
               <p>Nothing in these Terms is intended to exclude any liability that cannot legally be excluded under applicable law.</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">17. Intellectual Property</h2>
-              <p className="mb-3">All website content, including logos, branding, graphics, text, designs, images, software, and other materials belonging to YES Bike Service are protected by applicable intellectual-property laws.</p>
+              <p className="mb-3">All website content, including logos, branding, graphics, text, designs, images, software, and other materials belonging to Yes bike service are protected by applicable intellectual-property laws.</p>
               <p>You may not reproduce, modify, distribute, or commercially use our content without prior written permission.</p>
             </section>
 
@@ -171,7 +171,7 @@ export const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">19. Changes to These Terms</h2>
-              <p className="mb-3">YES Bike Service may update these Terms & Conditions from time to time. Updated terms will be published on our website with a revised "Last Updated" date.</p>
+              <p className="mb-3">Yes bike service may update these Terms & Conditions from time to time. Updated terms will be published on our website with a revised "Last Updated" date.</p>
               <p>Your continued use of our services after an update constitutes acceptance of the revised terms, to the extent permitted by law.</p>
             </section>
 
@@ -182,9 +182,9 @@ export const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">21. Contact Us</h2>
-              <p className="mb-4">For questions, complaints, cancellations, or service-related support, please contact YES Bike Service through the contact details provided on our website or app.</p>
+              <p className="mb-4">For questions, complaints, cancellations, or service-related support, please contact Yes bike service through the contact details provided on our website or app.</p>
               <div className="bg-white dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-[#333]">
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">YES Bike Service</h3>
+                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Yes bike service</h3>
                 <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
                 <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-yellow-500 hover:underline">7090400617</a></p>
               </div>

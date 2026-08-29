@@ -257,9 +257,9 @@ export default function App() {
       <header className="sticky top-0 z-50 bg-white/95 dark:bg-[#0b0b0b]/95 border-b border-gray-200 dark:border-[#303030] backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src={logoUrl} alt="Yes Bike Service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
+            <img src={logoUrl} alt="Yes bike service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
             <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-yellow-500 leading-none text-left">
-              YES <span className="text-gray-900 dark:text-white">BIKE SERVICE</span>
+              Yes <span className="text-gray-900 dark:text-white">bike service</span>
             </button>
           </div>
           <nav className="hidden lg:flex gap-6 items-center">
@@ -490,13 +490,13 @@ export default function App() {
         <FadeIn>
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
             <div className="lg:w-1/2">
-              <span className="text-yellow-500 font-black tracking-widest uppercase text-sm mb-3 block">About YES Bike Service</span>
+              <span className="text-yellow-500 font-black tracking-widest uppercase text-sm mb-3 block">About Yes bike service</span>
               <h2 className="text-[36px] md:text-[40px] font-bold mb-6 leading-tight text-gray-900 dark:text-white">
                 Reliable Two-Wheeler Service, <span className="text-yellow-500 dark:text-yellow-400">Right at Your Doorstep</span>
               </h2>
               
               <p className="text-gray-600 dark:text-[#bdbdbd] mb-4 text-[17px] leading-relaxed">
-                At YES Bike Service, we make bike and scooter servicing simple, convenient, and transparent. Our goal is to save riders time by bringing professional two-wheeler service and repair directly to their doorstep.
+                At Yes bike service, we make bike and scooter servicing simple, convenient, and transparent. Our goal is to save riders time by bringing professional two-wheeler service and repair directly to their doorstep.
               </p>
               <p className="text-gray-600 dark:text-[#bdbdbd] mb-10 text-[17px] leading-relaxed">
                 From routine servicing and brake repairs to battery replacement, tyre services, engine work, and emergency assistance, our experienced mechanics are equipped to handle your bike’s needs with care.
@@ -517,7 +517,7 @@ export default function App() {
             
             <div className="lg:w-1/2 w-full mt-8 lg:mt-0">
               <div className="bg-gray-50 dark:bg-[#101010] border border-gray-100 dark:border-[#303030] rounded-3xl p-8 md:p-10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Why Choose YES Bike Service?</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Why Choose Yes bike service?</h3>
                 <ul className="space-y-6">
                   {[
                     { icon: '🔧', title: 'Verified Mechanics', desc: 'Skilled professionals you can trust.' },
@@ -662,7 +662,7 @@ export default function App() {
                 <thead>
                   <tr>
                     <th className="p-4 border-b-2 border-gray-700 text-white font-bold text-lg w-1/4">Feature</th>
-                    <th className="p-4 border-b-2 border-yellow-500 bg-yellow-500/10 text-yellow-500 font-bold text-lg text-center rounded-t-xl w-1/4">YES Bike Service</th>
+                    <th className="p-4 border-b-2 border-yellow-500 bg-yellow-500/10 text-yellow-500 font-bold text-lg text-center rounded-t-xl w-1/4">Yes bike service</th>
                     <th className="p-4 border-b-2 border-gray-700 text-gray-400 font-bold text-lg text-center w-1/4">Local Garage</th>
                     <th className="p-4 border-b-2 border-gray-700 text-gray-400 font-bold text-lg text-center w-1/4">Authorized Center</th>
                   </tr>
@@ -967,14 +967,14 @@ export default function App() {
       <footer className="bg-white dark:bg-[#1d1d1d] py-10 px-5 text-center border-t border-gray-200 dark:border-[#303030]">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-center items-center gap-2 mb-3">
-            <img src={logoUrl} alt="Yes Bike Service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
+            <img src={logoUrl} alt="Yes bike service Logo" className="w-9 h-9 rounded-full object-cover shadow-sm" referrerPolicy="no-referrer" />
             <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-black text-yellow-500 leading-none">
-              YES <span className="text-gray-900 dark:text-white">BIKE SERVICE</span>
+              Yes <span className="text-gray-900 dark:text-white">bike service</span>
             </button>
           </div>
           <p className="text-gray-500 dark:text-[#bdbdbd] text-[14px]">Professional doorstep two-wheeler repair service.</p>
           <div className="flex justify-center gap-4 mt-4">
-            <button onClick={() => { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out YES Bike Service for doorstep two-wheeler repairs! ' + window.location.href)}`, '_blank') }} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#25d366]/10 text-[#25d366] hover:bg-[#25d366]/20 transition-colors text-sm font-bold">
+            <button onClick={() => { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out Yes bike service for doorstep two-wheeler repairs! ' + window.location.href)}`, '_blank') }} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#25d366]/10 text-[#25d366] hover:bg-[#25d366]/20 transition-colors text-sm font-bold">
               <Share2 className="w-4 h-4" /> WhatsApp
             </button>
             <button onClick={() => { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank') }} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1877f2]/10 text-[#1877f2] hover:bg-[#1877f2]/20 transition-colors text-sm font-bold">
@@ -985,7 +985,7 @@ export default function App() {
             <button onClick={() => { setCurrentView('terms'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-yellow-500 transition-colors">Terms & Conditions</button>
             <button onClick={() => { setCurrentView('privacy'); window.scrollTo(0,0); }} className="text-sm text-gray-500 hover:text-yellow-500 transition-colors">Privacy Policy</button>
           </div>
-          <p className="text-gray-400 dark:text-[#bdbdbd] text-[14px] mt-2.5">© 2026 Yes Bike Service. All Rights Reserved.</p>
+          <p className="text-gray-400 dark:text-[#bdbdbd] text-[14px] mt-2.5">© 2026 Yes bike service. All Rights Reserved.</p>
         </div>
       </footer>
 

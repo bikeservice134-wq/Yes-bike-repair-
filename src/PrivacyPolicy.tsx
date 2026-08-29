@@ -11,7 +11,7 @@ export const PrivacyPolicy = () => {
           
           <div className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-[#ddd] space-y-8">
             <p className="text-[17px] leading-relaxed">
-              At YES BIKE SERVICE, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect information when you use our website, mobile application, or bike service booking services.
+              At Yes bike service, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect information when you use our website, mobile application, or bike service booking services.
             </p>
 
             <section>
@@ -127,9 +127,9 @@ export const PrivacyPolicy = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">13. Contact Us</h2>
-              <p className="mb-4">If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact YES BIKE SERVICE through the contact details provided on our website.</p>
+              <p className="mb-4">If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact Yes bike service through the contact details provided on our website.</p>
               <div className="bg-white dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-[#333]">
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">YES BIKE SERVICE</h3>
+                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Yes bike service</h3>
                 <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
                 <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-yellow-500 hover:underline">7090400617</a></p>
               </div>
