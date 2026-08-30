@@ -1,0 +1,171 @@
+
+            Book Now
+          </a>
+        </div>
+      </header>
+
+      {currentView === "home" ? (
+        <main>
+      {/* HERO */}
+      <section 
+        id="home" 
+        className="min-h-[650px] flex items-center"
+        style={{
+          background: isDark ? 'linear-gradient(90deg, rgba(0,0,0,.95), rgba(0,0,0,.65)), radial-gradient(circle at 80% 40%, #5a4300, #111 45%, #000)' : 'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85)), radial-gradient(circle at 80% 40%, #fff9e6, #ffffff 45%, #f9fafb)'
+        }}
+      >
+                  <FadeIn>
+        <div className="max-w-6xl w-full mx-auto px-5 py-16 grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+          <div>
+            <p className="text-gray-600 dark:text-[#bdbdbd] text-lg md:text-[19px] max-w-[620px] mb-8">
+              Professional two-wheeler servicing at your home.
+              Book a verified mechanic online and get your vehicle fixed
+              without visiting a service center.
+            </p>
+
+          </div>
+
+          <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] p-5 sm:p-8 rounded-[20px] shadow-2xl backdrop-blur-sm relative">
+            <h3 className="text-gray-900 dark:text-white text-[25px] font-bold mb-3">Book in 30 Seconds.</h3>
+            
+            <ul className="text-sm text-gray-600 dark:text-gray-400 mb-5 space-y-2 font-medium">
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Certified mechanic at your doorstep in 30 minutes.</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Services starting from ₹399.</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> 30-day service warranty for complete peace of mind.</li>
+            </ul>
+
+            <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1 rounded-lg mb-5 border border-gray-200 dark:border-[#303030]">
+              {['Bike', 'Scooter'].map(type => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setHeroVehicle(type)}
+                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${heroVehicle === type ? 'bg-white dark:bg-[#1d1d1d] text-gray-900 dark:text-white shadow-sm border border-gray-200 dark:border-[#444]' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleQuickBook} className="space-y-3 sm:space-y-4">
+              <input type="hidden" name="vehicle" value={heroVehicle} />
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <input type="text" name="name" required placeholder="Full Name *" 
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
+                <div>
+                  <input type="tel" name="phone" required placeholder="Mobile No *"
+                    pattern="[0-9]{10}" maxLength={10}
+                    className={`w-full p-[13px] rounded-lg border ${heroErrors.phone ? 'border-yellow-400' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]`} />
+                  {heroErrors.phone && <p className="text-yellow-400 text-sm mt-1">{heroErrors.phone}</p>}
+                </div>
+              </div>
+
+              <div className="relative">
+                <input type="text" name="location" required placeholder="Service Location (Search area) *"
+                  value={locationSearch}
+                  onChange={(e) => {
+                    setLocationSearch(e.target.value);
+                    setIsLocationDropdownOpen(true);
+                    if (heroErrors.location) {
+                      setHeroErrors({...heroErrors, location: undefined});
+                    }
+                  }}
+                  onFocus={() => setIsLocationDropdownOpen(true)}
+                  onBlur={() => setTimeout(() => setIsLocationDropdownOpen(false), 200)}
+                  autoComplete="off"
+                  className={`w-full p-[13px] rounded-lg border ${heroErrors.location ? 'border-yellow-400' : 'border-gray-300 dark:border-[#444]'} bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]`} />
+                {heroErrors.location && <p className="text-yellow-400 text-sm mt-1">{heroErrors.location}</p>}
+                
+                {isLocationDropdownOpen && locationSearch.trim().length > 0 && (
+                  <ul className="absolute z-10 w-full mt-1 bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-[#303030] rounded-lg shadow-xl max-h-48 overflow-y-auto">
+                    {AVAILABLE_LOCATIONS.filter(l => l.toLowerCase().includes(locationSearch.toLowerCase())).map(loc => (
+                      <li
+                        key={loc}
+                        className="px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#333] cursor-pointer text-gray-900 dark:text-white text-sm border-b border-gray-100 dark:border-[#2a2a2a] last:border-0"
+                        onMouseDown={() => {
+                          setLocationSearch(loc);
+                          setIsLocationDropdownOpen(false);
+                          setHeroErrors({...heroErrors, location: undefined});
+                        }}
+                      >
+                        {loc}
+                      </li>
+                    ))}
+                    {AVAILABLE_LOCATIONS.filter(l => l.toLowerCase().includes(locationSearch.toLowerCase())).length === 0 && (
+                      <li className="px-4 py-3 text-gray-500 text-sm">We currently do not operate in this area.</li>
+                    )}
+                  </ul>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <input type="text" name="brand" required placeholder="Brand (e.g. Honda) *" 
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
+                <input type="text" name="model" required placeholder="Model *" 
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]" />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <select name="service" required
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]">
+                  <option value="">Select Service *</option>
+                  {heroVehicle === 'Car_Removed' ? (
+                    <>
+                      <option>₹999 Jump Start</option>
+                      <option>₹999 Puncture Repair</option>
+                      <option>Repair / Other</option>
+                    </>
+                  ) : (
+                    <>
+                      <option>₹699 General servicing</option>
+                      <option>₹399 Basic servicing</option>
+                      <option>₹1,339 Full Service</option>
+                      <option>Repair / Other</option>
+                    </>
+                  )}
+                </select>
+
+                <select name="timeSlot" required value={selectedTimeSlot} onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                  className="w-full p-[13px] rounded-lg border border-gray-300 dark:border-[#444] bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all text-[15px]">
+                  <option value="">Select Time *</option>
+                  <option>Morning (9-12)</option>
+                  <option>Afternoon (12-4)</option>
+                  <option>Evening (4-8)</option>
+                </select>
+
+              </div>
+
+              {selectedTimeSlot && (
+                <div className="flex items-center gap-2 mt-3 p-3 bg-green-50/50 dark:bg-[#122216] rounded-lg border border-green-100 dark:border-[#1c3a26] text-sm text-gray-700 dark:text-gray-300 animate-in fade-in slide-in-from-top-2 duration-300">
+                   <Clock className="w-4 h-4 text-green-600 dark:text-green-500" />
+                   <span className="font-medium">
+                     Estimated arrival: <span className="text-gray-900 dark:text-white font-bold">{
+                       selectedTimeSlot.includes('Morning') ? '9:30 AM - 10:30 AM' :
+                       selectedTimeSlot.includes('Afternoon') ? '12:30 PM - 1:30 PM' :
+                       selectedTimeSlot.includes('Evening') ? '4:30 PM - 5:30 PM' : 'Within 30-45 mins'
+                     }</span>
+                   </span>
+                </div>
+              )}
+              
+
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3.5 rounded-lg font-extrabold transition-colors text-[16px] flex justify-center items-center gap-2 mt-2">
+                <Wrench className="w-5 h-5" /> Book Mechanic Now
+              </button>
+
+            </form>
+
+            <div className="mt-6 pt-5 border-t border-gray-200 dark:border-[#303030]">
+              <h4 className="text-gray-900 dark:text-white font-bold text-[16px] mb-3 text-center">Service Highlights</h4>
+              <ul className="grid grid-cols-2 gap-y-2 gap-x-2 text-xs text-gray-600 dark:text-[#bdbdbd] font-medium">
+                <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-yellow-500" /> Verified Mechanics</li>
+                <li className="flex items-center gap-1.5"><Settings className="w-3.5 h-3.5 text-yellow-500" /> Genuine Spare Parts</li>
+                <li className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-yellow-500" /> 30-Day Warranty</li>
+                <li className="flex items-center gap-1.5"><DollarSign className="w-3.5 h-3.5 text-yellow-500" /> Transparent Pricing</li>
+                <li className="flex items-center gap-1.5 col-span-2 justify-center mt-1"><Home className="w-3.5 h-3.5 text-yellow-500" /> Doorstep Service</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+                    </FadeIn>

@@ -1,0 +1,321 @@
+                <span className="hidden sm:inline text-gray-300 dark:text-gray-700">&bull;</span>
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Transparent Pricing</span>
+                <span className="hidden sm:inline text-gray-300 dark:text-gray-700">&bull;</span>
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Doorstep Service</span>
+                <span className="hidden sm:inline text-gray-300 dark:text-gray-700">&bull;</span>
+                <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> Service Warranty</span>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-[#1a1a1a] rounded-3xl p-8 md:p-12 border-2 border-yellow-500 shadow-xl relative overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+                {/* Left Side: Info & Benefits */}
+                <div>
+                  <div className="inline-block bg-yellow-500 text-black px-4 py-1.5 rounded-full text-sm font-black mb-6">
+                    🏍️ FEATURED PACKAGE
+                  </div>
+                  <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white leading-tight mb-4">
+                    General Bike Service
+                  </h2>
+                  <h3 className="text-xl md:text-2xl font-medium text-yellow-600 dark:text-yellow-500 mb-6">
+                    Complete Two-Wheeler Service at Your Doorstep
+                  </h3>
+                  <p className="text-gray-600 dark:text-[#bdbdbd] text-lg mb-8 leading-relaxed">
+                    Keep your bike smooth, safe, and road-ready with our General Bike Service. Our trained mechanic performs essential inspections, cleaning, adjustments, lubrication, and safety checks—all at your doorstep.
+                  </p>
+                  
+                  <div className="mb-8">
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+                      ✨ Service Benefits
+                    </h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🏠</span> Available at Doorstep
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🛡️</span> 500 Kms or 1 Month Warranty
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>⏱️</span> Service Duration: Approx. 2 Hours
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🔧</span> Recommended Every 3,000 Kms or 3 Months
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white dark:bg-[#222] rounded-2xl p-6 border border-gray-200 dark:border-[#333] shadow-sm mb-6">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-2">💰 Special Price</div>
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">₹699</span>
+                      <span className="text-2xl text-gray-400 dark:text-gray-500 line-through font-bold">₹899</span>
+                    </div>
+                  </div>
+
+                  <a href="#home" className="inline-block bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg text-center w-full md:w-auto">
+                    Book Your General Service Now
+                  </a>
+                  <p className="text-sm text-gray-500 dark:text-[#888] mt-4 font-medium text-center md:text-left">
+                    Get professional bike servicing without the hassle of visiting a workshop.
+                  </p>
+                </div>
+
+                {/* Right Side: What's Included */}
+                <div className="bg-white dark:bg-[#111] rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-[#333] shadow-sm h-fit">
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    🔧 What's Included
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4">
+                    {[
+                      'Air Filter Cleaning',
+                      'Battery Voltage Check',
+                      'Brake Service',
+                      'Cables & Levers Adjustment',
+                      'Chain Tension Check',
+                      'Clutch Greasing',
+                      'Dry Wash',
+                      'Electrical Check-up',
+                      'Engine Oil Check',
+                      'Greasing & Lubrication',
+                      'Oil Leakage Check',
+                      'Spark Plug Cleaning'
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
+                        <span className="text-gray-700 dark:text-gray-300 font-medium text-[15px]">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Background accent */}
+              <div className="absolute -top-[100px] -right-[100px] w-[300px] h-[300px] bg-yellow-400 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-[100px] -left-[100px] w-[300px] h-[300px] bg-yellow-400 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            {/* FEATURED SERVICE 2 */}
+            <div className="bg-gray-50 dark:bg-[#151515] rounded-3xl p-8 md:p-12 border-2 border-gray-800 dark:border-gray-700 shadow-xl relative overflow-hidden mt-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+                {/* Left Side: Info & Benefits */}
+                <div>
+                  <div className="inline-block bg-gray-900 dark:bg-white text-white dark:text-black px-4 py-1.5 rounded-full text-sm font-black mb-6">
+                    🏍️ PREMIUM PACKAGE
+                  </div>
+                  <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white leading-tight mb-4">
+                    General Service with Engine Oil
+                  </h2>
+                  <h3 className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-6">
+                    Complete Bike Service at Your Doorstep — Now Only ₹1,249
+                  </h3>
+                  <p className="text-gray-600 dark:text-[#bdbdbd] text-lg mb-8 leading-relaxed">
+                    Keep your bike smooth, safe, and road-ready with our General Bike Service including an Engine Oil change. Our trained mechanic performs essential inspections, cleaning, adjustments, lubrication, and safety checks—all at your doorstep.
+                  </p>
+                  
+                  <div className="mb-8">
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+                      ✨ Service Benefits
+                    </h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🏠</span> Available at Doorstep
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🛡️</span> 500 Kms or 1 Month Warranty
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>⏱️</span> Service Duration: Approx. 2 Hours
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                        <span>🔧</span> Recommended Every 3,000 Kms or 3 Months
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-white dark:bg-[#222] rounded-2xl p-6 border border-gray-200 dark:border-[#333] shadow-sm mb-6">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-2">💰 Special Price</div>
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">₹1,249</span>
+                      <span className="text-2xl text-gray-400 dark:text-gray-500 line-through font-bold">₹1,500</span>
+                    </div>
+                  </div>
+
+                  <a href="#home" className="inline-block bg-gray-900 hover:bg-black dark:bg-white dark:hover:bg-gray-200 text-white dark:text-black px-8 py-4 rounded-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg text-center w-full md:w-auto">
+                    Book Your Service Now
+                  </a>
+                  <p className="text-sm text-gray-500 dark:text-[#888] mt-4 font-medium text-center md:text-left">
+                    Get professional bike servicing without the hassle of visiting a workshop.
+                  </p>
+                </div>
+
+                {/* Right Side: What's Included */}
+                <div className="bg-white dark:bg-[#111] rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-[#333] shadow-sm h-fit">
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    🔧 What's Included
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4">
+                    {[
+                      'Air Filter Cleaning',
+                      'Battery Voltage Check',
+                      'Brake Service',
+                      'Cables & Levers Adjustment',
+                      'Chain Tension Check',
+                      'Clutch Greasing',
+                      'Dry Wash',
+                      'Electrical Check-up',
+                      'Engine Oil Change',
+                      'Greasing & Lubrication',
+                      'Oil Leakage Check',
+                      'Spark Plug Cleaning'
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-gray-900 dark:text-white shrink-0 mt-0.5" />
+                        <span className="text-gray-700 dark:text-gray-300 font-medium text-[15px]">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Background accent */}
+              <div className="absolute -top-[100px] -right-[100px] w-[300px] h-[300px] bg-gray-400 dark:bg-gray-600 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-[100px] -left-[100px] w-[300px] h-[300px] bg-gray-400 dark:bg-gray-600 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            {/* FEATURED SERVICE 3: Jump Start */}
+            <div className="bg-white dark:bg-[#18181b] rounded-3xl p-8 md:p-12 border-2 border-red-500/20 dark:border-red-500/30 shadow-xl relative overflow-hidden mt-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+                {/* Left Side: Info */}
+                <div className="flex-1">
+                  <div className="inline-block bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 px-4 py-1.5 rounded-full text-sm font-black mb-6">
+                    ⚡ EMERGENCY SERVICE
+                  </div>
+                  <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white leading-tight mb-4">
+                    Jump Start Service
+                  </h2>
+                  <h3 className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-6">
+                    Get Your Bike Started at Your Doorstep
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4 mb-4">
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>🏠</span> Available at Doorstep
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>⚡</span> Quick & Reliable Jump Start
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>⏱️</span> 30 Minutes Service Time
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>🔧</span> Professional Mechanic Assistance
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side: Pricing & CTA */}
+                <div className="w-full lg:w-[400px] shrink-0 bg-gray-50 dark:bg-[#111] rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-[#333] shadow-sm text-center">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-2">💰 Special Price</div>
+                  <div className="flex justify-center items-baseline gap-4 mb-6">
+                    <span className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">₹399</span>
+                    <span className="text-2xl text-gray-400 dark:text-gray-500 line-through font-bold">₹600</span>
+                  </div>
+                  <a href="#home" className="block bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg">
+                    Book Now & Get Back on the Road
+                  </a>
+                </div>
+              </div>
+              
+              {/* Background accent */}
+              <div className="absolute -top-[100px] -right-[100px] w-[300px] h-[300px] bg-red-500 opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-[100px] -left-[100px] w-[300px] h-[300px] bg-red-500 opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            {/* FEATURED SERVICE 4: Puncture Repair */}
+            <div className="bg-white dark:bg-[#1d1d1d] rounded-3xl p-8 md:p-12 border-2 border-orange-500/20 dark:border-orange-500/30 shadow-xl relative overflow-hidden mt-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+                {/* Left Side: Info */}
+                <div className="flex-1">
+                  <div className="inline-block bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 px-4 py-1.5 rounded-full text-sm font-black mb-6">
+                    🛞 TYRE SERVICE
+                  </div>
+                  <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white leading-tight mb-4">
+                    Puncture Repair
+                  </h2>
+                  <h3 className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-6">
+                    Quick & convenient doorstep service
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4 mb-4">
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>🏠</span> Available at Doorstep
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>⏱️</span> 30 mins taken
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>🛞</span> One Tyre Puncture Repair
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>➕</span> ₹100 extra for each additional puncture
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-medium text-[17px]">
+                      <span>🔧</span> Professional mechanic assistance
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side: Pricing & CTA */}
+                <div className="w-full lg:w-[400px] shrink-0 bg-gray-50 dark:bg-[#111] rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-[#333] shadow-sm text-center">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-2">💰 Special Price</div>
+                  <div className="flex justify-center items-baseline gap-4 mb-6">
+                    <span className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">₹599</span>
+                    <span className="text-2xl text-gray-400 dark:text-gray-500 line-through font-bold">₹750</span>
+                  </div>
+                  <a href="#home" className="block bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg">
+                    Book Now & Fix Puncture
+                  </a>
+                </div>
+              </div>
+              
+              {/* Background accent */}
+              <div className="absolute -top-[100px] -right-[100px] w-[300px] h-[300px] bg-orange-500 opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-[100px] -left-[100px] w-[300px] h-[300px] bg-orange-500 opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* COVERAGE AREA */}
+      <section className="bg-white dark:bg-[#1d1d1d] py-20 px-5 border-t border-gray-200 dark:border-[#303030]">
+        <FadeIn>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="relative rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-[#303030] bg-gray-50 dark:bg-[#101010] p-3 aspect-[4/3] lg:aspect-auto lg:h-[450px]">
+                 <img src={coverageMapUrl} alt="Service Coverage Map" className="w-full h-full object-cover rounded-xl" referrerPolicy="no-referrer" />
+                 <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent pointer-events-none rounded-2xl"></div>
+              </div>
+              
+              <div>
+                <h2 className="text-[36px] font-bold mb-4 leading-tight text-gray-900 dark:text-white">
+                  Our Service <span className="text-yellow-600 dark:text-yellow-500">Coverage</span>
+                </h2>
+                <p className="text-gray-600 dark:text-[#bdbdbd] mb-8 text-[17px]">
+                  We currently provide doorstep repair services across major neighborhoods in Bangalore. Fast, reliable, and right at your location.
+                </p>
+                
+                <div className="flex flex-wrap gap-2.5">
+                  {AVAILABLE_LOCATIONS.map((loc, idx) => (
+                    <span key={'loc-'+idx} className="bg-gray-50 dark:bg-[#151515] text-gray-800 dark:text-[#ddd] px-4 py-2.5 rounded-full text-sm font-semibold border border-gray-200 dark:border-[#333] shadow-sm flex items-center gap-2 hover:border-yellow-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors cursor-default">
+                      <span className="w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span>
+                      {loc}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+
