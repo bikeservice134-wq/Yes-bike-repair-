@@ -18,3 +18,7 @@ html {
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
