@@ -158,6 +158,9 @@ export default function App() {
                     window.open(whatsappUrl, '_blank');
                     setCurrentView('booking-success');
                     window.scrollTo(0, 0);
+                    if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+                      (window as any).gtag_report_conversion();
+                    }
                   }}>
                     <div className="grid grid-cols-2 gap-2 mb-5">
                       <button type="button" onClick={() => setHeroVehicle('Bike')} className={`py-2.5 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${heroVehicle === 'Bike' ? 'bg-yellow-500 text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]' : 'bg-gray-50 dark:bg-[#101010] text-gray-600 dark:text-[#bdbdbd] border border-gray-200 dark:border-[#333] hover:border-yellow-500/50'}`}>🏍️ Bike</button>
@@ -681,6 +684,9 @@ export default function App() {
               setIsPackageModalOpen(false);
               setCurrentView('booking-success');
               window.scrollTo(0, 0);
+              if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+                (window as any).gtag_report_conversion();
+              }
             }} className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
               
               <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1.5 rounded-xl border border-gray-200 dark:border-[#303030]">
