@@ -140,9 +140,9 @@ export default function App() {
                 </div>
 
                 {/* RIGHT: SHORT FORM */}
-                <div className="order-1 lg:order-2 bg-white/90 dark:bg-[#161616]/95 backdrop-blur-xl border border-gray-100 dark:border-[#2a2a2a] p-6 sm:p-8 rounded-[28px] shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative z-10 w-full mx-auto max-w-[420px] transition-transform hover:-translate-y-1 duration-500">
-                  <h3 className="text-xl md:text-2xl font-black text-gray-900 dark:text-white mb-1 text-center leading-tight">Book Mechanic Now <br/><span className="text-yellow-500 text-[18px] md:text-xl">in 20 minutes.</span></h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 text-center font-bold mb-5">Services starting from <span className="text-yellow-600 dark:text-yellow-500 text-base">₹399.</span></p>
+                <div className="order-1 lg:order-2 bg-white/90 dark:bg-[#161616]/95 backdrop-blur-xl border border-gray-100 dark:border-[#2a2a2a] p-5 sm:p-6 rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative z-10 w-full mx-auto max-w-[400px] transition-transform hover:-translate-y-1 duration-500">
+                  <h3 className="text-lg md:text-xl font-black text-gray-900 dark:text-white mb-1 text-center leading-tight">Book Mechanic Now <br/><span className="text-yellow-500 text-base md:text-lg">in 20 minutes.</span></h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 text-center font-bold mb-4">Services starting from <span className="text-yellow-600 dark:text-yellow-500 text-sm">₹399.</span></p>
                   
                   <form onSubmit={(e) => {
                     e.preventDefault();
@@ -162,38 +162,38 @@ export default function App() {
                       (window as any).gtag_report_conversion();
                     }
                   }}>
-                    <div className="grid grid-cols-2 gap-2 mb-5">
-                      <button type="button" onClick={() => setHeroVehicle('Bike')} className={`py-2.5 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${heroVehicle === 'Bike' ? 'bg-yellow-500 text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]' : 'bg-gray-50 dark:bg-[#101010] text-gray-600 dark:text-[#bdbdbd] border border-gray-200 dark:border-[#333] hover:border-yellow-500/50'}`}>🏍️ Bike</button>
-                      <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`py-2.5 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${heroVehicle === 'Scooter' ? 'bg-yellow-500 text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]' : 'bg-gray-50 dark:bg-[#101010] text-gray-600 dark:text-[#bdbdbd] border border-gray-200 dark:border-[#333] hover:border-yellow-500/50'}`}>🛵 Scooter</button>
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      <button type="button" onClick={() => setHeroVehicle('Bike')} className={`py-2 px-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all ${heroVehicle === 'Bike' ? 'bg-yellow-500 text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]' : 'bg-gray-50 dark:bg-[#101010] text-gray-600 dark:text-[#bdbdbd] border border-gray-200 dark:border-[#333] hover:border-yellow-500/50'}`}>🏍️ Bike</button>
+                      <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`py-2 px-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all ${heroVehicle === 'Scooter' ? 'bg-yellow-500 text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]' : 'bg-gray-50 dark:bg-[#101010] text-gray-600 dark:text-[#bdbdbd] border border-gray-200 dark:border-[#333] hover:border-yellow-500/50'}`}>🛵 Scooter</button>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                          <User className="h-5 w-5" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                          <User className="h-4 w-4" />
                         </div>
-                        <input type="text" name="fullName" required placeholder="Full Name *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
+                        <input type="text" name="fullName" required placeholder="Full Name *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
                       </div>
                       
                       <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                          <Smartphone className="h-5 w-5" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                          <Smartphone className="h-4 w-4" />
                         </div>
-                        <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="Mobile No *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
+                        <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="Mobile No *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
                       </div>
 
                       <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                          <MapPin className="h-5 w-5" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                          <MapPin className="h-4 w-4" />
                         </div>
-                        <input type="text" required placeholder="Service Location *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" value={locationSearch} onChange={(e) => setLocationSearch(e.target.value)} />
+                        <input type="text" required placeholder="Service Location *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" value={locationSearch} onChange={(e) => setLocationSearch(e.target.value)} />
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Wrench className="h-5 w-5" />
+                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                            <Wrench className="h-4 w-4" />
                           </div>
-                          <select name="service" required className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
+                          <select name="service" required className="w-full pl-10 pr-8 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
                             <option value="">Choose a service...</option>
                             <option value="General Bike Service ₹699">General Bike Service ₹699</option>
                             <option value="General Service with Engine Oil ₹1,249">General Service with Engine Oil ₹1,249</option>
@@ -201,30 +201,29 @@ export default function App() {
                             <option value="Puncture Repair ₹599">Puncture Repair ₹599</option>
                             <option value="Other">Other</option>
                           </select>
-                          <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
                             <ChevronDown className="h-4 w-4" />
                           </div>
                         </div>
-
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Clock className="h-5 w-5" />
+                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                            <Clock className="h-4 w-4" />
                           </div>
-                          <select name="time" required className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
+                          <select name="time" required className="w-full pl-10 pr-8 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
                             <option value="">Preferred Time...</option>
                             <option value="As soon as possible">As soon as possible</option>
                             <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
                             <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
                             <option value="Evening (4 PM - 7 PM)">Evening (4 PM - 7 PM)</option>
                           </select>
-                          <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
                             <ChevronDown className="h-4 w-4" />
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    <button type="submit" className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black px-4 py-3.5 rounded-xl font-bold text-[16px] transition-all hover:scale-[1.02] active:scale-95 shadow-[0_8px_20px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 mt-6">
+                    <button type="submit" className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black px-4 py-3 rounded-xl font-bold text-[16px] transition-all hover:scale-[1.02] active:scale-95 shadow-[0_8px_20px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 mt-4">
                       Book Mechanic Now <ArrowRight className="w-5 h-5" />
                     </button>
                   </form>
@@ -496,7 +495,7 @@ export default function App() {
                 <div className="text-center mb-12">
                   <h2 className="text-[32px] font-bold mb-4 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {faqs.map((faq, index) => (
                     <div key={index} className="border border-gray-200 dark:border-[#333] rounded-2xl overflow-hidden bg-gray-50 dark:bg-[#161616] transition-all">
                       <button 
@@ -687,64 +686,63 @@ export default function App() {
               if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
                 (window as any).gtag_report_conversion();
               }
-            }} className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
+            }} className="p-4 space-y-3 max-h-[70vh] overflow-y-auto">
               
-              <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1.5 rounded-xl border border-gray-200 dark:border-[#303030]">
+              <div className="flex bg-gray-100 dark:bg-[#0b0b0b] p-1 rounded-xl border border-gray-200 dark:border-[#303030]">
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Bike" defaultChecked className="peer sr-only" />
-                  <div className="py-2.5 text-sm font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-[#222] peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+                  <div className="py-2 text-sm font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-[#222] peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
                     🏍️ Bike
                   </div>
                 </label>
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Scooter" className="peer sr-only" />
-                  <div className="py-2.5 text-sm font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-[#222] peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+                  <div className="py-2 text-sm font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-[#222] peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
                     🛵 Scooter
                   </div>
                 </label>
               </div>
                             
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 gap-4">
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 gap-3">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                      <User className="h-5 w-5" />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                      <User className="h-4 w-4" />
                     </div>
-                    <input type="text" name="fullName" required placeholder="Full Name *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
+                    <input type="text" name="fullName" required placeholder="Full Name *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
                   </div>
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                      <Smartphone className="h-5 w-5" />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                      <Smartphone className="h-4 w-4" />
                     </div>
-                    <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="Mobile No *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
+                    <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="Mobile No *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
                   </div>
                 </div>
                 
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                    <MapPin className="h-5 w-5" />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <MapPin className="h-4 w-4" />
                   </div>
-                  <input type="text" name="location" required placeholder="Service Location *" className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
+                  <input type="text" name="location" required placeholder="Service Location *" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm" />
                 </div>
-
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                    <Clock className="h-5 w-5" />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <Clock className="h-4 w-4" />
                   </div>
-                  <select name="time" required className="w-full pl-12 pr-10 py-3.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
+                  <select name="time" required className="w-full pl-10 pr-8 py-2.5 rounded-xl border border-gray-200 dark:border-[#333] bg-gray-50/80 dark:bg-[#101010] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500 transition-all text-sm font-semibold shadow-sm appearance-none cursor-pointer">
                     <option value="">Preferred Time...</option>
                     <option value="As soon as possible">As soon as possible</option>
                     <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
                     <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
                     <option value="Evening (4 PM - 7 PM)">Evening (4 PM - 7 PM)</option>
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
                     <ChevronDown className="h-4 w-4" />
                   </div>
                 </div>
               </div>
               
-              <button type="submit" className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black px-4 py-3.5 rounded-xl font-bold text-[16px] transition-all hover:scale-[1.02] active:scale-95 shadow-[0_8px_20px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 mt-4">
+              <button type="submit" className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black px-4 py-3 rounded-xl font-bold text-[16px] transition-all hover:scale-[1.02] active:scale-95 shadow-[0_8px_20px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 mt-4">
                 {packageSuccess ? (
                   <span className="flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
