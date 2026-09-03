@@ -1,6 +1,6 @@
 {
   "name": "Yes Bike Service",
-  "description": "Book expert doorstep bike service, repair, jump start, and engine oil change. Get a certified mechanic at your home in 20 minutes.",
+  "description": "Book a certified mechanic in just 30 seconds. We come to you—home, office, or roadside. Fast, reliable, and transparent.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

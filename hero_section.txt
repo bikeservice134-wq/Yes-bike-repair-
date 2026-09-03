@@ -1,18 +1,11 @@
-const fs = require('fs');
-let content = fs.readFileSync('src/App.tsx', 'utf-8');
-
-const targetStr = `                {/* LEFT */}
-                <div className="order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-400 text-sm font-semibold mb-6 shadow-sm">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                    </span>
-                    Mechanic currently serving near {activeLocation}
-                  </div>
-                </div>`;
-
-const replaceStr = `                {/* LEFT */}
+{/* HERO SECTION */}
+          <section id="home" className="min-h-[750px] flex items-center relative overflow-hidden pt-24 pb-16 bg-white dark:bg-[#0a0a0a]">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-yellow-500/10 dark:bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+            
+            <FadeIn>
+              <div className="max-w-6xl w-full mx-auto px-5 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center relative z-10">
+                {/* LEFT */}
                 <div className="order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-400 text-sm font-semibold mb-6 shadow-sm">
                     <span className="relative flex h-2 w-2">
@@ -41,8 +34,8 @@ const replaceStr = `                {/* LEFT */}
                   <p className="text-lg font-bold text-gray-900 dark:text-white">
                     Fast. Reliable. Transparent. Right at your doorstep.
                   </p>
-                </div>`;
+                </div>
 
-content = content.replace(targetStr, replaceStr);
-fs.writeFileSync('src/App.tsx', content, 'utf-8');
-console.log('Hero left side updated');
+                {/* RIGHT: SHORT FORM */}
+                <div className="order-1 lg:order-2 bg-white/90 dark:bg-[#161616]/95 backdrop-blur-xl border border-gray-100 dark:border-[#2a2a2a] p-5 sm:p-6 rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative z-10 w-full mx-auto max-w-[400px] transition-transform hover:-translate-y-1 duration-500">
+                  <h3 className="text-lg md:text-xl font-black text-gray-900 dark:text-white mb-1 text-center le
