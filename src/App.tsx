@@ -4,7 +4,7 @@ import {
   Phone, User, Smartphone, X, ArrowRight, Sun, Moon,
   Zap, Award, ThumbsUp, PenTool, Mail
 } from 'lucide-react';
-import logoUrl from './assets/images/premium_bike_logo_1788163395781.jpg';
+import logoUrl from './assets/images/yes_bike_service_logo_1788515679582.jpg';
 import coverageMapUrl from './assets/images/coverage_map_illustration_1787573120801.jpg';
 
 // Reusable FadeIn Component
@@ -171,7 +171,7 @@ export default function App() {
       <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0A0A0A]/80 border-b border-gray-100 dark:border-white/10 shadow-sm backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setCurrentView('home'); window.scrollTo(0,0); setIsMobileMenuOpen(false); }}>
-            <img src={logoUrl} alt="Logo" className="w-10 h-10 rounded-xl object-cover ring-1 ring-black/5 dark:ring-white/10 shadow-sm group-hover:scale-105 transition-transform" referrerPolicy="no-referrer" />
+            <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform"><Wrench className="w-6 h-6 text-black" /></div>
             <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">Yes Bike <span className="text-yellow-500">Service</span></span>
           </div>
           
@@ -190,10 +190,10 @@ export default function App() {
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
             <div className="hidden md:flex items-center gap-3">
-              <a href="tel:+917090400617" className="inline-flex bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 text-gray-900 dark:text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all items-center gap-2">
+              <a href="tel:+917090400617" className="inline-flex bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 text-gray-900 dark:text-white px-5 py-2 rounded-xl font-bold text-sm transition-all items-center gap-2">
                 <Phone className="w-4 h-4" /> Call
               </a>
-              <a href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20would%20like%20to%20book%20a%20mechanic." target="_blank" rel="noopener noreferrer" className="inline-flex bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(234,179,8,0.3)] hover:scale-[1.02] active:scale-95">
+              <a href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20would%20like%20to%20book%20a%20mechanic." target="_blank" rel="noopener noreferrer" className="inline-flex bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-2 rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(234,179,8,0.3)] hover:scale-[1.02] active:scale-95">
                 Book Now
               </a>
             </div>
@@ -214,10 +214,10 @@ export default function App() {
               <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-gray-900 dark:text-white py-2 border-b border-gray-100 dark:border-white/5">Services</a>
               
               <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-gray-900 dark:text-white py-2 border-b border-gray-100 dark:border-white/5">FAQ</a>
-              <a href="tel:+917090400617" onClick={() => setIsMobileMenuOpen(false)} className="mt-2 flex items-center justify-center gap-2 bg-yellow-500 text-black px-5 py-2.5 rounded-xl font-bold text-[16px] shadow-md">
+              <a href="tel:+917090400617" onClick={() => setIsMobileMenuOpen(false)} className="mt-2 flex items-center justify-center gap-2 bg-yellow-500 text-black px-5 py-2 rounded-xl font-bold text-[16px] shadow-md">
                 <Phone className="w-5 h-5" /> Call Now
               </a>
-              <a href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20would%20like%20to%20book%20a%20mechanic." target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="mt-2 text-center bg-yellow-500 text-black px-5 py-2.5 rounded-xl font-bold text-[16px] shadow-md">
+              <a href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20would%20like%20to%20book%20a%20mechanic." target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="mt-2 text-center bg-yellow-500 text-black px-5 py-2 rounded-xl font-bold text-[16px] shadow-md">
                 Book Mechanic Now
               </a>
             </div>
@@ -241,31 +241,29 @@ export default function App() {
                                                 {/* Hero Text */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10">
                   <FadeIn>
-                    <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-700 dark:text-yellow-400 px-4 py-2 rounded-full font-bold text-sm mb-6 mt-4 lg:mt-0">
-                      <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" /> Rated 4.9/5 by 10,000+ Riders
-                    </div>
-                    <h1 className="text-[44px] sm:text-[52px] lg:text-[64px] font-black leading-[1.05] tracking-tight text-gray-900 dark:text-white mb-6">
-                      Expert Bike Repair <br className="hidden lg:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-300">At Your Doorstep</span>
+                    <h1 className="text-4xl sm:text-[52px] lg:text-[64px] font-black leading-[1.05] tracking-tight text-gray-900 dark:text-white mb-4">
+                      Bengaluru's <br className="block sm:hidden lg:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-300">Doorstep Bike Repair</span>
                     </h1>
-                    <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 font-medium max-w-lg leading-relaxed">
-                      Book a certified mechanic in just 30 seconds. We come directly to your home, office, or roadside.
+                    <p className="text-gray-500 dark:text-gray-400 text-lg sm:text-xl font-medium max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed">
+                      Excellent two-wheeler servicing right at your home or office.
                     </p>
+
                   </FadeIn>
                   
 
                 </div>
                                 {/* Hero Form */}
-                <div id="booking-form" className="relative z-10 w-full max-w-[340px] mx-auto lg:ml-auto">
+                <div id="booking-form" className="relative z-10 w-full max-w-sm mx-auto lg:ml-auto">
                   <FadeIn delay={300}>
                     {/* Decorative blurred background */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/20 to-transparent blur-3xl -z-10 rounded-3xl"></div>
-                    <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-400/10 rounded-bl-[80px] -z-10"></div>
-                      <div className="text-center mb-5">
-                        <h3 className="text-xl font-black text-gray-900 dark:text-white mb-1 leading-tight">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/20 to-transparent blur-3xl -z-10 rounded-2xl"></div>
+                    <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[24px] p-5 sm:p-6 shadow-2xl relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-400/10 rounded-bl-[60px] -z-10"></div>
+                      <div className="text-center mb-3">
+                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-1.5 leading-tight">
                           Book Mechanic Now
                         </h3>
-                        <p className="text-xs font-bold text-gray-500 dark:text-gray-400 mb-2">Mechanic reaches in <span className="text-yellow-600 dark:text-yellow-500">20 mins</span>.</p>
+                        <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-4">Mechanic reaches in <span className="text-yellow-600 dark:text-yellow-500">20 mins</span>.</p>
                         <div className="bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 text-[11px] font-bold px-3 py-1.5 rounded-lg inline-block border border-green-100 dark:border-green-500/20">
                           Honest pricing with services starting from ₹399
                         </div>
@@ -280,42 +278,42 @@ export default function App() {
                       }}>
                         
                         {/* Toggle */}
-                        <div className="flex bg-gray-100/80 dark:bg-[#222] p-1 rounded-xl mb-4 border border-gray-200/50 dark:border-white/5">
-                          <button type="button" onClick={() => setHeroVehicle('Bike')} className={`flex-1 py-2 rounded-lg text-xs font-black transition-all ${heroVehicle === 'Bike' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                        <div className="flex bg-gray-100/80 dark:bg-[#222] p-1 rounded-xl mb-5 border border-gray-200/50 dark:border-white/5">
+                          <button type="button" onClick={() => setHeroVehicle('Bike')} className={`flex-1 py-2.5 rounded-lg text-sm font-black transition-all ${heroVehicle === 'Bike' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
                             🏍️ Bike
                           </button>
-                          <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`flex-1 py-2 rounded-lg text-xs font-black transition-all ${heroVehicle === 'Scooter' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                          <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`flex-1 py-2.5 rounded-lg text-sm font-black transition-all ${heroVehicle === 'Scooter' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
                             🛵 Scooter
                           </button>
                         </div>
 
                         <div className="space-y-3">
                           <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <User className="w-3.5 h-3.5" />
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-7 h-7 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
+                              <User className="w-4 h-4" />
                             </div>
-                            <input type="text" name="fullName" required placeholder="Your Name" className="w-full pl-11 pr-3 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[15px] sm:text-base placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <Smartphone className="w-3.5 h-3.5" />
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-7 h-7 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
+                              <Smartphone className="w-4 h-4" />
                             </div>
-                            <input type="tel" name="phone" required placeholder="Mobile Number" className="w-full pl-11 pr-3 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[15px] sm:text-base placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <MapPin className="w-3.5 h-3.5" />
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-7 h-7 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
+                              <MapPin className="w-4 h-4" />
                             </div>
-                            <input type="text" name="location" required placeholder="Service Location" className="w-full pl-11 pr-3 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="text" name="location" required placeholder="Service Location" className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[15px] sm:text-base placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <Wrench className="w-3.5 h-3.5" />
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-7 h-7 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
+                              <Wrench className="w-4 h-4" />
                             </div>
-                            <select name="service" required defaultValue="" className="w-full pl-11 pr-8 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[13px] appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
+                            <select name="service" required defaultValue="" className="w-full pl-11 pr-10 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[15px] sm:text-base appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
                               <option value="" disabled hidden>Select Service Type</option>
                               <option value="General Bike Service (₹699)">🔧 Gen. Service - ₹699</option>
                               <option value="General Service + Engine Oil (₹1,249)">🛢️ Serv. + Oil - ₹1,249</option>
@@ -328,10 +326,10 @@ export default function App() {
                           </div>
                           
                           <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <Clock className="w-3.5 h-3.5" />
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 w-7 h-7 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
+                              <Clock className="w-4 h-4" />
                             </div>
-                            <select name="time" required defaultValue="" className="w-full pl-11 pr-8 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[13px] appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
+                            <select name="time" required defaultValue="" className="w-full pl-11 pr-10 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[15px] sm:text-base appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
                               <option value="" disabled hidden>Preferred Time</option>
                               <option value="Immediate (Within 20 mins)">🚀 Immediate</option>
                               <option value="Today - Morning (9 AM - 12 PM)">🌅 Today (Morn)</option>
@@ -345,14 +343,14 @@ export default function App() {
                         </div>
 
                         <div className="mt-5">
-                          <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-3 rounded-xl font-black text-[15px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 group">
+                          <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-3.5 rounded-xl font-black text-[16px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.25)] flex justify-center items-center gap-2 group">
                             Book Mechanic Now 
-                            <div className="w-5 h-5 bg-white/30 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                              <ArrowRight className="w-3.5 h-3.5" />
+                            <div className="w-6 h-6 bg-white/30 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                              <ArrowRight className="w-4 h-4" />
                             </div>
                           </button>
-                          <p className="text-center text-[11px] font-bold text-gray-400 dark:text-gray-500 mt-3 flex items-center justify-center gap-1">
-                            <CheckCircle2 className="w-3 h-3 text-green-500" /> No advance payment
+                          <p className="text-center text-xs font-bold text-gray-400 dark:text-gray-500 mt-3 flex items-center justify-center gap-1.5">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-green-500" /> No advance payment
                           </p>
                         </div>
                       </form>
@@ -362,49 +360,29 @@ export default function App() {
                 </div>
 
               </div>
+              
+              <FadeIn delay={400}>
+                <div className="mt-16 flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-center bg-white dark:bg-[#111] py-6 px-8 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm">
+                  <div className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
+                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    4.8/5 Customer Rating
+                  </div>
+                  <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                  <div className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
+                    <CheckCircle2 className="w-5 h-5 text-yellow-500" />
+                    10,000+ Vehicles Serviced
+                  </div>
+                  <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                  <div className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
+                    <Shield className="w-5 h-5 text-yellow-500" />
+                    Verified Mechanics
+                  </div>
+                </div>
+              </FadeIn>
             </div>
           </section>
 
           
-          {/* TRUST METRICS */}
-          <section className="py-8 bg-yellow-500 text-black border-y border-yellow-600/20 relative z-20">
-            <div className="max-w-7xl mx-auto px-5">
-              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16 text-center">
-                <div className="flex items-center gap-3">
-                  <Users className="w-8 h-8 opacity-80" />
-                  <div className="text-left">
-                    <div className="text-2xl font-black leading-none">10,000+</div>
-                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-80 mt-1">Happy Riders</div>
-                  </div>
-                </div>
-                <div className="hidden sm:block w-px h-10 bg-black/10"></div>
-                <div className="flex items-center gap-3">
-                  <Star className="w-8 h-8 opacity-80" />
-                  <div className="text-left">
-                    <div className="text-2xl font-black leading-none">4.9/5</div>
-                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-80 mt-1">Average Rating</div>
-                  </div>
-                </div>
-                <div className="hidden sm:block w-px h-10 bg-black/10"></div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-8 h-8 opacity-80" />
-                  <div className="text-left">
-                    <div className="text-2xl font-black leading-none">30 Min</div>
-                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-80 mt-1">Arrival Time</div>
-                  </div>
-                </div>
-                <div className="hidden lg:block w-px h-10 bg-black/10"></div>
-                <div className="flex items-center gap-3">
-                  <Shield className="w-8 h-8 opacity-80" />
-                  <div className="text-left">
-                    <div className="text-2xl font-black leading-none">1 Month</div>
-                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-80 mt-1">Service Warranty</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* HOW IT WORKS */}
           <section className="py-24 bg-white dark:bg-[#0A0A0A]">
             <div className="max-w-7xl mx-auto px-5">
@@ -472,7 +450,7 @@ export default function App() {
                       </div>
                       <p className="text-green-700 dark:text-green-400 text-sm font-black bg-green-50 dark:bg-green-500/10 inline-block px-4 py-1.5 rounded-lg mb-6 tracking-wide uppercase">Offer Price: ₹699</p>
                       
-                      <div className="space-y-3 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
+                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
                         <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
                           <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
                           Available at Your Doorstep
@@ -529,7 +507,7 @@ export default function App() {
                       </div>
                       <p className="text-gray-300 text-sm font-semibold mb-6">Professional doorstep bike service with engine oil change.</p>
                       
-                      <div className="space-y-3 mb-6 bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                      <div className="space-y-2.5 mb-6 bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
                         <div className="flex items-center gap-4 text-sm font-bold text-white">
                           <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shadow-sm text-base">✓</div> 
                           Available at Your Doorstep
@@ -581,7 +559,7 @@ export default function App() {
                       
                       <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold mb-6">Get your bike started quickly with our doorstep jump-start service. No workshop visit, no waiting.</p>
                       
-                      <div className="space-y-3 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
+                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
                         <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
                           <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
                           Available at Your Doorstep
@@ -616,7 +594,7 @@ export default function App() {
                       
                       <div className="bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
                         <h4 className="text-sm font-black text-gray-900 dark:text-white mb-4 uppercase tracking-wider">Service Includes:</h4>
-                        <div className="space-y-4 mb-5">
+                        <div className="space-y-4 mb-4">
                           <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Available at Your Doorstep</div>
                           <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Takes only 20 minutes</div>
                           <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> One Tyre Puncture Repair</div>
@@ -650,16 +628,31 @@ export default function App() {
             </section>
 
           {/* BRANDS & COVERAGE */}
-          <section className="py-24 bg-[#FAFAFA] dark:bg-[#050505] border-y border-gray-100 dark:border-white/5">
+          <section id="areas" className="py-24 bg-[#FAFAFA] dark:bg-[#050505] border-y border-gray-100 dark:border-white/5">
             <div className="max-w-7xl mx-auto px-5">
               <FadeIn>
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">Brands We <span className="text-yellow-500">Service</span></h2>
                 </div>
-                <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-24">
-                  {['Hero', 'Honda', 'TVS', 'Bajaj', 'Yamaha', 'Suzuki', 'Royal Enfield', 'KTM'].map((brand, idx) => (
-                    <div key={idx} className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 px-6 py-4 rounded-xl flex items-center justify-center min-w-[120px] shadow-sm hover:border-yellow-500/50 hover:shadow-md transition-all">
-                      <span className="font-black text-gray-800 dark:text-gray-200 text-lg uppercase tracking-wider">{brand}</span>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-24 max-w-5xl mx-auto">
+                  {[
+                    { name: 'Hero', color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-500/10', border: 'border-red-100 dark:border-red-500/20' },
+                    { name: 'Honda', color: 'text-red-600', bg: 'bg-red-50 dark:bg-red-600/10', border: 'border-red-100 dark:border-red-600/20' },
+                    { name: 'TVS', color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-600/10', border: 'border-blue-100 dark:border-blue-600/20' },
+                    { name: 'Bajaj', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10', border: 'border-blue-100 dark:border-blue-500/20' },
+                    { name: 'Yamaha', color: 'text-red-600', bg: 'bg-red-50 dark:bg-red-600/10', border: 'border-red-100 dark:border-red-600/20' },
+                    { name: 'Suzuki', color: 'text-blue-700', bg: 'bg-blue-50 dark:bg-blue-700/10', border: 'border-blue-100 dark:border-blue-700/20' },
+                    { name: 'Royal Enfield', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-100 dark:border-amber-500/20' },
+                    { name: 'KTM', color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-500/10', border: 'border-orange-100 dark:border-orange-500/20' }
+                  ].map((brand, idx) => (
+                    <div key={idx} className="group bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 p-6 sm:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl hover:border-gray-200 dark:hover:border-white/10 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl ${brand.bg}`}></div>
+                      </div>
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${brand.bg} ${brand.border} border ${brand.color} font-black text-2xl group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 relative z-10 shadow-sm`}>
+                        {brand.name === 'KTM' ? 'KTM' : brand.name === 'TVS' ? 'TVS' : brand.name.split(' ').length > 1 ? brand.name.split(' ').map(n=>n[0]).join('') : brand.name.substring(0, 1)}
+                      </div>
+                      <span className="font-black text-gray-800 dark:text-gray-200 text-sm sm:text-[15px] uppercase tracking-wider relative z-10">{brand.name}</span>
                     </div>
                   ))}
                 </div>
@@ -700,11 +693,12 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-5">
               <div className="text-center mb-16">
                 <FadeIn>
+                  <span className="text-yellow-500 font-bold tracking-wider uppercase text-sm mb-3 block">Customer Reviews</span>
                   <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
-                    Loved by <span className="text-yellow-500">Riders</span>
+                    Loved by Riders. <span className="text-yellow-500">Trusted by Drivers.</span>
                   </h2>
                   <p className="text-gray-500 font-medium max-w-2xl mx-auto">
-                    See what our customers are saying about our doorstep service.
+                    Real experiences from customers who chose expert doorstep service, transparent pricing, and zero workshop hassle.
                   </p>
                 </FadeIn>
               </div>
@@ -869,17 +863,17 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="bg-gray-900 text-white pt-16 pb-32 md:pb-16 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img src={logoUrl} alt="Logo" className="w-10 h-10 rounded-xl" referrerPolicy="no-referrer" />
+              <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm"><Wrench className="w-6 h-6 text-black" /></div>
               <span className="text-2xl font-black tracking-tight">Yes Bike <span className="text-yellow-500">Service</span></span>
             </div>
             <p className="text-gray-400 font-medium max-w-sm">India's premium doorstep two-wheeler service. Making bike maintenance simple, transparent, and hassle-free.</p>
           </div>
           <div>
             <h4 className="text-lg font-bold mb-4 text-white">Services</h4>
-            <ul className="space-y-3 text-gray-400 font-medium text-sm">
+            <ul className="space-y-2.5 text-gray-400 font-medium text-sm">
               <li>General Service</li>
               <li>Engine Oil Change</li>
               <li>Puncture Repair</li>
@@ -887,8 +881,18 @@ export default function App() {
             </ul>
           </div>
           <div>
+            <h4 className="text-lg font-bold mb-4 text-white">Available Areas</h4>
+            <ul className="space-y-2.5 text-gray-400 font-medium text-sm">
+              <li><button onClick={() => { document.getElementById('areas')?.scrollIntoView({behavior: 'smooth'}) }} className="hover:text-yellow-500 transition-colors">Koramangala</button></li>
+              <li><button onClick={() => { document.getElementById('areas')?.scrollIntoView({behavior: 'smooth'}) }} className="hover:text-yellow-500 transition-colors">Indiranagar</button></li>
+              <li><button onClick={() => { document.getElementById('areas')?.scrollIntoView({behavior: 'smooth'}) }} className="hover:text-yellow-500 transition-colors">HSR Layout</button></li>
+              <li><button onClick={() => { document.getElementById('areas')?.scrollIntoView({behavior: 'smooth'}) }} className="hover:text-yellow-500 transition-colors">Whitefield</button></li>
+              <li><button onClick={() => { document.getElementById('areas')?.scrollIntoView({behavior: 'smooth'}) }} className="hover:text-yellow-500 transition-colors">Jayanagar</button></li>
+            </ul>
+          </div>
+          <div>
             <h4 className="text-lg font-bold mb-4 text-white">Company</h4>
-            <ul className="space-y-3 text-gray-400 font-medium text-sm">
+            <ul className="space-y-2.5 text-gray-400 font-medium text-sm">
               <li><button onClick={() => { setCurrentView('about'); window.scrollTo(0,0); }} className="hover:text-yellow-500 transition-colors">About Us</button></li>
               <li><button onClick={() => { setCurrentView('terms'); window.scrollTo(0,0); }} className="hover:text-yellow-500 transition-colors">Terms & Conditions</button></li>
               <li><button onClick={() => { setCurrentView('privacy'); window.scrollTo(0,0); }} className="hover:text-yellow-500 transition-colors">Privacy Policy</button></li>
@@ -896,7 +900,7 @@ export default function App() {
           </div>
           <div>
             <h4 className="text-lg font-bold mb-4 text-white">Contact</h4>
-            <ul className="space-y-3 text-gray-400 font-medium text-sm">
+            <ul className="space-y-2.5 text-gray-400 font-medium text-sm">
               <li className="flex items-center gap-3">
                 <a href="tel:+917090400617" className="flex items-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-1.5 rounded-lg transition-colors font-bold">
                   <Phone className="w-4 h-4 shrink-0" />
@@ -939,7 +943,7 @@ export default function App() {
             
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
               <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 sticky top-0 bg-white dark:bg-[#111] pt-2 pb-2">Step-by-step procedure:</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {detailsModalContent.details.map((step, idx) => (
                   <li key={idx} className="flex gap-3 text-sm font-medium text-gray-700 dark:text-gray-300 items-start">
                     <span className="bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-500 font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5">
@@ -999,15 +1003,12 @@ export default function App() {
         href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20have%20a%20query%20regarding..." 
         target="_blank" 
         rel="noopener noreferrer"
-        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-3.5 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all group"
+        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all"
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
-        <span className="absolute right-full mr-4 bg-white dark:bg-[#111] text-gray-900 dark:text-white text-sm font-bold px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-gray-100 dark:border-white/5">
-          Chat with us
-        </span>
       </a>
     </div>
   );
