@@ -82,6 +82,12 @@ export default function App() {
       'Starting engine safely',
       'Alternator output check to ensure charging'
     ],
+    'Running Repair': [
+      'Complete Vehicle Inspection',
+      'On-the-Spot Running Repairs',
+      'Repairs & Parts Charged Separately',
+      '30-minute estimated repair time'
+    ],
     'Puncture Repair': [
       'Locating the puncture site',
       'Removing foreign objects (nails, glass)',
@@ -171,7 +177,7 @@ export default function App() {
       <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0A0A0A]/80 border-b border-gray-100 dark:border-white/10 shadow-sm backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setCurrentView('home'); window.scrollTo(0,0); setIsMobileMenuOpen(false); }}>
-            <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform"><Wrench className="w-6 h-6 text-black" /></div>
+            <img src="/src/assets/images/premium_bike_logo_1788528519448.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform hidden"><Wrench className="w-6 h-6 text-black" /></div>
             <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">Yes Bike <span className="text-yellow-500">Service</span></span>
           </div>
           
@@ -330,6 +336,7 @@ export default function App() {
                               <option value="Jump Start Service (₹399)">⚡ Jump Start - ₹399</option>
                               <option value="Puncture Repair (₹599)">🔘 Puncture - ₹599</option>
                               <option value="Battery Replacement (₹1,499)">🔋 Battery - ₹1,499</option>
+                              <option value="Running Repair (₹399)">⏱️ Running Repair - ₹399</option>
                               <option value="Other / Custom Issue">📋 Other Issue</option>
                             </select>
                             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
@@ -620,6 +627,48 @@ export default function App() {
                     </div>
                   </div>
                 </FadeIn>
+
+                {/* Running Repair */}
+                <FadeIn delay={500} className="flex">
+                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[32px] p-6 sm:p-8 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-2">⏱️ Running Repair</h3>
+                      <div className="flex items-end gap-3 mb-4">
+                        <div className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</div>
+                        <div className="text-lg font-bold text-gray-400 line-through mb-1">₹600</div>
+                      </div>
+                      
+                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
+                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
+                          Available at Your Doorstep
+                        </div>
+                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">⏱️</div> 
+                          Approx. 30 Minutes
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h4 className="font-black text-gray-900 dark:text-white text-sm uppercase tracking-wider">What's Included</h4>
+                        <ul className="space-y-3">
+                          {['Complete Vehicle Inspection', 'On-the-Spot Running Repairs', 'Repairs & Parts Charged Separately'].map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 text-[13px] font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> {item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4">
+                      <button onClick={() => { setSelectedPackage({name: 'Running Repair', price: '₹399'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2">
+                        Book Now <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => setDetailsModalContent({name: 'Running Repair', details: packageDetailsData['Running Repair']})} className="flex-1 bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center">
+                        View Technical Details
+                      </button>
+                    </div>
+                  </div>
+                </FadeIn>
               </div>
               <div className="mt-16 text-center">
                 <p className="text-gray-500 dark:text-gray-400 font-medium mb-6">Need a custom repair or have something else in mind?</p>
@@ -869,7 +918,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm"><Wrench className="w-6 h-6 text-black" /></div>
+              <img src="/src/assets/images/premium_bike_logo_1788528519448.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm hidden"><Wrench className="w-6 h-6 text-black" /></div>
               <span className="text-2xl font-black tracking-tight">Yes Bike <span className="text-yellow-500">Service</span></span>
             </div>
             <p className="text-gray-400 font-medium max-w-sm">India's premium doorstep two-wheeler service. Making bike maintenance simple, transparent, and hassle-free.</p>
