@@ -271,7 +271,7 @@ export default function App() {
                       <form onSubmit={(e) => {
                         e.preventDefault();
                         const formData = new FormData(e.currentTarget);
-                        const message = `🏍️🛵 NEW BOOKING\n\n👤 Name: ${formData.get('fullName')}\n📞 Phone: ${formData.get('phone')}\n📍 Location: ${formData.get('location')}\n🏍️ Vehicle Type: ${heroVehicle}\n🔧 Service: ${formData.get('service')}\n⏰ Time: ${formData.get('time')}\n\n✅ Please confirm my booking!`;
+                        const message = `🏍️🛵 NEW BOOKING\n\n👤 Name: ${formData.get('fullName')}\n📞 Phone: ${formData.get('phone')}\n📍 Location: ${formData.get('location')}\n🏍️ Vehicle Type: ${heroVehicle}\n🔧 Service: ${formData.get('service')}\n📅 Date: ${formData.get('date')}\n⏰ Time: ${formData.get('time')}\n\n✅ Please confirm my booking!`;
                         window.open(`https://wa.me/917090400617?text=${encodeURIComponent(message)}`, '_blank');
                         
                         // Trigger Google Ads Conversion
@@ -335,20 +335,13 @@ export default function App() {
                             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                           </div>
                           
-                          <div className="relative group">
-                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
-                              <Clock className="w-3 h-3" />
+                          <div className="flex gap-2">
+                            <div className="relative group flex-1">
+                                <input type="date" name="date" required className="w-full px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
                             </div>
-                            <select name="time" required defaultValue="" className="w-full pl-8 pr-7 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
-                              <option value="" disabled hidden>Preferred Time</option>
-                              <option value="Immediate (Within 20 mins)">🚀 Immediate</option>
-                              <option value="Today - Morning (9 AM - 12 PM)">🌅 Today (Morn)</option>
-                              <option value="Today - Afternoon (12 PM - 4 PM)">☀️ Today (Aft)</option>
-                              <option value="Today - Evening (4 PM - 8 PM)">🌙 Today (Eve)</option>
-                              <option value="Tomorrow - First Half">📅 Tomorrow (Morn)</option>
-                              <option value="Tomorrow - Second Half">📅 Tomorrow (Aft)</option>
-                            </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                            <div className="relative group flex-1">
+                                <input type="time" name="time" required className="w-full px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
+                            </div>
                           </div>
                         </div>
 
