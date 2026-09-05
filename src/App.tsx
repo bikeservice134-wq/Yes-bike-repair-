@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Menu, Wrench, Users, Clock, Shield, Star, CheckCircle2, ChevronDown, MapPin, 
+  Menu, Wrench, Users, Clock, Shield, Star, CheckCircle2, ChevronDown, MapPin, LocateFixed, Loader2, 
   Phone, User, Smartphone, X, ArrowRight, Sun, Moon,
   Zap, Award, ThumbsUp, PenTool, Mail
 } from 'lucide-react';
@@ -45,6 +45,45 @@ const Toast = ({ message, onClose }: { message: string, onClose: () => void }) =
 };
 
 export default function App() {
+
+  const locationInputRef = React.useRef<HTMLInputElement>(null);
+  const [isLocating, setIsLocating] = useState(false);
+  const handleLocateMe = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+          const data = await response.json();
+          if (data && locationInputRef.current) {
+            let address = "";
+            if (data.address) {
+                const parts = [];
+                if (data.address.suburb) parts.push(data.address.suburb);
+                else if (data.address.neighbourhood) parts.push(data.address.neighbourhood);
+                if (data.address.city || data.address.town || data.address.county) parts.push(data.address.city || data.address.town || data.address.county);
+                address = parts.join(', ');
+            }
+            locationInputRef.current.value = address || data.display_name.split(',').slice(0, 3).join(',');
+          }
+        } catch (error) {
+          console.error("Error getting location", error);
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (error) => {
+        console.error("Error getting location", error);
+        setIsLocating(false);
+      }
+    );
+  };
   const [heroSuccess, setHeroSuccess] = useState(false);
   const [isPackageModalOpen, setIsPackageModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<{name: string, price: string} | null>(null);
@@ -88,20 +127,8 @@ export default function App() {
       'Repairs & Parts Charged Separately',
       '30-minute estimated repair time'
     ],
-    'Puncture Repair': [
-      'Locating the puncture site',
-      'Removing foreign objects (nails, glass)',
-      'Inserting high-quality puncture plug',
-      'Trimming excess plug material',
-      'Checking overall tire pressure'
-    ],
-    'Battery Replacement': [
-      'Battery voltage and health diagnostic check',
-      'Safe removal of the old battery',
-      'Installation of genuine Exide/Amaron battery',
-      'Terminal greasing to prevent corrosion',
-      'Electrical system check to ensure proper charging'
-    ]
+
+
   };
 
   const [packageSuccess, setPackageSuccess] = useState(false);
@@ -177,7 +204,7 @@ export default function App() {
       <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0A0A0A]/80 border-b border-gray-100 dark:border-white/10 shadow-sm backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setCurrentView('home'); window.scrollTo(0,0); setIsMobileMenuOpen(false); }}>
-            <img src="/src/assets/images/ultra_premium_bike_logo_1788610062922.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform hidden"><Wrench className="w-6 h-6 text-black" /></div>
+            <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform"><Wrench className="w-6 h-6 text-black" /></div>
             <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">Yes Bike <span className="text-yellow-500">Service</span></span>
           </div>
           
@@ -241,15 +268,29 @@ export default function App() {
             <div className="absolute top-0 inset-x-0 h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(234,179,8,0.15),transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(234,179,8,0.08),transparent_50%)] -z-10"></div>
             
             <div className="max-w-7xl mx-auto px-5">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 w-full">
+              <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10 lg:gap-16 w-full">
                 
                 
                                                 {/* Hero Text */}
-                <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10">
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10 lg:pt-8">
                   <FadeIn>
                     <h1 className="text-4xl sm:text-[52px] lg:text-[64px] font-black leading-[1.05] tracking-tight text-gray-900 dark:text-white mb-4">
                       Bengaluru's <br className="block sm:hidden lg:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-300">Doorstep Bike Repair</span>
                     </h1>
+                    <ul className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl font-bold flex flex-col gap-3 mx-auto lg:mx-0 mb-8 mt-8">
+                      <li className="flex items-center justify-center lg:justify-start gap-3">
+                        <CheckCircle2 className="w-6 h-6 text-yellow-500 shrink-0" />
+                        General Bike Service
+                      </li>
+                      <li className="flex items-center justify-center lg:justify-start gap-3">
+                        <CheckCircle2 className="w-6 h-6 text-yellow-500 shrink-0" />
+                        General Service + Engine Oil
+                      </li>
+                      <li className="flex items-center justify-center lg:justify-start gap-3">
+                        <CheckCircle2 className="w-6 h-6 text-yellow-500 shrink-0" />
+                        Jump Start Service
+                      </li>
+</ul>
                     
 
                   </FadeIn>
@@ -257,18 +298,18 @@ export default function App() {
 
                 </div>
                                 {/* Hero Form */}
-                <div id="booking-form" className="relative z-10 w-full max-w-[300px] mx-auto lg:ml-auto">
+                <div id="booking-form" className="relative z-10 w-full max-w-[300px] mx-auto lg:ml-auto -mt-12 lg:-mt-24 xl:-mt-32">
                   <FadeIn delay={300}>
                     {/* Decorative blurred background */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/20 to-transparent blur-3xl -z-10 rounded-2xl"></div>
-                    <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-2xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
+                    <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-2xl p-3 sm:p-4 shadow-xl relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-400/10 rounded-bl-[60px] -z-10"></div>
-                      <div className="text-center mb-3">
-                        <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white mb-1 leading-tight">
+                      <div className="text-center mb-2">
+                        <h3 className="text-base sm:text-lg font-black text-gray-900 dark:text-white mb-1 leading-tight">
                           Book Mechanic Now
                         </h3>
-                        <p className="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">Mechanic reaches in <span className="text-yellow-600 dark:text-yellow-500">20 mins</span>.</p>
-                        <div className="bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 text-[11px] font-bold px-3 py-1.5 rounded-lg inline-block border border-green-100 dark:border-green-500/20">
+                        <p className="text-[10px] sm:text-xs font-bold text-gray-500 dark:text-gray-400 mb-2">Mechanic reaches in <span className="text-yellow-600 dark:text-yellow-500">20 mins</span>.</p>
+                        <div className="bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 text-[10px] font-bold px-3 py-1 rounded-lg inline-block border border-green-100 dark:border-green-500/20 mb-1">
                           Honest pricing with services starting from ₹399
                         </div>
                       </div>
@@ -293,59 +334,65 @@ export default function App() {
                         
                         {/* Toggle */}
                         <div className="flex bg-gray-100/80 dark:bg-[#222] p-1 rounded-lg mb-3 border border-gray-200/50 dark:border-white/5">
-                          <button type="button" onClick={() => setHeroVehicle('Bike')} className={`flex-1 py-1.5 rounded-md text-xs font-black transition-all ${heroVehicle === 'Bike' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                          <button type="button" onClick={() => setHeroVehicle('Bike')} className={`flex-1 py-1 rounded-md text-xs font-black transition-all ${heroVehicle === 'Bike' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
                             🏍️ Bike
                           </button>
-                          <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`flex-1 py-1.5 rounded-md text-xs font-black transition-all ${heroVehicle === 'Scooter' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                          <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`flex-1 py-1 rounded-md text-xs font-black transition-all ${heroVehicle === 'Scooter' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
                             🛵 Scooter
                           </button>
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <User className="w-3 h-3" />
                             </div>
-                            <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <Smartphone className="w-3 h-3" />
                             </div>
-                            <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <MapPin className="w-3 h-3" />
                             </div>
-                            <input type="text" name="location" required placeholder="Service Location" className="w-full pl-8 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input ref={locationInputRef} type="text" name="location" required placeholder="Service Location, Bengaluru" className="w-full pl-8 pr-8 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <button 
+                              type="button" 
+                              onClick={handleLocateMe}
+                              title="Use current location"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors"
+                            >
+                              {isLocating ? <Loader2 className="w-3 h-3 animate-spin" /> : <LocateFixed className="w-3.5 h-3.5" />}
+                            </button>
                           </div>
                           
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <Wrench className="w-3 h-3" />
                             </div>
-                            <select name="service" required defaultValue="" className="w-full pl-8 pr-7 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
+                            <select name="service" required defaultValue="" className="w-full pl-8 pr-7 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
                               <option value="" disabled hidden>Select Service Type</option>
                               <option value="General Bike Service (₹699)">🔧 Gen. Service - ₹699</option>
                               <option value="General Service + Engine Oil (₹1,249)">🛢️ Serv. + Oil - ₹1,249</option>
                               <option value="Jump Start Service (₹399)">⚡ Jump Start - ₹399</option>
-                              <option value="Puncture Repair (₹599)">🔘 Puncture - ₹599</option>
-                              <option value="Battery Replacement (₹1,499)">🔋 Battery - ₹1,499</option>
                               <option value="Running Repair (₹399)">⏱️ Running Repair - ₹399</option>
                               <option value="Other / Custom Issue">📋 Other Issue</option>
-                            </select>
+</select>
                             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                           </div>
                           
                           <div className="flex gap-2">
                             <div className="relative group flex-1">
-                                <input type="date" name="date" required className="w-full px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
+                                <input type="date" name="date" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
                             </div>
                             <div className="relative group flex-1">
-                                <input type="time" name="time" required className="w-full px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
+                                <input type="time" name="time" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
                             </div>
                           </div>
                         </div>
@@ -446,222 +493,144 @@ export default function App() {
                 </FadeIn>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-10 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:p-5 xl:gap-8 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                 {/* General Service */}
                 <FadeIn delay={100} className="flex">
-                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[32px] p-6 sm:p-8 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">General Bike Service</h3>
+                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-3xl p-4 sm:p-5 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative h-full">
+                    <div className="mb-4 flex-grow">
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 line-clamp-2 min-h-[56px]">General Bike Service</h3>
                       <div className="flex items-end gap-3 mb-4">
-                        <div className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹699</div>
-                        <div className="text-lg font-bold text-gray-400 line-through mb-1">₹899</div>
+                        <div className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">₹699</div>
+                        <div className="text-sm font-bold text-gray-400 line-through mb-1">₹899</div>
                       </div>
-                      <p className="text-green-700 dark:text-green-400 text-sm font-black bg-green-50 dark:bg-green-500/10 inline-block px-4 py-1.5 rounded-lg mb-6 tracking-wide uppercase">Offer Price: ₹699</p>
+                      <p className="text-green-700 dark:text-green-400 text-xs font-black bg-green-50 dark:bg-green-500/10 inline-block px-3 py-1 rounded-md mb-4 tracking-wide uppercase">Offer Price: ₹699</p>
                       
-                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
-                          Available at Your Doorstep
+                      <div className="space-y-2.5 mb-4 bg-gray-50 dark:bg-[#1A1A1A] p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">🏠</div> 
+                          At Your Doorstep
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🛡️</div> 
-                          500 Kms or 1 Month Warranty
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">🛡️</div> 
+                          1 Month Warranty
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🔧</div> 
-                          Recommended Every 3,000 Kms or 3 Months
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">⏱️</div> 
+                          ~60-90 Minutes
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">⏱️</div> 
-                          Service Time: 2 Hours
-                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h4 className="font-black text-gray-900 dark:text-white text-xs uppercase tracking-wider">What's Included</h4>
+                        <ul className="space-y-2">
+                          {['Complete Vehicle Inspection', 'Washing & Polishing', 'Brakes & Clutch Adjustment', 'Chain Tension Adjustment', 'Carburetor Cleaning / Tuning'].map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" /> {item}</li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                     
-                    <div className="mt-auto pt-2">
-                      <h4 className="text-sm font-black text-gray-900 dark:text-white mb-4 uppercase tracking-wider">Service Includes:</h4>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-8">
-                        {['Air Filter Cleaning', 'Battery Voltage Check', 'Brake Service', 'Cables & Levers Adj.', 'Chain Tension Check', 'Clutch Greasing', 'Dry Wash', 'Electrical Check-up', 'Engine Oil Check', 'Greasing & Lube', 'Oil Leakage Check', 'Spark Plug Cleaning'].map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 text-[13px] font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> {item}</li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <button onClick={() => { setSelectedPackage({name: 'General Bike Service', price: '₹699'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2">
-                          Book Now <ArrowRight className="w-4 h-4" />
-                        </button>
-                        <button onClick={() => setDetailsModalContent({name: 'General Bike Service', details: packageDetailsData['General Bike Service']})} className="flex-1 bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center">
-                          View Technical Details
-                        </button>
-                      </div>
+                    <div className="flex flex-col gap-2 mt-auto pt-4">
+                      <button onClick={() => { setSelectedPackage({name: 'General Bike Service', price: '₹699'}); setIsPackageModalOpen(true); }} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
+                        Book Now <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => setDetailsModalContent({name: 'General Bike Service', details: packageDetailsData['General Bike Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
+                        View Technical Details
+                      </button>
                     </div>
                   </div>
                 </FadeIn>
 
-                {/* Engine Oil Combo (Bestseller) */}
+                {/* General Service + Engine Oil */}
                 <FadeIn delay={200} className="flex">
-                  <div className="bg-gray-900 dark:bg-[#161616] border border-yellow-500/50 rounded-[32px] p-6 sm:p-8 flex flex-col w-full relative shadow-[0_10px_40px_rgba(234,179,8,0.15)] overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-transparent pointer-events-none"></div>
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-bl-full blur-2xl"></div>
+                  <div className="bg-gray-900 border border-yellow-500/30 rounded-3xl p-4 sm:p-5 flex flex-col w-full shadow-xl relative overflow-hidden group h-full">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl -z-10 group-hover:bg-yellow-400/10 transition-colors"></div>
                     
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-0 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-1.5 rounded-b-xl text-[11px] font-black uppercase tracking-widest shadow-md z-10">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-0 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-1 rounded-b-lg text-[9px] font-black uppercase tracking-widest shadow-md z-10">
                       Most Popular
                     </div>
                     
-                    <div className="mb-6 pt-4 relative z-10">
-                      <h3 className="text-2xl font-black text-white mb-2 flex items-center gap-2">🏍️ General Service + Engine Oil</h3>
+                    <div className="mb-4 flex-grow relative z-10 mt-2">
+                      <h3 className="text-lg font-black text-white mb-2 flex items-start gap-2 line-clamp-2 min-h-[56px]"><span className="text-lg leading-tight">🏍️</span> <span className="leading-tight">General Service + Engine Oil</span></h3>
                       <div className="flex items-end gap-3 mb-4">
-                        <div className="text-4xl font-black text-yellow-400 tracking-tight">₹1,249</div>
-                        <div className="text-lg font-bold text-gray-500 line-through mb-1">₹1,500</div>
+                        <div className="text-2xl font-black text-yellow-400 tracking-tight">₹1,249</div>
+                        <div className="text-sm font-bold text-gray-500 line-through mb-1">₹1,500</div>
                       </div>
-                      <p className="text-gray-300 text-sm font-semibold mb-6">Professional doorstep bike service with engine oil change.</p>
+                      <p className="text-gray-300 text-xs font-semibold mb-4">Premium doorstep service with full oil change.</p>
                       
-                      <div className="space-y-2.5 mb-6 bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                        <div className="flex items-center gap-4 text-sm font-bold text-white">
-                          <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shadow-sm text-base">✓</div> 
-                          Available at Your Doorstep
+                      <div className="space-y-2.5 mb-4 bg-white/5 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shadow-sm text-sm">🛢️</div> 
+                          Semi-Synthetic Engine Oil
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-white">
-                          <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shadow-sm text-base">✓</div> 
-                          500 Kms or 1 Month Warranty
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shadow-sm text-sm">🏠</div> 
+                          At Your Doorstep
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-white">
-                          <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shadow-sm text-base">✓</div> 
-                          Recommended Every 3,000 Kms or 3 Months
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shadow-sm text-sm">🛡️</div> 
+                          1 Month Warranty
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-white">
-                          <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shadow-sm text-base">✓</div> 
-                          Service Time: Approx. 2 Hours
-                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h4 className="font-black text-white text-xs uppercase tracking-wider">What's Included</h4>
+                        <ul className="space-y-2">
+                          {['Everything in General Service', 'Engine Oil Change', 'Oil Filter Replacement (if applicable)', 'Engine Flushing (if needed)'].map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-gray-300"><CheckCircle2 className="w-3.5 h-3.5 text-yellow-400 shrink-0" /> {item}</li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                     
-                    <div className="mt-auto pt-2 relative z-10">
-                      <h4 className="text-sm font-black text-white mb-4 uppercase tracking-wider">Service Includes:</h4>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-8">
-                        {['Air Filter Cleaning', 'Battery Voltage Check', 'Brake Service', 'Cables & Levers Adj.', 'Chain Tension Check', 'Clutch Greasing', 'Dry Wash', 'Electrical Check-up', 'Engine Oil Change', 'Greasing & Lube', 'Oil Leakage Check', 'Spark Plug Cleaning'].map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 text-[13px] font-bold text-gray-300"><CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0" /> {item}</li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <button onClick={() => { setSelectedPackage({name: 'General Service + Engine Oil', price: '₹1,249'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.4)] flex justify-center items-center gap-2">
-                          Book Now <ArrowRight className="w-4 h-4" />
-                        </button>
-                        <button onClick={() => setDetailsModalContent({name: 'General Service + Engine Oil', details: packageDetailsData['General Service + Engine Oil']})} className="flex-1 bg-white/10 hover:bg-white/20 text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center backdrop-blur-sm">
-                          View Technical Details
-                        </button>
-                      </div>
+                    <div className="flex flex-col gap-2 mt-auto pt-4 relative z-10">
+                      <button onClick={() => { setSelectedPackage({name: 'General Service + Engine Oil', price: '₹1,249'}); setIsPackageModalOpen(true); }} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.4)] flex justify-center items-center gap-2 text-sm">
+                        Book Now <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => setDetailsModalContent({name: 'General Service + Engine Oil', details: packageDetailsData['General Service + Engine Oil']})} className="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center backdrop-blur-sm">
+                        View Technical Details
+                      </button>
                     </div>
                   </div>
                 </FadeIn>
 
                 {/* Jump Start */}
                 <FadeIn delay={300} className="flex">
-                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[32px] p-6 sm:p-8 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-2">⚡ Jump Start Service</h3>
+                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-3xl p-4 sm:p-5 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative h-full">
+                    <div className="mb-4 flex-grow">
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 flex items-start gap-2 line-clamp-2 min-h-[56px]"><span className="text-lg leading-tight">⚡</span> <span className="leading-tight">Jump Start Service</span></h3>
                       <div className="flex items-end gap-3 mb-4">
-                        <div className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</div>
-                        <div className="text-lg font-bold text-gray-400 line-through mb-1">₹600</div>
+                        <div className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">₹399</div>
+                        <div className="text-sm font-bold text-gray-400 line-through mb-1">₹600</div>
                       </div>
-                      <p className="text-green-700 dark:text-green-400 text-sm font-black bg-green-50 dark:bg-green-500/10 inline-block px-4 py-1.5 rounded-lg mb-6 tracking-wide uppercase">Special Price: ₹399</p>
+                      <p className="text-green-700 dark:text-green-400 text-xs font-black bg-green-50 dark:bg-green-500/10 inline-block px-3 py-1 rounded-md mb-4 tracking-wide uppercase">Special Price: ₹399</p>
                       
-                      <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold mb-6">Get your bike started quickly with our doorstep jump-start service. No workshop visit, no waiting.</p>
-                      
-                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
-                          Available at Your Doorstep
+                      <div className="space-y-2.5 mb-4 bg-gray-50 dark:bg-[#1A1A1A] p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">🏠</div> 
+                          At Your Doorstep
                         </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">⏱️</div> 
-                          20 Minutes Approx.
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">⏱️</div> 
+                          Arrives in ~20 Mins
                         </div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4">
-                      <button onClick={() => { setSelectedPackage({name: 'Jump Start Service', price: '₹399'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2">
-                        Book Now <ArrowRight className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => setDetailsModalContent({name: 'Jump Start Service', details: packageDetailsData['Jump Start Service']})} className="flex-1 bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center">
-                        View Technical Details
-                      </button>
-                    </div>
-                  </div>
-                </FadeIn>
-
-                {/* Puncture Repair */}
-                <FadeIn delay={400} className="flex">
-                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[32px] p-6 sm:p-8 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-2">🛞 Puncture Repair</h3>
-                      <div className="flex items-end gap-3 mb-6">
-                        <div className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹599</div>
-                        <div className="text-lg font-bold text-gray-400 line-through mb-1">₹750</div>
                       </div>
                       
-                      <div className="bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
-                        <h4 className="text-sm font-black text-gray-900 dark:text-white mb-4 uppercase tracking-wider">Service Includes:</h4>
-                        <div className="space-y-4 mb-4">
-                          <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Available at Your Doorstep</div>
-                          <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> Takes only 20 minutes</div>
-                          <div className="flex items-center gap-3 text-[13px] font-bold text-gray-700 dark:text-gray-300"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> One Tyre Puncture Repair</div>
-                        </div>
-                        
-                        <div className="bg-yellow-50 dark:bg-yellow-500/10 text-yellow-800 dark:text-yellow-500 text-[13px] font-bold px-4 py-3 rounded-xl flex items-start gap-2 border border-yellow-200/50 dark:border-yellow-500/20">
-                          <span className="text-lg leading-none">+</span>
-                          <span>₹100 extra for each additional puncture</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4">
-                      <button onClick={() => { setSelectedPackage({name: 'Puncture Repair', price: '₹599'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2">
-                        Book Now <ArrowRight className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => setDetailsModalContent({name: 'Puncture Repair', details: packageDetailsData['Puncture Repair']})} className="flex-1 bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center">
-                        View Technical Details
-                      </button>
-                    </div>
-                  </div>
-                </FadeIn>
-
-                {/* Running Repair */}
-                <FadeIn delay={500} className="flex">
-                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-[32px] p-6 sm:p-8 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-2">⏱️ Running Repair</h3>
-                      <div className="flex items-end gap-3 mb-4">
-                        <div className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</div>
-                        <div className="text-lg font-bold text-gray-400 line-through mb-1">₹600</div>
-                      </div>
-                      
-                      <div className="space-y-2.5 mb-6 bg-gray-50 dark:bg-[#1A1A1A] p-5 rounded-2xl border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">🏠</div> 
-                          Available at Your Doorstep
-                        </div>
-                        <div className="flex items-center gap-4 text-sm font-bold text-gray-700 dark:text-gray-300">
-                          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-base">⏱️</div> 
-                          Approx. 30 Minutes
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <h4 className="font-black text-gray-900 dark:text-white text-sm uppercase tracking-wider">What's Included</h4>
-                        <ul className="space-y-3">
-                          {['Complete Vehicle Inspection', 'On-the-Spot Running Repairs', 'Repairs & Parts Charged Separately'].map((item, i) => (
-                            <li key={i} className="flex items-center gap-2 text-[13px] font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" /> {item}</li>
+                      <div className="space-y-3">
+                        <h4 className="font-black text-gray-900 dark:text-white text-xs uppercase tracking-wider">What's Included</h4>
+                        <ul className="space-y-2">
+                          {['Immediate Battery Jump Start', 'Battery Voltage Testing', 'Charging System Check', 'Terminals Cleaning'].map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" /> {item}</li>
                           ))}
                         </ul>
                       </div>
                     </div>
                     
-                    <div className="flex flex-col sm:flex-row gap-3 mt-auto pt-4">
-                      <button onClick={() => { setSelectedPackage({name: 'Running Repair', price: '₹399'}); setIsPackageModalOpen(true); }} className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black py-4 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2">
+                    <div className="flex flex-col gap-2 mt-auto pt-4">
+                      <button onClick={() => { setSelectedPackage({name: 'Jump Start Service', price: '₹399'}); setIsPackageModalOpen(true); }} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
                         Book Now <ArrowRight className="w-4 h-4" />
                       </button>
-                      <button onClick={() => setDetailsModalContent({name: 'Running Repair', details: packageDetailsData['Running Repair']})} className="flex-1 bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-4 rounded-xl font-black transition-all text-sm flex justify-center items-center">
+                      <button onClick={() => setDetailsModalContent({name: 'Jump Start Service', details: packageDetailsData['Jump Start Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
                         View Technical Details
                       </button>
                     </div>
@@ -828,6 +797,65 @@ export default function App() {
             </FadeIn>
           </section>
         
+
+          {/* SEO SECTION */}
+          <section className="pt-24 pb-32 bg-gray-50 dark:bg-[#050505]">
+            <div className="max-w-7xl mx-auto px-5">
+              <div className="max-w-4xl mx-auto">
+                <FadeIn>
+                  <p className="text-sm font-black text-yellow-500 uppercase tracking-widest mb-3 text-center md:text-left">Top Rated Doorstep Bike Service Bangalore</p>
+                  <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight text-center md:text-left">Looking for the Best "Bike Service Near Me"? We Come to You.</h2>
+                  
+                  <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed mb-12">
+                    <p>
+                      Searching for a reliable <strong className="text-gray-800 dark:text-gray-200">bike mechanic near me</strong>? Skip the local garage queues and get premium <strong className="text-gray-800 dark:text-gray-200">bike repair near me</strong> with our expert <strong className="text-gray-800 dark:text-gray-200">doorstep bike service</strong> in Bangalore. Whether you need a routine oil change or emergency <strong className="text-gray-800 dark:text-gray-200">bike repair Bangalore</strong>, our verified professionals bring the workshop to your location—be it your home, office, or roadside.
+                    </p>
+                    <p>
+                      We specialize in comprehensive <strong className="text-gray-800 dark:text-gray-200">two wheeler service near me</strong>, including engine diagnostics, battery jump-starts, brake replacements, and general maintenance. Experience the ultimate convenience of <strong className="text-gray-800 dark:text-gray-200">bike service at home</strong> without compromising on quality or genuine parts. When you need a top-tier <strong className="text-gray-800 dark:text-gray-200">motorcycle service near me</strong>, we are just a click away.
+                    </p>
+                  </div>
+                  
+                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mt-12 mb-8">Why We Are the #1 Choice for Bike Service Bangalore</h3>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                    {[
+                      { icon: '🔧', text: 'Verified & expert bike mechanics' },
+                      { icon: '🏠', text: 'Premium bike service at home' },
+                      { icon: '📍', text: 'Fastest bike repair near your location' },
+                      { icon: '⚡', text: 'Quick doorstep bike service' },
+                      { icon: '💰', text: 'Transparent & upfront pricing' },
+                      { icon: '🛠️', text: '100% Genuine OEM parts' },
+                      { icon: '🛡️', text: 'Comprehensive service warranty' },
+                      { icon: '🚗', text: 'Anywhere in Bangalore assistance' }
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-4 bg-white dark:bg-[#111] p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm">
+                        <span className="text-xl">{item.icon}</span>
+                        <span className="text-gray-700 dark:text-gray-300 font-bold text-[15px]">{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="bg-white dark:bg-[#111] p-8 md:p-12 rounded-[32px] border border-gray-100 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 mt-12 shadow-md relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="text-center md:text-left flex-1">
+                      <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-4">
+                        Beat the Bangalore Traffic. We Come to You.
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 font-medium mb-3">
+                        From Koramangala to Whitefield, book Namma Bengaluru's most trusted two-wheeler experts today.
+                      </p>
+                      <p className="text-gray-900 dark:text-white font-bold">
+                        Fast, reliable, and hassle-free <strong className="font-bold">doorstep bike service across Bangalore</strong>.
+                      </p>
+                    </div>
+                    <button onClick={() => { document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'}) }} className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.3)] uppercase tracking-wider text-sm whitespace-nowrap">
+                      BOOK MECHANIC IN BANGALORE
+                    </button>
+                  </div>
+                </FadeIn>
+              </div>
+            </div>
+          </section>
+
           {/* STICKY MOBILE CTA */}
           <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-[#0A0A0A]/90 backdrop-blur-md border-t border-gray-200 dark:border-white/10 md:hidden z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
             <button 
@@ -916,7 +944,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/src/assets/images/ultra_premium_bike_logo_1788610062922.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm hidden"><Wrench className="w-6 h-6 text-black" /></div>
+              <div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm"><Wrench className="w-6 h-6 text-black" /></div>
               <span className="text-2xl font-black tracking-tight">Yes Bike <span className="text-yellow-500">Service</span></span>
             </div>
             <p className="text-gray-400 font-medium max-w-sm">India's premium doorstep two-wheeler service. Making bike maintenance simple, transparent, and hassle-free.</p>
@@ -926,7 +954,6 @@ export default function App() {
             <ul className="space-y-2.5 text-gray-400 font-medium text-sm">
               <li>General Service</li>
               <li>Engine Oil Change</li>
-              <li>Puncture Repair</li>
               <li>Jump Start</li>
             </ul>
           </div>
