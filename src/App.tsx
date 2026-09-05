@@ -46,6 +46,20 @@ const Toast = ({ message, onClose }: { message: string, onClose: () => void }) =
 
 export default function App() {
 
+  const handleBookPackage = (packageName: string) => {
+    document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'});
+    setTimeout(() => {
+      const selectEl = document.querySelector('select[name="service"]') as HTMLSelectElement;
+      if (selectEl) {
+        Array.from(selectEl.options).forEach(opt => {
+          if (opt.value.includes(packageName)) {
+            selectEl.value = opt.value;
+          }
+        });
+      }
+    }, 100);
+  };
+
   const locationInputRef = React.useRef<HTMLInputElement>(null);
   const [isLocating, setIsLocating] = useState(false);
   const handleLocateMe = (e: React.MouseEvent) => {
@@ -379,7 +393,7 @@ export default function App() {
                             <select name="service" required defaultValue="" className="w-full pl-8 pr-7 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
                               <option value="" disabled hidden>Select Service Type</option>
                               <option value="General Bike Service (₹699)">🔧 Gen. Service - ₹699</option>
-                              <option value="General Service + Engine Oil (₹1,249)">🛢️ Serv. + Oil - ₹1,249</option>
+                              <option value="General Service + Engine Oil (₹1,349)">🛢️ Serv. + Oil - ₹1,349</option>
                               <option value="Jump Start Service (₹399)">⚡ Jump Start - ₹399</option>
                               <option value="Running Repair (₹399)">⏱️ Running Repair - ₹399</option>
                               <option value="Other / Custom Issue">📋 Other Issue</option>
@@ -531,7 +545,7 @@ export default function App() {
                     </div>
                     
                     <div className="flex flex-col gap-2 mt-auto pt-4">
-                      <button onClick={() => { setSelectedPackage({name: 'General Bike Service', price: '₹699'}); setIsPackageModalOpen(true); }} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
+                      <button onClick={() => handleBookPackage('General Bike Service')} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
                         Book Now <ArrowRight className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDetailsModalContent({name: 'General Bike Service', details: packageDetailsData['General Bike Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
@@ -553,7 +567,7 @@ export default function App() {
                     <div className="mb-4 flex-grow relative z-10 mt-2">
                       <h3 className="text-lg font-black text-white mb-2 flex items-start gap-2 line-clamp-2 min-h-[56px]"><span className="text-lg leading-tight">🏍️</span> <span className="leading-tight">General Service + Engine Oil</span></h3>
                       <div className="flex items-end gap-3 mb-4">
-                        <div className="text-2xl font-black text-yellow-400 tracking-tight">₹1,249</div>
+                        <div className="text-2xl font-black text-yellow-400 tracking-tight">₹1,349</div>
                         <div className="text-sm font-bold text-gray-500 line-through mb-1">₹1,500</div>
                       </div>
                       <p className="text-gray-300 text-xs font-semibold mb-4">Premium doorstep service with full oil change.</p>
@@ -584,7 +598,7 @@ export default function App() {
                     </div>
                     
                     <div className="flex flex-col gap-2 mt-auto pt-4 relative z-10">
-                      <button onClick={() => { setSelectedPackage({name: 'General Service + Engine Oil', price: '₹1,249'}); setIsPackageModalOpen(true); }} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.4)] flex justify-center items-center gap-2 text-sm">
+                      <button onClick={() => handleBookPackage('General Service + Engine Oil')} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(234,179,8,0.4)] flex justify-center items-center gap-2 text-sm">
                         Book Now <ArrowRight className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDetailsModalContent({name: 'General Service + Engine Oil', details: packageDetailsData['General Service + Engine Oil']})} className="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center backdrop-blur-sm">
@@ -627,7 +641,7 @@ export default function App() {
                     </div>
                     
                     <div className="flex flex-col gap-2 mt-auto pt-4">
-                      <button onClick={() => { setSelectedPackage({name: 'Jump Start Service', price: '₹399'}); setIsPackageModalOpen(true); }} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
+                      <button onClick={() => handleBookPackage('Jump Start Service')} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
                         Book Now <ArrowRight className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDetailsModalContent({name: 'Jump Start Service', details: packageDetailsData['Jump Start Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
@@ -638,9 +652,8 @@ export default function App() {
                 </FadeIn>
               </div>
               <div className="mt-16 text-center">
-                <p className="text-gray-500 dark:text-gray-400 font-medium mb-6">Need a custom repair or have something else in mind?</p>
-                <button onClick={() => { document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'}) }} className="bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 hover:border-yellow-500 text-gray-900 dark:text-white px-8 py-3 rounded-xl font-bold transition-all shadow-sm hover:shadow-md">
-                  Request Custom Service
+                <button onClick={() => { document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'}) }} className="bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 hover:border-yellow-500 text-gray-900 dark:text-white px-8 py-3 rounded-xl font-bold transition-all shadow-sm hover:shadow-md inline-flex items-center justify-center gap-2">
+                  Book all packages via the booking form <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -651,29 +664,34 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-5">
               <FadeIn>
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">Brands We <span className="text-yellow-500">Service</span></h2>
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">All Bike Brands We <span className="text-yellow-500">Service</span></h2>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium text-lg max-w-2xl mx-auto">We service and repair all major bike &amp; scooter brands at your doorstep across Bangalore.</p>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-24 max-w-5xl mx-auto">
-                  {[
-                    { name: 'Hero', color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-500/10', border: 'border-red-100 dark:border-red-500/20' },
-                    { name: 'Honda', color: 'text-red-600', bg: 'bg-red-50 dark:bg-red-600/10', border: 'border-red-100 dark:border-red-600/20' },
-                    { name: 'TVS', color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-600/10', border: 'border-blue-100 dark:border-blue-600/20' },
-                    { name: 'Bajaj', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10', border: 'border-blue-100 dark:border-blue-500/20' },
-                    { name: 'Yamaha', color: 'text-red-600', bg: 'bg-red-50 dark:bg-red-600/10', border: 'border-red-100 dark:border-red-600/20' },
-                    { name: 'Suzuki', color: 'text-blue-700', bg: 'bg-blue-50 dark:bg-blue-700/10', border: 'border-blue-100 dark:border-blue-700/20' },
-                    { name: 'Royal Enfield', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-100 dark:border-amber-500/20' },
-                    { name: 'KTM', color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-500/10', border: 'border-orange-100 dark:border-orange-500/20' }
-                  ].map((brand, idx) => (
-                    <div key={idx} className="group bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 p-6 sm:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl hover:border-gray-200 dark:hover:border-white/10 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl ${brand.bg}`}></div>
+                <div className="mb-24 max-w-5xl mx-auto bg-white dark:bg-[#111] p-8 md:p-12 rounded-[32px] border border-gray-100 dark:border-white/5 shadow-xl text-center">
+                  <h3 className="text-lg md:text-xl font-black text-gray-900 dark:text-white mb-8 uppercase tracking-wider">Popular Brands</h3>
+                  
+                  <div className="flex flex-wrap justify-center gap-3 mb-12">
+                    {[
+                      'Hero', 'Honda', 'TVS', 'Bajaj', 'Yamaha', 'Royal Enfield', 
+                      'Suzuki', 'KTM', 'Kawasaki', 'Jawa', 'Yezdi', 'BMW', 
+                      'Triumph', 'Harley-Davidson', 'Aprilia', 'Vespa', 'Piaggio', 
+                      'Benelli', 'Husqvarna', 'Ather', 'Ola Electric', 'TVS Electric', 
+                      'Revolt', 'Ultraviolette'
+                    ].map((brand, i) => (
+                      <div key={i} className="px-5 py-2.5 bg-gray-50 dark:bg-[#1A1A1A] border border-gray-200 dark:border-white/10 rounded-full text-sm font-bold text-gray-700 dark:text-gray-300 shadow-sm hover:-translate-y-1 hover:border-yellow-500/50 hover:text-yellow-600 dark:hover:text-yellow-400 transition-all cursor-default">
+                        {brand}
                       </div>
-                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${brand.bg} ${brand.border} border ${brand.color} font-black text-2xl group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 relative z-10 shadow-sm`}>
-                        {brand.name === 'KTM' ? 'KTM' : brand.name === 'TVS' ? 'TVS' : brand.name.split(' ').length > 1 ? brand.name.split(' ').map(n=>n[0]).join('') : brand.name.substring(0, 1)}
-                      </div>
-                      <span className="font-black text-gray-800 dark:text-gray-200 text-sm sm:text-[15px] uppercase tracking-wider relative z-10">{brand.name}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  
+                  <div className="bg-yellow-50 dark:bg-yellow-500/10 p-6 md:p-8 rounded-2xl border border-yellow-200 dark:border-yellow-500/20 max-w-2xl mx-auto">
+                    <p className="text-yellow-800 dark:text-yellow-400 font-bold text-lg mb-6">
+                      Don’t see your brand? No problem — we service most bikes and scooters.
+                    </p>
+                    <button onClick={() => { document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'}) }} className="w-full sm:w-auto bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-3 rounded-xl font-black transition-all hover:scale-[1.02] shadow-[0_4px_14px_rgba(234,179,8,0.3)] flex justify-center items-center gap-2 mx-auto text-sm md:text-base">
+                      Book a doorstep mechanic in Bangalore today <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
               </FadeIn>
 
