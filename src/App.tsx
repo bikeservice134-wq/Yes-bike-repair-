@@ -177,7 +177,7 @@ export default function App() {
       <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0A0A0A]/80 border-b border-gray-100 dark:border-white/10 shadow-sm backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setCurrentView('home'); window.scrollTo(0,0); setIsMobileMenuOpen(false); }}>
-            <img src="/src/assets/images/premium_bike_logo_1788528519448.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform hidden"><Wrench className="w-6 h-6 text-black" /></div>
+            <img src="/src/assets/images/ultra_premium_bike_logo_1788610062922.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform hidden"><Wrench className="w-6 h-6 text-black" /></div>
             <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white">Yes Bike <span className="text-yellow-500">Service</span></span>
           </div>
           
@@ -250,9 +250,7 @@ export default function App() {
                     <h1 className="text-4xl sm:text-[52px] lg:text-[64px] font-black leading-[1.05] tracking-tight text-gray-900 dark:text-white mb-4">
                       Bengaluru's <br className="block sm:hidden lg:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-300">Doorstep Bike Repair</span>
                     </h1>
-                    <p className="text-gray-500 dark:text-gray-400 text-lg sm:text-xl font-medium max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed">
-                      Excellent two-wheeler servicing right at your home or office.
-                    </p>
+                    
 
                   </FadeIn>
                   
@@ -918,7 +916,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/src/assets/images/premium_bike_logo_1788528519448.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm hidden"><Wrench className="w-6 h-6 text-black" /></div>
+              <img src="/src/assets/images/ultra_premium_bike_logo_1788610062922.jpg" alt="Yes Bike Service Logo" className="w-10 h-10 rounded-full shadow-sm object-cover"  /><div className="w-10 h-10 rounded-xl bg-yellow-500 flex items-center justify-center shadow-sm hidden"><Wrench className="w-6 h-6 text-black" /></div>
               <span className="text-2xl font-black tracking-tight">Yes Bike <span className="text-yellow-500">Service</span></span>
             </div>
             <p className="text-gray-400 font-medium max-w-sm">India's premium doorstep two-wheeler service. Making bike maintenance simple, transparent, and hassle-free.</p>
