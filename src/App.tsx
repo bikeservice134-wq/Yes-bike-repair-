@@ -47,20 +47,17 @@ const Toast = ({ message, onClose }: { message: string, onClose: () => void }) =
 export default function App() {
 
   const handleBookPackage = (packageName: string) => {
-    document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'});
-    setTimeout(() => {
-      const selectEl = document.querySelector('select[name="service"]') as HTMLSelectElement;
-      if (selectEl) {
-        Array.from(selectEl.options).forEach(opt => {
-          if (opt.value.includes(packageName)) {
-            selectEl.value = opt.value;
-          }
-        });
-      }
-    }, 100);
+    const priceMap: Record<string, string> = {
+      'General Service': '₹699',
+      'General Service + Engine Oil': '₹1,349',
+      'Jump Start Service': '₹399',
+      'Puncture Repair': '₹599'
+    };
+    setSelectedPackage({name: packageName, price: priceMap[packageName] || ''});
+    setIsPackageModalOpen(true);
   };
 
-  const locationInputRef = React.useRef<HTMLInputElement>(null);
+const locationInputRef = React.useRef<HTMLInputElement>(null);
   const [isLocating, setIsLocating] = useState(false);
   const handleLocateMe = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -104,7 +101,7 @@ export default function App() {
   const [detailsModalContent, setDetailsModalContent] = useState<{name: string, details: string[]} | null>(null);
 
   const packageDetailsData = {
-    'General Bike Service': [
+    'General Service': [
       'Initial inspection of bike condition',
       'Carburettor tuning and setting',
       'Spark plug gap setting and cleaning',
@@ -128,6 +125,12 @@ export default function App() {
       'Brake shoe cleaning and sanding',
       'Electrical system check',
       'Dry wash and exterior polishing'
+    ],
+    'Puncture Repair': [
+      'Locating tyre puncture safely',
+      'Removing debris/nail from the tyre',
+      'Plugging the puncture with high-quality seal',
+      'Checking tyre pressure & reinflating'
     ],
     'Jump Start Service': [
       'Battery voltage diagnostic check',
@@ -294,7 +297,7 @@ export default function App() {
                     <ul className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl font-bold flex flex-col gap-3 mx-auto lg:mx-0 mb-8 mt-8">
                       <li className="flex items-center justify-center lg:justify-start gap-3">
                         <CheckCircle2 className="w-6 h-6 text-yellow-500 shrink-0" />
-                        General Bike Service
+                        General Service
                       </li>
                       <li className="flex items-center justify-center lg:justify-start gap-3">
                         <CheckCircle2 className="w-6 h-6 text-yellow-500 shrink-0" />
@@ -361,21 +364,21 @@ export default function App() {
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <User className="w-3 h-3" />
                             </div>
-                            <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-[16px] md:text-sm placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <Smartphone className="w-3 h-3" />
                             </div>
-                            <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-8 pr-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-[16px] md:text-sm placeholder:text-gray-400 placeholder:font-medium" />
                           </div>
                           
                           <div className="relative group">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <MapPin className="w-3 h-3" />
                             </div>
-                            <input ref={locationInputRef} type="text" name="location" required placeholder="Service Location, Bengaluru" className="w-full pl-8 pr-8 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400 placeholder:font-medium" />
+                            <input ref={locationInputRef} type="text" name="location" required placeholder="Service Location, Bengaluru" className="w-full pl-8 pr-8 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-[16px] md:text-sm placeholder:text-gray-400 placeholder:font-medium" />
                             <button 
                               type="button" 
                               onClick={handleLocateMe}
@@ -390,11 +393,12 @@ export default function App() {
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 bg-white dark:bg-[#222] rounded-full flex items-center justify-center shadow-sm text-gray-400 group-focus-within:text-yellow-600 dark:group-focus-within:text-yellow-500 transition-colors">
                               <Wrench className="w-3 h-3" />
                             </div>
-                            <select name="service" required defaultValue="" className="w-full pl-8 pr-7 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
+                            <select name="service" required defaultValue="" className="w-full pl-8 pr-7 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[16px] md:text-sm appearance-none cursor-pointer invalid:text-gray-400 invalid:font-medium">
                               <option value="" disabled hidden>Select Service Type</option>
-                              <option value="General Bike Service (₹699)">🔧 Gen. Service - ₹699</option>
+                              <option value="General Service (₹699)">🔧 Gen. Service - ₹699</option>
                               <option value="General Service + Engine Oil (₹1,349)">🛢️ Serv. + Oil - ₹1,349</option>
                               <option value="Jump Start Service (₹399)">⚡ Jump Start - ₹399</option>
+                              <option value="Puncture Repair (₹599)">🛞 Puncture Repair - ₹599</option>
                               <option value="Running Repair (₹399)">⏱️ Running Repair - ₹399</option>
                               <option value="Other / Custom Issue">📋 Other Issue</option>
 </select>
@@ -403,10 +407,10 @@ export default function App() {
                           
                           <div className="flex gap-2">
                             <div className="relative group flex-1">
-                                <input type="date" name="date" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
+                                <input type="date" name="date" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-[16px] md:text-sm placeholder:text-gray-400" />
                             </div>
                             <div className="relative group flex-1">
-                                <input type="time" name="time" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-sm placeholder:text-gray-400" />
+                                <input type="time" name="time" required className="w-full px-3 py-1 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-xs sm:text-[16px] md:text-sm placeholder:text-gray-400" />
                             </div>
                           </div>
                         </div>
@@ -507,12 +511,12 @@ export default function App() {
                 </FadeIn>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:p-5 xl:gap-8 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:p-5 xl:gap-6 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                 {/* General Service */}
                 <FadeIn delay={100} className="flex">
                   <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-3xl p-4 sm:p-5 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative h-full">
                     <div className="mb-4 flex-grow">
-                      <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 line-clamp-2 min-h-[56px]">General Bike Service</h3>
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 line-clamp-2 min-h-[56px]">General Service</h3>
                       <div className="flex items-end gap-3 mb-4">
                         <div className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">₹699</div>
                         <div className="text-sm font-bold text-gray-400 line-through mb-1">₹899</div>
@@ -545,10 +549,10 @@ export default function App() {
                     </div>
                     
                     <div className="flex flex-col gap-2 mt-auto pt-4">
-                      <button onClick={() => handleBookPackage('General Bike Service')} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
+                      <button onClick={() => handleBookPackage('General Service')} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
                         Book Now <ArrowRight className="w-4 h-4" />
                       </button>
-                      <button onClick={() => setDetailsModalContent({name: 'General Bike Service', details: packageDetailsData['General Bike Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
+                      <button onClick={() => setDetailsModalContent({name: 'General Service', details: packageDetailsData['General Service']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
                         View Technical Details
                       </button>
                     </div>
@@ -650,12 +654,50 @@ export default function App() {
                     </div>
                   </div>
                 </FadeIn>
+
+                {/* Puncture Repair */}
+                <FadeIn delay={400} className="flex">
+                  <div className="bg-white dark:bg-[#111] border border-gray-100 dark:border-white/5 rounded-3xl p-4 sm:p-5 flex flex-col w-full hover:border-yellow-500/30 transition-all shadow-sm hover:shadow-xl relative h-full">
+                    <div className="mb-4 flex-grow">
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 flex items-start gap-2 line-clamp-2 min-h-[56px]"><span className="text-lg leading-tight">🛞</span> <span className="leading-tight">Puncture Repair</span></h3>
+                      <div className="flex items-end gap-3 mb-4">
+                        <div className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">₹599</div>
+                        <div className="text-sm font-bold text-gray-400 line-through mb-1">₹750</div>
+                      </div>
+                      <p className="text-green-700 dark:text-green-400 text-xs font-black bg-green-50 dark:bg-green-500/10 inline-block px-3 py-1 rounded-md mb-4 tracking-wide uppercase">Special Price: ₹599</p>
+                        
+                      <div className="space-y-2.5 mb-4 bg-gray-50 dark:bg-[#1A1A1A] p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">🏠</div> 
+                          Available at Doorstep
+                        </div>
+                        <div className="flex items-center gap-3 text-xs font-bold text-gray-700 dark:text-gray-300">
+                          <div className="w-6 h-6 rounded-full bg-white dark:bg-[#222] flex items-center justify-center shadow-sm text-sm">⏱️</div> 
+                          30 Minutes Approx.
+                        </div>
+                      </div>
+                        
+                      <div className="space-y-3">
+                        <h4 className="font-black text-gray-900 dark:text-white text-xs uppercase tracking-wider">What's Included</h4>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-xs font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" /> 1 Tyre Puncture Repair</li>
+                          <li className="flex items-start gap-2 text-xs font-bold text-gray-600 dark:text-gray-400"><CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" /> Additional Puncture: ₹100/- per tyre</li>
+                        </ul>
+                      </div>
+                    </div>
+                      
+                    <div className="flex flex-col gap-2 mt-auto pt-4">
+                      <button onClick={() => handleBookPackage('Puncture Repair')} className="w-full bg-gray-900 dark:bg-white text-white dark:text-black py-2.5 rounded-xl font-black transition-all hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center gap-2 text-sm">
+                        Book Now <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => setDetailsModalContent({name: 'Puncture Repair', details: packageDetailsData['Puncture Repair']})} className="w-full bg-gray-100 dark:bg-[#222] hover:bg-gray-200 dark:hover:bg-[#333] text-gray-900 dark:text-white py-2 rounded-xl font-black transition-all text-xs flex justify-center items-center">
+                        View Technical Details
+                      </button>
+                    </div>
+                  </div>
+                </FadeIn>
               </div>
-              <div className="mt-16 text-center">
-                <button onClick={() => { document.getElementById('booking-form')?.scrollIntoView({behavior: 'smooth'}) }} className="bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 hover:border-yellow-500 text-gray-900 dark:text-white px-8 py-3 rounded-xl font-bold transition-all shadow-sm hover:shadow-md inline-flex items-center justify-center gap-2">
-                  Book all packages via the booking form <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+
             </div>
             </section>
 
@@ -1066,7 +1108,7 @@ export default function App() {
               <div>
                 <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-1">Book Package</h3>
                 {selectedPackage && (
-                  <div className="inline-block bg-yellow-50 dark:bg-yellow-500/10 rounded-lg px-3 py-1.5 mt-2">
+                  <div className="inline-block bg-yellow-50 dark:bg-yellow-500/10 rounded-lg px-3 py-1.5 mt-2 border border-yellow-200 dark:border-yellow-500/20">
                     <span className="text-sm font-bold text-yellow-600 dark:text-yellow-500">{selectedPackage.name}</span>
                     <span className="mx-2 text-yellow-300">|</span>
                     <span className="text-sm font-black text-yellow-600 dark:text-yellow-500">{selectedPackage.price}</span>
@@ -1078,22 +1120,64 @@ export default function App() {
               </button>
             </div>
             
-            
-            <div className="mt-8 space-y-4">
-              <a 
-                href={`https://wa.me/917090400617?text=${encodeURIComponent("Hi Yes Bike Service, I would like to book the " + selectedPackage?.name + " (" + selectedPackage?.price + ").")}`}
-                target="_blank" rel="noopener noreferrer"
-                className="w-full bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-4 rounded-xl font-black text-[16px] transition-all hover:scale-[1.02] shadow-xl flex justify-center items-center gap-2"
-              >
-                Book via WhatsApp <ArrowRight className="w-5 h-5" />
-              </a>
-            </div>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const message = `🏍️🛵 NEW BOOKING\n\n👤 Name: ${formData.get('fullName')}\n📞 Phone: ${formData.get('phone')}\n📍 Location: ${formData.get('location')}\n🏍️ Vehicle Type: ${heroVehicle}\n🔧 Service: ${selectedPackage?.name} (${selectedPackage?.price})\n\n✅ Please confirm my booking!`;
+              window.open(`https://wa.me/917090400617?text=${encodeURIComponent(message)}`, '_blank');
+              
+              if (typeof window !== 'undefined' && typeof (window as any).gtag !== 'undefined') {
+                (window as any).gtag('event', 'conversion', {
+                    'send_to': 'AW-18313979172/mupQCP_io-4cEKTK5JxE',
+                    'value': 1.0,
+                    'currency': 'INR'
+                });
+              }
+              
+              setIsPackageModalOpen(false);
+              setCurrentView('thank-you');
+              window.scrollTo(0, 0);
+            }} className="space-y-4">
+              
+              <div className="flex bg-gray-100/80 dark:bg-[#222] p-1 rounded-lg mb-3 border border-gray-200/50 dark:border-white/5">
+                <button type="button" onClick={() => setHeroVehicle('Bike')} className={`flex-1 py-1.5 rounded-md text-xs font-black transition-all ${heroVehicle === 'Bike' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                  🏍️ Bike
+                </button>
+                <button type="button" onClick={() => setHeroVehicle('Scooter')} className={`flex-1 py-1.5 rounded-md text-xs font-black transition-all ${heroVehicle === 'Scooter' ? 'bg-white dark:bg-[#333] text-black dark:text-white shadow-sm scale-100' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 scale-95 hover:scale-100'}`}>
+                  🛵 Scooter
+                </button>
+              </div>
 
+              <div className="relative group">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <User className="w-4 h-4" />
+                </div>
+                <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[16px] md:text-sm placeholder:text-gray-400" />
+              </div>
+                
+              <div className="relative group">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <Smartphone className="w-4 h-4" />
+                </div>
+                <input type="tel" name="phone" required placeholder="Phone Number" className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[16px] md:text-sm placeholder:text-gray-400" />
+              </div>
+                
+              <div className="relative group">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <input type="text" name="location" required placeholder="Service Location, Bengaluru" className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-[#1A1A1A] text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500/50 focus:bg-white dark:focus:bg-[#222] transition-all font-semibold text-[16px] md:text-sm placeholder:text-gray-400" />
+              </div>
+
+              <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-4 rounded-xl font-black text-[16px] transition-all hover:scale-[1.02] shadow-[0_4px_14px_rgba(234,179,8,0.3)] flex justify-center items-center gap-2 mt-2">
+                Confirm Booking <ArrowRight className="w-5 h-5" />
+              </button>
+            </form>
           </div>
         </div>
       )}
 
-            {/* WHATSAPP FAB */}
+      {/* WHATSAPP FAB */}
       <a 
         href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20have%20a%20query%20regarding..." 
         target="_blank" 
