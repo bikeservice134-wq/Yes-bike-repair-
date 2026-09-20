@@ -1,7 +1,9 @@
 {
   "name": "Yes Bike Service",
-  "description": "Book a certified mechanic in just 30 seconds. We come to you—home, office, or roadside. Fast, reliable, and transparent.",
-  "requestFramePermissions": [],
+  "description": "Bengaluru doorstep bike repair & service. General Bike Service, General Service + Engine Oil, Jump Start Service across Bengaluru.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]

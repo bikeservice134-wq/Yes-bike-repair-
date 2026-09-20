@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yes Bike Service | Premium Bike Service at Home</title>
-    <meta name="description" content="Book a certified mechanic in just 30 seconds. We come to you—home, office, or roadside. Fast, reliable, and transparent." />
-    <meta name="keywords" content="bike service, doorstep bike repair, mechanic near me, motorcycle service, two wheeler repair, bike mechanic, jump start, puncture repair, engine oil change" />
+    <title>Yes Bike Service | Doorstep Bike Repair & Service Bengaluru</title>
+    <meta name="description" content="Bengaluru doorstep bike repair & service. General Bike Service, General Service + Engine Oil, Jump Start Service across Bengaluru." />
+    <meta name="keywords" content="bike service Bengaluru, doorstep bike repair, mechanic near me, motorcycle service, two wheeler repair, bike mechanic, jump start, puncture repair, engine oil change" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Yes Bike Service" />
-    <meta property="og:title" content="Yes Bike Service | Premium Bike Service at Home" />
-    <meta property="og:description" content="Book a certified mechanic in just 30 seconds. We come to you—home, office, or roadside. Fast, reliable, and transparent." />
+    <meta property="og:title" content="Yes Bike Service | Doorstep Bike Repair & Service Bengaluru" />
+    <meta property="og:description" content="Bengaluru doorstep bike repair & service. General Bike Service, General Service + Engine Oil, Jump Start Service across Bengaluru." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,7 @@
       gtag('config', 'AW-17586403307');
       gtag('config', 'AW-18313979172');
     </script>
+    <!-- Event snippet for 12 Submit lead form conversion page -->
     <script>
     function gtag_report_conversion(url) {
       var callback = function () {
@@ -31,12 +32,19 @@
           window.location = url;
         }
       };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-17586403307/D8AlCOPU7-scEOvv7MFB',
-          'value': 1.0,
-          'currency': 'INR',
-          'event_callback': callback
-      });
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-18313979172/mupQCP_io-4cEKTK5JxE',
+            'value': 1.0,
+            'currency': 'INR',
+            'event_callback': callback
+        });
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17586403307/D8AlCOPU7-scEOvv7MFB',
+            'value': 1.0,
+            'currency': 'INR'
+        });
+      }
       return false;
     }
     </script>
