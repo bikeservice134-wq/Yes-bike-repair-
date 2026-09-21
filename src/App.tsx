@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
-  Phone, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Search, Home, Quote } from 'lucide-react';
+  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Search, Home, Quote } from 'lucide-react';
 import coverageMapUrl from './assets/images/coverage_map_illustration_1787573120801.jpg';
 
 // Reusable FadeIn Component
@@ -67,37 +67,79 @@ const POPULAR_BENGALURU_AREAS = [
 const QUICK_SERVICE_OPTIONS = [
   { id: "General Service - ₹699", name: "General Service", price: "₹699", note: "21-point checkup, tuning & washing", badge: "Most Popular" },
   { id: "General Service + Engine Oil - ₹1,349", name: "General Service + Engine Oil", price: "₹1,349", note: "Includes 100% genuine Castrol/Motul oil", badge: "Best Value" },
-  { id: "Jump Start Service - ₹399", name: "Jump Start Service", price: "₹399", note: "Roadside battery jump start in 20 mins", badge: "Express" },
-  { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix in ~20 mins", badge: "Express" },
+  { id: "Jump Start Service - ₹399", name: "Jump Start Service", price: "₹399", note: "Roadside battery jump start at your location", badge: "Express" },
+  { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
   { id: "Running Repair - ₹450", name: "Running Repair", price: "₹450", note: "Vehicle inspection & quick repairs at doorstep", badge: "Quick Fix" },
 ];
 
-const ALL_BRANDS_LIST = [
-  { name: "Bajaj", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Popular", tagline: "Pulsar, Platina, Avenger, Dominar" },
-  { name: "Hero", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Popular", tagline: "Splendor, Passion, HF Deluxe, Xtreme" },
-  { name: "Honda", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🛵", badge: "Popular", tagline: "Activa, Shine, Dio, Unicorn, Hornet" },
-  { name: "KTM", category: "Sports", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Sports", tagline: "Duke 200/250/390, RC 200/390, ADV" },
-  { name: "TVS", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Popular", tagline: "Jupiter, Ntorq, Apache RTR, Raider" },
-  { name: "Royal Enfield", category: "Cruiser", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Top Rated", tagline: "Classic, Hunter, Bullet, Meteor, Himalayan" },
-  { name: "Vespa", category: "Scooter", popular: true, coreTwoWheeler: true, icon: "🛵", badge: "Classic", tagline: "VXL 125/150, SXL 125/150, ZX" },
-  { name: "Mahindra", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Two-Wheeler", tagline: "Mojo, Gusto, Centuro, Rodeo" },
-  { name: "Yamaha", category: "Sports", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Performance", tagline: "FZ, R15, MT-15, RayZR, Aerox" },
-  { name: "Suzuki", category: "Commuter", popular: true, coreTwoWheeler: true, icon: "🛵", badge: "Popular", tagline: "Access 125, Burgman, Gixxer, Avenis" },
-  { name: "Triumph", category: "Premium", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Premium", tagline: "Speed 400, Scrambler 400 X, Bonneville" },
-  { name: "Jawa", category: "Cruiser", popular: true, coreTwoWheeler: true, icon: "🏍️", badge: "Classic", tagline: "Jawa 42, Perak, Classic, Bobber" },
-  { name: "Kawasaki", category: "Sports", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Superbike", tagline: "Ninja 300/400/650, Z650, Z900" },
-  { name: "Yezdi", category: "Cruiser", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Adventure", tagline: "Roadster, Scrambler, Adventure" },
-  { name: "BMW", category: "Premium", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Premium", tagline: "G 310 R, G 310 GS, F 900 R" },
-  { name: "Harley-Davidson", category: "Cruiser", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Cruiser", tagline: "X440, Iron 883, Street 750" },
-  { name: "Aprilia", category: "Sports", popular: false, coreTwoWheeler: false, icon: "🛵", badge: "Italian", tagline: "RS 457, SR 125/160, Storm" },
-  { name: "Piaggio", category: "Scooter", popular: false, coreTwoWheeler: false, icon: "🛵", badge: "Urban", tagline: "Typhoon, Medley, Beverly" },
-  { name: "Benelli", category: "Sports", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Tourer", tagline: "Imperiale 400, TRK 502, Leoncino" },
-  { name: "Husqvarna", category: "Sports", popular: false, coreTwoWheeler: false, icon: "🏍️", badge: "Swedish", tagline: "Svartpilen 250/401, Vitpilen 250" },
-  { name: "Ather", category: "Electric", popular: true, coreTwoWheeler: false, icon: "⚡", badge: "Smart EV", tagline: "450X, 450S, 450 Apex, Rizta" },
-  { name: "Ola Electric", category: "Electric", popular: true, coreTwoWheeler: false, icon: "⚡", badge: "Electric", tagline: "S1 Pro, S1 Air, S1 X+" },
-  { name: "TVS Electric", category: "Electric", popular: false, coreTwoWheeler: false, icon: "⚡", badge: "iQube EV", tagline: "iQube, iQube S, iQube ST" },
-  { name: "Revolt", category: "Electric", popular: false, coreTwoWheeler: false, icon: "⚡", badge: "E-Motorcycle", tagline: "RV400, RV400 BRZ, RV1" },
-  { name: "Ultraviolette", category: "Electric", popular: false, coreTwoWheeler: false, icon: "⚡", badge: "Hi-Tech EV", tagline: "F77 Mach 2, F77 Recon" },
+export interface LocalityItem {
+  name: string;
+  zone: 'South' | 'East' | 'North' | 'Central & West';
+  eta: string;
+  landmark: string;
+  activeCount: number;
+}
+
+export const BENGALURU_LOCALITIES: LocalityItem[] = [
+  // South
+  { name: 'Koramangala', zone: 'South', eta: '20-30 min', landmark: 'Sony World / 4th-8th Block', activeCount: 6 },
+  { name: 'HSR Layout', zone: 'South', eta: '20-30 min', landmark: '27th Main / Sectors 1-7', activeCount: 5 },
+  { name: 'BTM Layout', zone: 'South', eta: '20-30 min', landmark: 'Udupi Garden / Ring Road', activeCount: 4 },
+  { name: 'Jayanagar', zone: 'South', eta: '20-30 min', landmark: '3rd, 4th & 9th Blocks', activeCount: 4 },
+  { name: 'JP Nagar', zone: 'South', eta: '25-30 min', landmark: 'Phases 1 to 8', activeCount: 4 },
+  { name: 'Electronic City', zone: 'South', eta: '25-30 min', landmark: 'Phase 1 & Phase 2 / Wipro', activeCount: 5 },
+  { name: 'Bannerghatta Road', zone: 'South', eta: '25-30 min', landmark: 'Arekere / Meenakshi Mall', activeCount: 3 },
+  { name: 'Banashankari', zone: 'South', eta: '25-30 min', landmark: 'BSK 2nd & 3rd Stage', activeCount: 3 },
+  { name: 'Begur & Singasandra', zone: 'South', eta: '25-30 min', landmark: 'Hosur Road Corridor', activeCount: 3 },
+  { name: 'Kudlu Gate', zone: 'South', eta: '20-30 min', landmark: 'Haralur Road Junction', activeCount: 3 },
+  { name: 'Kasavanahalli', zone: 'South', eta: '20-30 min', landmark: 'Sarjapur ORR Link', activeCount: 3 },
+  { name: 'Kumaraswamy Layout', zone: 'South', eta: '25-30 min', landmark: 'Dayananda Sagar Area', activeCount: 2 },
+  { name: 'Arekere & Hulimavu', zone: 'South', eta: '25-30 min', landmark: 'BG Road Lakeside', activeCount: 3 },
+
+  // East
+  { name: 'Indiranagar', zone: 'East', eta: '20-30 min', landmark: '100ft Road / 12th Main', activeCount: 6 },
+  { name: 'Whitefield', zone: 'East', eta: '25-30 min', landmark: 'ITPB / Hope Farm / Nexus', activeCount: 5 },
+  { name: 'Marathahalli', zone: 'East', eta: '20-30 min', landmark: 'Bridge / Multiplex Corridor', activeCount: 4 },
+  { name: 'Bellandur', zone: 'East', eta: '20-30 min', landmark: 'EcoSpace / Outer Ring Road', activeCount: 5 },
+  { name: 'Sarjapur Road', zone: 'East', eta: '25-30 min', landmark: 'Wipro Campus / Carmelaram', activeCount: 4 },
+  { name: 'CV Raman Nagar', zone: 'East', eta: '20-30 min', landmark: 'DRDO / Bagmane Tech Park', activeCount: 3 },
+  { name: 'Mahadevapura', zone: 'East', eta: '20-30 min', landmark: 'Phoenix Marketcity', activeCount: 4 },
+  { name: 'Brookefield', zone: 'East', eta: '20-30 min', landmark: 'AECS Layout / ITPL Main', activeCount: 3 },
+  { name: 'Hoodi', zone: 'East', eta: '25-30 min', landmark: 'Hoodi Circle / IT Corridor', activeCount: 3 },
+  { name: 'KR Puram', zone: 'East', eta: '25-30 min', landmark: 'Hanging Bridge / Tin Factory', activeCount: 3 },
+  { name: 'Kaggadasapura', zone: 'East', eta: '20-30 min', landmark: 'Near DRDO Complex', activeCount: 2 },
+  { name: 'Domlur', zone: 'East', eta: '20-30 min', landmark: 'Embassy GolfLinks (EGL)', activeCount: 3 },
+  { name: 'Varthur', zone: 'East', eta: '25-30 min', landmark: 'Gunjur / Balagere Road', activeCount: 2 },
+  { name: 'Murugeshpalya', zone: 'East', eta: '20-30 min', landmark: 'Old Airport Road', activeCount: 3 },
+
+  // North
+  { name: 'Hebbal', zone: 'North', eta: '25-30 min', landmark: 'Flyover / Esteem Mall', activeCount: 4 },
+  { name: 'Yelahanka', zone: 'North', eta: '25-30 min', landmark: 'New Town & Old Town', activeCount: 3 },
+  { name: 'Kalyan Nagar', zone: 'North', eta: '20-30 min', landmark: 'HRBR Layout / CMR Road', activeCount: 4 },
+  { name: 'Manyata Tech Park', zone: 'North', eta: '20-30 min', landmark: 'Nagawara / ORR Junction', activeCount: 5 },
+  { name: 'RT Nagar', zone: 'North', eta: '20-30 min', landmark: 'Dinnur Main / Post Office', activeCount: 3 },
+  { name: 'Sahakar Nagar', zone: 'North', eta: '25-30 min', landmark: 'Kodigehalli / CQAL', activeCount: 3 },
+  { name: 'Sanjay Nagar', zone: 'North', eta: '25-30 min', landmark: 'RMV 2nd Stage', activeCount: 2 },
+  { name: 'Kammanahalli', zone: 'North', eta: '20-30 min', landmark: 'Nehru Road / Ramaiah', activeCount: 3 },
+  { name: 'Hennur Road', zone: 'North', eta: '25-30 min', landmark: 'Biozeen / Geddalahalli', activeCount: 3 },
+  { name: 'Thanisandra', zone: 'North', eta: '25-30 min', landmark: 'Bhartiya City Corridor', activeCount: 3 },
+  { name: 'Banaswadi', zone: 'North', eta: '20-30 min', landmark: 'Subramanya Temple Road', activeCount: 3 },
+  { name: 'Horamavu', zone: 'North', eta: '25-30 min', landmark: 'Kalkere / Ring Road Link', activeCount: 2 },
+
+  // Central & West
+  { name: 'MG Road & Brigade', zone: 'Central & West', eta: '20-30 min', landmark: 'CBD Commercial Hub', activeCount: 4 },
+  { name: 'Richmond Town', zone: 'Central & West', eta: '20-30 min', landmark: 'Langford Town / Victoria', activeCount: 3 },
+  { name: 'Malleshwaram', zone: 'Central & West', eta: '20-30 min', landmark: 'Sampige & Margosa Road', activeCount: 4 },
+  { name: 'Rajajinagar', zone: 'Central & West', eta: '20-30 min', landmark: 'Navrang / Orion Mall', activeCount: 4 },
+  { name: 'Basavanagudi', zone: 'Central & West', eta: '20-30 min', landmark: 'Gandhi Bazaar / DVG Road', activeCount: 3 },
+  { name: 'Vijayanagar', zone: 'Central & West', eta: '25-30 min', landmark: 'RPC Layout / Water Tank', activeCount: 3 },
+  { name: 'Yeshwanthpur', zone: 'Central & West', eta: '25-30 min', landmark: 'Metro / APMC Yard', activeCount: 3 },
+  { name: 'Frazer Town', zone: 'Central & West', eta: '20-30 min', landmark: 'Coles Park / Mosque Road', activeCount: 3 },
+  { name: 'Sadashivanagar', zone: 'Central & West', eta: '20-30 min', landmark: 'Palace Grounds Area', activeCount: 2 },
+  { name: 'Nagarbhavi', zone: 'Central & West', eta: '25-30 min', landmark: 'Bangalore University', activeCount: 2 },
+  { name: 'Kengeri', zone: 'Central & West', eta: '25-30 min', landmark: 'Satellite Town / Metro', activeCount: 2 },
+  { name: 'Ulsoor', zone: 'Central & West', eta: '20-30 min', landmark: 'Ulsoor Lake / Trinity Circle', activeCount: 3 },
+  { name: 'Shanti Nagar', zone: 'Central & West', eta: '20-30 min', landmark: 'KH Road / Double Road', activeCount: 3 },
 ];
 
 const Toast = ({ message, onClose }: { message: string, onClose: () => void }) => {
@@ -143,6 +185,11 @@ export default function App() {
       if (typeof window !== 'undefined') {
         if ((window as any).gtag) {
           (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-18313979172/gVmhCI-SzP8cEKTK5JxE',
+            'value': 1.0,
+            'currency': 'INR'
+          });
+          (window as any).gtag('event', 'conversion', {
             'send_to': 'AW-18313979172/mupQCP_io-4cEKTK5JxE',
             'value': 1.0,
             'currency': 'INR'
@@ -156,9 +203,10 @@ export default function App() {
   }, [currentView]);
   
   const [locationSearch, setLocationSearch] = useState('');
-  const [brandFilter, setBrandFilter] = useState('TwoWheelers');
-  const [brandSearch, setBrandSearch] = useState('');
-  const [brandToast, setBrandToast] = useState<string | null>(null);
+  const [coverageSearch, setCoverageSearch] = useState('');
+  const [coverageZone, setCoverageZone] = useState<string>('All');
+  const [selectedCoverageArea, setSelectedCoverageArea] = useState<LocalityItem>(BENGALURU_LOCALITIES[0]);
+  const [coverageToast, setCoverageToast] = useState<string | null>(null);
   const [heroBrand, setHeroBrand] = useState("");
   const [heroModel, setHeroModel] = useState("");
   const [heroName, setHeroName] = useState("");
@@ -259,12 +307,55 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
     return () => clearInterval(interval);
   }, []);
 
-  const faqs = [
-    { question: "1. What is doorstep bike service?", answer: "Our doorstep bike service brings certified two-wheeler mechanics right to your home, office, or breakdown location in Bangalore. We carry specialized tools, equipment, and genuine spare parts to service or repair your bike on-site." },
-    { question: "2. Which brands do you service?", answer: "We service all major commuter, sports, premium, and electric two-wheeler brands including Hero, Honda, TVS, Bajaj, Yamaha, Royal Enfield, Suzuki, KTM, Kawasaki, Jawa, Yezdi, BMW, Triumph, Harley-Davidson, Ather, Ola Electric, and more." },
-    { question: "3. How do I book a mechanic?", answer: "Simply fill out our quick booking form above, choose your vehicle brand and service, enter your location, and click Book Mechanic Now. Our mechanic is dispatched immediately and calls to confirm." },
-    { question: "4. Do I need to provide tools?", answer: "No, our mechanics carry all necessary professional tools, diagnostic gear, and genuine spare parts required for the service. You only need to provide a safe spot for the mechanic to work." },
-    { question: "5. How long does a service take?", answer: "A standard General Service takes approximately 60–90 minutes. Jump start and quick emergency fixes typically take 15–25 minutes." }
+  const faqItems = [
+    {
+      q: "1. What is doorstep bike service?",
+      schemaQ: "What is doorstep bike service?",
+      a: "Doorstep bike service brings certified two-wheeler mechanics directly to your home, office, or roadside across Bengaluru. Mechanics arrive fully equipped with professional tools, diagnostic equipment, and genuine spare parts.",
+      icon: Home
+    },
+    {
+      q: "2. Which two-wheeler brands do you service?",
+      schemaQ: "Which two-wheeler brands do you service?",
+      a: "We service all major brands in Bengaluru including Royal Enfield, Honda, Yamaha, KTM, Bajaj, TVS, Suzuki, Hero, Jawa, Yezdi, and electric scooters like Ather and Ola Electric.",
+      icon: Bike
+    },
+    {
+      q: "3. How do I book a doorstep bike mechanic?",
+      schemaQ: "How do I book a doorstep bike mechanic?",
+      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, or call +91 70904 00617. Our certified mechanic is assigned for your selected slot.",
+      icon: Calendar
+    },
+    {
+      q: "4. Do I need to provide tools or equipment?",
+      schemaQ: "Do I need to provide tools or equipment?",
+      a: "No, our mechanics carry a full mobile workshop with all necessary professional tools, diagnostics, battery jump-starters, and genuine consumables. You only need to provide space to park and work on the vehicle.",
+      icon: Wrench
+    },
+    {
+      q: "5. How long does a doorstep bike service take?",
+      schemaQ: "How long does a doorstep bike service take?",
+      a: "A standard general service typically takes between 60 to 90 minutes. Quick emergency jump-start and puncture repair services take approximately 20 to 30 minutes.",
+      icon: Clock
+    },
+    {
+      q: "6. What doorstep bike services are available and what are the prices?",
+      schemaQ: "What doorstep bike services are available and what are the prices?",
+      a: "We offer General Service at ₹699, General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹399, Puncture Repair at ₹599, and Running Repairs or general inspection at ₹450.",
+      icon: Shield
+    },
+    {
+      q: "7. Is there any advance payment required?",
+      schemaQ: "Is there any advance payment required?",
+      a: "No. We operate with a strict Zero Advance Payment policy. You pay only after the bike service is completed to your complete satisfaction.",
+      icon: CheckCircle2
+    },
+    {
+      q: "8. Which areas in Bengaluru do you cover?",
+      schemaQ: "Which areas in Bengaluru do you cover?",
+      a: "We cover all major locations across Bengaluru including Koramangala, Indiranagar, HSR Layout, Whitefield, Marathahalli, Bellandur, Electronic City, Jayanagar, JP Nagar, BTM Layout, Hebbal, Yelahanka, and surrounding areas.",
+      icon: MapPin
+    }
   ];
 
   return (
@@ -272,10 +363,12 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       
       {/* HEADER */}
       <header className="fixed top-0 w-full z-50 bg-white/95 dark:bg-zinc-950/95 border-b border-gray-200 dark:border-zinc-800 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3.5 sm:px-5 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center shadow-[0_4px_10px_rgba(234,179,8,0.3)] shrink-0"><Wrench className="w-5 h-5 text-black" /></div>
-            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-[25px] font-extrabold tracking-tight text-yellow-500 leading-none text-left">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center shadow-[0_4px_10px_rgba(234,179,8,0.3)] shrink-0">
+              <Wrench className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+            </div>
+            <button onClick={() => { setCurrentView('home'); window.scrollTo(0,0); }} className="text-lg sm:text-[22px] lg:text-[25px] font-extrabold tracking-tight text-yellow-500 leading-none text-left cursor-pointer">
               Yes <span className="text-gray-900 dark:text-white">Bike Service</span>
             </button>
           </div>
@@ -285,12 +378,37 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
             <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Book Online</a>
           </nav>
           
-          <button onClick={() => setIsDark(!isDark)} className="ml-auto lg:ml-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
-          </button>
-          <a href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20would%20like%20to%20book%20a%20mechanic." target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex bg-yellow-500 hover:bg-yellow-400 text-zinc-950 px-6 py-2.5 rounded-full font-bold transition-all ml-4 shadow-[0_4px_14px_rgba(234,179,8,0.2)] hover:shadow-[0_6px_20px_rgba(234,179,8,0.3)] hover:-translate-y-0.5">
-            Book Now
-          </a>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <a 
+              href="tel:+917090400617" 
+              className="inline-flex md:hidden items-center gap-1 bg-yellow-500 hover:bg-yellow-400 text-black px-2.5 py-1.5 rounded-full font-black text-xs shadow-xs transition-transform active:scale-95"
+              aria-label="Call Mechanic Now"
+            >
+              <PhoneCall className="w-3.5 h-3.5" />
+              <span>Call</span>
+            </a>
+            <button onClick={() => setIsDark(!isDark)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer" aria-label="Toggle theme">
+              {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('booking-form');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  setCurrentView('home');
+                  setTimeout(() => {
+                    document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }
+              }}
+              className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-zinc-950 px-5 py-2.5 rounded-full font-black text-xs lg:text-sm transition-all ml-2 shadow-[0_4px_14px_rgba(234,179,8,0.25)] hover:shadow-[0_6px_20px_rgba(234,179,8,0.4)] hover:-translate-y-0.5 cursor-pointer"
+            >
+              <Wrench className="w-3.5 h-3.5 text-zinc-950" />
+              <span>Book Mechanic Now</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -302,93 +420,97 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[450px] bg-yellow-500/10 dark:bg-yellow-500/5 blur-[130px] rounded-full pointer-events-none"></div>
             
             <FadeIn>
-              <div className="max-w-xl w-full mx-auto px-4 flex flex-col items-center justify-center relative z-10">
-                {/* HERO HEADER */}
-                <div className="text-center mb-5 max-w-lg">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 dark:bg-yellow-400/10 border border-yellow-500/25 text-yellow-800 dark:text-yellow-400 text-xs sm:text-sm font-black uppercase tracking-wider mb-2">
-                    <MapPin className="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400" />
-                    <span>Bengaluru's</span>
-                  </div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
-                    Doorstep Bike Repair
-                  </h1>
-                  <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-zinc-400 font-medium">
-                    Certified mechanic at your home or office in 20 minutes across Bengaluru
-                  </p>
-
-                  {/* User-Requested 3 Core Services */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5">
-                    {[
-                      { id: "General Service - ₹699", label: "General Service", price: "₹699", icon: "🛠️" },
-                      { id: "General Service + Engine Oil - ₹1,349", label: "General Service + Engine Oil", price: "₹1,349", icon: "🛢️" },
-                      { id: "Jump Start Service - ₹399", label: "Jump Start Service", price: "₹399", icon: "⚡" },
-                    ].map((srv) => {
-                      const isSelected = heroService === srv.id;
-                      return (
-                        <button
-                          key={srv.id}
-                          type="button"
-                          onClick={() => setHeroService(srv.id)}
-                          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border shadow-xs ${
-                            isSelected
-                              ? 'bg-yellow-500 text-zinc-950 border-yellow-500 font-extrabold shadow-sm ring-2 ring-yellow-400/40'
-                              : 'bg-white/90 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-200 border-gray-200 dark:border-zinc-700 hover:border-yellow-400'
-                          }`}
-                        >
-                          <span>{srv.icon}</span>
-                          <span>{srv.label}</span>
-                          <span className={`text-[11px] font-black ml-0.5 ${isSelected ? 'text-zinc-950' : 'text-yellow-600 dark:text-yellow-400'}`}>{srv.price}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
+              <div className="max-w-xl w-full mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+                {/* 1. Tagline */}
+                <div className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-yellow-700 dark:text-yellow-400 mb-1">
+                  BENGALURU'S TRUSTED TWO WHEELER CARE
                 </div>
 
-                {/* SMALL SIZE COMPACT BOOKING FORM */}
-                <div id="booking-form" className="w-full max-w-[375px] sm:max-w-[390px] relative z-20 pt-3">
-                  <div className="absolute inset-0 -top-1 bg-gradient-to-br from-yellow-400/25 via-yellow-500/15 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-60 animate-pulse" style={{ animationDuration: "4s" }}></div>
-                  
-                  {/* FLOATING STATUS BADGE */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center group cursor-default">
-                    <div className="absolute inset-0 bg-yellow-500/25 blur-md rounded-full"></div>
-                    <div className="relative bg-zinc-900 dark:bg-black text-white text-[10px] font-black uppercase tracking-wider py-1 px-3.5 rounded-full shadow-lg border border-yellow-400/40 flex items-center gap-1.5 overflow-hidden">
-                      <span className="relative flex h-2 w-2 shrink-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="relative z-10 text-yellow-400 font-bold whitespace-nowrap">
-                        Reaches in 20 mins
-                      </span>
-                    </div>
-                  </div>
+                {/* 2. Main Headline */}
+                <h1 className="text-2xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-1">
+                  Doorstep Bike Repair
+                </h1>
 
-                  <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 pt-4.5 sm:pt-5 shadow-xl border border-white/60 dark:border-zinc-700/50 relative overflow-hidden">
-                    <div className="text-center mb-2.5 mt-0.5">
-                      <h2 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight">
-                        Book Mechanic Now
-                      </h2>
-                      <div className="mt-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 dark:bg-yellow-400/10 border border-amber-500/20 dark:border-yellow-400/20 text-[10.5px] font-semibold text-gray-700 dark:text-zinc-200">
-                        <span className="flex items-center text-emerald-600 dark:text-emerald-400 font-bold">
-                          <CheckCircle2 className="w-3 h-3 inline mr-0.5 text-emerald-500 shrink-0" />
-                          Zero Advance
+                {/* 3. Subtitle */}
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium max-w-md mb-2">
+                  Certified mechanic at your home or office across Bengaluru
+                </p>
+
+                {/* 4. Trust Highlights */}
+                <div className="flex items-center justify-center gap-2.5 text-xs font-bold text-gray-700 dark:text-zinc-300 mb-3.5">
+                  <span className="flex items-center gap-1 text-gray-800 dark:text-zinc-200">
+                    <Shield className="w-3.5 h-3.5 text-emerald-500" />
+                    Certified Mechanics.
+                  </span>
+                  <span className="text-gray-300 dark:text-zinc-600">•</span>
+                  <span className="flex items-center gap-1 text-gray-800 dark:text-zinc-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    Zero Advance Payment
+                  </span>
+                </div>
+
+                {/* 5. 3 Services Selector */}
+                <div className="grid grid-cols-3 gap-1.5 w-full max-w-[380px] mb-3">
+                  {[
+                    { id: "General Service - ₹699", icon: "🛠️", label: "General Service", price: "699" },
+                    { id: "General Service + Engine Oil - ₹1,349", icon: "🛢️", label: "General Service Engine Oil", price: "1,349" },
+                    { id: "Jump Start Service - ₹399", icon: "⚡", label: "Jump Start Service", price: "₹399" },
+                  ].map((srv) => {
+                    const isSelected = heroService === srv.id;
+                    return (
+                      <button
+                        key={srv.id}
+                        type="button"
+                        onClick={() => setHeroService(srv.id)}
+                        className={`p-2 rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-center ${
+                          isSelected
+                            ? 'bg-yellow-500 text-black border-yellow-500 font-black shadow-xs ring-1 ring-yellow-400'
+                            : 'bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-yellow-400 font-semibold'
+                        }`}
+                      >
+                        <span className="text-base mb-0.5">{srv.icon}</span>
+                        <span className="text-[10px] leading-tight line-clamp-1">{srv.label}</span>
+                        <span className={`text-[11px] font-black mt-0.5 ${isSelected ? 'text-black' : 'text-amber-600 dark:text-yellow-400'}`}>
+                          {srv.price}
                         </span>
-                        <span className="text-gray-300 dark:text-zinc-600 font-normal">|</span>
-                        <span>
-                          Starts <strong className="font-extrabold text-amber-600 dark:text-yellow-400">₹399</strong>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div id="booking-form" className="w-full max-w-[380px] relative z-20">
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-amber-600/10 blur-lg rounded-2xl pointer-events-none opacity-50"></div>
+
+                      <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3.5 sm:p-4 shadow-lg border border-gray-200/80 dark:border-zinc-800 relative overflow-hidden">
+                        {/* Compact Card Header */}
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-5 h-5 rounded-md bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 flex items-center justify-center text-xs font-bold">
+                          ⚡
+                        </div>
+                        <h2 className="text-sm font-black text-gray-900 dark:text-white tracking-tight">
+                          Quick Booking
+                        </h2>
+                      </div>
+                      <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                         </span>
+                        <span>Available Today</span>
                       </div>
                     </div>
 
                     <form className="space-y-2 relative z-10" onSubmit={handleBookService}>
-                      {/* Segmented Control for Vehicle Type */}
-                      <div className="flex p-0.5 bg-gray-100/90 dark:bg-zinc-800/90 rounded-lg">
+                      {/* Compact Vehicle Type Switch */}
+                      <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800 rounded-lg">
                         <button
                           type="button"
                           onClick={() => setHeroVehicle('Bike')}
-                          className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer ${
+                          className={`flex-1 text-[11px] font-bold py-1 rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer ${
                             heroVehicle === 'Bike'
-                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs ring-1 ring-black/5 dark:ring-white/10'
-                              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
+                              : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
                           }`}
                         >
                           <span>🏍️</span> Bike
@@ -396,21 +518,21 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                         <button
                           type="button"
                           onClick={() => setHeroVehicle('Scooter')}
-                          className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer ${
+                          className={`flex-1 text-[11px] font-bold py-1 rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer ${
                             heroVehicle === 'Scooter'
-                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs ring-1 ring-black/5 dark:ring-white/10'
-                              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
+                              : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
                           }`}
                         >
                           <span>🛵</span> Scooter
                         </button>
                       </div>
 
-                      {/* Customer Name & Phone */}
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <User className="h-3.5 w-3.5" />
+                      {/* Name & Phone in 2-Columns */}
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400">
+                            <User className="h-3 w-3" />
                           </div>
                           <input 
                             type="text" 
@@ -418,37 +540,37 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                             required 
                             value={heroName}
                             onChange={(e) => setHeroName(e.target.value)}
-                            placeholder="Full Name" 
-                            className="w-full pl-8 pr-2 py-2 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:font-medium placeholder:text-gray-400" 
+                            placeholder="Your Name" 
+                            autoComplete="name"
+                            className="w-full pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium placeholder:text-gray-400" 
                           />
                         </div>
                         
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Phone className="h-3 w-3" />
-                          </div>
-                          <div className="absolute left-6 inset-y-0 flex items-center pointer-events-none text-[10px] font-extrabold text-gray-400 dark:text-zinc-500 border-r border-gray-200 dark:border-zinc-700 pr-1 my-1.5">
+                        <div className="relative">
+                          <div className="absolute left-2 inset-y-0 flex items-center pointer-events-none text-[10px] font-bold text-gray-500 dark:text-zinc-400">
                             +91
                           </div>
                           <input 
                             type="tel" 
                             name="phone" 
                             required 
+                            inputMode="numeric"
+                            autoComplete="tel"
                             pattern="[0-9]{10}"
                             maxLength={10}
                             value={heroPhone}
                             onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                             placeholder="Mobile No." 
-                            className="w-full pl-13 pr-2 py-2 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:font-medium placeholder:text-gray-400 tracking-wide" 
+                            className="w-full pl-9 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium placeholder:text-gray-400 tracking-wide" 
                           />
                         </div>
                       </div>
 
-                      {/* Brand & Model Selection */}
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Tag className="h-3.5 w-3.5" />
+                      {/* Brand & Model in 2-Columns */}
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400">
+                            <Tag className="h-3 w-3" />
                           </div>
                           <select 
                             name="brand" 
@@ -458,53 +580,53 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                               setHeroBrand(e.target.value);
                               setHeroModel("");
                             }} 
-                            className="w-full pl-8 pr-6 py-2 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
+                            className="w-full pl-6 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium appearance-none cursor-pointer"
                           >
-                            <option value="" disabled>Select Brand</option>
+                            <option value="" disabled>Brand</option>
                             {Object.keys(MODELS_BY_BRAND).map(brand => (
                               <option key={brand} value={brand} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{brand}</option>
                             ))}
                           </select>
-                          <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                          <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
                             <ChevronDown className="h-3 w-3" />
                           </div>
                         </div>
 
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Bike className="h-3.5 w-3.5" />
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400">
+                            <Bike className="h-3 w-3" />
                           </div>
                           <select 
                             name="model" 
                             required 
                             value={heroModel}
                             onChange={(e) => setHeroModel(e.target.value)}
-                            className="w-full pl-8 pr-6 py-2 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer disabled:opacity-50" 
+                            className="w-full pl-6 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium appearance-none cursor-pointer disabled:opacity-50" 
                             disabled={!heroBrand}
                           >
-                            <option value="" disabled>{heroBrand ? "Select Model" : "Brand First"}</option>
+                            <option value="" disabled>{heroBrand ? "Model" : "Model"}</option>
                             {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
                               <option key={model} value={model} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{model}</option>
                             ))}
                           </select>
-                          <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                          <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
                             <ChevronDown className="h-3 w-3" />
                           </div>
                         </div>
                       </div>
                       
-                      {/* Location Input with Auto-Fill / Geolocation */}
+                      {/* Location Input with Auto-Fill */}
                       <div className="space-y-1">
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <MapPin className="h-3.5 w-3.5" />
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400">
+                            <MapPin className="h-3 w-3 text-yellow-500" />
                           </div>
                           <input 
                             type="text" 
                             name="location" 
                             required 
                             placeholder="Locality / Area, Bengaluru" 
-                            className="w-full pl-8 pr-20 py-2 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:font-medium placeholder:text-gray-400" 
+                            className="w-full pl-6 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium placeholder:text-gray-400" 
                             value={locationSearch} 
                             onChange={(e) => setLocationSearch(e.target.value)} 
                           />
@@ -529,17 +651,16 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                                 setLocationSearch(`${activeLocation}, Bengaluru`);
                               }
                             }}
-                            className="absolute right-1 top-1 bottom-1 px-2 rounded-md bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 text-[10px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                            className="absolute right-1 top-1 bottom-1 px-1.5 rounded bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-700 dark:text-yellow-400 text-[10px] font-bold flex items-center gap-0.5 cursor-pointer"
                             title="Auto-fill locality"
                           >
                             <Navigation className={`w-2.5 h-2.5 ${isDetectingLocation ? 'animate-spin' : ''}`} />
-                            <span>{isDetectingLocation ? '...' : 'Auto-fill'}</span>
+                            <span>GPS</span>
                           </button>
                         </div>
 
-                        {/* Quick Bengaluru locality chips */}
-                        <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[10px]">
-                          <span className="text-[9.5px] font-bold text-gray-400 dark:text-zinc-500 shrink-0">Popular:</span>
+                        {/* Quick locality chips */}
+                        <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[9.5px]">
                           {POPULAR_BENGALURU_AREAS.slice(0, 4).map((area) => (
                             <button
                               key={area}
@@ -547,8 +668,8 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                               onClick={() => setLocationSearch(`${area}, Bengaluru`)}
                               className={`px-1.5 py-0.5 rounded text-[9.5px] border transition-all shrink-0 cursor-pointer ${
                                 locationSearch.includes(area)
-                                  ? 'bg-yellow-500 text-black border-yellow-500 font-bold shadow-xs'
-                                  : 'bg-gray-100/80 dark:bg-zinc-800/80 text-gray-600 dark:text-zinc-300 border-gray-200/60 dark:border-zinc-700/60 hover:border-yellow-400 font-medium'
+                                  ? 'bg-yellow-500 text-black border-yellow-500 font-bold'
+                                  : 'bg-gray-100/70 dark:bg-zinc-800/70 text-gray-600 dark:text-zinc-300 border-gray-200/50 dark:border-zinc-700/50 hover:border-yellow-400'
                               }`}
                             >
                               {area}
@@ -557,136 +678,64 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                         </div>
                       </div>
 
-                      {/* Service Selection */}
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between px-0.5">
-                          <label className="text-[10.5px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-1">
-                            <Wrench className="w-3 h-3 text-yellow-500" />
-                            <span>Service</span>
-                          </label>
-                          <span className="text-[9.5px] font-bold text-yellow-600 dark:text-yellow-400">
-                            Doorstep Repair
-                          </span>
+                      {/* Service Dropdown */}
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400">
+                          <Wrench className="h-3.5 w-3.5 text-yellow-500" />
                         </div>
-
-                        {/* 5 Core Services in Compact 1-Tap Row */}
-                        <div className="grid grid-cols-5 gap-1">
-                          {[
-                            { id: "General Service - ₹699", name: "General", price: "₹699" },
-                            { id: "General Service + Engine Oil - ₹1,349", name: "Gen+Oil", price: "₹1,349" },
-                            { id: "Jump Start Service - ₹399", name: "Jump Start", price: "₹399" },
-                            { id: "Puncture Repair - ₹599", name: "Puncture", price: "₹599" },
-                            { id: "Running Repair - ₹450", name: "Running", price: "₹450" },
-                          ].map((s) => {
-                            const isSelected = heroService.startsWith(s.name) || heroService === s.id;
-                            return (
-                              <button
-                                key={s.id}
-                                type="button"
-                                onClick={() => setHeroService(s.id)}
-                                className={`p-1 rounded-lg text-center border transition-all cursor-pointer flex flex-col items-center justify-center min-h-[38px] ${
-                                  isSelected
-                                    ? 'bg-yellow-500/15 border-yellow-500 text-gray-900 dark:text-white font-extrabold ring-1 ring-yellow-400 shadow-xs'
-                                    : 'bg-gray-50 dark:bg-zinc-800/50 border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 hover:border-yellow-400/70 font-semibold'
-                                }`}
-                              >
-                                <span className="text-[9px] leading-tight truncate w-full">{s.name}</span>
-                                <span className="text-[9.5px] font-black text-amber-600 dark:text-yellow-400">{s.price}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-
-                        {/* Dropdown for other services */}
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Wrench className="h-3 w-3" />
-                          </div>
-                          <select 
-                            name="service" 
-                            required 
-                            value={heroService} 
-                            onChange={(e) => setHeroService(e.target.value)} 
-                            className="w-full pl-8 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
-                          >
-                            {QUICK_SERVICE_OPTIONS.map(opt => (
-                              <option key={opt.id} value={opt.id} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">
-                                {opt.name} — {opt.price} ({opt.badge})
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
-                            <ChevronDown className="h-3 w-3" />
-                          </div>
+                        <select 
+                          name="service" 
+                          required 
+                          value={heroService} 
+                          onChange={(e) => setHeroService(e.target.value)} 
+                          className="w-full pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-xs font-medium appearance-none cursor-pointer"
+                        >
+                          {QUICK_SERVICE_OPTIONS.map(opt => (
+                            <option key={opt.id} value={opt.id} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">
+                              {opt.id.startsWith("General Service -") ? "🛠️ " : opt.id.startsWith("General Service + Engine Oil") ? "🛢️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
+                              {opt.name} ({opt.price})
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                          <ChevronDown className="h-3 w-3" />
                         </div>
                       </div>
 
-                      {/* Date & Time Selection */}
-                      <div className="grid grid-cols-2 gap-2">
-                        {/* Date */}
-                        <div className="space-y-0.5">
-                          <div className="flex items-center justify-between px-0.5">
-                            <label className="text-[10.5px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-1">
-                              <Calendar className="w-3 h-3 text-yellow-500" />
-                              <span>Date</span>
-                            </label>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const todayStr = new Date().toISOString().split('T')[0];
-                                setBookingDate(todayStr);
-                              }}
-                              className="text-[9.5px] font-bold text-yellow-600 dark:text-yellow-400 hover:underline cursor-pointer"
-                            >
-                              Today
-                            </button>
+                      {/* Date & Time Slot in 2-Columns */}
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400">
+                            <Calendar className="h-3 w-3" />
                           </div>
-                          <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                              <Calendar className="h-3.5 w-3.5" />
-                            </div>
-                            <input 
-                              type="date" 
-                              name="date" 
-                              required 
-                              min={new Date().toISOString().split('T')[0]}
-                              value={bookingDate}
-                              onChange={(e) => setBookingDate(e.target.value)}
-                              className="w-full pl-8 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold cursor-pointer"
-                              title="Select Service Date" 
-                            />
-                          </div>
+                          <input 
+                            type="date" 
+                            name="date" 
+                            required 
+                            min={new Date().toISOString().split('T')[0]}
+                            value={bookingDate}
+                            onChange={(e) => setBookingDate(e.target.value)}
+                            className="w-full pl-6 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-[11px] font-medium cursor-pointer"
+                          />
                         </div>
 
-                        {/* Time */}
-                        <div className="space-y-0.5">
-                          <div className="flex items-center justify-between px-0.5">
-                            <label className="text-[10.5px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-1">
-                              <Clock className="w-3 h-3 text-yellow-500" />
-                              <span>Time</span>
-                            </label>
-                            <span className="text-[9.5px] font-bold text-yellow-600 dark:text-yellow-400">
-                              Slot
-                            </span>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400">
+                            <Clock className="h-3 w-3" />
                           </div>
-                          <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                              <Clock className="h-3.5 w-3.5" />
-                            </div>
-                            <select 
-                              name="time" 
-                              required 
-                              value={bookingTime}
-                              onChange={(e) => setBookingTime(e.target.value)}
-                              className="w-full pl-8 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 hover:bg-gray-100/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
-                            >
-                              <option value="Morning (09:00 AM - 12:00 PM)">🌅 Morning (9 AM - 12 PM)</option>
-                              <option value="Afternoon (12:00 PM - 03:00 PM)">☀️ Afternoon (12 PM - 3 PM)</option>
-                              <option value="Evening (03:00 PM - 07:00 PM)">🌆 Evening (3 PM - 7 PM)</option>
-                            </select>
-                            <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
-                              <ChevronDown className="h-3 w-3" />
-                            </div>
+                          <select 
+                            name="time" 
+                            required 
+                            value={bookingTime}
+                            onChange={(e) => setBookingTime(e.target.value)}
+                            className="w-full pl-6 pr-4 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-1.5 focus:ring-yellow-500 text-[11px] font-medium appearance-none cursor-pointer"
+                          >
+                            <option value="Morning (09:00 AM - 12:00 PM)">🌅 9 AM - 12 PM</option>
+                            <option value="Afternoon (12:00 PM - 03:00 PM)">☀️ 12 PM - 3 PM</option>
+                            <option value="Evening (03:00 PM - 07:00 PM)">🌆 3 PM - 7 PM</option>
+                          </select>
+                          <div className="absolute inset-y-0 right-0 pr-1 flex items-center pointer-events-none text-gray-400">
+                            <ChevronDown className="h-2.5 w-2.5" />
                           </div>
                         </div>
                       </div>
@@ -695,58 +744,38 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                       <button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-xs uppercase tracking-wider py-2.5 rounded-xl shadow-[0_6px_20px_rgba(234,179,8,0.3)] hover:shadow-[0_8px_25px_rgba(234,179,8,0.45)] transition-all flex items-center justify-center gap-1.5 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-75 cursor-pointer mt-2"
+                        className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs uppercase tracking-wider py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1"
                       >
-                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-in-out pointer-events-none"></div>
-                        <span className="relative z-10 flex items-center justify-center gap-1.5">
-                          {isSubmitting ? (
-                            <>
-                              <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
-                              <span>Dispatching Mechanic...</span>
-                            </>
-                          ) : (
-                            <>
-                              <span>Book Mechanic Now</span>
-                              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
-                            </>
-                          )}
-                        </span>
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
+                            <span>Dispatching...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Book Mechanic Now</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </>
+                        )}
                       </button>
                       
                       {/* Trust Highlights & Emergency Helpline */}
-                      <div className="pt-0.5 flex flex-col items-center gap-1">
-                        <div className="flex items-center justify-center gap-2 text-[10px] font-semibold text-gray-500 dark:text-gray-400">
-                          <span className="flex items-center gap-0.5">
-                            <Shield className="w-3 h-3 text-emerald-500" />
-                            No Advance
-                          </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-0.5">
-                            <Clock className="w-3 h-3 text-amber-500" />
-                            20-Min Doorstep
-                          </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-0.5">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-                            Genuine Spares
-                          </span>
-                        </div>
-
-                        <div className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium text-center">
-                          Emergency?{" "}
-                          <a 
-                            href="tel:917090400617" 
-                            className="font-bold text-gray-900 dark:text-yellow-400 hover:underline inline-flex items-center gap-0.5"
-                          >
-                            <Phone className="w-2.5 h-2.5 text-emerald-500 inline" />
-                            +91 7090400617
-                          </a>
-                        </div>
+                      <div className="pt-0.5 flex items-center justify-between text-[10px] text-gray-500 dark:text-zinc-400 font-medium">
+                        <span className="flex items-center gap-1">
+                          <Shield className="w-3 h-3 text-emerald-500" />
+                          Zero Advance
+                        </span>
+                        <a 
+                          href="tel:+917090400617" 
+                          className="font-bold text-gray-800 dark:text-yellow-400 hover:underline inline-flex items-center gap-0.5"
+                        >
+                          <Phone className="w-2.5 h-2.5 text-emerald-500" />
+                          Call 7090400617
+                        </a>
                       </div>
                     </form>
                   </div>
                 </div>
-
               </div>
             </FadeIn>
           </section>
@@ -817,7 +846,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 <div className="flex items-center gap-1 mb-1">
                   <span className="text-[11px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    20 Min On-Site
+                    Rapid On-Site Doorstep
                   </span>
                 </div>
                 <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
@@ -1149,7 +1178,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(234,179,8,0.35)] hover:shadow-[0_6px_22px_rgba(234,179,8,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center gap-1.5">
-                    Book Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    Book Mechanic Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </span>
                 </button>
                 <button 
@@ -1308,7 +1337,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                     className="w-full relative overflow-hidden bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-400 hover:from-yellow-300 hover:to-yellow-400 text-black font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_18px_rgba(234,179,8,0.45)] hover:shadow-[0_6px_25px_rgba(234,179,8,0.6)] transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
-                      Book Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                      Book Mechanic Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                     </span>
                   </button>
                   <button 
@@ -1448,7 +1477,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center gap-1.5">
-                    Book Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    Book Mechanic Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </span>
                 </button>
                 <button 
@@ -1591,7 +1620,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center gap-1.5">
-                    Book Puncture Repair Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    Book Mechanic Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </span>
                 </button>
                 <button 
@@ -1735,7 +1764,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-500 hover:from-yellow-400 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(234,179,8,0.35)] hover:shadow-[0_6px_22px_rgba(234,179,8,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center gap-1.5">
-                    Book Running Repair Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    Book Mechanic Now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </span>
                 </button>
                 <button 
@@ -1770,297 +1799,445 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
 
       
       
-      {/* ALL BIKE BRANDS SECTION */}
-      <section id="brands" className="py-20 relative bg-white dark:bg-black overflow-hidden border-t border-gray-100 dark:border-white/5">
-        {/* Subtle background ambient glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-6xl h-64 bg-yellow-500/[0.04] blur-3xl pointer-events-none rounded-full"></div>
-
+      {/* COVERAGE AREA SECTION */}
+      <section id="areas" className="py-20 sm:py-24 relative bg-white dark:bg-zinc-950 overflow-hidden border-t border-gray-100 dark:border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/[0.03] via-transparent to-yellow-500/[0.02] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/30 text-yellow-700 dark:text-yellow-400 text-xs font-black tracking-wider uppercase mb-4">
-              <span className="text-sm">🏍️</span> Two-Wheelers Specialist
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
-              We Look After <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600">All Brands</span>
-            </h2>
-            <p className="text-base md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium">
-              We service and repair all major two-wheeler brands at your doorstep across Bangalore.
-            </p>
-          </div>
-
-          {/* Search and Category Filter Controls */}
-          <div className="max-w-4xl mx-auto mb-10 space-y-4">
-            {/* Search Input */}
-            <div className="relative max-w-md mx-auto">
-              <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="text"
-                value={brandSearch}
-                onChange={(e) => setBrandSearch(e.target.value)}
-                placeholder="Search brand or model (e.g. Royal Enfield, Activa, Ather)..."
-                className="w-full pl-11 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900/90 border border-gray-200 dark:border-zinc-800 text-sm font-medium text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all shadow-sm"
-              />
-              {brandSearch && (
-                <button
-                  type="button"
-                  onClick={() => setBrandSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-white p-1"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
+          <FadeIn>
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/30 text-yellow-700 dark:text-yellow-400 text-xs font-black tracking-wider uppercase mb-4">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <MapPin className="w-3.5 h-3.5" /> Doorstep Service Across Bangalore
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
+                We Cover 50+ Localities Across <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600">Bengaluru</span>
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+                Our mobile mechanics are stationed across 50+ central hubs in Bangalore. Whether you are at home, tech park office, or stranded roadside, verified mechanics reach your doorstep in ~20 minutes with diagnostic kits, battery boosters, and genuine parts.
+              </p>
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-              {[
-                { id: 'TwoWheelers', label: '🏍️ Two-Wheelers (12)' },
-                { id: 'All', label: 'All Brands (25)' },
-                { id: 'Popular', label: '🔥 Popular' },
-                { id: 'Commuter', label: '🛵 Commuter & Scooters' },
-                { id: 'Cruiser', label: '🏍️ Cruisers & Retro' },
-                { id: 'Sports', label: '🏁 Sports & Premium' },
-                { id: 'Electric', label: '⚡ Electric (EV)' }
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setBrandFilter(tab.id)}
-                  className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
-                    brandFilter === tab.id
-                      ? 'bg-yellow-500 text-black shadow-sm font-black scale-105'
-                      : 'bg-gray-100 hover:bg-gray-200/80 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-gray-700 dark:text-gray-300 border border-transparent dark:border-zinc-800'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
+            {/* 4 Pillars Live Dispatch Guarantees */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mb-12">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/80 border border-gray-200/80 dark:border-zinc-800 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="block text-sm font-black text-gray-900 dark:text-white leading-tight">~20 Min Arrival</span>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Fast doorstep dispatch</span>
+                </div>
+              </div>
 
-          {/* Brands Interactive Grid */}
-          <div className="mb-12">
-            {(() => {
-              const filteredBrands = ALL_BRANDS_LIST.filter(brand => {
-                const matchesSearch = 
-                  brand.name.toLowerCase().includes(brandSearch.toLowerCase()) ||
-                  brand.tagline.toLowerCase().includes(brandSearch.toLowerCase()) ||
-                  brand.badge.toLowerCase().includes(brandSearch.toLowerCase());
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/80 border border-gray-200/80 dark:border-zinc-800 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                  <Bike className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="block text-sm font-black text-gray-900 dark:text-white leading-tight">45+ Mobile Mechanics</span>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">On duty across Bangalore</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/80 border border-gray-200/80 dark:border-zinc-800 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <Shield className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="block text-sm font-black text-gray-900 dark:text-white leading-tight">₹0 Visiting Charges</span>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">Free travel in 50+ zones</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/80 border border-gray-200/80 dark:border-zinc-800 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                  <Navigation className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="block text-sm font-black text-gray-900 dark:text-white leading-tight">Live GPS Tracking</span>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">WhatsApp link & direct call</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Content Grid: Locality Navigator (Left) + Interactive Map Card (Right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column: Interactive Locality Search, Zone Tabs & Grid (7 cols) */}
+              <div className="lg:col-span-7 space-y-5">
                 
-                if (!matchesSearch) return false;
-                if (brandFilter === 'TwoWheelers') return brand.coreTwoWheeler;
-                if (brandFilter === 'All') return true;
-                if (brandFilter === 'Popular') return brand.popular;
-                if (brandFilter === 'Commuter') return brand.category === 'Commuter' || brand.category === 'Scooter';
-                if (brandFilter === 'Cruiser') return brand.category === 'Cruiser';
-                if (brandFilter === 'Sports') return brand.category === 'Sports' || brand.category === 'Premium';
-                if (brandFilter === 'Electric') return brand.category === 'Electric';
-                return true;
-              });
-
-              if (filteredBrands.length === 0) {
-                return (
-                  <div className="text-center py-12 bg-gray-50 dark:bg-zinc-900/50 rounded-2xl border border-dashed border-gray-200 dark:border-zinc-800 max-w-lg mx-auto">
-                    <p className="text-gray-600 dark:text-gray-400 font-semibold mb-3">No brand found matching "{brandSearch}"</p>
-                    <button
-                      onClick={() => { setBrandSearch(''); setBrandFilter('All'); }}
-                      className="text-xs font-bold text-yellow-600 dark:text-yellow-500 hover:underline"
-                    >
-                      Clear search and view all brands
-                    </button>
-                  </div>
-                );
-              }
-
-              return (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-                  {filteredBrands.map(brand => {
-                    const isSelected = heroBrand.toLowerCase() === brand.name.toLowerCase();
-                    return (
-                      <div
-                        key={brand.name}
-                        onClick={() => {
-                          setHeroBrand(brand.name);
-                          if (brand.category === 'Electric') {
-                            setHeroVehicle('EV');
-                          } else if (brand.category === 'Scooter') {
-                            setHeroVehicle('Scooter');
-                          } else {
-                            setHeroVehicle('Bike');
-                          }
-                          setHeroModel('');
-                          setBrandToast(`Selected ${brand.name}! Select your service & book mechanic.`);
-                          setTimeout(() => setBrandToast(null), 3500);
-                          const formElem = document.getElementById('booking-form');
-                          if (formElem) {
-                            formElem.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }}
-                        className={`group relative p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between text-left ${
-                          isSelected
-                            ? 'bg-yellow-500/10 border-yellow-500 ring-2 ring-yellow-400/50 shadow-md'
-                            : 'bg-white dark:bg-zinc-900/90 border-gray-200/90 dark:border-zinc-800 hover:border-yellow-400 dark:hover:border-yellow-500/60 hover:shadow-md hover:-translate-y-1'
-                        }`}
+                {/* Search & Zone Filter Bar */}
+                <div className="space-y-3">
+                  <div className="relative">
+                    <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={coverageSearch}
+                      onChange={(e) => setCoverageSearch(e.target.value)}
+                      placeholder="Search your Bangalore locality (e.g., Koramangala, Whitefield, HSR)..."
+                      className="w-full pl-11 pr-10 py-3 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-sm font-semibold text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-yellow-500 dark:focus:border-yellow-400 transition-all shadow-sm"
+                    />
+                    {coverageSearch && (
+                      <button
+                        type="button"
+                        onClick={() => setCoverageSearch('')}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1"
                       >
-                        {/* Top: Icon + Badge */}
-                        <div className="flex items-center justify-between gap-1 mb-2">
-                          <span className="text-xl group-hover:scale-110 transition-transform">{brand.icon}</span>
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                            brand.category === 'Electric'
-                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
-                              : isSelected
-                              ? 'bg-yellow-500 text-black border-transparent font-black'
-                              : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 border-gray-200/60 dark:border-zinc-700'
-                          }`}>
-                            {brand.badge}
-                          </span>
-                        </div>
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
 
-                        {/* Name */}
-                        <div>
-                          <h4 className="text-base font-extrabold text-gray-900 dark:text-white leading-tight flex items-center gap-1.5">
-                            {brand.name}
-                            {isSelected && <Check className="w-4 h-4 text-yellow-500 stroke-[3]" />}
-                          </h4>
-                          <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1 mt-1 leading-snug">
-                            {brand.tagline}
-                          </p>
-                        </div>
+                  {/* Zone Filter Chips */}
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    {[
+                      { id: 'All', label: 'All Localities (52)' },
+                      { id: 'South', label: 'South Bengaluru' },
+                      { id: 'East', label: 'East Bengaluru' },
+                      { id: 'North', label: 'North Bengaluru' },
+                      { id: 'Central & West', label: 'Central & West' },
+                    ].map(tab => {
+                      const isActive = coverageZone === tab.id;
+                      return (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setCoverageZone(tab.id)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-yellow-500 text-black shadow-xs font-black'
+                              : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                        {/* Hover Prompt */}
-                        <div className="mt-3 pt-2 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-bold text-yellow-600 dark:text-yellow-400 opacity-80 group-hover:opacity-100">
-                          <span>{isSelected ? 'Selected' : 'Book Doorstep'}</span>
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                        </div>
+                {/* Localities Card Grid */}
+                {(() => {
+                  const filtered = BENGALURU_LOCALITIES.filter(loc => {
+                    const matchesSearch = loc.name.toLowerCase().includes(coverageSearch.toLowerCase()) ||
+                                          loc.landmark.toLowerCase().includes(coverageSearch.toLowerCase()) ||
+                                          loc.zone.toLowerCase().includes(coverageSearch.toLowerCase());
+                    if (!matchesSearch) return false;
+                    if (coverageZone === 'All') return true;
+                    return loc.zone === coverageZone;
+                  });
+
+                  if (filtered.length === 0) {
+                    return (
+                      <div className="p-8 text-center rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800">
+                        <MapPin className="w-8 h-8 text-yellow-500 mx-auto mb-2 opacity-80" />
+                        <p className="font-bold text-gray-900 dark:text-white text-sm mb-1">
+                          No exact match found for "{coverageSearch}"
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                          Don't worry — we cover all pin codes and localities in and around Bangalore!
+                        </p>
+                        <button
+                          onClick={() => { setCoverageSearch(''); setCoverageZone('All'); }}
+                          className="px-4 py-2 rounded-xl bg-yellow-500 text-black font-bold text-xs cursor-pointer hover:bg-yellow-400 transition-colors"
+                        >
+                          Show All 50+ Localities
+                        </button>
                       </div>
                     );
-                  })}
-                </div>
-              );
-            })()}
-          </div>
-
-          {/* "Don't see your brand?" Callout Card */}
-          <div className="bg-gradient-to-r from-gray-50 via-yellow-500/[0.04] to-gray-50 dark:from-zinc-900 dark:via-yellow-500/[0.05] dark:to-zinc-900 rounded-3xl p-6 sm:p-8 border border-gray-200 dark:border-zinc-800 text-center max-w-4xl mx-auto shadow-sm">
-            <div className="w-12 h-12 rounded-2xl bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 flex items-center justify-center mx-auto mb-4">
-              <Bike className="w-6 h-6" />
-            </div>
-            
-            <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-2">
-              Don’t see your brand? No problem — we service most bikes and scooters.
-            </h3>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto mb-6 leading-relaxed">
-              From vintage classics and custom builds to unlisted two-wheelers, our verified doorstep mechanics carry universal diagnostic scanners, specialty toolkits, and multi-brand spares.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="#booking-form"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const formElem = document.getElementById('booking-form');
-                  if (formElem) {
-                    formElem.scrollIntoView({ behavior: 'smooth' });
                   }
-                }}
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-black text-sm uppercase tracking-wider py-4 px-8 rounded-xl shadow-[0_4px_15px_rgba(234,179,8,0.3)] hover:shadow-[0_8px_25px_rgba(234,179,8,0.5)] transition-all transform hover:-translate-y-0.5"
-              >
-                Book a doorstep mechanic in Bangalore today <ArrowRight className="w-4 h-4" />
-              </a>
 
-              <a
-                href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE,%20I%20have%20a%20bike/scooter%20and%20wanted%20to%20check%20if%20doorstep%20service%20is%20available%20for%20my%20model."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white dark:bg-zinc-800 text-gray-900 dark:text-white border border-gray-300 dark:border-zinc-700 font-bold text-sm py-4 px-6 rounded-xl hover:border-yellow-500 hover:text-yellow-600 dark:hover:text-yellow-400 transition-all shadow-sm"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-500" /> Ask on WhatsApp
-              </a>
-            </div>
+                  return (
+                    <div className="max-h-[380px] overflow-y-auto pr-1 space-y-2.5 custom-scrollbar">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {filtered.map(loc => {
+                          const isSelected = selectedCoverageArea.name === loc.name;
+                          return (
+                            <div
+                              key={loc.name}
+                              onClick={() => {
+                                setSelectedCoverageArea(loc);
+                                setLocationSearch(`${loc.name}, Bengaluru`);
+                                setCoverageToast(`Selected ${loc.name}! Booking location updated.`);
+                                setTimeout(() => setCoverageToast(null), 3000);
+                              }}
+                              className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-start justify-between gap-2.5 ${
+                                isSelected
+                                  ? 'bg-yellow-500/10 border-yellow-500 shadow-sm ring-2 ring-yellow-500/30'
+                                  : 'bg-gray-50/70 hover:bg-white dark:bg-zinc-900/60 dark:hover:bg-zinc-900 border-gray-200/80 dark:border-zinc-800 hover:border-yellow-500/40 hover:shadow-xs'
+                              }`}
+                            >
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-1.5 mb-1">
+                                  <MapPin className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-yellow-600 dark:text-yellow-400' : 'text-emerald-500'}`} />
+                                  <h4 className="font-extrabold text-sm text-gray-900 dark:text-white leading-tight truncate">
+                                    {loc.name}
+                                  </h4>
+                                </div>
+                                <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate pl-5">
+                                  {loc.landmark}
+                                </p>
+                              </div>
 
-            {/* Quick Guarantees Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-6 mt-6 border-t border-gray-200/80 dark:border-zinc-800 text-xs font-semibold text-gray-600 dark:text-gray-400">
-              <div className="flex items-center justify-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" /> 100% Genuine Spares
+                              <div className="text-right shrink-0">
+                                <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                  {loc.eta}
+                                </span>
+                                <span className="block text-[10px] text-gray-400 mt-1 font-medium">
+                                  {loc.activeCount} mechanics
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Selected Locality Action Card */}
+                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-transparent border border-yellow-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-400">
+                        Active In Your Area
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-black text-gray-900 dark:text-white">
+                      {selectedCoverageArea.name}, Bengaluru
+                    </h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-0.5">
+                      {selectedCoverageArea.landmark} • <span className="text-emerald-600 dark:text-emerald-400 font-bold">{selectedCoverageArea.eta} arrival</span> • ₹0 Doorstep Travel Fee
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <a
+                      href="#booking-form"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setLocationSearch(`${selectedCoverageArea.name}, Bengaluru`);
+                        const bookingElem = document.getElementById('booking-form');
+                        if (bookingElem) {
+                          bookingElem.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-black font-black text-xs uppercase tracking-wider py-3 px-5 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+                    >
+                      Book in {selectedCoverageArea.name} <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+
+                    <a
+                      href="tel:+917090400617"
+                      className="p-3 rounded-xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:border-yellow-500 text-gray-800 dark:text-white transition-colors"
+                      title="Call Dispatch"
+                    >
+                      <Phone className="w-4 h-4 text-emerald-500" />
+                    </a>
+                  </div>
+                </div>
+
               </div>
-              <div className="flex items-center justify-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-yellow-500 shrink-0" /> ~20 Min Arrival
+
+              {/* Right Column: Bengaluru Coverage Map with Interactive Radar Overlay (5 cols) */}
+              <div className="lg:col-span-5 relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/25 to-transparent blur-3xl rounded-full pointer-events-none"></div>
+                
+                <div className="relative rounded-3xl overflow-hidden border-2 border-yellow-500/30 dark:border-zinc-700 shadow-2xl bg-zinc-950">
+                  
+                  {/* Top Live Radar Badge */}
+                  <div className="p-3.5 bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800 flex items-center justify-between text-xs text-white">
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                      </span>
+                      <span className="font-extrabold text-white">Live GPS Dispatch Active</span>
+                    </div>
+                    <span className="font-bold text-yellow-400 text-[11px] bg-yellow-500/15 px-2 py-0.5 rounded-md border border-yellow-500/25">
+                      45+ Mechanics On Duty
+                    </span>
+                  </div>
+
+                  {/* Interactive Map Visual */}
+                  <div className="relative group">
+                    <img 
+                      src={coverageMapUrl} 
+                      alt="Bengaluru Two-Wheeler Doorstep Coverage Map" 
+                      className="w-full h-[360px] sm:h-[400px] object-cover filter brightness-[0.92] contrast-[1.05]" 
+                    />
+
+                    {/* Interactive Hotspot Pins overlaid on key Bangalore hubs */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {/* Indiranagar Hotspot */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const area = BENGALURU_LOCALITIES.find(l => l.name === 'Indiranagar');
+                          if (area) {
+                            setSelectedCoverageArea(area);
+                            setLocationSearch('Indiranagar, Bengaluru');
+                          }
+                        }}
+                        className="pointer-events-auto absolute top-[38%] right-[32%] group/pin cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <div className="relative flex items-center justify-center">
+                          <span className="animate-ping absolute h-6 w-6 rounded-full bg-yellow-400 opacity-60"></span>
+                          <div className="w-4 h-4 rounded-full bg-yellow-500 border-2 border-black flex items-center justify-center shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                          </div>
+                        </div>
+                        <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/85 text-yellow-400 font-bold text-[10px] px-2 py-0.5 rounded-md border border-yellow-500/40 opacity-90 group-hover/pin:opacity-100 shadow-md">
+                          Indiranagar • 15m
+                        </span>
+                      </button>
+
+                      {/* Koramangala Hotspot */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const area = BENGALURU_LOCALITIES.find(l => l.name === 'Koramangala');
+                          if (area) {
+                            setSelectedCoverageArea(area);
+                            setLocationSearch('Koramangala, Bengaluru');
+                          }
+                        }}
+                        className="pointer-events-auto absolute top-[52%] left-[46%] group/pin cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <div className="relative flex items-center justify-center">
+                          <span className="animate-ping absolute h-6 w-6 rounded-full bg-emerald-400 opacity-60"></span>
+                          <div className="w-4 h-4 rounded-full bg-emerald-500 border-2 border-black flex items-center justify-center shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                          </div>
+                        </div>
+                        <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/85 text-emerald-400 font-bold text-[10px] px-2 py-0.5 rounded-md border border-emerald-500/40 opacity-90 group-hover/pin:opacity-100 shadow-md">
+                          Koramangala • 15m
+                        </span>
+                      </button>
+
+                      {/* HSR Layout Hotspot */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const area = BENGALURU_LOCALITIES.find(l => l.name === 'HSR Layout');
+                          if (area) {
+                            setSelectedCoverageArea(area);
+                            setLocationSearch('HSR Layout, Bengaluru');
+                          }
+                        }}
+                        className="pointer-events-auto absolute top-[68%] left-[56%] group/pin cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <div className="relative flex items-center justify-center">
+                          <span className="animate-ping absolute h-6 w-6 rounded-full bg-yellow-400 opacity-60"></span>
+                          <div className="w-4 h-4 rounded-full bg-yellow-500 border-2 border-black flex items-center justify-center shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                          </div>
+                        </div>
+                        <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/85 text-yellow-400 font-bold text-[10px] px-2 py-0.5 rounded-md border border-yellow-500/40 opacity-90 group-hover/pin:opacity-100 shadow-md">
+                          HSR Layout • 18m
+                        </span>
+                      </button>
+
+                      {/* Whitefield Hotspot */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const area = BENGALURU_LOCALITIES.find(l => l.name === 'Whitefield');
+                          if (area) {
+                            setSelectedCoverageArea(area);
+                            setLocationSearch('Whitefield, Bengaluru');
+                          }
+                        }}
+                        className="pointer-events-auto absolute top-[36%] right-[12%] group/pin cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <div className="relative flex items-center justify-center">
+                          <span className="animate-ping absolute h-6 w-6 rounded-full bg-yellow-400 opacity-60"></span>
+                          <div className="w-4 h-4 rounded-full bg-yellow-500 border-2 border-black flex items-center justify-center shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                          </div>
+                        </div>
+                        <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/85 text-yellow-400 font-bold text-[10px] px-2 py-0.5 rounded-md border border-yellow-500/40 opacity-90 group-hover/pin:opacity-100 shadow-md">
+                          Whitefield • 20m
+                        </span>
+                      </button>
+
+                      {/* Hebbal Hotspot */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const area = BENGALURU_LOCALITIES.find(l => l.name === 'Hebbal');
+                          if (area) {
+                            setSelectedCoverageArea(area);
+                            setLocationSearch('Hebbal, Bengaluru');
+                          }
+                        }}
+                        className="pointer-events-auto absolute top-[20%] left-[38%] group/pin cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <div className="relative flex items-center justify-center">
+                          <span className="animate-ping absolute h-6 w-6 rounded-full bg-yellow-400 opacity-60"></span>
+                          <div className="w-4 h-4 rounded-full bg-yellow-500 border-2 border-black flex items-center justify-center shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                          </div>
+                        </div>
+                        <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/85 text-yellow-400 font-bold text-[10px] px-2 py-0.5 rounded-md border border-yellow-500/40 opacity-90 group-hover/pin:opacity-100 shadow-md">
+                          Hebbal • 20m
+                        </span>
+                      </button>
+                    </div>
+
+                    {/* Gradient Overlay at Bottom */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-5 text-white">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <span className="font-extrabold text-xs text-white">Live Tracking Available</span>
+                        </div>
+                        <span className="text-[11px] text-zinc-300 font-medium">Updated every 30s</span>
+                      </div>
+                      <p className="text-xs text-zinc-300 leading-relaxed font-medium">
+                        Doorstep mechanics ride equipped with diagnostic gear, jump-start packs, tyre puncture machines, and genuine oils.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center justify-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-blue-500 shrink-0" /> Background Verified
-              </div>
-              <div className="flex items-center justify-center gap-1.5">
-                <ThumbsUp className="w-3.5 h-3.5 text-emerald-500 shrink-0" /> Pay After Service
-              </div>
+
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Floating Brand Selection Toast */}
-      {brandToast && (
+      {/* Area Selection Toast */}
+      {coverageToast && (
         <div className="fixed bottom-6 right-6 z-50 bg-gray-950 text-white border border-yellow-500/50 shadow-2xl rounded-2xl px-5 py-3.5 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4">
           <div className="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shrink-0">
             <Check className="w-4 h-4 stroke-[3]" />
           </div>
           <div>
-            <p className="text-sm font-bold text-white">{brandToast}</p>
-            <p className="text-xs text-gray-400">Booking form updated above</p>
+            <p className="text-sm font-bold text-white">{coverageToast}</p>
+            <p className="text-xs text-gray-400">Ready to book mechanic</p>
           </div>
+          <a
+            href="#booking-form"
+            onClick={() => setCoverageToast(null)}
+            className="ml-2 px-3 py-1.5 rounded-lg bg-yellow-500 text-black font-extrabold text-xs hover:bg-yellow-400 transition-colors"
+          >
+            Book Now
+          </a>
           <button
-            onClick={() => setBrandToast(null)}
-            className="text-gray-400 hover:text-white ml-2 p-1"
+            onClick={() => setCoverageToast(null)}
+            className="text-gray-400 hover:text-white p-1"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
       )}
-
-      {/* COVERAGE AREA SECTION */}
-      <section id="areas" className="py-20 relative bg-white dark:bg-zinc-950 overflow-hidden border-t border-gray-100 dark:border-white/5">
-        <div className="absolute inset-0 bg-yellow-50/50 dark:bg-yellow-500/5"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <FadeIn>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-800 dark:text-yellow-500 text-xs font-bold tracking-wider uppercase mb-6">
-                  <MapPin className="w-4 h-4" /> Doorstep Service Across Bangalore
-                </div>
-                <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-6">
-                  We Cover 50+ Localities Across <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600">Bengaluru</span>
-                </h2>
-                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                  Our extensive network of verified mechanics ensures we reach your location in 20 mins, wherever you are in the city.
-                </p>
-                
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="flex items-center gap-2 text-gray-800 dark:text-gray-200 font-bold bg-white dark:bg-zinc-900 px-4 py-3 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-sm"><MapPin className="w-4 h-4 text-emerald-500" /> Indiranagar</div>
-                  <div className="flex items-center gap-2 text-gray-800 dark:text-gray-200 font-bold bg-white dark:bg-zinc-900 px-4 py-3 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-sm"><MapPin className="w-4 h-4 text-emerald-500" /> Koramangala</div>
-                  <div className="flex items-center gap-2 text-gray-800 dark:text-gray-200 font-bold bg-white dark:bg-zinc-900 px-4 py-3 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-sm"><MapPin className="w-4 h-4 text-emerald-500" /> HSR Layout</div>
-                  <div className="flex items-center gap-2 text-gray-800 dark:text-gray-200 font-bold bg-white dark:bg-zinc-900 px-4 py-3 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-sm"><MapPin className="w-4 h-4 text-emerald-500" /> Whitefield</div>
-                </div>
-              </div>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/20 to-transparent blur-3xl rounded-full"></div>
-                <div className="relative rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl">
-                  <img src={coverageMapUrl} alt="Bengaluru Coverage Map" className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
-                    <div className="p-6 w-full flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-white font-semibold">
-                        <span className="relative flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                        </span>
-                        Live Tracking Available
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
 
       {/* CUSTOMER REVIEWS SECTION */}
       <section className="py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
@@ -2293,7 +2470,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               href="#home"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 hover:bg-yellow-500 hover:text-black dark:bg-white dark:text-black dark:hover:bg-yellow-400 text-white text-xs font-extrabold transition-all shadow-sm shrink-0"
             >
-              Book Doorstep Mechanic <ArrowRight className="w-3.5 h-3.5" />
+              Book Mechanic Now <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
@@ -2311,34 +2488,27 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
             </p>
           </div>
 
+          {/* JSON-LD FAQ Schema Markup for Search Engine Crawlers & Rich Snippets */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faqItems.map((faq) => ({
+                  "@type": "Question",
+                  "name": faq.schemaQ,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                  }
+                }))
+              })
+            }}
+          />
+
           <div className="space-y-4">
-            {[
-              {
-                q: "1. What is doorstep bike service?",
-                a: "Doorstep bike service brings professional two-wheeler repair and maintenance directly to your home, office, or roadside. Our verified mechanics arrive fully equipped with tools and genuine parts.",
-                icon: Home
-              },
-              {
-                q: "2. Which brands do you service?",
-                a: "We service all major brands including Royal Enfield, Honda, Yamaha, KTM, Bajaj, TVS, Suzuki, Hero, and electric scooters like Ather and Ola.",
-                icon: Bike
-              },
-              {
-                q: "3. How do I book a mechanic?",
-                a: "Simply fill out the booking form on our website with your vehicle details, preferred time, and Bangalore location. Our mechanic will be assigned and reach in 20 mins or at your scheduled slot.",
-                icon: Calendar
-              },
-              {
-                q: "4. Do I need to provide tools?",
-                a: "No, our mechanics carry a full mobile workshop with all necessary tools, diagnostics, and genuine consumables. You just need to provide space to park and work on the vehicle.",
-                icon: Wrench
-              },
-              {
-                q: "5. How long does a service take?",
-                a: "A general service typically takes between 60 to 90 minutes. Quick emergency jump-start services take only 15 to 20 minutes.",
-                icon: Clock
-              }
-            ].map((faq, index) => {
+            {faqItems.map((faq, index) => {
               const isOpen = activeFaq === index;
               const IconComponent = faq.icon;
               return (
@@ -2399,7 +2569,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
 
 
       {/* FOOTER */}
-      <footer className="bg-[#0A0D14] text-zinc-300 pt-14 pb-16 lg:pt-18 lg:pb-20 border-t border-zinc-800/90 relative overflow-hidden shadow-2xl">
+      <footer className="bg-[#0A0D14] text-zinc-300 pt-14 pb-24 md:pb-16 lg:pb-20 border-t border-zinc-800/90 relative overflow-hidden shadow-2xl">
         {/* Sleek luminous golden accent line at top */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-80 pointer-events-none"></div>
 
@@ -2453,7 +2623,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 }}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5"
               >
-                <span>Book Mechanic</span>
+                <span>Book Mechanic Now</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -2546,7 +2716,6 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 {[
                   { label: 'Home', href: '#home' },
                   { label: 'Services', href: '#services' },
-                  { label: 'Brands We Service', href: '#brands' },
                   { label: 'Bangalore Areas', href: '#areas' },
                   { label: 'How It Works', href: '#how-it-works' },
                   { label: 'Customer Reviews', href: '#reviews' },
@@ -2712,25 +2881,30 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       {/* QUICK CONTACT BOTTOM BAR (MOBILE) */}
       {/* PACKAGE BOOKING MODAL */}
       {isPackageModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-[280px] rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-100 dark:border-zinc-800">
-            <div className="flex justify-between items-center p-5 border-b border-gray-100 dark:border-zinc-800">
-              <div className="w-full">
-                <h3 className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-0.5">Book Online</h3>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-zinc-900 w-full max-w-[420px] sm:max-w-md rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[90vh]">
+            <div className="flex justify-between items-center p-4 sm:p-5 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
+              <div className="w-full pr-2">
+                <h3 className="text-lg sm:text-xl font-black tracking-tight text-gray-900 dark:text-white mb-1">Book Service Package</h3>
                 {selectedPackage && (
-                  <div className="bg-gray-50 dark:bg-zinc-950 rounded-lg p-3 border border-gray-100 dark:border-zinc-800 mb-2">
-                    <p className="text-sm font-bold text-gray-900 dark:text-white">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 dark:bg-yellow-400/10 rounded-lg border border-yellow-500/20 text-xs">
+                    <span className="font-extrabold text-gray-900 dark:text-white truncate">
                       {selectedPackage.name}
-                    </p>
-                    <p className="text-lg font-extrabold tracking-tight text-yellow-600 dark:text-yellow-500">{selectedPackage.price}</p>
+                    </span>
+                    <span className="font-black text-amber-600 dark:text-yellow-400 shrink-0">{selectedPackage.price}</span>
                   </div>
                 )}
               </div>
-              <button onClick={() => setIsPackageModalOpen(false)} className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-2 rounded-full">
-                <X className="w-5 h-5" />
+              <button 
+                onClick={() => setIsPackageModalOpen(false)} 
+                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-2 rounded-full cursor-pointer shrink-0"
+                aria-label="Close modal"
+              >
+                <X className="w-4 h-4" />
               </button>
             </div>
-              <form onSubmit={(e) => { 
+            
+            <form onSubmit={(e) => { 
               e.preventDefault(); 
               const formData = new FormData(e.currentTarget);
               const fullName = (formData.get('fullName') as string) || 'Customer';
@@ -2784,128 +2958,184 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
                 (window as any).gtag_report_conversion();
               }
-            }} className="p-4 space-y-2 max-h-[70vh] overflow-y-auto">
-                            <div className="flex bg-gray-100 dark:bg-zinc-950 p-1 rounded-xl border border-gray-200 dark:border-zinc-800">
+            }} className="p-4 sm:p-5 space-y-3 overflow-y-auto">
+              
+              <div className="flex bg-gray-100 dark:bg-zinc-950 p-1 rounded-xl border border-gray-200 dark:border-zinc-800">
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Bike" defaultChecked className="peer sr-only" />
-                  <div className="py-1 text-[12px] font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+                  <div className="py-1.5 text-xs font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🏍️ Bike
                   </div>
                 </label>
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Scooter" className="peer sr-only" />
-                  <div className="py-1 text-[12px] font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+                  <div className="py-1.5 text-xs font-bold rounded-lg transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🛵 Scooter
                   </div>
                 </label>
               </div>
 
-              <div className="space-y-3">
-                <div className="grid grid-cols-1 gap-3">
+              <div className="space-y-2.5">
+                {/* Brand & Model */}
+                <div className="grid grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <Tag className="h-4 w-4" />
                     </div>
-                    <select name="brand" required value={modalBrand} onChange={(e) => setModalBrand(e.target.value)} className="w-full pl-10 pr-10 py-1.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[12px] font-semibold shadow-sm appearance-none cursor-pointer">
-                       <option value="" disabled>Select Brand</option>
-                       {Object.keys(MODELS_BY_BRAND).map(brand => (
-                         <option key={brand} value={brand}>{brand}</option>
-                       ))}
+                    <select 
+                      name="brand" 
+                      required 
+                      value={modalBrand} 
+                      onChange={(e) => setModalBrand(e.target.value)} 
+                      className="w-full pl-9 pr-6 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Select Brand</option>
+                      {Object.keys(MODELS_BY_BRAND).map(brand => (
+                        <option key={brand} value={brand}>{brand}</option>
+                      ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                      <ChevronDown className="h-4 w-4" />
+                    <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-gray-400">
+                      <ChevronDown className="h-3.5 w-3.5" />
                     </div>
                   </div>
+
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <Bike className="h-4 w-4" />
                     </div>
-                    <select name="model" required defaultValue="" className="w-full pl-10 pr-10 py-1.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[12px] font-semibold shadow-sm appearance-none cursor-pointer" disabled={!modalBrand}>
-                       <option value="" disabled>Select Model</option>
-                       {modalBrand && MODELS_BY_BRAND[modalBrand]?.map(model => (
-                         <option key={model} value={model}>{model}</option>
-                       ))}
+                    <select 
+                      name="model" 
+                      required 
+                      defaultValue="" 
+                      className="w-full pl-9 pr-6 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer disabled:opacity-50" 
+                      disabled={!modalBrand}
+                    >
+                      <option value="" disabled>{modalBrand ? "Select Model" : "Brand First"}</option>
+                      {modalBrand && MODELS_BY_BRAND[modalBrand]?.map(model => (
+                        <option key={model} value={model}>{model}</option>
+                      ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                      <ChevronDown className="h-4 w-4" />
+                    <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-gray-400">
+                      <ChevronDown className="h-3.5 w-3.5" />
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                {/* Customer Name & Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <User className="h-4 w-4" />
                     </div>
-                    <input type="text" name="fullName" required placeholder="Full Name" className="w-full pl-10 pr-4 py-1.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[12px] font-semibold shadow-sm" />
+                    <input 
+                      type="text" 
+                      name="fullName" 
+                      required 
+                      autoComplete="name"
+                      placeholder="Full Name" 
+                      className="w-full pl-9 pr-3 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:text-gray-400" 
+                    />
                   </div>
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <Phone className="h-4 w-4" />
                     </div>
-                    <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="Phone Number" className="w-full pl-10 pr-4 py-1.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[12px] font-semibold shadow-sm" />
+                    <div className="absolute left-8 inset-y-0 flex items-center pointer-events-none text-[11px] font-extrabold text-gray-500 dark:text-zinc-400 border-r border-gray-200 dark:border-zinc-700 pr-1.5 my-1.5">
+                      +91
+                    </div>
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      required 
+                      inputMode="numeric"
+                      autoComplete="tel"
+                      pattern="[0-9]{10}" 
+                      maxLength={10}
+                      placeholder="10-digit mobile" 
+                      className="w-full pl-16 pr-3 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:text-gray-400 tracking-wider" 
+                    />
                   </div>
                 </div>
                 
+                {/* Location / Address */}
                 <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3 pt-3 flex items-start pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                      <MapPin className="h-4 w-4" />
-                    </div>
-                    <textarea name="location" required placeholder="Full Address, Bengaluru" className="w-full pl-10 pr-4 py-1.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[12px] font-semibold shadow-sm resize-none h-[50px]"></textarea>
+                  <div className="absolute inset-y-0 left-0 pl-3 pt-2.5 flex items-start pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <MapPin className="h-4 w-4" />
                   </div>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                      <Wrench className="h-4 w-4" />
-                    </div>
-                    <select name="service" required defaultValue="" className="w-full pl-10 pr-10 py-1 rounded-[10px] border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 focus:bg-white dark:focus:bg-zinc-950 transition-all text-[11px] font-semibold shadow-sm appearance-none cursor-pointer">
-                       <option value="" disabled>Select Service Type</option>
-                       {QUICK_SERVICE_OPTIONS.map((opt) => (
-                         <option key={opt.id} value={opt.id}>{opt.name} - {opt.price}</option>
-                       ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                      <ChevronDown className="h-4 w-4" />
-                    </div>
+                  <textarea 
+                    name="location" 
+                    required 
+                    placeholder="Locality / Address in Bengaluru" 
+                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold placeholder:text-gray-400 resize-none h-[54px]"
+                  ></textarea>
+                </div>
+
+                {/* Service Dropdown */}
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <Wrench className="h-4 w-4" />
                   </div>
+                  <select 
+                    name="service" 
+                    required 
+                    defaultValue={selectedPackage ? selectedPackage.name : ""} 
+                    className="w-full pl-9 pr-7 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled>Select Service Type</option>
+                    {QUICK_SERVICE_OPTIONS.map((opt) => (
+                      <option key={opt.id} value={opt.id}>{opt.name} - {opt.price}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-gray-400">
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  </div>
+                </div>
                 
-                <div className="grid grid-cols-2 gap-3">
+                {/* Date & Time */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <Calendar className="h-4 w-4" />
                     </div>
-                    <input type="date" name="date" required min={new Date().toISOString().split('T')[0]} defaultValue={new Date().toISOString().split('T')[0]} className="w-full pl-10 pr-2 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-[11.5px] font-semibold cursor-pointer" />
+                    <input 
+                      type="date" 
+                      name="date" 
+                      required 
+                      min={new Date().toISOString().split('T')[0]} 
+                      defaultValue={new Date().toISOString().split('T')[0]} 
+                      className="w-full pl-9 pr-2 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold cursor-pointer" 
+                    />
                   </div>
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
                       <Clock className="h-4 w-4" />
                     </div>
-                    <select name="time" required defaultValue="Immediate (Next 20 Mins)" className="w-full pl-10 pr-7 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-[11.5px] font-semibold appearance-none cursor-pointer">
+                    <select 
+                      name="time" 
+                      required 
+                      defaultValue="Immediate (Next 20 Mins)" 
+                      className="w-full pl-9 pr-6 py-2 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs font-semibold appearance-none cursor-pointer"
+                    >
                       <option value="Immediate (Next 20 Mins)">⚡ In 20 Mins (Now)</option>
                       <option value="Morning (09:00 AM - 12:00 PM)">🌅 Morning (9 AM - 12 PM)</option>
                       <option value="Afternoon (12:00 PM - 03:00 PM)">☀️ Afternoon (12 PM - 3 PM)</option>
                       <option value="Evening (03:00 PM - 06:00 PM)">🌆 Evening (3 PM - 6 PM)</option>
                       <option value="Late Evening (06:00 PM - 08:00 PM)">🌙 Late (6 PM - 8 PM)</option>
                     </select>
-                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                    <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-gray-400">
                       <ChevronDown className="h-3.5 w-3.5" />
                     </div>
                   </div>
                 </div>
               </div>
               
-              <button type="submit" className="w-full relative group overflow-hidden bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-[14px] py-2.5 px-4 rounded-xl shadow-[0_4px_14px_rgba(234,179,8,0.3)] hover:shadow-[0_6px_20px_rgba(234,179,8,0.4)] transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 mt-4">
-                <div className="absolute inset-0 w-full h-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-                <span className="relative z-10 flex items-center justify-center w-full">
-                  {packageSuccess ? (
-                    <span className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 animate-in zoom-in" />
-                      Request Sent!
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Confirm Booking <ArrowRight className="w-5 h-5" />
-                    </span>
-                  )}
+              <button 
+                type="submit" 
+                className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider py-2.5 sm:py-3 px-4 rounded-xl shadow-[0_6px_20px_rgba(234,179,8,0.3)] hover:shadow-[0_8px_25px_rgba(234,179,8,0.45)] transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer mt-2"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <span>Book Mechanic Now</span>
+                  <ArrowRight className="w-4 h-4" />
                 </span>
               </button>
             </form>
@@ -3220,20 +3450,47 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
           </div>
         </div>
       )}
-      
-      {/* WhatsApp Floating Button */}
-      <a 
-        href="https://wa.me/917090400617?text=Hi,%20I%20need%20help%20with%20my%20bike" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-[90] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all group"
-        aria-label="Chat on WhatsApp"
-      >
-        <div className="absolute inset-0 w-full h-full rounded-full bg-[#25D366] animate-ping opacity-30"></div>
-        <svg className="w-7 h-7 relative z-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-      </a>
+
+      {/* MOBILE STICKY BOTTOM ACTION BAR */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
+        <a
+          href="tel:+917090400617"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-zinc-900 hover:bg-black dark:bg-zinc-850 dark:hover:bg-zinc-800 text-white text-xs font-black shadow-sm transition-all active:scale-[0.98]"
+        >
+          <PhoneCall className="w-4 h-4 text-yellow-400 shrink-0" />
+          <span>Call Mechanic</span>
+        </a>
+        <a
+          href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center p-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm transition-all active:scale-[0.98] shrink-0"
+          aria-label="WhatsApp"
+        >
+          <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+        </a>
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById('booking-form');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              setCurrentView('home');
+              setTimeout(() => {
+                document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }
+          }}
+          className="flex-[1.25] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-yellow-400 text-black text-xs font-black shadow-md shadow-yellow-500/25 transition-all active:scale-[0.98] cursor-pointer"
+        >
+          <Wrench className="w-3.5 h-3.5 shrink-0" />
+          <span>Book Mechanic Now</span>
+        </button>
+      </div>
+
       </main>
       )}
     </div>
