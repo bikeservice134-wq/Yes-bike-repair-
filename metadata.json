@@ -1,6 +1,6 @@
 {
   "name": "Yes Bike Service",
-  "description": "Bengaluru doorstep bike repair & service. General Bike Service, General Service + Engine Oil, Jump Start Service across Bengaluru.",
+  "description": "Doorstep bike repair & service across Bengaluru. Certified mechanic at your home or office with 30-min arrival, transparent pricing, and zero advance payment.",
   "requestFramePermissions": [
     "geolocation"
   ],
