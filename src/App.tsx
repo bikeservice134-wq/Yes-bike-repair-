@@ -227,12 +227,27 @@ export default function App() {
       if (typeof window !== 'undefined') {
         if ((window as any).gtag) {
           (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
+            'value': 1.0,
+            'currency': 'INR'
+          });
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17586403307/EvEbCPiDm4IdEOvv7MFB',
+            'value': 1.0,
+            'currency': 'INR'
+          });
+          (window as any).gtag('event', 'conversion', {
             'send_to': 'AW-18313979172/gVmhCI-SzP8cEKTK5JxE',
             'value': 1.0,
             'currency': 'INR'
           });
           (window as any).gtag('event', 'conversion', {
             'send_to': 'AW-18313979172/mupQCP_io-4cEKTK5JxE',
+            'value': 1.0,
+            'currency': 'INR'
+          });
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17586403307/D8AlCOPU7-scEOvv7MFB',
             'value': 1.0,
             'currency': 'INR'
           });
@@ -510,7 +525,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 </div>
 
                 {/* 5. 3 Services Selector */}
-                <div className="grid grid-cols-3 gap-2 w-full max-w-[480px] sm:max-w-[500px] mb-3.5">
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-lg mb-3 sm:mb-3.5">
                   {[
                     { id: "General Service - ₹699", icon: "🛠️", label: "General Service", price: "₹699" },
                     { id: "General Service + Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
@@ -522,14 +537,14 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                         key={srv.id}
                         type="button"
                         onClick={() => setHeroService(srv.id)}
-                        className={`p-2.5 sm:p-3 rounded-2xl text-center border transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        className={`p-2 sm:p-3 rounded-xl sm:rounded-2xl text-center border transition-all cursor-pointer flex flex-col items-center justify-center ${
                           isSelected
                             ? 'bg-yellow-500 text-black border-yellow-500 font-black shadow-md ring-2 ring-yellow-400'
                             : 'bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-yellow-400 font-semibold'
                         }`}
                       >
-                        <span className="text-lg sm:text-xl mb-1">{srv.icon}</span>
-                        <span className="text-xs font-bold leading-tight line-clamp-1">{srv.label}</span>
+                        <span className="text-base sm:text-xl mb-0.5 sm:mb-1">{srv.icon}</span>
+                        <span className="text-[11px] sm:text-xs font-bold leading-tight truncate max-w-full">{srv.label}</span>
                         <span className={`text-xs sm:text-sm font-black mt-0.5 ${isSelected ? 'text-black' : 'text-amber-600 dark:text-yellow-400'}`}>
                           {srv.price}
                         </span>
@@ -538,10 +553,10 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   })}
                 </div>
 
-                <div id="booking-form" className="w-full max-w-[480px] sm:max-w-[500px] relative z-20 text-left">
+                <div id="booking-form" className="w-full max-w-lg relative z-20 text-left">
                       <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/25 via-yellow-500/15 to-amber-600/15 blur-xl rounded-3xl pointer-events-none opacity-60"></div>
 
-                      <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+                      <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
                         {/* Card Header */}
                     <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-zinc-800">
                       <div className="flex items-center gap-2">
@@ -591,8 +606,8 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                         </button>
                       </div>
 
-                      {/* Name & Phone in 2-Columns */}
-                      <div className="grid grid-cols-2 gap-2.5">
+                      {/* Name & Phone in Responsive Grid (1 col on mobile, 2 cols on tablet/desktop) */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                             <User className="h-4 w-4" />
@@ -740,7 +755,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                         </div>
 
                         {/* Quick locality chips */}
-                        <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-xs">
+                        <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-xs -mx-1 px-1 touch-pan-x">
                           {POPULAR_BENGALURU_AREAS.slice(0, 5).map((area) => (
                             <button
                               key={area}
@@ -865,7 +880,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                       </button>
                       
                       {/* Trust Highlights & Emergency Helpline */}
-                      <div className="pt-1 flex items-center justify-between text-xs text-gray-500 dark:text-zinc-400 font-medium">
+                      <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-500 dark:text-zinc-400 font-medium">
                         <span className="flex items-center gap-1.5">
                           <Shield className="w-3.5 h-3.5 text-emerald-500" />
                           Zero Advance Payment
@@ -2122,7 +2137,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2.5 shrink-0">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0 w-full sm:w-auto">
                     <a
                       href="#booking-form"
                       onClick={(e) => {
@@ -2133,14 +2148,14 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                           bookingElem.scrollIntoView({ behavior: 'smooth' });
                         }
                       }}
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-black font-black text-xs uppercase tracking-wider py-3 px-5 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-black font-black text-xs uppercase tracking-wider py-3 px-5 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
                     >
                       Book in {selectedCoverageArea.name} <ArrowRight className="w-3.5 h-3.5" />
                     </a>
 
                     <a
                       href="tel:+917090400617"
-                      className="p-3 rounded-xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:border-yellow-500 text-gray-800 dark:text-white transition-colors"
+                      className="p-3 rounded-xl bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:border-yellow-500 text-gray-800 dark:text-white transition-colors shrink-0"
                       title="Call Dispatch"
                     >
                       <Phone className="w-4 h-4 text-emerald-500" />
@@ -2686,7 +2701,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
           
           {/* Pre-Footer Fast-Assistance Banner */}
           <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-yellow-500/20 via-zinc-900/95 to-amber-500/20 border border-yellow-500/35 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-sm">
-            <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 text-black flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/30">
                 <Bike className="w-7 h-7 stroke-[2.2]" />
               </div>
@@ -2704,10 +2719,10 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 shrink-0">
               <a
                 href="tel:+917090400617"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800/90 hover:bg-yellow-400 hover:text-black text-white text-xs sm:text-sm font-black transition-all shadow-md border border-zinc-700 hover:border-yellow-400 transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-800/90 hover:bg-yellow-400 hover:text-black text-white text-xs sm:text-sm font-black transition-all shadow-md border border-zinc-700 hover:border-yellow-400 transform hover:-translate-y-0.5"
               >
                 <Phone className="w-4 h-4 text-yellow-400 group-hover:text-black" />
                 <span>Call +91 70904 00617</span>
@@ -2716,7 +2731,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>WhatsApp Help</span>
@@ -2726,7 +2741,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   const form = document.getElementById('booking-form') || document.getElementById('home');
                   if (form) form.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>Book Mechanic Now</span>
                 <ArrowRight className="w-4 h-4" />
@@ -2986,9 +3001,9 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       {/* QUICK CONTACT BOTTOM BAR (MOBILE) */}
       {/* PACKAGE BOOKING MODAL */}
       {isPackageModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white dark:bg-zinc-900 w-full max-w-lg sm:max-w-xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92vh]">
-            <div className="flex justify-between items-center p-5 sm:p-6 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
+            <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="w-full pr-2">
                 <h3 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white mb-1">Book Service Package</h3>
                 {selectedPackage && (
@@ -3063,7 +3078,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
                 (window as any).gtag_report_conversion();
               }
-            }} className="p-5 sm:p-6 space-y-4 overflow-y-auto">
+            }} className="p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-y-auto">
               
               <div className="flex bg-gray-100 dark:bg-zinc-950 p-1 rounded-xl border border-gray-200 dark:border-zinc-800">
                 <label className="flex-1 text-center cursor-pointer">
@@ -3286,8 +3301,8 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
           />
           
           {/* Modal Content */}
-          <div className="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl shadow-2xl animate-in zoom-in-95 overflow-hidden flex flex-col max-h-[85vh]">
-            <div className="p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50">
+          <div className="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl animate-in zoom-in-95 overflow-hidden flex flex-col max-h-[85vh]">
+            <div className="p-4 sm:p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-xl text-yellow-600 dark:text-yellow-400">
                   <Shield className="w-5 h-5" />
@@ -3312,7 +3327,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               </button>
             </div>
             
-            <div className="p-6 overflow-y-auto space-y-6">
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6">
               {/* If package specific steps exist */}
               {technicalDetailsContent.steps && technicalDetailsContent.steps.length > 0 && (
                 <div>
@@ -3340,7 +3355,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 <h4 className="text-xs font-black tracking-wider text-gray-900 dark:text-white uppercase mb-3 flex items-center gap-2">
                   <Cog className="w-4 h-4 text-yellow-500" /> 100% Genuine Parts & Consumables
                 </h4>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                   <div className="p-3.5 rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900/50">
                     <p className="font-bold text-gray-900 dark:text-white text-xs mb-0.5">Engine Oil Standards</p>
                     <p className="text-[11px] text-gray-500 dark:text-gray-400">Motul / Castrol (API SN, JASO MA2)</p>
@@ -3419,8 +3434,8 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       
       {/* SUCCESS / BOOKING CONFIRMED RECEIPT VIEW */}
       {(heroSuccess || currentView === 'booking-success') && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md overflow-y-auto">
-          <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-5 sm:p-7 max-w-md w-full my-6 shadow-2xl animate-in zoom-in-95 duration-200 text-left relative overflow-hidden">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md overflow-y-auto">
+          <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl sm:rounded-3xl p-4 sm:p-7 max-w-md w-full my-6 shadow-2xl animate-in zoom-in-95 duration-200 text-left relative overflow-hidden">
             {/* Top decorative gradient bar */}
             <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-emerald-400 via-yellow-400 to-amber-500"></div>
 
@@ -3505,7 +3520,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
 
             {/* Booking Details Card */}
             <div className="mt-3.5 space-y-2 text-xs">
-              <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block">Vehicle</span>
                   <span className="font-bold text-gray-900 dark:text-white text-[12.5px] truncate block">
@@ -3520,7 +3535,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block">Customer</span>
                   <span className="font-semibold text-gray-900 dark:text-white block truncate">
@@ -3582,10 +3597,10 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       )}
 
       {/* MOBILE STICKY BOTTOM ACTION BAR */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
         <a
           href="tel:+917090400617"
-          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-zinc-900 hover:bg-black dark:bg-zinc-850 dark:hover:bg-zinc-800 text-white text-xs font-black shadow-sm transition-all active:scale-[0.98]"
+          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-2 rounded-xl bg-zinc-900 hover:bg-black dark:bg-zinc-850 dark:hover:bg-zinc-800 text-white text-xs font-black shadow-sm transition-all active:scale-[0.98]"
         >
           <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
           <span>Call Mechanic</span>
@@ -3594,7 +3609,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
           href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center p-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm transition-all active:scale-[0.98] shrink-0"
+          className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm transition-all active:scale-[0.98] shrink-0"
           aria-label="WhatsApp"
         >
           <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -3614,7 +3629,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               }, 100);
             }
           }}
-          className="flex-[1.25] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
+          className="flex-[1.25] flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
         >
           <Wrench className="w-3.5 h-3.5 shrink-0" />
           <span>Book Mechanic Now</span>
