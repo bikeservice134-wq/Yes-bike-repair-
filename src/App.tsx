@@ -24,11 +24,69 @@ export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, del
 
 
 const MODELS_BY_BRAND: Record<string, string[]> = {
-  Bajaj: ["Pulsar 150", "Pulsar NS200", "Pulsar N160", "Platina 100", "CT 110", "Dominar 400", "Avenger Cruise 220"],
+  Bajaj: ["Pulsar 125", "Pulsar 150", "Pulsar 180", "Pulsar 220F", "Pulsar NS200", "Pulsar RS200", "Pulsar N160", "Dominar 250", "Dominar 400", "Platina 100", "CT 110", "Avenger Cruise 220"],
   Hero: ["Splendor Plus", "Super Splendor", "HF Deluxe", "Passion Pro", "Glamour", "Xtreme 160R", "Destini 125", "Pleasure Plus"],
-  Honda: ["Activa 6G", "Activa 125", "Dio", "Shine 125", "SP 125", "Unicorn", "Hornet 2.0", "H'ness CB350"],
+  Honda: [
+    "Activa 3G",
+    "Activa 4G",
+    "Activa 5G",
+    "Activa 6G",
+    "Activa 110",
+    "Activa 125",
+    "Activa 125 BS6",
+    "Activa 125 H-Smart",
+    "Dio",
+    "Dio 3G",
+    "Dio 4G",
+    "Dio 5G",
+    "Dio 110",
+    "Dio 125",
+    "Grazia",
+    "Grazia 125",
+    "Shine 100",
+    "Shine 125",
+    "CB Shine",
+    "CB Shine SP",
+    "SP 125",
+    "SP 125 Sports Edition",
+    "SP160",
+    "Livo",
+    "Livo BS6",
+    "Unicorn",
+    "CB Unicorn 150",
+    "CB Unicorn 160",
+    "Hornet 160R",
+    "Hornet 2.0",
+    "CBR150",
+    "CBR250",
+    "H'ness CB350"
+  ],
   KTM: ["Duke 200", "Duke 250", "Duke 390", "RC 200", "RC 390", "Adventure 390"],
-  TVS: ["Jupiter", "Ntorq 125", "Apache RTR 160", "Apache RTR 200", "Raider", "Radeon", "Sport", "XL100"],
+  TVS: [
+    "TVS Wego",
+    "Jupiter",
+    "Jupiter 110",
+    "Jupiter 125",
+    "Ntorq 125",
+    "Zest 110",
+    "Scooty Pep+",
+    "Apache RTR 160",
+    "Apache RTR 160 4V",
+    "Apache RTR 180",
+    "Apache RTR 200",
+    "Apache RTR 200 4V",
+    "Apache RTR 310",
+    "Apache RR 310",
+    "Raider",
+    "Raider 125",
+    "Raider 125 iGO",
+    "Ronin 225",
+    "Star City+",
+    "Star City+ Sports",
+    "Radeon",
+    "Sport",
+    "XL100"
+  ],
   "Royal Enfield": ["Classic 350", "Hunter 350", "Bullet 350", "Meteor 350", "Himalayan", "Continental GT 650", "Interceptor 650"],
   Vespa: ["Vespa ZX 125", "Vespa VXL 150", "Vespa SXL 150"],
   Mahindra: ["Mojo 300", "Gusto 125", "Centuro", "Rodeo RZ", "Flyte"],
@@ -140,7 +198,7 @@ export const parseTime12Hour = (hhmm: string): { hour: number; minute: string; p
 };
 
 const QUICK_SERVICE_OPTIONS = [
-  { id: "General Service - ₹799", name: "General Service", price: "₹799", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
+  { id: "General Service - ₹699", name: "General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
   { id: "Jump Start Service - ₹399", name: "Jump Start Service", price: "₹399", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
@@ -230,7 +288,7 @@ export default function App() {
   const [heroModel, setHeroModel] = useState("");
   const [heroName, setHeroName] = useState("");
   const [heroPhone, setHeroPhone] = useState("");
-  const [heroService, setHeroService] = useState("General Service - ₹799");
+  const [heroService, setHeroService] = useState("General Service - ₹699");
   const [bookingDate, setBookingDate] = useState(() => getTodayIST());
   const [bookingTime, setBookingTime] = useState(() => getCurrentTimeHHMM());
   const [modalWatchTime, setModalWatchTime] = useState(() => getCurrentTimeHHMM());
@@ -374,7 +432,7 @@ export default function App() {
     const brand = heroBrand || (formData.get('brand') as string) || 'Hero';
     const model = heroModel || (formData.get('model') as string) || '';
     const location = (formData.get('location') as string)?.trim() || locationSearch || 'Bengaluru';
-    const service = heroService || (formData.get('service') as string) || 'General Service - ₹799';
+    const service = heroService || (formData.get('service') as string) || 'General Service - ₹699';
     const date = (formData.get('date') as string)?.trim() || bookingDate;
     let time = (formData.get('time') as string)?.trim() || bookingTime;
     const customTime = (formData.get('customTime') as string)?.trim();
@@ -399,7 +457,7 @@ export default function App() {
     const timingText = `${date} • ${time}${isSameTimeOrToday ? ' ⚡ (Simple Same Time / Immediate Dispatch)' : ''}`;
 
     const selectedOpt = QUICK_SERVICE_OPTIONS.find(s => s.id === service);
-    const estimatedPrice = selectedOpt ? selectedOpt.price : '₹799';
+    const estimatedPrice = selectedOpt ? selectedOpt.price : '₹699';
     const bookingId = `YB-${Math.floor(10000 + Math.random() * 90000)}`;
 
     const confirmedData = {
@@ -490,7 +548,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
     {
       q: "6. What doorstep bike services are available and what are the prices?",
       schemaQ: "What doorstep bike services are available and what are the prices?",
-      a: "We offer General Service at ₹799 (discounted from ₹999), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹399, Puncture Repair at ₹599, and Running Repairs or general inspection at ₹450.",
+      a: "We offer General Service at ₹699 (discounted from ₹999), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹399, Puncture Repair at ₹599, and Running Repairs or general inspection at ₹450.",
       icon: Shield
     },
     {
@@ -671,7 +729,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 {/* 5. 3 Services Selector */}
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-lg mb-3 sm:mb-3.5">
                   {[
-                    { id: "General Service - ₹799", icon: "🛠️", label: "General Service", price: "₹799" },
+                    { id: "General Service - ₹699", icon: "🛠️", label: "General Service", price: "₹699" },
                     { id: "General Service with Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
                     { id: "Jump Start Service - ₹399", icon: "⚡", label: "Jump Start", price: "₹399" },
                   ].map((srv) => {
@@ -1320,123 +1378,164 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       </section>
 
       <div id="services"></div>
-      <section id="pricing" className="py-20 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden">
+      <section id="pricing" className="py-16 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden border-t border-gray-100 dark:border-white/5">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 md:mb-20">
-            <div className="inline-flex items-center justify-center gap-2 bg-yellow-100 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-500 px-4 py-2 rounded-full font-bold text-sm tracking-wide uppercase mb-6 border border-yellow-200 dark:border-yellow-500/20 shadow-sm">
-              <Star className="w-4 h-4" /> Transparent Pricing
+        <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <div className="inline-flex items-center justify-center gap-2 bg-yellow-500/10 dark:bg-yellow-500/15 text-yellow-800 dark:text-yellow-400 px-3.5 py-1.5 rounded-full font-extrabold text-xs tracking-wider uppercase mb-4 border border-yellow-500/25 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+              <span>Transparent Pricing</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white mb-6">
-              Our Popular Packages
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400">Popular Packages</span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
               No hidden costs. Just honest, upfront pricing for all services.
             </p>
+
+            {/* Honest Pricing Guarantee Strip */}
+            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-2.5 rounded-2xl bg-white dark:bg-zinc-900/90 border border-gray-200/80 dark:border-zinc-800 shadow-sm text-xs sm:text-sm font-semibold text-gray-700 dark:text-zinc-300">
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <span><strong className="font-extrabold text-gray-900 dark:text-white">₹0 Advance</strong> · Pay After Service</span>
+              </span>
+              <span className="hidden sm:inline text-gray-300 dark:text-zinc-700" aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Shield className="w-4 h-4 text-amber-500 shrink-0" />
+                <span><strong className="font-extrabold text-gray-900 dark:text-white">500 km / 1-Mo</strong> Service Warranty</span>
+              </span>
+              <span className="hidden sm:inline text-gray-300 dark:text-zinc-700" aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <span><strong className="font-extrabold text-gray-900 dark:text-white">100% Upfront</strong> Approval on Parts</span>
+              </span>
+            </div>
           </div>
 
-                    
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[96rem] mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 items-stretch">
             {/* Pkg 1: General Service */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
-              <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
-                <Wrench className="w-24 h-24 text-yellow-500" />
-              </div>
-
-              {/* Floating Top Badge */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/15 text-yellow-800 dark:text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider border border-yellow-400/40">
-                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-5 sm:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+              {/* Top Status & Discount Bar */}
+              <div className="flex items-center justify-between gap-2 mb-3.5">
+                <span className="inline-flex items-center gap-1.5 text-yellow-800 dark:text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
                   Doorstep Standard
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20">
-                  Save ₹200 (20% OFF)
+                <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
+                  Save ₹300 (30% OFF)
                 </span>
               </div>
 
               {/* Header */}
-              <div className="relative z-10 mb-3">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 ring-1 ring-yellow-400/30">
-                    <Wrench className="w-6 h-6" />
+              <div className="relative z-10 mb-3.5">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 ring-1 ring-yellow-400/30 shrink-0">
+                    <Wrench className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white">
+                    <h3 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
                       General Service
                     </h3>
-                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-yellow-400">
-                      Offer Price: ₹799
-                    </div>
+                    <p className="text-xs font-bold text-amber-600 dark:text-yellow-400 mt-0.5">
+                      Offer Price: ₹699 · For Bikes & Scooters
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Price Banner */}
-              <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-3 border-b border-gray-100 dark:border-zinc-800">
-                <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹799</span>
-                <span className="text-lg font-medium text-gray-400 line-through">₹999</span>
-                <span className="text-xs font-semibold text-gray-500 dark:text-zinc-400">/ all-inclusive</span>
-              </div>
-
-              {/* Key Highlights: Doorstep, Warranty, Interval, Service Time */}
-              <div className="space-y-1.5 mb-4">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/10 border border-amber-500/20 text-gray-900 dark:text-zinc-100 text-xs font-bold">
-                  <span className="text-sm shrink-0">🏍️</span>
-                  <span>Available at Your Doorstep</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/10 border border-amber-500/20 text-gray-900 dark:text-zinc-100 text-xs font-bold">
-                  <span className="text-sm shrink-0">🛡️</span>
-                  <span>500 km or 1-Month Service Warranty</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/10 border border-amber-500/20 text-gray-900 dark:text-zinc-100 text-xs font-bold">
-                  <span className="text-sm shrink-0">🔧</span>
-                  <span>Recommended Every 3,000 km or 3 Months</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/10 border border-amber-500/20 text-gray-900 dark:text-zinc-100 text-xs font-bold">
-                  <span className="text-sm shrink-0">⏱️</span>
-                  <span>Service Time: Approx. 2 Hours</span>
+              <div className="relative z-10 flex items-baseline justify-between gap-2 mb-4 pb-3.5 border-b border-gray-100 dark:border-zinc-800 tabular-nums">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹699</span>
+                  <span className="text-base font-semibold text-gray-400 dark:text-zinc-500 line-through">₹999</span>
+                  <span className="text-xs font-semibold text-gray-500 dark:text-zinc-400">/ all-inclusive</span>
                 </div>
               </div>
 
-              {/* Service Includes */}
+              {/* Key Highlights: Clean 2x2 Spec Grid */}
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                    <span>🏍️</span>
+                    <span>Location</span>
+                  </div>
+                  <span className="text-gray-900 dark:text-zinc-100 text-[11.5px] font-extrabold leading-snug">
+                    Available at Your Doorstep
+                  </span>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                    <span>🛡️</span>
+                    <span>Warranty</span>
+                  </div>
+                  <span className="text-gray-900 dark:text-zinc-100 text-[11.5px] font-extrabold leading-snug">
+                    500 km or 1-Month Service Warranty
+                  </span>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                    <span>🔧</span>
+                    <span>Interval</span>
+                  </div>
+                  <span className="text-gray-900 dark:text-zinc-100 text-[11.5px] font-extrabold leading-snug">
+                    Recommended Every 3,000 km or 3 Months
+                  </span>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                    <span>⏱️</span>
+                    <span>Duration</span>
+                  </div>
+                  <span className="text-gray-900 dark:text-zinc-100 text-[11.5px] font-extrabold leading-snug">
+                    Service Time: Approx. 2 Hours
+                  </span>
+                </div>
+              </div>
+
+              {/* Service Includes: Unified Clean 12-Point Checklist */}
               <div className="relative z-10 mb-5 flex-grow">
-                <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white mb-2.5">
+                <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white mb-2">
                   <span>Service Includes:</span>
-                  <span className="text-[10.5px] font-bold text-emerald-600 dark:text-emerald-400 normal-case">12 Core Services</span>
+                  <span className="text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 normal-case">12 Core Services</span>
                 </div>
-                <ul className="space-y-1.5">
-                  {[
-                    "Air Filter Cleaning",
-                    "Battery Voltage Check",
-                    "Brake Check & Service",
-                    "Cables & Levers Adjustment",
-                    "Chain Tension Check",
-                    "Clutch Greasing",
-                    "Dry Wash",
-                    "Electrical Check-up",
-                    "Engine Oil Check",
-                    "Greasing & Lubrication",
-                    "Oil Leakage Check",
-                    "Spark Plug Cleaning"
-                  ].map((serviceItem, idx) => (
-                    <li key={idx} className="flex items-center gap-2 p-1.5 px-2 rounded-lg bg-gray-50/90 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800/80">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span className="text-gray-900 dark:text-white font-semibold text-[11.5px] leading-tight">
-                        {serviceItem}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="rounded-2xl bg-gray-50/90 dark:bg-zinc-800/40 border border-gray-200/70 dark:border-zinc-800 p-3">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-x-3 gap-y-2">
+                    {[
+                      "Air Filter Cleaning",
+                      "Battery Voltage Check",
+                      "Brake Check & Service",
+                      "Cables & Levers Adjustment",
+                      "Chain Tension Check",
+                      "Clutch Greasing",
+                      "Dry Wash",
+                      "Electrical Check-up",
+                      "Engine Oil Check",
+                      "Greasing & Lubrication",
+                      "Oil Leakage Check",
+                      "Spark Plug Cleaning"
+                    ].map((serviceItem, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                        <span className="text-gray-800 dark:text-zinc-100 font-semibold text-xs leading-snug">
+                          {serviceItem}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               {/* Actions: Book Now & View Technical Details */}
-              <div className="relative z-10 mt-auto flex flex-col gap-2.5 pt-2 border-t border-gray-100 dark:border-zinc-800">
+              <div className="relative z-10 mt-auto flex flex-col gap-2 pt-3 border-t border-gray-100 dark:border-zinc-800">
                 <button 
                   onClick={() => { 
-                    setSelectedPackage({ name: 'General Service', price: '₹799' }); 
+                    setSelectedPackage({ name: 'General Service', price: '₹699' }); 
                     setIsPackageModalOpen(true); 
                   }} 
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(234,179,8,0.35)] hover:shadow-[0_6px_22px_rgba(234,179,8,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
@@ -1449,7 +1548,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   type="button"
                   onClick={() => { 
                     setTechnicalDetailsContent({ 
-                      title: 'General Service (₹799)', 
+                      title: 'General Service (₹699)', 
                       steps: [
                         'Air Filter Cleaning & Intake Inspection',
                         'Battery Voltage Check & Terminal Cleaning',
@@ -1488,97 +1587,120 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 </div>
               </div>
 
-              <div className="bg-zinc-950 dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400 p-6 sm:p-7 pt-7 sm:pt-8 flex flex-col shadow-2xl shadow-yellow-500/25 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-yellow-400/50">
-                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
-                  <Settings className="w-24 h-24 text-yellow-400" />
-                </div>
+              <div className="bg-zinc-950 dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400 p-5 sm:p-6 pt-7 sm:pt-8 flex flex-col shadow-2xl shadow-yellow-500/25 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-yellow-400/50">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/15 via-yellow-500/5 to-transparent pointer-events-none"></div>
                 
                 {/* Sub-header Badges */}
-                <div className="flex items-center justify-between gap-2 mb-3 mt-1.5">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 font-extrabold text-[10.5px] uppercase tracking-wider border border-yellow-400/40">
+                <div className="flex items-center justify-between gap-2 mb-3.5 mt-1">
+                  <span className="inline-flex items-center gap-1.5 text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider">
                     <span>🛢️</span> Engine Oil Included
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-[11px] border border-emerald-400/30">
+                  <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] border border-emerald-400/30">
                     Save ₹151 (10% OFF)
                   </span>
                 </div>
 
                 {/* Header */}
-                <div className="relative z-10 mb-3">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-12 h-12 bg-yellow-500/25 rounded-2xl flex items-center justify-center text-yellow-400 ring-1 ring-yellow-400/40 shadow-inner">
-                      <Settings className="w-6 h-6 animate-spin-slow" style={{ animationDuration: '18s' }} />
+                <div className="relative z-10 mb-3.5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 bg-yellow-500/25 rounded-2xl flex items-center justify-center text-yellow-400 ring-1 ring-yellow-400/40 shadow-inner shrink-0">
+                      <Settings className="w-5 h-5 animate-spin-slow" style={{ animationDuration: '18s' }} />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-black tracking-tight text-white">
+                      <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-tight">
                         General Service with Engine Oil
                       </h3>
-                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-yellow-400">
-                        Offer Price: ₹1,349
-                      </div>
+                      <p className="text-xs font-bold text-yellow-400 mt-0.5">
+                        Offer Price: ₹1,349 · Fresh 4T Engine Oil
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Price Banner */}
-                <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-3 border-b border-white/10">
+                <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-3.5 border-b border-white/10 tabular-nums">
                   <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹1,349</span>
-                  <span className="text-lg font-medium text-gray-400 line-through">₹1,500</span>
+                  <span className="text-base font-semibold text-gray-400 line-through">₹1,500</span>
                   <span className="text-xs font-semibold text-yellow-400/90 bg-yellow-400/10 px-2 py-0.5 rounded-md border border-yellow-400/20">
                     Engine Oil Included
                   </span>
                 </div>
 
-                {/* Key Highlights: The 3 exact bullets */}
-                <div className="space-y-1.5 mb-4">
-                  <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-white text-xs font-bold">
-                    <span className="text-sm shrink-0">🏍️</span>
-                    <span>Available at Your Doorstep</span>
+                {/* Key Highlights: Clean 2x2 Spec Grid */}
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                      <span>🏍️</span>
+                      <span>Location</span>
+                    </div>
+                    <span className="text-white text-[11.5px] font-extrabold leading-snug">
+                      Available at Your Doorstep
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-white text-xs font-bold">
-                    <span className="text-sm shrink-0">🛡️</span>
-                    <span>500 Kms or 1 Month Warranty</span>
+
+                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                      <span>🛡️</span>
+                      <span>Warranty</span>
+                    </div>
+                    <span className="text-white text-[11.5px] font-extrabold leading-snug">
+                      500 Kms or 1 Month Warranty
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-white text-xs font-bold">
-                    <span className="text-sm shrink-0">🔧</span>
-                    <span>Recommended Every 3,000 Kms or 3 Months</span>
+
+                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                      <span>🔧</span>
+                      <span>Interval</span>
+                    </div>
+                    <span className="text-white text-[11.5px] font-extrabold leading-snug">
+                      Every 3,000 Kms or 3 Months
+                    </span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                      <span>⏱️</span>
+                      <span>Duration</span>
+                    </div>
+                    <span className="text-white text-[11.5px] font-extrabold leading-snug">
+                      Service Time: Approx. 2 Hours
+                    </span>
                   </div>
                 </div>
                 
                 {/* Service Includes */}
                 <div className="relative z-10 mb-5 flex-grow">
-                  <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-white mb-2.5">
+                  <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-white mb-2">
                     <span>Service Includes:</span>
-                    <span className="text-[10.5px] font-bold text-yellow-400 normal-case">12 Core Services</span>
+                    <span className="text-[11px] font-extrabold text-yellow-400 normal-case">12 Core Services</span>
                   </div>
-                  <ul className="space-y-1.5">
-                    {[
-                      { name: "Air Filter Cleaning", isOil: false },
-                      { name: "Battery Voltage Check", isOil: false },
-                      { name: "Brake Service", isOil: false },
-                      { name: "Cables & Levers Adjustment", isOil: false },
-                      { name: "Chain Tension Check", isOil: false },
-                      { name: "Clutch Greasing", isOil: false },
-                      { name: "Dry Wash", isOil: false },
-                      { name: "Electrical Check-up", isOil: false },
-                      { name: "Engine Oil Change", isOil: true },
-                      { name: "Greasing & Lubrication", isOil: false },
-                      { name: "Oil Leakage Check", isOil: false },
-                      { name: "Spark Plug Cleaning", isOil: false },
-                    ].map((item, idx) => (
-                      <li key={idx} className={`flex items-center gap-2 p-1.5 px-2 rounded-lg border ${
-                        item.isOil 
-                          ? 'bg-yellow-500/20 border-yellow-400 text-yellow-300 font-bold shadow-xs' 
-                          : 'bg-white/5 border-white/10 text-white font-semibold text-[11.5px]'
-                      }`}>
-                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-yellow-400' : 'text-emerald-400'}`} />
-                        <span className="leading-tight">
-                          {item.name} {item.isOil && <span className="ml-1 text-[9.5px] bg-yellow-400 text-black px-1.5 py-0.2 rounded font-black uppercase">Oil Change</span>}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="rounded-2xl bg-white/5 border border-white/10 p-3">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-x-3 gap-y-2">
+                      {[
+                        { name: "Air Filter Cleaning", isOil: false },
+                        { name: "Battery Voltage Check", isOil: false },
+                        { name: "Brake Service", isOil: false },
+                        { name: "Cables & Levers Adjustment", isOil: false },
+                        { name: "Chain Tension Check", isOil: false },
+                        { name: "Clutch Greasing", isOil: false },
+                        { name: "Dry Wash", isOil: false },
+                        { name: "Electrical Check-up", isOil: false },
+                        { name: "Engine Oil Change", isOil: true },
+                        { name: "Greasing & Lubrication", isOil: false },
+                        { name: "Oil Leakage Check", isOil: false },
+                        { name: "Spark Plug Cleaning", isOil: false },
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2">
+                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-yellow-400' : 'text-emerald-400'}`} />
+                          <span className={`text-xs leading-snug ${item.isOil ? 'text-yellow-300 font-black' : 'text-zinc-100 font-semibold'}`}>
+                            {item.name}
+                            {item.isOil && <span className="ml-1.5 text-[9.5px] bg-yellow-400 text-black px-1.5 py-0.5 rounded font-black uppercase align-middle">Included</span>}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Actions: Book Now & View Technical Details */}
@@ -2752,7 +2874,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               const model = (formData.get('model') as string) || 'Model';
               
               const pkgName = selectedPackage ? selectedPackage.name : 'Selected Service';
-              const pkgPrice = selectedPackage ? selectedPackage.price : '₹799';
+              const pkgPrice = selectedPackage ? selectedPackage.price : '₹699';
               const bookingId = `YB-${Math.floor(10000 + Math.random() * 90000)}`;
 
               const isSameTimeOrToday = isSameTimeActive || (date === getTodayIST() && (!time || time === 'ASAP' || time.includes(formatTime12Hour(getCurrentTimeHHMM()))));
@@ -3116,12 +3238,12 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 onClick={() => {
                   setShowTechDetails(false);
                   setIsTechnicalDetailsOpen(false);
-                  setSelectedPackage({ name: 'General Service', price: '₹799' });
+                  setSelectedPackage({ name: 'General Service', price: '₹699' });
                   setIsPackageModalOpen(true);
                 }}
                 className="flex-1 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
               >
-                <span>🚀 Book General Service (₹799)</span>
+                <span>🚀 Book General Service (₹699)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button 
@@ -3236,7 +3358,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block">Service Selected</span>
                   <span className="font-bold text-gray-900 dark:text-white text-[12.5px] truncate block">
-                    {bookingConfirmedData?.service || 'General Service - ₹799'}
+                    {bookingConfirmedData?.service || 'General Service - ₹699'}
                   </span>
                 </div>
               </div>
