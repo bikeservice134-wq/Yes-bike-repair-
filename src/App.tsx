@@ -530,7 +530,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
     {
       q: "3. How do I book a doorstep bike mechanic?",
       schemaQ: "How do I book a doorstep bike mechanic?",
-      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, or call +91 70904 00617. Our certified mechanic is assigned for your selected slot.",
+      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, and click Book Mechanic Now. Our certified mechanic is assigned for your selected slot.",
       icon: Calendar
     },
     {
@@ -569,62 +569,56 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
       
       {/* HEADER */}
-      <header className="fixed top-0 w-full z-50 bg-white/95 dark:bg-zinc-950/95 border-b border-gray-200 dark:border-zinc-800 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-3.5 sm:px-5 py-3 sm:py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center shadow-[0_4px_10px_rgba(234,179,8,0.3)] shrink-0">
-              <Wrench className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+      <header className="fixed top-0 w-full z-50 bg-white/95 dark:bg-zinc-950/95 border-b border-gray-200/80 dark:border-zinc-800/80 backdrop-blur-xl shadow-xs">
+        <div className="max-w-7xl mx-auto px-3 sm:px-5 h-13 sm:h-14 flex items-center justify-between gap-2">
+          {/* Brand Logo Lockup */}
+          <button 
+            type="button"
+            onClick={() => { 
+              setCurrentView('home'); 
+              setIsMobileMenuOpen(false); 
+              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }} 
+            className="group flex items-center gap-1.5 sm:gap-2 text-left cursor-pointer shrink-0 focus:outline-none"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-xs shrink-0">
+              <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-950" />
             </div>
-            <button 
-              onClick={() => { 
-                setCurrentView('home'); 
-                setIsMobileMenuOpen(false); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-              }} 
-              className="text-lg sm:text-[22px] lg:text-[25px] font-extrabold tracking-tight text-yellow-500 leading-none text-left cursor-pointer"
-            >
-              Yes <span className="text-gray-900 dark:text-white">Bike Service</span>
-            </button>
-          </div>
-          <nav className="hidden lg:flex gap-6 items-center">
-            <a href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Home</a>
-            <a href="#brands" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Brands</a>
-            <a href="#pricing" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Pricing</a>
-            <a href="#how-it-works" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">How It Works</a>
-            <a href="#reviews" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">Reviews</a>
-            <a href="#faq" className="text-gray-900 dark:text-white font-semibold hover:text-yellow-600 dark:hover:text-yellow-500 transition-colors">FAQ</a>
+            <span className="text-[15px] sm:text-lg lg:text-xl font-extrabold tracking-tight leading-none whitespace-nowrap">
+              <span className="text-yellow-500">Yes</span>{' '}
+              <span className="text-gray-900 dark:text-white">Bike Service</span>
+            </span>
+          </button>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {[
+              { label: 'Home', href: '#home' },
+              { label: 'Brands', href: '#brands' },
+              { label: 'Pricing', href: '#pricing' },
+              { label: 'How It Works', href: '#how-it-works' },
+              { label: 'Reviews', href: '#reviews' },
+              { label: 'FAQ', href: '#faq' }
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => {
+                  if (currentView !== 'home') setCurrentView('home');
+                }}
+                className="px-3 py-1 rounded-full text-xs font-bold text-gray-700 dark:text-zinc-300 hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors whitespace-nowrap"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
           
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <a 
-              href="tel:+917090400617" 
-              className="inline-flex md:hidden items-center gap-1 bg-yellow-500 hover:bg-yellow-400 text-black px-2.5 py-1.5 rounded-full font-black text-xs shadow-xs transition-transform active:scale-95 min-h-[36px]"
-              aria-label="Call Mechanic Now"
-            >
-              <PhoneCall className="w-3.5 h-3.5" />
-              <span>Call</span>
-            </a>
-            <button 
-              onClick={() => setIsDark(!isDark)} 
-              className="p-2 min-h-[40px] min-w-[40px] rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer flex items-center justify-center text-gray-700 dark:text-zinc-300" 
-              aria-label="Toggle theme"
-            >
-              {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
-            </button>
-
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 min-h-[40px] min-w-[40px] rounded-xl bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-yellow-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-
+          {/* Right Actions & Compact Primary CTA */}
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             <button
               type="button"
               onClick={() => {
+                setIsMobileMenuOpen(false);
                 const el = document.getElementById('booking-form');
                 if (el) {
                   el.scrollIntoView({ behavior: 'smooth' });
@@ -635,10 +629,29 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                   }, 100);
                 }
               }}
-              className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-zinc-950 px-5 py-2.5 rounded-full font-black text-xs lg:text-sm transition-all ml-1 shadow-[0_4px_14px_rgba(234,179,8,0.25)] hover:shadow-[0_6px_20px_rgba(234,179,8,0.4)] hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-zinc-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-extrabold text-[10px] sm:text-[11px] lg:text-xs tracking-tight shadow-xs border border-yellow-300/80 transition-all active:scale-95 min-h-[28px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
+              aria-label="Book Mechanic Now"
             >
-              <Wrench className="w-3.5 h-3.5 text-zinc-950" />
+              <Wrench className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-950 shrink-0" />
               <span>Book Mechanic Now</span>
+            </button>
+
+            <button 
+              onClick={() => setIsDark(!isDark)} 
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100/80 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 hover:border-yellow-400 transition-colors cursor-pointer flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0" 
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-400" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" />}
+            </button>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-yellow-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center shrink-0"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
             </button>
           </div>
         </div>
@@ -646,7 +659,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
         {/* Mobile Navigation Dropdown Drawer */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
-            <div className="max-w-6xl mx-auto px-4 py-4 space-y-3">
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
               <nav className="grid grid-cols-2 gap-2 text-sm font-bold">
                 {[
                   { label: 'Home', href: '#home' },
@@ -671,22 +684,36 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 ))}
               </nav>
 
-              <div className="pt-2 border-t border-gray-100 dark:border-zinc-800 grid grid-cols-2 gap-2">
-                <a
-                  href="tel:+917090400617"
-                  className="flex items-center justify-center gap-2 p-3 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-black shadow-sm min-h-[44px]"
+              <div className="pt-2 border-t border-gray-100 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    const el = document.getElementById('booking-form');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      setCurrentView('home');
+                      setTimeout(() => {
+                        document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }
+                  }}
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black shadow-md border border-yellow-300/80 min-h-[46px] cursor-pointer"
                 >
-                  <PhoneCall className="w-4 h-4 text-amber-400" />
-                  <span>Call Us</span>
-                </a>
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                  <Wrench className="w-4 h-4 text-zinc-950" />
+                  <span>Book Mechanic Now</span>
+                  <ArrowRight className="w-4 h-4 text-zinc-950" />
+                </button>
                 <a
                   href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-black shadow-sm min-h-[44px]"
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs sm:text-sm font-black shadow-sm min-h-[46px]"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp</span>
+                  <span>WhatsApp Support</span>
                 </a>
               </div>
             </div>
@@ -2541,13 +2568,17 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
             </div>
 
             <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 shrink-0">
-              <a
-                href="tel:+917090400617"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-800/90 hover:bg-yellow-400 hover:text-black text-white text-xs sm:text-sm font-black transition-all shadow-md border border-zinc-700 hover:border-yellow-400 transform hover:-translate-y-0.5"
+              <button
+                onClick={() => {
+                  const form = document.getElementById('booking-form') || document.getElementById('home');
+                  if (form) form.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <Phone className="w-4 h-4 text-yellow-400 group-hover:text-black" />
-                <span>Call +91 70904 00617</span>
-              </a>
+                <Wrench className="w-4 h-4" />
+                <span>Book Mechanic Now</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
               <a
                 href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
                 target="_blank"
@@ -2557,16 +2588,6 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                 <MessageCircle className="w-4 h-4" />
                 <span>WhatsApp Help</span>
               </a>
-              <button
-                onClick={() => {
-                  const form = document.getElementById('booking-form') || document.getElementById('home');
-                  if (form) form.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5 cursor-pointer"
-              >
-                <span>Book Mechanic Now</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
@@ -2595,13 +2616,17 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
 
               {/* Direct Actions */}
               <div className="flex flex-wrap items-center gap-2.5">
-                <a
-                  href="tel:+917090400617"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-850 hover:bg-yellow-400 hover:text-black text-white text-xs font-extrabold transition-all shadow-sm border border-zinc-700/80 transform hover:-translate-y-0.5"
+                <button
+                  type="button"
+                  onClick={() => {
+                    const form = document.getElementById('booking-form') || document.getElementById('home');
+                    if (form) form.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5 cursor-pointer"
                 >
-                  <Phone className="w-3.5 h-3.5 text-yellow-400 group-hover:text-black" />
-                  Call +91 70904 00617
-                </a>
+                  <Wrench className="w-3.5 h-3.5 text-black" />
+                  Book Mechanic Now
+                </button>
                 <a
                   href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
                   target="_blank"
@@ -2697,16 +2722,20 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
 
                 <li className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-yellow-500/15 text-yellow-400 flex items-center justify-center shrink-0 border border-yellow-500/25">
-                    <Phone className="w-4 h-4" />
+                    <Wrench className="w-4 h-4" />
                   </div>
                   <div>
-                    <a
-                      href="tel:+917090400617"
-                      className="font-black text-white hover:text-yellow-400 transition-colors block text-sm"
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const form = document.getElementById('booking-form') || document.getElementById('home');
+                        if (form) form.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="font-black text-white hover:text-yellow-400 transition-colors block text-sm cursor-pointer text-left"
                     >
-                      +91 70904 00617
-                    </a>
-                    <span className="text-[11px] font-semibold text-emerald-400">Click to call directly</span>
+                      Book Mechanic Now
+                    </button>
+                    <span className="text-[11px] font-semibold text-emerald-400">Instant doorstep mechanic dispatch</span>
                   </div>
                 </li>
 
@@ -3370,7 +3399,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
                     {bookingConfirmedData?.fullName || 'Customer'}
                   </span>
                   <span className="text-gray-500 dark:text-zinc-400 block text-[11px]">
-                    +91 {bookingConfirmedData?.phone || '7090400617'}
+                    {bookingConfirmedData?.phone ? `+91 ${bookingConfirmedData.phone}` : 'Verified Booking'}
                   </span>
                 </div>
                 <div>
@@ -3400,13 +3429,20 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               </a>
 
               <div className="grid grid-cols-2 gap-2">
-                <a
-                  href="tel:917090400617"
-                  className="py-2.5 px-3 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-900 dark:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setHeroSuccess(false);
+                    setCurrentView('home');
+                    setTimeout(() => {
+                      document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="py-2.5 px-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-black text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
-                  <Phone className="w-3.5 h-3.5 text-emerald-500" />
-                  Call Support
-                </a>
+                  <Wrench className="w-3.5 h-3.5" />
+                  Book Mechanic Now
+                </button>
                 <button
                   type="button"
                   onClick={() => {
@@ -3723,13 +3759,6 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
       {/* MOBILE STICKY BOTTOM ACTION BAR */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
         <a
-          href="tel:+917090400617"
-          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-2 rounded-xl bg-zinc-900 hover:bg-black dark:bg-zinc-850 dark:hover:bg-zinc-800 text-white text-xs font-black shadow-sm transition-all active:scale-[0.98]"
-        >
-          <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
-          <span>Call Mechanic</span>
-        </a>
-        <a
           href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
           target="_blank"
           rel="noopener noreferrer"
@@ -3753,7 +3782,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               }, 100);
             }
           }}
-          className="flex-[1.25] flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
+          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
         >
           <Wrench className="w-3.5 h-3.5 shrink-0" />
           <span>Book Mechanic Now</span>
@@ -3786,7 +3815,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">3. Data Protection & Security</h2>
               <p>We respect customer privacy and do not sell, rent, or trade your personal information to third parties or marketing brokers. All communication is securely handled.</p>
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">4. Contact & Inquiries</h2>
-              <p>For any privacy-related questions, reach out to our team at <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a> or call <a href="tel:+917090400617" className="text-yellow-600 dark:text-yellow-400 font-bold underline">+91 70904 00617</a>.</p>
+              <p>For any privacy-related questions, reach out to our team at <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a>.</p>
             </div>
             <div className="pt-4 border-t border-gray-100 dark:border-zinc-800">
               <button
@@ -3823,7 +3852,7 @@ YES BIKE SERVICE - Doorstep Service Bengaluru`;
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">3. Service Warranty</h2>
               <p>Qualifying general services carry a 500 km or 1-month warranty on workmanship for inspected components. The warranty applies under standard riding conditions.</p>
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">4. Support & Rescheduling</h2>
-              <p>Need to reschedule or have questions? Contact us at <a href="tel:+917090400617" className="text-yellow-600 dark:text-yellow-400 font-bold underline">+91 70904 00617</a> or email <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a>.</p>
+              <p>Need to reschedule or have questions? Email us at <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a> or book online anytime.</p>
             </div>
             <div className="pt-4 border-t border-gray-100 dark:border-zinc-800">
               <button

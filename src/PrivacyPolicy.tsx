@@ -130,8 +130,7 @@ export const PrivacyPolicy = () => {
               <p className="mb-4">If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact Yes bike service through the contact details provided on our website.</p>
               <div className="bg-white dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-[#333]">
                 <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Yes bike service</h3>
-                <p className="flex items-center gap-2 mb-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
-                <p className="flex items-center gap-2"><span className="text-gray-500">Phone:</span> <a href="tel:+917090400617" className="text-yellow-500 hover:underline">7090400617</a></p>
+                <p className="flex items-center gap-2"><span className="text-gray-500">Website:</span> <a href="https://yesbikeservice.in" className="text-yellow-500 hover:underline">yesbikeservice.in</a></p>
               </div>
             </section>
 
