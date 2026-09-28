@@ -250,12 +250,12 @@ export default function App() {
     if (typeof window !== 'undefined') {
       if ((window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
-          'send_to': 'AW-18313979172/_0_OCPnK0okdEKTK5JxE',
+          'send_to': 'AW-18313979172/doJMCNeauYkdEKTK5JxE',
           'value': 1.0,
           'currency': 'INR'
         });
         (window as any).gtag('event', 'conversion', {
-          'send_to': 'AW-18313979172/doJMCNeauYkdEKTK5JxE',
+          'send_to': 'AW-18313979172/_0_OCPnK0okdEKTK5JxE',
           'value': 1.0,
           'currency': 'INR'
         });
