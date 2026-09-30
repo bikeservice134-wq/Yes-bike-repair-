@@ -707,21 +707,21 @@ YES BIKE SERVICE
               type="button"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                const el = document.getElementById('booking-form');
+                const el = document.getElementById('pricing');
                 if (el) {
                   el.scrollIntoView({ behavior: 'smooth' });
                 } else {
                   setCurrentView('home');
                   setTimeout(() => {
-                    document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }
               }}
               className="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-zinc-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-extrabold text-[9.5px] sm:text-[11px] lg:text-xs tracking-tight shadow-xs border border-yellow-300/80 transition-all active:scale-95 min-h-[28px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
-              aria-label="Book service & repair Now"
+              aria-label="Our Popular Packages"
             >
               <Wrench className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-950 shrink-0" />
-              <span>Book service & repair Now</span>
+              <span>Our Popular Packages</span>
             </button>
 
             <button 
@@ -777,13 +777,13 @@ YES BIKE SERVICE
                   type="button"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    const el = document.getElementById('booking-form');
+                    const el = document.getElementById('pricing');
                     if (el) {
                       el.scrollIntoView({ behavior: 'smooth' });
                     } else {
                       setCurrentView('home');
                       setTimeout(() => {
-                        document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
                       }, 100);
                     }
                   }}
@@ -791,7 +791,7 @@ YES BIKE SERVICE
                 >
                   <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
                   <Wrench className="w-4 h-4 text-zinc-950" />
-                  <span>Book service & repair Now</span>
+                  <span>Our Popular Packages</span>
                   <ArrowRight className="w-4 h-4 text-zinc-950" />
                 </button>
                 <a
