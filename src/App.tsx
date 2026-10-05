@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { YesBikeLogo } from './components/YesBikeLogo';
+import yesBikeLogo from './assets/images/ultra_clean_bike_logo_1791194224276.jpg';
 import { 
   Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
-  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu } from 'lucide-react';
+  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send } from 'lucide-react';
 
 // Reusable FadeIn Component
 export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
@@ -667,12 +669,10 @@ YES BIKE SERVICE
               setIsMobileMenuOpen(false); 
               window.scrollTo({ top: 0, behavior: 'smooth' }); 
             }} 
-            className="group flex items-center gap-1.5 sm:gap-2 text-left cursor-pointer shrink-0 focus:outline-none"
+            className="group flex items-center gap-2 sm:gap-2.5 text-left cursor-pointer shrink-0 focus:outline-none"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-xs shrink-0">
-              <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-950" />
-            </div>
-            <span className="text-[14px] sm:text-lg lg:text-xl font-extrabold tracking-tight leading-none whitespace-nowrap">
+            <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-105 transition-transform duration-200" />
+            <span className="text-[15px] sm:text-lg lg:text-xl font-black tracking-tight leading-none whitespace-nowrap">
               <span className="text-yellow-500">Yes</span>{' '}
               <span className="text-gray-900 dark:text-white">Bike Service</span>
             </span>
@@ -748,6 +748,19 @@ YES BIKE SERVICE
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
+              {/* Mobile Drawer Brand Header */}
+              <div className="flex items-center gap-3 pb-3 border-b border-gray-100 dark:border-zinc-800">
+                <YesBikeLogo className="w-11 h-11" />
+                <div>
+                  <span className="text-base font-black tracking-tight leading-tight block text-gray-900 dark:text-white">
+                    <span className="text-yellow-500">YES</span> BIKE SERVICE
+                  </span>
+                  <span className="text-[11px] font-semibold text-gray-500 dark:text-zinc-400">
+                    Doorstep Two-Wheeler Care • Bengaluru
+                  </span>
+                </div>
+              </div>
+
               <nav className="grid grid-cols-2 gap-2 text-sm font-bold">
                 {[
                   { label: 'Home', href: '#home' },
@@ -876,10 +889,8 @@ YES BIKE SERVICE
                   <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
                     {/* Compact Card Header */}
                     <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <div className="w-6 h-6 rounded-md bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 flex items-center justify-center text-xs font-bold shrink-0">
-                          ⚡
-                        </div>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <YesBikeLogo className="w-7 h-7 sm:w-8 sm:h-8" />
                         <div className="min-w-0">
                           <h2 className="text-sm sm:text-base font-black text-gray-900 dark:text-white tracking-tight leading-none truncate">
                             Quick Booking
@@ -896,300 +907,300 @@ YES BIKE SERVICE
                       </div>
                     </div>
 
-                    <form className="space-y-2 relative z-10" onSubmit={handleBookService}>
-                      {/* Vehicle Type Switch */}
-                      <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800/80 rounded-lg">
-                        <button
-                          type="button"
-                          onClick={() => setHeroVehicle('Bike')}
-                          className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
-                            heroVehicle === 'Bike'
-                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
-                              : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
-                          }`}
-                        >
-                          <span className="text-sm">🏍️</span> <span>Bike</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setHeroVehicle('Scooter')}
-                          className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
-                            heroVehicle === 'Scooter'
-                              ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
-                              : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
-                          }`}
-                        >
-                          <span className="text-sm">🛵</span> <span>Scooter</span>
-                        </button>
-                      </div>
-
-                      {/* Name & Phone in 2-Column Compact Grid */}
-                      <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <User className="h-3.5 w-3.5" />
-                          </div>
-                          <input 
-                            type="text" 
-                            name="name" 
-                            required 
-                            value={heroName}
-                            onChange={(e) => setHeroName(e.target.value)}
-                            placeholder="Your Name" 
-                            autoComplete="name"
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
-                          />
-                        </div>
-                        
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                            <span className="flex items-center gap-0.5 text-[10px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-300 dark:border-zinc-700">
-                              <span className="text-[10px]" role="img" aria-label="India">🇮🇳</span>
-                              <span>+91</span>
-                            </span>
-                          </div>
-                          <input 
-                            type="tel" 
-                            name="phone" 
-                            required 
-                            inputMode="numeric"
-                            autoComplete="tel"
-                            pattern="[0-9]{10}"
-                            maxLength={10}
-                            value={heroPhone}
-                            onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                            placeholder="Phone number" 
-                            className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-400 tracking-wide transition-shadow ${
-                              heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
-                            }`}
-                          />
-                          {heroPhone.length === 10 && (
-                            <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                            </div>
-                          )}
-                          {heroPhone.length > 0 && heroPhone.length < 10 && (
-                            <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
-                              <span className="text-[9px] font-bold text-amber-600 dark:text-yellow-400">
-                                {10 - heroPhone.length}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Brand & Model in 2-Columns */}
-                      <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Tag className="h-3.5 w-3.5" />
-                          </div>
-                          <select 
-                            name="brand" 
-                            required 
-                            value={heroBrand} 
-                            onChange={(e) => {
-                              setHeroBrand(e.target.value);
-                              setHeroModel("");
-                            }} 
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
-                          >
-                            <option value="" disabled>Select Brand</option>
-                            {Object.keys(MODELS_BY_BRAND).map(brand => (
-                              <option key={brand} value={brand} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{brand}</option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
-                            <ChevronDown className="h-3 w-3" />
-                          </div>
-                        </div>
-
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Bike className="h-3.5 w-3.5" />
-                          </div>
-                          <select 
-                            name="model" 
-                            required 
-                            value={heroModel} 
-                            onChange={(e) => setHeroModel(e.target.value)}
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
-                            disabled={!heroBrand}
-                          >
-                            <option value="" disabled>{heroBrand ? "Select Model" : "Brand First"}</option>
-                            {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
-                              <option key={model} value={model} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{model}</option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
-                            <ChevronDown className="h-3 w-3" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Location Input with Auto-Fill */}
-                      <div className="space-y-1">
-                        <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                            <MapPin className="h-3.5 w-3.5 text-yellow-500" />
-                          </div>
-                          <input 
-                            type="text" 
-                            name="location" 
-                            required 
-                            placeholder="Locality / Area, Bengaluru" 
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-16 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
-                            value={locationSearch} 
-                            onChange={(e) => setLocationSearch(e.target.value)} 
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setIsDetectingLocation(true);
-                              if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(
-                                  () => {
-                                    setIsDetectingLocation(false);
-                                    setLocationSearch(`${activeLocation}, Bengaluru`);
-                                  },
-                                  () => {
-                                    setIsDetectingLocation(false);
-                                    setLocationSearch(`${activeLocation}, Bengaluru`);
-                                  },
-                                  { timeout: 3000 }
-                                );
-                              } else {
-                                setIsDetectingLocation(false);
-                                setLocationSearch(`${activeLocation}, Bengaluru`);
-                              }
-                            }}
-                            className="absolute right-1 top-1 bottom-1 px-2 rounded-md bg-yellow-500/15 hover:bg-yellow-500/25 active:scale-[0.96] text-yellow-700 dark:text-yellow-400 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all"
-                            title="Auto-fill locality"
-                          >
-                            <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
-                            <span>GPS</span>
-                          </button>
-                        </div>
-
-                        {/* Quick locality chips */}
-                        <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[10px] -mx-1 px-1 touch-pan-x overscroll-x-contain">
-                          {POPULAR_BENGALURU_AREAS.slice(0, 5).map((area) => (
+                        <form className="space-y-2 relative z-10" onSubmit={handleBookService}>
+                          {/* Vehicle Type Switch */}
+                          <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800/80 rounded-lg">
                             <button
-                              key={area}
                               type="button"
-                              onClick={() => setLocationSearch(`${area}, Bengaluru`)}
-                              className={`px-2 py-0.5 min-h-[22px] rounded-md text-[10px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
-                                locationSearch.includes(area)
-                                  ? 'bg-yellow-500 text-black border-yellow-500 font-bold shadow-2xs'
-                                  : 'bg-gray-100/80 dark:bg-zinc-800/80 text-gray-700 dark:text-zinc-300 border-gray-200/60 dark:border-zinc-700/60 hover:border-yellow-400'
+                              onClick={() => setHeroVehicle('Bike')}
+                              className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                                heroVehicle === 'Bike'
+                                  ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
+                                  : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
                               }`}
                             >
-                              {area}
+                              <span className="text-sm">🏍️</span> <span>Bike</span>
                             </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Service Dropdown */}
-                      <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                          <Wrench className="h-3.5 w-3.5 text-yellow-500" />
-                        </div>
-                        <select 
-                          name="service" 
-                          required 
-                          value={heroService} 
-                          onChange={(e) => setHeroService(e.target.value)} 
-                          className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
-                        >
-                          {QUICK_SERVICE_OPTIONS.map(opt => (
-                            <option key={opt.id} value={opt.id} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">
-                              {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
-                              {opt.name} ({opt.price})
-                            </option>
-                          ))}
-                        </select>
-                        <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
-                          <ChevronDown className="h-3 w-3" />
-                        </div>
-                      </div>
-
-                      {/* Calendar & Time Inputs */}
-                      <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
-                        {/* Calendar Date Input */}
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Calendar className="h-3.5 w-3.5 shrink-0" />
+                            <button
+                              type="button"
+                              onClick={() => setHeroVehicle('Scooter')}
+                              className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                                heroVehicle === 'Scooter'
+                                  ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-xs font-extrabold'
+                                  : 'text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
+                              }`}
+                            >
+                              <span className="text-sm">🛵</span> <span>Scooter</span>
+                            </button>
                           </div>
-                          <input 
-                            type="date" 
-                            name="date" 
-                            required 
-                            min={getTodayIST()}
-                            value={bookingDate}
-                            onChange={(e) => setBookingDate(e.target.value)}
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
-                            title="Calendar (Select Service Date)"
-                          />
-                        </div>
 
-                        {/* Time Input */}
-                        <div className="relative group min-w-0">
-                          <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
-                            <Clock className="h-3.5 w-3.5 shrink-0" />
+                          {/* Name & Phone in 2-Column Compact Grid */}
+                          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                                <User className="h-3.5 w-3.5" />
+                              </div>
+                              <input 
+                                type="text" 
+                                name="name" 
+                                required 
+                                value={heroName}
+                                onChange={(e) => setHeroName(e.target.value)}
+                                placeholder="Your Name" 
+                                autoComplete="name"
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
+                              />
+                            </div>
+                            
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                <span className="flex items-center gap-0.5 text-[10px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-300 dark:border-zinc-700">
+                                  <span className="text-[10px]" role="img" aria-label="India">🇮🇳</span>
+                                  <span>+91</span>
+                                </span>
+                              </div>
+                              <input 
+                                type="tel" 
+                                name="phone" 
+                                required 
+                                inputMode="numeric"
+                                autoComplete="tel"
+                                pattern="[0-9]{10}"
+                                maxLength={10}
+                                value={heroPhone}
+                                onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                                placeholder="Phone number" 
+                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-400 tracking-wide transition-shadow ${
+                                  heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
+                                }`}
+                              />
+                              {heroPhone.length === 10 && (
+                                <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                                </div>
+                              )}
+                              {heroPhone.length > 0 && heroPhone.length < 10 && (
+                                <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
+                                  <span className="text-[9px] font-bold text-amber-600 dark:text-yellow-400">
+                                    {10 - heroPhone.length}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          <input 
-                            type="time" 
-                            name="time" 
-                            required 
-                            value={bookingTime}
-                            onChange={(e) => setBookingTime(e.target.value)}
-                            className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
-                            title="Time (Select Service Time)"
-                          />
-                        </div>
-                      </div>
 
-                      {/* Submit Action Button */}
-                      <button 
-                        type="submit" 
-                        disabled={isSubmitting}
-                        className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
-                            <span>Sending Booking Details...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>Submit the booking</span>
-                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                          </>
-                        )}
-                      </button>
+                          {/* Brand & Model in 2-Columns */}
+                          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                                <Tag className="h-3.5 w-3.5" />
+                              </div>
+                              <select 
+                                name="brand" 
+                                required 
+                                value={heroBrand} 
+                                onChange={(e) => {
+                                  setHeroBrand(e.target.value);
+                                  setHeroModel("");
+                                }} 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                              >
+                                <option value="" disabled>Select Brand</option>
+                                {Object.keys(MODELS_BY_BRAND).map(brand => (
+                                  <option key={brand} value={brand} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{brand}</option>
+                                ))}
+                              </select>
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                                <ChevronDown className="h-3 w-3" />
+                              </div>
+                            </div>
 
-                      {heroSuccess && bookingConfirmedData && (
-                        <div className="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold flex items-center justify-between gap-2 animate-in fade-in duration-200">
-                          <div className="flex items-center gap-1.5 min-w-0">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                            <span className="truncate">
-                              Booking details sent! ({bookingConfirmedData.bookingId})
-                            </span>
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                                <Bike className="h-3.5 w-3.5" />
+                              </div>
+                              <select 
+                                name="model" 
+                                required 
+                                value={heroModel} 
+                                onChange={(e) => setHeroModel(e.target.value)}
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
+                                disabled={!heroBrand}
+                              >
+                                <option value="" disabled>{heroBrand ? "Select Model" : "Brand First"}</option>
+                                {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
+                                  <option key={model} value={model} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{model}</option>
+                                ))}
+                              </select>
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                                <ChevronDown className="h-3 w-3" />
+                              </div>
+                            </div>
                           </div>
-                          <a
-                            href={`https://wa.me/917090400617?text=${encodeURIComponent(
-                              `🏍️🛵 NEW BOOKING RECEIVED!\n\nHello YES BIKE SERVICE Team 👋\n\n📋 Booking Reference: ${bookingConfirmedData.bookingId}\n👤 Customer: ${bookingConfirmedData.fullName}\n📞 Phone: +91 ${bookingConfirmedData.phone}\n📍 Location: ${bookingConfirmedData.location}\n🏍️ Vehicle: ${bookingConfirmedData.vehicle} - ${bookingConfirmedData.brand} ${bookingConfirmedData.model}\n🔧 Service: ${bookingConfirmedData.service}\n📅 Date: ${bookingDate}\n⏰ Service Time: ${formatTime12Hour(bookingTime)}\n\n✅ DOORSTEP MECHANIC ASSIGNED\n\n📞 Booking confirmed! The assigned mechanic will call the customer within 10 minutes to confirm the service.\n\n━━━━━━━━━━━━━━━━━━━━\nYES BIKE SERVICE\n🏍️ Doorstep Bike Service & Repair\n📍 Bengaluru`
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-2 py-1 rounded-md bg-emerald-600 text-white text-[10px] font-black shrink-0 hover:bg-emerald-500 transition-colors"
+                          
+                          {/* Location Input with Auto-Fill */}
+                          <div className="space-y-1">
+                            <div className="relative group">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                                <MapPin className="h-3.5 w-3.5 text-yellow-500" />
+                              </div>
+                              <input 
+                                type="text" 
+                                name="location" 
+                                required 
+                                placeholder="Locality / Area, Bengaluru" 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-16 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
+                                value={locationSearch} 
+                                onChange={(e) => setLocationSearch(e.target.value)} 
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setIsDetectingLocation(true);
+                                  if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(
+                                      () => {
+                                        setIsDetectingLocation(false);
+                                        setLocationSearch(`${activeLocation}, Bengaluru`);
+                                      },
+                                      () => {
+                                        setIsDetectingLocation(false);
+                                        setLocationSearch(`${activeLocation}, Bengaluru`);
+                                      },
+                                      { timeout: 3000 }
+                                    );
+                                  } else {
+                                    setIsDetectingLocation(false);
+                                    setLocationSearch(`${activeLocation}, Bengaluru`);
+                                  }
+                                }}
+                                className="absolute right-1 top-1 bottom-1 px-2 rounded-md bg-yellow-500/15 hover:bg-yellow-500/25 active:scale-[0.96] text-yellow-700 dark:text-yellow-400 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all"
+                                title="Auto-fill locality"
+                              >
+                                <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
+                                <span>GPS</span>
+                              </button>
+                            </div>
+
+                            {/* Quick locality chips */}
+                            <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[10px] -mx-1 px-1 touch-pan-x overscroll-x-contain">
+                              {POPULAR_BENGALURU_AREAS.slice(0, 5).map((area) => (
+                                <button
+                                  key={area}
+                                  type="button"
+                                  onClick={() => setLocationSearch(`${area}, Bengaluru`)}
+                                  className={`px-2 py-0.5 min-h-[22px] rounded-md text-[10px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                                    locationSearch.includes(area)
+                                      ? 'bg-yellow-500 text-black border-yellow-500 font-bold shadow-2xs'
+                                      : 'bg-gray-100/80 dark:bg-zinc-800/80 text-gray-700 dark:text-zinc-300 border-gray-200/60 dark:border-zinc-700/60 hover:border-yellow-400'
+                                  }`}
+                                >
+                                  {area}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Service Dropdown */}
+                          <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                              <Wrench className="h-3.5 w-3.5 text-yellow-500" />
+                            </div>
+                            <select 
+                              name="service" 
+                              required 
+                              value={heroService} 
+                              onChange={(e) => setHeroService(e.target.value)} 
+                              className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                            >
+                              {QUICK_SERVICE_OPTIONS.map(opt => (
+                                <option key={opt.id} value={opt.id} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">
+                                  {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
+                                  {opt.name} ({opt.price})
+                                </option>
+                              ))}
+                            </select>
+                            <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                              <ChevronDown className="h-3 w-3" />
+                            </div>
+                          </div>
+
+                          {/* Calendar & Time Inputs */}
+                          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                            {/* Calendar Date Input */}
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                                <Calendar className="h-3.5 w-3.5 shrink-0" />
+                              </div>
+                              <input 
+                                type="date" 
+                                name="date" 
+                                required 
+                                min={getTodayIST()}
+                                value={bookingDate}
+                                onChange={(e) => setBookingDate(e.target.value)}
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
+                                title="Calendar (Select Service Date)"
+                              />
+                            </div>
+
+                            {/* Time Input */}
+                            <div className="relative group min-w-0">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                                <Clock className="h-3.5 w-3.5 shrink-0" />
+                              </div>
+                              <input 
+                                type="time" 
+                                name="time" 
+                                required 
+                                value={bookingTime}
+                                onChange={(e) => setBookingTime(e.target.value)}
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
+                                title="Time (Select Service Time)"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Submit Action Button */}
+                          <button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
                           >
-                            WhatsApp ↗
-                          </a>
-                        </div>
-                      )}
-                    </form>
+                            {isSubmitting ? (
+                              <>
+                                <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
+                                <span>Sending Booking Details...</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Submit the booking</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </>
+                            )}
+                          </button>
+
+                          {heroSuccess && bookingConfirmedData && (
+                            <div className="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold flex items-center justify-between gap-2 animate-in fade-in duration-200">
+                              <div className="flex items-center gap-1.5 min-w-0">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                                <span className="truncate">
+                                  Booking details sent! ({bookingConfirmedData.bookingId})
+                                </span>
+                              </div>
+                              <a
+                                href={`https://wa.me/917090400617?text=${encodeURIComponent(
+                                  `🏍️🛵 NEW BOOKING RECEIVED!\n\nHello YES BIKE SERVICE Team 👋\n\n📋 Booking Reference: ${bookingConfirmedData.bookingId}\n👤 Customer: ${bookingConfirmedData.fullName}\n📞 Phone: +91 ${bookingConfirmedData.phone}\n📍 Location: ${bookingConfirmedData.location}\n🏍️ Vehicle: ${bookingConfirmedData.vehicle} - ${bookingConfirmedData.brand} ${bookingConfirmedData.model}\n🔧 Service: ${bookingConfirmedData.service}\n📅 Date: ${bookingDate}\n⏰ Service Time: ${formatTime12Hour(bookingTime)}\n\n✅ DOORSTEP MECHANIC ASSIGNED\n\n📞 Booking confirmed! The assigned mechanic will call the customer within 10 minutes to confirm the service.\n\n━━━━━━━━━━━━━━━━━━━━\nYES BIKE SERVICE\n🏍️ Doorstep Bike Service & Repair\n📍 Bengaluru`
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2 py-1 rounded-md bg-emerald-600 text-white text-[10px] font-black shrink-0 hover:bg-emerald-500 transition-colors"
+                              >
+                                WhatsApp ↗
+                              </a>
+                            </div>
+                          )}
+                        </form>
                   </div>
                 </div>
               </div>
@@ -2300,9 +2311,6 @@ YES BIKE SERVICE
         </div>
       </section>
 
-      
-      
-
       {/* CUSTOMER REVIEWS SECTION */}
       <section id="reviews" className="py-16 sm:py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
         {/* Subtle background ambient glows */}
@@ -2692,9 +2700,7 @@ YES BIKE SERVICE
             {/* Column 1: Brand & Bio (lg:col-span-5) */}
             <div className="lg:col-span-5 space-y-6">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/30 shrink-0 ring-2 ring-yellow-400/30">
-                  <Wrench className="h-6 w-6 text-black stroke-[2.5]" />
-                </div>
+                <YesBikeLogo className="w-14 h-14" />
                 <div>
                   <span className="text-2xl font-black tracking-tight text-white block leading-tight">
                     YES BIKE SERVICE
@@ -2951,23 +2957,26 @@ YES BIKE SERVICE
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92vh]">
             <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
-              <div className="w-full pr-2">
-                <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
-                {selectedPackage && (
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-500/10 dark:bg-yellow-400/10 rounded-md border border-yellow-500/20 text-xs">
-                    <span className="font-extrabold text-gray-900 dark:text-white truncate">
-                      {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
-                    </span>
-                    {selectedPackage.name.includes("Jump Start") ? (
-                      <span className="flex items-center gap-1 shrink-0">
-                        <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
-                        <span className="font-black text-amber-600 dark:text-yellow-400">{selectedPackage.price}</span>
+              <div className="flex items-center gap-2.5 w-full pr-2">
+                <YesBikeLogo className="w-9 h-9" />
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
+                  {selectedPackage && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-500/10 dark:bg-yellow-400/10 rounded-md border border-yellow-500/20 text-xs">
+                      <span className="font-extrabold text-gray-900 dark:text-white truncate">
+                        {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
                       </span>
-                    ) : (
-                      <span className="font-black text-amber-600 dark:text-yellow-400 shrink-0">{selectedPackage.price}</span>
-                    )}
-                  </div>
-                )}
+                      {selectedPackage.name.includes("Jump Start") ? (
+                        <span className="flex items-center gap-1 shrink-0">
+                          <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
+                          <span className="font-black text-amber-600 dark:text-yellow-400">{selectedPackage.price}</span>
+                        </span>
+                      ) : (
+                        <span className="font-black text-amber-600 dark:text-yellow-400 shrink-0">{selectedPackage.price}</span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
               <button 
                 onClick={() => setIsPackageModalOpen(false)} 
