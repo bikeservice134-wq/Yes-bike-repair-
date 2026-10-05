@@ -8,7 +8,7 @@ interface YesBikeLogoProps {
 }
 
 export const YesBikeLogo: React.FC<YesBikeLogoProps> = ({ 
-  className = "w-10 h-10", 
+  className = "w-12 h-12", 
   size,
   alt = "YES BIKE SERVICE Logo" 
 }) => {

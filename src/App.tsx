@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { YesBikeLogo } from './components/YesBikeLogo';
-import yesBikeLogo from './assets/images/ultra_clean_bike_logo_1791194224276.jpg';
 import { 
   Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
   Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send } from 'lucide-react';
+import { YesBikeLogo } from './components/YesBikeLogo';
 
 // Reusable FadeIn Component
 export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
@@ -671,7 +670,7 @@ YES BIKE SERVICE
             }} 
             className="group flex items-center gap-2 sm:gap-2.5 text-left cursor-pointer shrink-0 focus:outline-none"
           >
-            <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-105 transition-transform duration-200" />
+            <YesBikeLogo className="w-10 h-10 sm:w-11 sm:h-11 group-hover:scale-105 transition-transform duration-200" />
             <span className="text-[15px] sm:text-lg lg:text-xl font-black tracking-tight leading-none whitespace-nowrap">
               <span className="text-yellow-500">Yes</span>{' '}
               <span className="text-gray-900 dark:text-white">Bike Service</span>
@@ -749,8 +748,8 @@ YES BIKE SERVICE
           <div className="lg:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
               {/* Mobile Drawer Brand Header */}
-              <div className="flex items-center gap-3 pb-3 border-b border-gray-100 dark:border-zinc-800">
-                <YesBikeLogo className="w-11 h-11" />
+              <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100 dark:border-zinc-800">
+                <YesBikeLogo className="w-12 h-12" />
                 <div>
                   <span className="text-base font-black tracking-tight leading-tight block text-gray-900 dark:text-white">
                     <span className="text-yellow-500">YES</span> BIKE SERVICE
@@ -831,26 +830,43 @@ YES BIKE SERVICE
             
             <FadeIn>
               <div className="max-w-xl w-full mx-auto px-3.5 relative z-10 flex flex-col items-center text-center">
-                {/* 1. Tagline */}
-                <div className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-yellow-700 dark:text-yellow-400 mb-0.5">
-                  BENGALURU'S TRUSTED TWO WHEELER CARE
+                {/* Simple Tagline */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/20 text-yellow-800 dark:text-yellow-400 text-xs font-bold mb-2.5">
+                  <MapPin className="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400 shrink-0" />
+                  <span>Bengaluru's Trusted Two-Wheeler Care</span>
+                  <span className="opacity-40">•</span>
+                  <span>Doorstep Service</span>
                 </div>
 
-                {/* 2. Main Headline */}
-                <h1 className="text-xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-1">
-                  Doorstep Bike Repair & Service
+                {/* Main Headline */}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2">
+                  Bike &amp; Scooter Repair Services{' '}
+                  <span className="text-yellow-500 dark:text-yellow-400">at Your Doorstep</span>
                 </h1>
 
-                {/* 3. Subtitle */}
-                <p className="text-[11px] sm:text-xs text-gray-600 dark:text-zinc-300 font-medium max-w-md mb-1.5">
-                  Certified mechanic at your home or office across Bengaluru
-                </p>
+                {/* Subtitle */}
+                <div className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
+                  <p className="font-semibold text-gray-800 dark:text-zinc-200">
+                    At your home or office across Bengaluru.
+                  </p>
+                  <p className="mt-1 text-gray-600 dark:text-zinc-300">
+                    Get a mechanic at your doorstep in as little as 30 minutes.
+                  </p>
+                </div>
 
                 {/* 4. Trust Highlights */}
-                <div className="flex items-center justify-center gap-2 text-[11px] font-bold text-gray-700 dark:text-zinc-300 mb-2.5">
-                  <span className="flex items-center gap-1 text-gray-800 dark:text-zinc-200">
-                    <Shield className="w-3 h-3 text-emerald-500" />
-                    Certified Mechanic
+                <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-gray-800 dark:text-zinc-200 mb-3.5">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    Verified Mechanics
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/20 text-yellow-800 dark:text-yellow-400 shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-yellow-500 shrink-0" />
+                    Transparent Pricing
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/20 text-blue-700 dark:text-blue-400 shadow-2xs">
+                    <Shield className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    30-Day Service Warranty
                   </span>
                 </div>
 
@@ -890,7 +906,7 @@ YES BIKE SERVICE
                     {/* Compact Card Header */}
                     <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
                       <div className="flex items-center gap-2 min-w-0">
-                        <YesBikeLogo className="w-7 h-7 sm:w-8 sm:h-8" />
+                        <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9" />
                         <div className="min-w-0">
                           <h2 className="text-sm sm:text-base font-black text-gray-900 dark:text-white tracking-tight leading-none truncate">
                             Quick Booking
@@ -1165,7 +1181,7 @@ YES BIKE SERVICE
                           <button 
                             type="submit" 
                             disabled={isSubmitting}
-                            className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
+                            className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[40px] sm:min-h-[44px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
                               <>
@@ -1174,7 +1190,7 @@ YES BIKE SERVICE
                               </>
                             ) : (
                               <>
-                                <span>Submit the booking</span>
+                                <span>Book Your Service Today</span>
                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                               </>
                             )}
@@ -1201,10 +1217,10 @@ YES BIKE SERVICE
                             </div>
                           )}
                         </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </FadeIn>
+                </FadeIn>
           </section>
       {/* WHY CHOOSE US SECTION */}
 
@@ -2699,8 +2715,8 @@ YES BIKE SERVICE
             
             {/* Column 1: Brand & Bio (lg:col-span-5) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="flex items-center gap-3.5">
-                <YesBikeLogo className="w-14 h-14" />
+              <div className="flex items-center gap-3">
+                <YesBikeLogo className="w-14 h-14 sm:w-16 sm:h-16" />
                 <div>
                   <span className="text-2xl font-black tracking-tight text-white block leading-tight">
                     YES BIKE SERVICE
@@ -2958,7 +2974,7 @@ YES BIKE SERVICE
           <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92vh]">
             <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-2.5 w-full pr-2">
-                <YesBikeLogo className="w-9 h-9" />
+                <YesBikeLogo className="w-9 h-9 sm:w-10 sm:h-10" />
                 <div className="min-w-0 flex-1">
                   <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
                   {selectedPackage && (
