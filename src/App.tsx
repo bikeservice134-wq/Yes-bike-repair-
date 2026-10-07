@@ -720,7 +720,8 @@ YES BIKE SERVICE
               aria-label="Our Popular Service Packages"
             >
               <Wrench className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-950 shrink-0" />
-              <span>Our Popular Service Packages</span>
+              <span className="hidden sm:inline">Our Popular Service Packages</span>
+              <span className="sm:hidden">Packages</span>
             </button>
 
             <button 
@@ -839,18 +840,18 @@ YES BIKE SERVICE
                 </div>
 
                 {/* Main Headline */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2">
-                  Bike &amp; Scooter Repair Services{' '}
-                  <span className="text-yellow-500 dark:text-yellow-400">at Your Doorstep</span>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2.5">
+                  Doorstep Bike Repair &amp; Service{' '}
+                  <span className="text-yellow-500 dark:text-yellow-400">in Bengaluru</span>
                 </h1>
 
                 {/* Subtitle */}
                 <div className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
-                  <p className="font-semibold text-gray-800 dark:text-zinc-200">
-                    At your home or office across Bengaluru.
+                  <p className="font-semibold text-gray-800 dark:text-zinc-200 text-sm sm:text-base">
+                    Professional bike &amp; scooter service at your home or office.
                   </p>
-                  <p className="mt-1 text-gray-600 dark:text-zinc-300">
-                    Get a mechanic at your doorstep in as little as <span className="font-bold text-gray-900 dark:text-white">30 minutes</span>.
+                  <p className="mt-1 text-gray-600 dark:text-zinc-300 font-medium">
+                    Book in 30 seconds. Get a mechanic at your doorstep.
                   </p>
                 </div>
 
@@ -1547,9 +1548,9 @@ YES BIKE SERVICE
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-4 xl:gap-4 2xl:gap-6 items-stretch">
             {/* Pkg 1: General Service */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-5 sm:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               {/* Top Status & Discount Bar */}
               <div className="flex items-center justify-between gap-2 mb-3.5">
                 <span className="inline-flex items-center gap-1.5 text-yellow-800 dark:text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider">
@@ -1710,7 +1711,7 @@ YES BIKE SERVICE
             <div className="relative pt-4 flex flex-col h-full transform lg:-translate-y-3 lg:hover:-translate-y-4 transition-all duration-300">
               {/* Top Floating Badge (Outside overflow-hidden so it is never clipped) */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center whitespace-nowrap">
-                <div className="relative bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 text-zinc-950 font-black text-[10.5px] uppercase tracking-[0.16em] py-1.5 px-4 rounded-full shadow-[0_4px_16px_rgba(234,179,8,0.5)] flex items-center gap-1.5 border border-yellow-200">
+                <div className="relative bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 text-zinc-950 font-black text-[9.5px] sm:text-[10.5px] uppercase tracking-wider sm:tracking-[0.16em] py-1 sm:py-1.5 px-3 sm:px-4 rounded-full shadow-[0_4px_16px_rgba(234,179,8,0.5)] flex items-center gap-1.5 border border-yellow-200">
                   <span className="relative flex h-2 w-2 shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-60"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
@@ -1719,7 +1720,7 @@ YES BIKE SERVICE
                 </div>
               </div>
 
-              <div className="bg-zinc-950 dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400 p-5 sm:p-6 pt-7 sm:pt-8 flex flex-col shadow-2xl shadow-yellow-500/25 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-yellow-400/50">
+              <div className="bg-zinc-950 dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400 p-4 sm:p-5 pt-6 sm:pt-7 xl:p-4 xl:pt-6 2xl:p-6 2xl:pt-8 flex flex-col shadow-2xl shadow-yellow-500/25 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-yellow-400/50">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/15 via-yellow-500/5 to-transparent pointer-events-none"></div>
                 
                 {/* Sub-header Badges */}
@@ -1880,7 +1881,7 @@ YES BIKE SERVICE
             </div>
 
             {/* Pkg 3: Jump Start Service */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
                 <Zap className="w-24 h-24 text-amber-500" />
               </div>
@@ -1921,21 +1922,21 @@ YES BIKE SERVICE
               </div>
 
               {/* Key Highlights: Available at Doorstep, Quick Assistance, 30 Mins Service Time */}
-              <div className="grid grid-cols-3 gap-2 mb-5">
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🏠</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">Doorstep</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Available</span>
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🏠</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Doorstep</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Available</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">⏱️</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">30 Minutes</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Service Time</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">⏱️</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">30 Mins</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Service Time</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🏍️</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">Bikes & Scooters</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">All Models</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🏍️</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">All 2-W</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Bikes & Scooters</span>
                 </div>
               </div>
 
@@ -2018,7 +2019,7 @@ YES BIKE SERVICE
             </div>
 
             {/* Pkg 4: Puncture Repair */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
                 <Disc className="w-24 h-24 text-amber-500" />
               </div>
@@ -2059,21 +2060,21 @@ YES BIKE SERVICE
               </div>
 
               {/* Key Highlights: Available at Doorstep, 30 min service time, One Tyre Puncture */}
-              <div className="grid grid-cols-3 gap-2 mb-5">
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🏠</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">At Doorstep</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Home/Road</span>
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🏠</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Doorstep</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Home/Road</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">⏱️</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">30 Min Service</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Fast Arrival</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">⏱️</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">30 Mins</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Fast Arrival</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🛞</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">One Tyre Fix</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Tubeless/Tube</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🛞</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">1 Tyre Fix</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Tubeless/Tube</span>
                 </div>
               </div>
 
@@ -2162,7 +2163,7 @@ YES BIKE SERVICE
             </div>
 
             {/* Pkg 5: Running Repair */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
                 <Wrench className="w-24 h-24 text-yellow-500" />
               </div>
@@ -2203,21 +2204,21 @@ YES BIKE SERVICE
               </div>
 
               {/* Key Highlights: Available at Doorstep, 30 min service time, Vehicle Inspection */}
-              <div className="grid grid-cols-3 gap-2 mb-5">
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🏠</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">At Doorstep</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Home/Road</span>
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🏠</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Doorstep</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Home/Road</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">⏱️</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">30 Min Service</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Fast Arrival</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">⏱️</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">30 Mins</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Fast Arrival</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center">
-                  <span className="text-lg mb-0.5">🔍</span>
-                  <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight">Inspection</span>
-                  <span className="text-[9.5px] text-gray-500 dark:text-zinc-400">Multi-Point</span>
+                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base sm:text-lg mb-0.5">🔍</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Inspection</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Multi-Point</span>
                 </div>
               </div>
 
@@ -2953,7 +2954,7 @@ YES BIKE SERVICE
       {/* PACKAGE BOOKING MODAL */}
       {isPackageModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92vh]">
+          <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92dvh] sm:max-h-[90vh]">
             <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-2.5 w-full pr-2">
                 <YesBikeLogo className="w-9 h-9 sm:w-10 sm:h-10" />
@@ -3253,7 +3254,7 @@ YES BIKE SERVICE
           />
           
           {/* Modal Content */}
-          <div className="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl animate-in zoom-in-95 overflow-hidden flex flex-col max-h-[85vh]">
+          <div className="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl animate-in zoom-in-95 overflow-hidden flex flex-col max-h-[88dvh] sm:max-h-[85vh]">
             <div className="p-4 sm:p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-xl text-yellow-600 dark:text-yellow-400">
@@ -3393,7 +3394,7 @@ YES BIKE SERVICE
             onClick={handlePickerCancel}
           />
           
-          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] z-10 animate-in slide-in-from-bottom-6 sm:zoom-in-95 duration-200">
+          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[88vh] z-10 animate-in slide-in-from-bottom-6 sm:zoom-in-95 duration-200">
             {/* Mobile Drag Indicator */}
             <div className="sm:hidden w-12 h-1.5 bg-gray-300 dark:bg-zinc-700 rounded-full mx-auto mt-2.5 mb-1 shrink-0"></div>
 
@@ -3706,7 +3707,7 @@ YES BIKE SERVICE
               }, 100);
             }
           }}
-          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
+          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight"
         >
           <Wrench className="w-3.5 h-3.5 shrink-0" />
           <span>Book your service and repair today</span>
