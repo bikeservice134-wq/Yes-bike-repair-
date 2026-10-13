@@ -672,7 +672,7 @@ YES BIKE SERVICE
           >
             <YesBikeLogo className="w-10 h-10 sm:w-11 sm:h-11 group-hover:scale-105 transition-transform duration-200" />
             <span className="text-[15px] sm:text-lg lg:text-xl font-black tracking-tight leading-none whitespace-nowrap">
-              <span className="text-yellow-500">Yes</span>{' '}
+              <span className="text-amber-500 dark:text-amber-400">Yes</span>{' '}
               <span className="text-gray-900 dark:text-white">Bike Service</span>
             </span>
           </button>
@@ -681,8 +681,8 @@ YES BIKE SERVICE
           <nav className="hidden lg:flex items-center gap-1">
             {[
               { label: 'Home', href: '#home' },
+              { label: 'Service Packages', href: '#pricing' },
               { label: 'Brands', href: '#brands' },
-              { label: 'Pricing', href: '#pricing' },
               { label: 'How It Works', href: '#how-it-works' },
               { label: 'Reviews', href: '#reviews' },
               { label: 'FAQ', href: '#faq' }
@@ -693,7 +693,7 @@ YES BIKE SERVICE
                 onClick={() => {
                   if (currentView !== 'home') setCurrentView('home');
                 }}
-                className="px-3 py-1 rounded-full text-xs font-bold text-gray-700 dark:text-zinc-300 hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors whitespace-nowrap"
+                className="px-3 py-1 rounded-full text-xs font-bold text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-400/10 transition-all whitespace-nowrap"
               >
                 {item.label}
               </a>
@@ -716,26 +716,26 @@ YES BIKE SERVICE
                   }, 100);
                 }
               }}
-              className="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-zinc-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-extrabold text-[9.5px] sm:text-[11px] lg:text-xs tracking-tight shadow-xs border border-yellow-300/80 transition-all active:scale-95 min-h-[28px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
-              aria-label="Our Popular Service Packages"
+              className="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-extrabold text-[9.5px] sm:text-[11px] lg:text-xs tracking-tight shadow-xs border border-amber-300/80 transition-all active:scale-95 min-h-[28px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
+              aria-label="Service Packages"
             >
               <Wrench className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-950 shrink-0" />
-              <span className="hidden sm:inline">Our Popular Service Packages</span>
+              <span className="hidden sm:inline">Service Packages</span>
               <span className="sm:hidden">Packages</span>
             </button>
 
             <button 
               onClick={() => setIsDark(!isDark)} 
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100/80 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 hover:border-yellow-400 transition-colors cursor-pointer flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0" 
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100/80 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 hover:border-amber-400 transition-colors cursor-pointer flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0" 
               aria-label="Toggle theme"
             >
-              {isDark ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-400" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" />}
+              {isDark ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" />}
             </button>
 
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-yellow-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center shrink-0"
+              className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center shrink-0"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
@@ -753,7 +753,7 @@ YES BIKE SERVICE
                 <YesBikeLogo className="w-12 h-12" />
                 <div>
                   <span className="text-base font-black tracking-tight leading-tight block text-gray-900 dark:text-white">
-                    <span className="text-yellow-500">YES</span> BIKE SERVICE
+                    <span className="text-amber-500 dark:text-amber-400">YES</span> BIKE SERVICE
                   </span>
                   <span className="text-[11px] font-semibold text-gray-500 dark:text-zinc-400">
                     Doorstep Two-Wheeler Care • Bengaluru
@@ -764,8 +764,8 @@ YES BIKE SERVICE
               <nav className="grid grid-cols-2 gap-2 text-sm font-bold">
                 {[
                   { label: 'Home', href: '#home' },
+                  { label: 'Service Packages', href: '#pricing' },
                   { label: 'Bike Brands', href: '#brands' },
-                  { label: 'Pricing', href: '#pricing' },
                   { label: 'How It Works', href: '#how-it-works' },
                   { label: 'Reviews', href: '#reviews' },
                   { label: 'FAQ', href: '#faq' }
@@ -777,10 +777,10 @@ YES BIKE SERVICE
                       setIsMobileMenuOpen(false);
                       if (currentView !== 'home') setCurrentView('home');
                     }}
-                    className="p-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-yellow-500 hover:text-black dark:hover:text-black transition-all flex items-center justify-between min-h-[44px]"
+                    className="p-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-black dark:hover:text-black transition-all flex items-center justify-between min-h-[44px]"
                   >
                     <span>{item.label}</span>
-                    <span className="text-yellow-500 text-xs">›</span>
+                    <span className="text-amber-500 text-xs">›</span>
                   </a>
                 ))}
               </nav>
@@ -800,11 +800,10 @@ YES BIKE SERVICE
                       }, 100);
                     }
                   }}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black shadow-md border border-yellow-300/80 min-h-[46px] cursor-pointer"
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black shadow-md border border-amber-300/80 min-h-[46px] cursor-pointer"
                 >
-                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
                   <Wrench className="w-4 h-4 text-zinc-950" />
-                  <span>Our Popular Service Packages</span>
+                  <span>Service Packages</span>
                   <ArrowRight className="w-4 h-4 text-zinc-950" />
                 </button>
                 <a
@@ -827,13 +826,13 @@ YES BIKE SERVICE
           {/* HERO SECTION */}
           <section id="home" className="relative overflow-hidden pt-16 sm:pt-20 pb-10 lg:pb-16 bg-white dark:bg-zinc-950">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60"></div>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-yellow-500/10 dark:bg-yellow-500/5 blur-[130px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-amber-500/10 dark:bg-amber-500/5 blur-[130px] rounded-full pointer-events-none"></div>
             
             <FadeIn>
               <div className="max-w-xl w-full mx-auto px-3.5 relative z-10 flex flex-col items-center text-center">
                 {/* Simple Tagline */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/20 text-yellow-800 dark:text-yellow-400 text-xs font-bold mb-2.5">
-                  <MapPin className="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400 shrink-0" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 text-xs font-bold mb-2.5">
+                  <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>Bengaluru's Trusted Two-Wheeler Care</span>
                   <span className="opacity-40">•</span>
                   <span>Doorstep Service</span>
@@ -842,7 +841,7 @@ YES BIKE SERVICE
                 {/* Main Headline */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2.5">
                   Doorstep Bike Repair &amp; Service{' '}
-                  <span className="text-yellow-500 dark:text-yellow-400">in Bengaluru</span>
+                  <span className="text-amber-500 dark:text-amber-400">in Bengaluru</span>
                 </h1>
 
                 {/* Subtitle */}
@@ -850,7 +849,7 @@ YES BIKE SERVICE
                   <p className="font-semibold text-gray-800 dark:text-zinc-200 text-sm sm:text-base">
                     Professional bike &amp; scooter service at your home or office.
                   </p>
-                  <p className="mt-1 text-gray-600 dark:text-zinc-300 font-medium">
+                  <p className="mt-1 text-gray-600 dark:text-zinc-400 font-medium">
                     Book in 30 seconds. Get a mechanic at your doorstep.
                   </p>
                 </div>
@@ -861,12 +860,12 @@ YES BIKE SERVICE
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                     Verified Mechanics
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/20 text-yellow-800 dark:text-yellow-400 shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-yellow-500 shrink-0" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/20 text-amber-800 dark:text-amber-300 shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                     Transparent Pricing
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/20 text-blue-700 dark:text-blue-400 shadow-2xs">
-                    <Shield className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 text-sky-700 dark:text-sky-300 shadow-2xs">
+                    <Shield className="w-3.5 h-3.5 text-sky-500 shrink-0" />
                     30-Day Service Warranty
                   </span>
                 </div>
@@ -886,13 +885,13 @@ YES BIKE SERVICE
                         onClick={() => setHeroService(srv.id)}
                         className={`p-1.5 sm:p-2 rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-center ${
                           isSelected
-                            ? 'bg-yellow-500 text-black border-yellow-500 font-black shadow-sm ring-1 ring-yellow-400'
-                            : 'bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-yellow-400 font-semibold'
+                            ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-md ring-2 ring-amber-400/50'
+                            : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-amber-400 font-semibold'
                         }`}
                       >
                         <span className="text-sm sm:text-base mb-0.5">{srv.icon}</span>
                         <span className="text-[10px] sm:text-[11px] font-bold leading-tight truncate max-w-full">{srv.label}</span>
-                        <span className={`text-[11px] sm:text-xs font-black ${isSelected ? 'text-black' : 'text-amber-600 dark:text-yellow-400'}`}>
+                        <span className={`text-[11px] sm:text-xs font-black ${isSelected ? 'text-zinc-950' : 'text-amber-600 dark:text-amber-400'}`}>
                           {srv.price}
                         </span>
                       </button>
@@ -901,9 +900,9 @@ YES BIKE SERVICE
                 </div>
 
                 <div id="booking-form" className="w-full max-w-md relative z-20 text-left">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-amber-600/10 blur-xl rounded-2xl pointer-events-none opacity-60"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-60"></div>
 
-                  <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+                  <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-xl border border-zinc-200/90 dark:border-zinc-800 relative overflow-hidden">
                     {/* Compact Card Header */}
                     <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
                       <div className="flex items-center gap-2 min-w-0">
@@ -954,7 +953,7 @@ YES BIKE SERVICE
                           {/* Name & Phone in 2-Column Compact Grid */}
                           <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                             <div className="relative group min-w-0">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                                 <User className="h-3.5 w-3.5" />
                               </div>
                               <input 
@@ -965,13 +964,13 @@ YES BIKE SERVICE
                                 onChange={(e) => setHeroName(e.target.value)}
                                 placeholder="Your Name" 
                                 autoComplete="name"
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-zinc-400 transition-shadow" 
                               />
                             </div>
                             
                             <div className="relative group min-w-0">
                               <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                                <span className="flex items-center gap-0.5 text-[10px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-300 dark:border-zinc-700">
+                                <span className="flex items-center gap-0.5 text-[10px] font-bold text-zinc-600 dark:text-zinc-300 pr-1 border-r border-zinc-300 dark:border-zinc-700">
                                   <span className="text-[10px]" role="img" aria-label="India">🇮🇳</span>
                                   <span>+91</span>
                                 </span>
@@ -987,7 +986,7 @@ YES BIKE SERVICE
                                 value={heroPhone}
                                 onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                 placeholder="Phone number" 
-                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-400 tracking-wide transition-shadow ${
+                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-zinc-400 tracking-wide transition-shadow ${
                                   heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
                                 }`}
                               />
@@ -998,7 +997,7 @@ YES BIKE SERVICE
                               )}
                               {heroPhone.length > 0 && heroPhone.length < 10 && (
                                 <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
-                                  <span className="text-[9px] font-bold text-amber-600 dark:text-yellow-400">
+                                  <span className="text-[9px] font-bold text-amber-600 dark:text-amber-400">
                                     {10 - heroPhone.length}
                                   </span>
                                 </div>
@@ -1009,7 +1008,7 @@ YES BIKE SERVICE
                           {/* Brand & Model in 2-Columns */}
                           <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                             <div className="relative group min-w-0">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                                 <Tag className="h-3.5 w-3.5" />
                               </div>
                               <select 
@@ -1020,36 +1019,36 @@ YES BIKE SERVICE
                                   setHeroBrand(e.target.value);
                                   setHeroModel("");
                                 }} 
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                               >
                                 <option value="" disabled>Select Brand</option>
                                 {Object.keys(MODELS_BY_BRAND).map(brand => (
-                                  <option key={brand} value={brand} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{brand}</option>
+                                  <option key={brand} value={brand} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">{brand}</option>
                                 ))}
                               </select>
-                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-zinc-400">
                                 <ChevronDown className="h-3 w-3" />
                               </div>
                             </div>
 
                             <div className="relative group min-w-0">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                                 <Bike className="h-3.5 w-3.5" />
                               </div>
                               <select 
                                 name="model" 
                                 required 
                                 value={heroModel} 
-                                onChange={(e) => setHeroModel(e.target.value)}
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
+                                onChange={(e) => setHeroModel(e.target.value)} 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
                                 disabled={!heroBrand}
                               >
                                 <option value="" disabled>{heroBrand ? "Select Model" : "Brand First"}</option>
                                 {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
-                                  <option key={model} value={model} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">{model}</option>
+                                  <option key={model} value={model} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">{model}</option>
                                 ))}
                               </select>
-                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-zinc-400">
                                 <ChevronDown className="h-3 w-3" />
                               </div>
                             </div>
@@ -1058,15 +1057,15 @@ YES BIKE SERVICE
                           {/* Location Input with Auto-Fill */}
                           <div className="space-y-1">
                             <div className="relative group">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                                <MapPin className="h-3.5 w-3.5 text-yellow-500" />
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                                <MapPin className="h-3.5 w-3.5 text-amber-500" />
                               </div>
                               <input 
                                 type="text" 
                                 name="location" 
                                 required 
                                 placeholder="Locality / Area, Bengaluru" 
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-16 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 transition-shadow" 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-16 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-zinc-400 transition-shadow" 
                                 value={locationSearch} 
                                 onChange={(e) => setLocationSearch(e.target.value)} 
                               />
@@ -1091,7 +1090,7 @@ YES BIKE SERVICE
                                     setLocationSearch(`${activeLocation}, Bengaluru`);
                                   }
                                 }}
-                                className="absolute right-1 top-1 bottom-1 px-2 rounded-md bg-yellow-500/15 hover:bg-yellow-500/25 active:scale-[0.96] text-yellow-700 dark:text-yellow-400 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all"
+                                className="absolute right-1 top-1 bottom-1 px-2 rounded-md bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.96] text-amber-700 dark:text-amber-300 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all border border-amber-500/20"
                                 title="Auto-fill locality"
                               >
                                 <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
@@ -1108,8 +1107,8 @@ YES BIKE SERVICE
                                   onClick={() => setLocationSearch(`${area}, Bengaluru`)}
                                   className={`px-2 py-0.5 min-h-[22px] rounded-md text-[10px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
                                     locationSearch.includes(area)
-                                      ? 'bg-yellow-500 text-black border-yellow-500 font-bold shadow-2xs'
-                                      : 'bg-gray-100/80 dark:bg-zinc-800/80 text-gray-700 dark:text-zinc-300 border-gray-200/60 dark:border-zinc-700/60 hover:border-yellow-400'
+                                      ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold shadow-2xs'
+                                      : 'bg-zinc-100/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/60 dark:border-zinc-700/60 hover:border-amber-400'
                                   }`}
                                 >
                                   {area}
@@ -1120,24 +1119,24 @@ YES BIKE SERVICE
 
                           {/* Service Dropdown */}
                           <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
-                              <Wrench className="h-3.5 w-3.5 text-yellow-500" />
+                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                              <Wrench className="h-3.5 w-3.5 text-amber-500" />
                             </div>
                             <select 
                               name="service" 
                               required 
                               value={heroService} 
                               onChange={(e) => setHeroService(e.target.value)} 
-                              className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                              className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                             >
                               {QUICK_SERVICE_OPTIONS.map(opt => (
-                                <option key={opt.id} value={opt.id} className="text-gray-900 dark:text-white bg-white dark:bg-zinc-900">
+                                <option key={opt.id} value={opt.id} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">
                                   {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
                                   {opt.name} ({opt.price})
                                 </option>
                               ))}
                             </select>
-                            <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                            <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-zinc-400">
                               <ChevronDown className="h-3 w-3" />
                             </div>
                           </div>
@@ -1146,7 +1145,7 @@ YES BIKE SERVICE
                           <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                             {/* Calendar Date Input */}
                             <div className="relative group min-w-0">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400 group-focus-within:text-amber-500 transition-colors">
                                 <Calendar className="h-3.5 w-3.5 shrink-0" />
                               </div>
                               <input 
@@ -1156,14 +1155,14 @@ YES BIKE SERVICE
                                 min={getTodayIST()}
                                 value={bookingDate}
                                 onChange={(e) => setBookingDate(e.target.value)}
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
                                 title="Calendar (Select Service Date)"
                               />
                             </div>
 
                             {/* Time Input */}
                             <div className="relative group min-w-0">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400 group-focus-within:text-amber-500 transition-colors">
                                 <Clock className="h-3.5 w-3.5 shrink-0" />
                               </div>
                               <input 
@@ -1172,7 +1171,7 @@ YES BIKE SERVICE
                                 required 
                                 value={bookingTime}
                                 onChange={(e) => setBookingTime(e.target.value)}
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200 dark:ring-zinc-700 bg-gray-50 dark:bg-zinc-800/60 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow"
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
                                 title="Time (Select Service Time)"
                               />
                             </div>
@@ -1182,7 +1181,7 @@ YES BIKE SERVICE
                           <button 
                             type="submit" 
                             disabled={isSubmitting}
-                            className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[40px] sm:min-h-[44px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-yellow-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
+                            className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[40px] sm:min-h-[44px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
                               <>
@@ -1228,22 +1227,22 @@ YES BIKE SERVICE
       {/* TRUST STATS SECTION */}
       <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 relative overflow-hidden">
         {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-24 bg-yellow-500/5 blur-3xl pointer-events-none rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-24 bg-amber-500/5 blur-3xl pointer-events-none rounded-full"></div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             
             {/* Stat 1: 4.8/5 Customer Rating */}
-            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-yellow-400/70 dark:hover:border-yellow-500/40 transition-all duration-300 flex items-start gap-4">
-              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-yellow-500/15 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 flex items-center justify-center shrink-0 ring-1 ring-yellow-400/40 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
-                <Star className="w-7 h-7 fill-yellow-500 text-yellow-500" />
+            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-zinc-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-amber-400/70 dark:hover:border-amber-500/40 transition-all duration-300 flex items-start gap-4">
+              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 ring-1 ring-amber-400/40 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
+                <Star className="w-7 h-7 fill-amber-400 text-amber-400" />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1 text-amber-500 dark:text-yellow-400 mb-1">
+                <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-current" />
                   ))}
-                  <span className="ml-1.5 text-[11px] font-black uppercase tracking-wider text-amber-600 dark:text-yellow-400 bg-yellow-500/10 dark:bg-yellow-500/20 px-2 py-0.5 rounded-full border border-yellow-400/30">
+                  <span className="ml-1.5 text-[11px] font-black uppercase tracking-wider text-amber-700 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-500/20 px-2 py-0.5 rounded-full border border-amber-400/30">
                     Google Reviews
                   </span>
                 </div>
@@ -1259,13 +1258,13 @@ YES BIKE SERVICE
             </div>
 
             {/* Stat 2: 100,000+ Customers */}
-            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-yellow-400/70 dark:hover:border-yellow-500/40 transition-all duration-300 flex items-start gap-4">
-              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-yellow-500/15 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 flex items-center justify-center shrink-0 ring-1 ring-yellow-400/40 group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-300">
+            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-zinc-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-amber-400/70 dark:hover:border-amber-500/40 transition-all duration-300 flex items-start gap-4">
+              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 ring-1 ring-amber-400/40 group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-300">
                 <Bike className="w-7 h-7" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1 mb-1">
-                  <span className="text-[11px] font-black uppercase tracking-wider text-amber-700 dark:text-yellow-400 bg-yellow-500/10 dark:bg-yellow-500/20 px-2 py-0.5 rounded-full border border-yellow-400/30 flex items-center gap-1">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-amber-800 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-500/20 px-2 py-0.5 rounded-full border border-amber-400/30 flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                     Trusted Service
                   </span>
@@ -1275,21 +1274,21 @@ YES BIKE SERVICE
                 </h4>
                 <p className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 mt-0.5 flex items-center gap-1.5">
                   <span>Trusted across India</span>
-                  <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
+                  <span className="w-1 h-1 rounded-full bg-amber-500"></span>
                   <span className="text-[11px] text-gray-500 dark:text-zinc-400 font-bold">Doorstep Care</span>
                 </p>
               </div>
             </div>
 
             {/* Stat 3: Verified Mechanics */}
-            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-yellow-400/70 dark:hover:border-yellow-500/40 transition-all duration-300 flex items-start gap-4">
-              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-yellow-500/15 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 flex items-center justify-center shrink-0 ring-1 ring-yellow-400/40 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
+            <div className="group relative bg-white dark:bg-zinc-900/90 rounded-2xl p-5 sm:p-6 border border-zinc-200/90 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-amber-400/70 dark:hover:border-amber-500/40 transition-all duration-300 flex items-start gap-4">
+              <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 ring-1 ring-amber-400/40 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
                 <Shield className="w-7 h-7" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1 mb-1">
                   <span className="text-[11px] font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     Rapid On-Site Doorstep
                   </span>
                 </div>
@@ -1310,11 +1309,11 @@ YES BIKE SERVICE
 
       {/* TRUSTED BY 100,000+ CUSTOMERS SECTION */}
       <section id="brands" className="py-16 sm:py-20 relative bg-white dark:bg-zinc-950 overflow-hidden border-t border-gray-100 dark:border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/[0.02] via-transparent to-yellow-500/[0.03] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.02] via-transparent to-amber-500/[0.03] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/25 text-yellow-700 dark:text-yellow-400 font-extrabold text-xs tracking-wider uppercase mb-3 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 font-extrabold text-xs tracking-wider uppercase mb-3 shadow-xs">
                 <Shield className="w-3.5 h-3.5" />
                 <span>Verified Doorstep Service</span>
               </div>
@@ -1330,7 +1329,7 @@ YES BIKE SERVICE
             </div>
 
             {/* Trust Highlights Ribbon */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border-2 border-yellow-500/30 max-w-3xl mx-auto mb-8 text-center shadow-lg shadow-yellow-500/5">
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 border-2 border-amber-500/25 max-w-3xl mx-auto mb-8 text-center shadow-lg shadow-amber-500/5">
               <p className="text-base sm:text-lg md:text-xl font-black text-gray-900 dark:text-white leading-relaxed tracking-wide">
                 100,000+ Customers · Verified Mechanics · Trusted Service
               </p>
@@ -1347,7 +1346,7 @@ YES BIKE SERVICE
                     bookingForm.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-8 rounded-full shadow-[0_4px_14px_rgba(234,179,8,0.3)] hover:shadow-[0_6px_20px_rgba(234,179,8,0.45)] hover:-translate-y-0.5 transition-all cursor-pointer group"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-8 rounded-full shadow-[0_4px_14px_rgba(245,158,11,0.3)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.45)] hover:-translate-y-0.5 transition-all cursor-pointer group"
               >
                 <span>Book your service and repair today</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -1360,17 +1359,16 @@ YES BIKE SERVICE
       {/* HOW IT WORKS SECTION */}
       <section id="how-it-works" className="py-20 md:py-24 relative bg-gray-50 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
         {/* Subtle decorative radial lights */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[350px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[350px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 border border-yellow-500/25 text-yellow-700 dark:text-yellow-400 font-extrabold text-xs tracking-wider uppercase mb-4 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-              Simple & Hassle-Free
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 font-extrabold text-xs tracking-wider uppercase mb-4 shadow-sm">
+              <span>Simple & Hassle-Free</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
-              How It <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600">Works</span>
+              How It <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400">Works</span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
               Get your bike fixed in three simple steps without stepping out of your home.
@@ -1380,26 +1378,26 @@ YES BIKE SERVICE
           {/* 3 Step Cards Grid with Connecting Pipeline */}
           <div className="relative">
             {/* Desktop Connector Track */}
-            <div className="hidden md:block absolute top-[90px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-yellow-500/20 via-yellow-500 to-yellow-500/20 z-0"></div>
+            <div className="hidden md:block absolute top-[90px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-amber-500/20 via-amber-500 to-amber-500/20 z-0"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 items-stretch">
               
               {/* STEP 1 */}
-              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border-2 border-gray-100 dark:border-zinc-800 hover:border-yellow-400/80 dark:hover:border-yellow-500/50 shadow-lg hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-125"></div>
+              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 hover:border-amber-400/80 dark:hover:border-amber-500/50 shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-125"></div>
                 
                 {/* Step Pill Header */}
                 <div className="flex items-center justify-between gap-2 mb-6">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
                     Step 1
                   </span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-yellow-400 flex items-center gap-1">
+                  <span className="text-xs font-bold text-amber-700 dark:text-amber-300 flex items-center gap-1">
                     ⚡ Under 60 Sec
                   </span>
                 </div>
 
                 {/* Step Icon */}
-                <div className="w-16 h-16 rounded-2xl bg-yellow-500/15 dark:bg-yellow-500/20 border border-yellow-400/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-6 group-hover:scale-110 group-hover:rotate-2 transition-transform duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6 group-hover:scale-110 group-hover:rotate-2 transition-transform duration-300">
                   <Smartphone className="w-8 h-8" />
                 </div>
 
@@ -1421,16 +1419,15 @@ YES BIKE SERVICE
               </div>
 
               {/* STEP 2 */}
-              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border-2 border-amber-400/80 dark:border-amber-500/50 hover:border-amber-400 dark:hover:border-amber-400 shadow-xl hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
+              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border-2 border-amber-500/60 dark:border-amber-500/50 hover:border-amber-500 dark:hover:border-amber-400 shadow-xl hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-125"></div>
                 
                 {/* Step Pill Header */}
                 <div className="flex items-center justify-between gap-2 mb-6">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
                     Step 2
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-extrabold text-[11px] border border-emerald-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                     Fast Response
                   </span>
                 </div>
@@ -1462,12 +1459,12 @@ YES BIKE SERVICE
               </div>
 
               {/* STEP 3 */}
-              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border-2 border-gray-100 dark:border-zinc-800 hover:border-yellow-400/80 dark:hover:border-yellow-500/50 shadow-lg hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-125"></div>
+              <div className="group relative bg-white dark:bg-zinc-900 rounded-3xl p-7 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 hover:border-amber-400/80 dark:hover:border-amber-500/50 shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5 overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-125"></div>
                 
                 {/* Step Pill Header */}
                 <div className="flex items-center justify-between gap-2 mb-6">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
                     Step 3
                   </span>
                   <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
@@ -1476,7 +1473,7 @@ YES BIKE SERVICE
                 </div>
 
                 {/* Step Icon */}
-                <div className="w-16 h-16 rounded-2xl bg-yellow-500/15 dark:bg-yellow-500/20 border border-yellow-400/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-6 group-hover:scale-110 group-hover:rotate-2 transition-transform duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6 group-hover:scale-110 group-hover:rotate-2 transition-transform duration-300">
                   <ThumbsUp className="w-8 h-8" />
                 </div>
 
@@ -1505,7 +1502,7 @@ YES BIKE SERVICE
           </div>
 
           {/* Quick Action Strip below the 3 steps */}
-          <div className="mt-12 p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200/90 dark:border-zinc-800 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
+          <div className="mt-12 p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
             <div className="flex items-center gap-3.5 text-center sm:text-left">
               <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 shrink-0">
                 <Bike className="w-5 h-5" />
@@ -1519,7 +1516,7 @@ YES BIKE SERVICE
               onClick={() => {
                 document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 font-black text-xs sm:text-sm tracking-wide shadow-md hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm tracking-wide shadow-md hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
             >
               <span>Book your service and repair today</span>
               <ArrowRight className="w-4 h-4" />
@@ -1531,13 +1528,12 @@ YES BIKE SERVICE
       <div id="services"></div>
       <section id="pricing" className="py-16 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden border-t border-gray-100 dark:border-white/5">
         {/* Background Accents */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <div className="inline-flex items-center justify-center gap-2 bg-yellow-500/10 dark:bg-yellow-500/15 text-yellow-800 dark:text-yellow-400 px-3.5 py-1.5 rounded-full font-extrabold text-xs tracking-wider uppercase mb-4 border border-yellow-500/25 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+            <div className="inline-flex items-center justify-center gap-2 bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-300 px-3.5 py-1.5 rounded-full font-extrabold text-xs tracking-wider uppercase mb-4 border border-amber-500/25 shadow-xs">
               <span>Transparent Pricing</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
@@ -1550,11 +1546,10 @@ YES BIKE SERVICE
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-4 xl:gap-4 2xl:gap-6 items-stretch">
             {/* Pkg 1: General Service */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/90 dark:border-zinc-800 hover:border-amber-400/80 dark:hover:border-amber-500/50 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               {/* Top Status & Discount Bar */}
               <div className="flex items-center justify-between gap-2 mb-3.5">
-                <span className="inline-flex items-center gap-1.5 text-yellow-800 dark:text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider">
-                  <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+                <span className="inline-flex items-center gap-1.5 text-amber-800 dark:text-amber-300 font-extrabold text-[11px] uppercase tracking-wider">
                   Doorstep Standard
                 </span>
                 <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
@@ -1565,14 +1560,14 @@ YES BIKE SERVICE
               {/* Header */}
               <div className="relative z-10 mb-3.5">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 ring-1 ring-yellow-400/30 shrink-0">
+                  <div className="w-11 h-11 bg-amber-500/15 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30 shrink-0">
                     <Wrench className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
                       General Service
                     </h3>
-                    <p className="text-xs font-bold text-amber-600 dark:text-yellow-400 mt-0.5">
+                    <p className="text-xs font-bold text-amber-700 dark:text-amber-300 mt-0.5">
                       Offer Price: ₹699 · For Bikes & Scooters
                     </p>
                   </div>
@@ -1590,8 +1585,8 @@ YES BIKE SERVICE
 
               {/* Key Highlights: Clean 2x2 Spec Grid */}
               <div className="grid grid-cols-2 gap-2 mb-4">
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 dark:border-amber-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-0.5">
                     <span>🏍️</span>
                     <span>Location</span>
                   </div>
@@ -1600,8 +1595,8 @@ YES BIKE SERVICE
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 dark:border-amber-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-0.5">
                     <span>🛡️</span>
                     <span>Warranty</span>
                   </div>
@@ -1610,8 +1605,8 @@ YES BIKE SERVICE
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 dark:border-amber-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-0.5">
                     <span>🔧</span>
                     <span>Interval</span>
                   </div>
@@ -1620,8 +1615,8 @@ YES BIKE SERVICE
                   </span>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-yellow-400/5 border border-amber-500/20 dark:border-yellow-500/15 flex flex-col justify-between">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 mb-0.5">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 dark:border-amber-500/15 flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-0.5">
                     <span>⏱️</span>
                     <span>Duration</span>
                   </div>
@@ -1671,7 +1666,7 @@ YES BIKE SERVICE
                     setSelectedPackage({ name: 'General Service', price: '₹699' }); 
                     setIsPackageModalOpen(true); 
                   }} 
-                  className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(234,179,8,0.35)] hover:shadow-[0_6px_22px_rgba(234,179,8,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-1.5 font-black">
                     Book General Service now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -1699,7 +1694,7 @@ YES BIKE SERVICE
                     }); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
-                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-yellow-600 dark:text-gray-300 dark:hover:text-yellow-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
+                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
                 >
                   <span>View All 12 Technical Points</span>
                   <ChevronDown className="w-3.5 h-3.5" />
@@ -1711,7 +1706,7 @@ YES BIKE SERVICE
             <div className="relative pt-4 flex flex-col h-full transform lg:-translate-y-3 lg:hover:-translate-y-4 transition-all duration-300">
               {/* Top Floating Badge (Outside overflow-hidden so it is never clipped) */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center whitespace-nowrap">
-                <div className="relative bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 text-zinc-950 font-black text-[9.5px] sm:text-[10.5px] uppercase tracking-wider sm:tracking-[0.16em] py-1 sm:py-1.5 px-3 sm:px-4 rounded-full shadow-[0_4px_16px_rgba(234,179,8,0.5)] flex items-center gap-1.5 border border-yellow-200">
+                <div className="relative bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 text-zinc-950 font-black text-[9.5px] sm:text-[10.5px] uppercase tracking-wider sm:tracking-[0.16em] py-1 sm:py-1.5 px-3 sm:px-4 rounded-full shadow-[0_4px_16px_rgba(245,158,11,0.45)] flex items-center gap-1.5 border border-amber-200">
                   <span className="relative flex h-2 w-2 shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-60"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
@@ -1720,12 +1715,12 @@ YES BIKE SERVICE
                 </div>
               </div>
 
-              <div className="bg-zinc-950 dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400 p-4 sm:p-5 pt-6 sm:pt-7 xl:p-4 xl:pt-6 2xl:p-6 2xl:pt-8 flex flex-col shadow-2xl shadow-yellow-500/25 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-yellow-400/50">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/15 via-yellow-500/5 to-transparent pointer-events-none"></div>
+              <div className="bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950 rounded-3xl border-2 border-amber-400/90 dark:border-amber-400/80 p-4 sm:p-5 pt-6 sm:pt-7 xl:p-4 xl:pt-6 2xl:p-6 2xl:pt-8 flex flex-col shadow-2xl shadow-amber-500/20 h-full relative group hover:-translate-y-1 transition-all duration-300 overflow-hidden ring-1 ring-amber-400/40">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/15 via-amber-500/5 to-transparent pointer-events-none"></div>
                 
                 {/* Sub-header Badges */}
                 <div className="flex items-center justify-between gap-2 mb-3.5 mt-1">
-                  <span className="inline-flex items-center gap-1.5 text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider">
+                  <span className="inline-flex items-center gap-1.5 text-amber-300 font-extrabold text-[11px] uppercase tracking-wider">
                     <span>🛢️</span> Engine Oil Included
                   </span>
                   <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] border border-emerald-400/30">
@@ -1736,14 +1731,14 @@ YES BIKE SERVICE
                 {/* Header */}
                 <div className="relative z-10 mb-3.5">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 bg-yellow-500/25 rounded-2xl flex items-center justify-center text-yellow-400 ring-1 ring-yellow-400/40 shadow-inner shrink-0">
+                    <div className="w-11 h-11 bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-400 ring-1 ring-amber-400/40 shadow-inner shrink-0">
                       <Settings className="w-5 h-5 animate-spin-slow" style={{ animationDuration: '18s' }} />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white leading-tight">
                         General Service with Engine Oil
                       </h3>
-                      <p className="text-xs font-bold text-yellow-400 mt-0.5">
+                      <p className="text-xs font-bold text-amber-400 mt-0.5">
                         Offer Price: ₹1,349 · Fresh 4T Engine Oil
                       </p>
                     </div>
@@ -1754,15 +1749,15 @@ YES BIKE SERVICE
                 <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-3.5 border-b border-white/10 tabular-nums">
                   <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹1,349</span>
                   <span className="text-base font-semibold text-gray-400 line-through">₹1,500</span>
-                  <span className="text-xs font-semibold text-yellow-400/90 bg-yellow-400/10 px-2 py-0.5 rounded-md border border-yellow-400/20">
+                  <span className="text-xs font-semibold text-amber-300 bg-amber-500/15 px-2 py-0.5 rounded-md border border-amber-400/30">
                     Engine Oil Included
                   </span>
                 </div>
 
                 {/* Key Highlights: Clean 2x2 Spec Grid */}
                 <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-0.5">
                       <span>🏍️</span>
                       <span>Location</span>
                     </div>
@@ -1771,8 +1766,8 @@ YES BIKE SERVICE
                     </span>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-0.5">
                       <span>🛡️</span>
                       <span>Warranty</span>
                     </div>
@@ -1781,8 +1776,8 @@ YES BIKE SERVICE
                     </span>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-0.5">
                       <span>🔧</span>
                       <span>Interval</span>
                     </div>
@@ -1791,8 +1786,8 @@ YES BIKE SERVICE
                     </span>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/25 flex flex-col justify-between">
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-yellow-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-col justify-between">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-0.5">
                       <span>⏱️</span>
                       <span>Duration</span>
                     </div>
@@ -1806,7 +1801,7 @@ YES BIKE SERVICE
                 <div className="relative z-10 mb-5 flex-grow">
                   <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-white mb-2">
                     <span>Service Includes:</span>
-                    <span className="text-[11px] font-extrabold text-yellow-400 normal-case">12 Core Services</span>
+                    <span className="text-[11px] font-extrabold text-amber-400 normal-case">12 Core Services</span>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/10 p-3">
                     <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-x-3 gap-y-2">
@@ -1825,10 +1820,10 @@ YES BIKE SERVICE
                         { name: "Spark Plug Cleaning", isOil: false },
                       ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2">
-                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-yellow-400' : 'text-emerald-400'}`} />
-                          <span className={`text-xs leading-snug ${item.isOil ? 'text-yellow-300 font-black' : 'text-zinc-100 font-semibold'}`}>
+                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-400' : 'text-emerald-400'}`} />
+                          <span className={`text-xs leading-snug ${item.isOil ? 'text-amber-300 font-black' : 'text-zinc-100 font-semibold'}`}>
                             {item.name}
-                            {item.isOil && <span className="ml-1.5 text-[9.5px] bg-yellow-400 text-black px-1.5 py-0.5 rounded font-black uppercase align-middle">Included</span>}
+                            {item.isOil && <span className="ml-1.5 text-[9.5px] bg-amber-400 text-zinc-950 px-1.5 py-0.5 rounded font-black uppercase align-middle">Included</span>}
                           </span>
                         </li>
                       ))}
@@ -1843,7 +1838,7 @@ YES BIKE SERVICE
                       setSelectedPackage({ name: 'General Service with Engine Oil', price: '₹1,349' }); 
                       setIsPackageModalOpen(true); 
                     }} 
-                    className="w-full relative overflow-hidden bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-400 hover:from-yellow-300 hover:to-yellow-400 text-black font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_18px_rgba(234,179,8,0.45)] hover:shadow-[0_6px_25px_rgba(234,179,8,0.6)] transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
+                    className="w-full relative overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_18px_rgba(245,158,11,0.45)] hover:shadow-[0_6px_25px_rgba(245,158,11,0.6)] transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-1.5 font-black">
                       Book General Service with Engine Oil now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -1871,7 +1866,7 @@ YES BIKE SERVICE
                       }); 
                       setIsTechnicalDetailsOpen(true); 
                     }} 
-                    className="w-full text-center text-xs font-bold text-gray-300 hover:text-yellow-400 transition-colors py-2 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-center gap-1"
+                    className="w-full text-center text-xs font-bold text-gray-300 hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-center gap-1"
                   >
                     <span>View All 12 Technical Points</span>
                     <ChevronDown className="w-3.5 h-3.5" />
@@ -2163,15 +2158,15 @@ YES BIKE SERVICE
             </div>
 
             {/* Pkg 5: Running Repair */}
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-yellow-400/80 dark:border-yellow-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
-                <Wrench className="w-24 h-24 text-yellow-500" />
+                <Wrench className="w-24 h-24 text-amber-500" />
               </div>
 
               {/* Floating Top Badges */}
               <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/15 text-yellow-800 dark:text-yellow-300 font-extrabold text-[11px] uppercase tracking-wider border border-yellow-400/40">
-                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 font-extrabold text-[11px] uppercase tracking-wider border border-amber-400/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                   Quick Diagnosis
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20">
@@ -2182,14 +2177,14 @@ YES BIKE SERVICE
               {/* Header */}
               <div className="relative z-10 mb-3">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 ring-1 ring-yellow-400/30">
+                  <div className="w-12 h-12 bg-amber-500/15 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30">
                     <span className="text-2xl leading-none">🔧</span>
                   </div>
                   <div>
                     <h3 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white flex items-center gap-1.5">
                       <span>Running Repair</span>
                     </h3>
-                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-yellow-400">
+                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
                       Offer Price: ₹450
                     </div>
                   </div>
@@ -2274,7 +2269,7 @@ YES BIKE SERVICE
                     setSelectedPackage({ name: 'Running Repair', price: '₹450' }); 
                     setIsPackageModalOpen(true); 
                   }} 
-                  className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-1.5 font-black">
                     Book Running Repair now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -2313,16 +2308,16 @@ YES BIKE SERVICE
       {/* CUSTOMER REVIEWS SECTION */}
       <section id="reviews" className="py-16 sm:py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
         {/* Subtle background ambient glows */}
-        <div className="absolute top-1/2 left-0 w-80 h-80 bg-yellow-500/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-yellow-500/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-100 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 text-xs font-black tracking-wider uppercase mb-4 border border-yellow-200/80 dark:border-yellow-500/20 shadow-2xs">
-              <Star className="w-3.5 h-3.5 fill-current text-yellow-500" /> Customer Reviews
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-300 text-xs font-black tracking-wider uppercase mb-4 border border-amber-400/30 shadow-2xs">
+              <Star className="w-3.5 h-3.5 fill-current text-amber-500" /> Customer Reviews
             </div>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
-              Loved by Riders. <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600">Trusted Across Bengaluru.</span>
+              Loved by Riders. <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400">Trusted Across Bengaluru.</span>
             </h2>
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium">
               Real experiences from customers who chose expert doorstep service, transparent pricing, and zero workshop hassle.
@@ -2332,7 +2327,7 @@ YES BIKE SERVICE
             <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-3 md:gap-6 py-2.5 px-5 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 shadow-sm text-xs font-semibold text-gray-700 dark:text-gray-300">
               <div className="flex items-center gap-1.5">
                 <span className="text-sm font-black text-gray-900 dark:text-white">4.8</span>
-                <div className="flex text-yellow-500">
+                <div className="flex text-amber-400">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-current" />
                   ))}
@@ -2349,15 +2344,15 @@ YES BIKE SERVICE
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {/* Review 1 - Rahul M. */}
-            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-yellow-400/60 dark:hover:border-yellow-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
-              <div className="absolute top-6 right-6 text-yellow-500/20 group-hover:text-yellow-500/30 transition-colors pointer-events-none">
+            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-amber-400/70 dark:hover:border-amber-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
+              <div className="absolute top-6 right-6 text-amber-500/20 group-hover:text-amber-500/35 transition-colors pointer-events-none">
                 <Quote className="w-10 h-10 stroke-1 fill-current" />
               </div>
 
               <div>
                 {/* Header tags: Vehicle & Locality */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 text-[11px] font-bold border border-yellow-200/60 dark:border-yellow-500/20">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-300 text-[11px] font-bold border border-amber-400/30">
                     🏍️ Royal Enfield
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 text-[11px] font-medium">
@@ -2367,7 +2362,7 @@ YES BIKE SERVICE
 
                 {/* Stars & Timing */}
                 <div className="flex items-center justify-between gap-2 mb-5">
-                  <div className="flex items-center gap-1 text-yellow-500">
+                  <div className="flex items-center gap-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
@@ -2384,7 +2379,7 @@ YES BIKE SERVICE
               {/* Author Footer */}
               <div className="pt-5 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 text-black font-black flex items-center justify-center text-sm shadow-md shadow-yellow-500/20 shrink-0">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-zinc-950 font-black flex items-center justify-center text-sm shadow-md shadow-amber-500/25 shrink-0">
                     RM
                   </div>
                   <div>
@@ -2405,15 +2400,15 @@ YES BIKE SERVICE
             </div>
 
             {/* Review 2 - Sneha K. */}
-            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-yellow-400/60 dark:hover:border-yellow-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
-              <div className="absolute top-6 right-6 text-yellow-500/20 group-hover:text-yellow-500/30 transition-colors pointer-events-none">
+            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-amber-400/70 dark:hover:border-amber-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
+              <div className="absolute top-6 right-6 text-amber-500/20 group-hover:text-amber-500/35 transition-colors pointer-events-none">
                 <Quote className="w-10 h-10 stroke-1 fill-current" />
               </div>
 
               <div>
                 {/* Header tags: Vehicle & Locality */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 text-[11px] font-bold border border-yellow-200/60 dark:border-yellow-500/20">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-300 text-[11px] font-bold border border-amber-400/30">
                     🛵 Honda Activa
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 text-[11px] font-medium">
@@ -2423,7 +2418,7 @@ YES BIKE SERVICE
 
                 {/* Stars & Timing */}
                 <div className="flex items-center justify-between gap-2 mb-5">
-                  <div className="flex items-center gap-1 text-yellow-500">
+                  <div className="flex items-center gap-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
@@ -2440,7 +2435,7 @@ YES BIKE SERVICE
               {/* Author Footer */}
               <div className="pt-5 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 text-black font-black flex items-center justify-center text-sm shadow-md shadow-yellow-500/20 shrink-0">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-zinc-950 font-black flex items-center justify-center text-sm shadow-md shadow-amber-500/25 shrink-0">
                     SK
                   </div>
                   <div>
@@ -2461,15 +2456,15 @@ YES BIKE SERVICE
             </div>
 
             {/* Review 3 - Vikram S. */}
-            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-yellow-400/60 dark:hover:border-yellow-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
-              <div className="absolute top-6 right-6 text-yellow-500/20 group-hover:text-yellow-500/30 transition-colors pointer-events-none">
+            <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200/90 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-amber-400/70 dark:hover:border-amber-500/40 flex flex-col justify-between relative group hover:-translate-y-1.5 transition-all duration-300">
+              <div className="absolute top-6 right-6 text-amber-500/20 group-hover:text-amber-500/35 transition-colors pointer-events-none">
                 <Quote className="w-10 h-10 stroke-1 fill-current" />
               </div>
 
               <div>
                 {/* Header tags: Vehicle & Locality */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 text-[11px] font-bold border border-yellow-200/60 dark:border-yellow-500/20">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-300 text-[11px] font-bold border border-amber-400/30">
                     🏁 KTM Duke
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 text-[11px] font-medium">
@@ -2479,7 +2474,7 @@ YES BIKE SERVICE
 
                 {/* Stars & Timing */}
                 <div className="flex items-center justify-between gap-2 mb-5">
-                  <div className="flex items-center gap-1 text-yellow-500">
+                  <div className="flex items-center gap-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
@@ -2496,7 +2491,7 @@ YES BIKE SERVICE
               {/* Author Footer */}
               <div className="pt-5 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 text-black font-black flex items-center justify-center text-sm shadow-md shadow-yellow-500/20 shrink-0">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-zinc-950 font-black flex items-center justify-center text-sm shadow-md shadow-amber-500/25 shrink-0">
                     VS
                   </div>
                   <div>
@@ -2539,7 +2534,7 @@ YES BIKE SERVICE
 
             <a
               href="#home"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 hover:bg-yellow-500 hover:text-black dark:bg-white dark:text-black dark:hover:bg-yellow-400 text-white text-xs font-extrabold transition-all shadow-sm shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 hover:bg-amber-500 hover:text-zinc-950 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-400 text-white text-xs font-extrabold transition-all shadow-sm shrink-0"
             >
               Book Mechanic Now <ArrowRight className="w-3.5 h-3.5" />
             </a>
@@ -2552,7 +2547,7 @@ YES BIKE SERVICE
         <div className="max-w-4xl mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
-              Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600">Questions</span>
+              Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400">Questions</span>
             </h2>
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 font-medium">
               Everything you need to know about our doorstep service.
@@ -2587,31 +2582,31 @@ YES BIKE SERVICE
                   key={index}
                   className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
                     isOpen 
-                      ? 'bg-white dark:bg-zinc-900 border-yellow-400/80 dark:border-yellow-500/50 shadow-md ring-1 ring-yellow-400/20'
+                      ? 'bg-white dark:bg-zinc-900 border-amber-400/80 dark:border-amber-500/50 shadow-md ring-1 ring-amber-400/20'
                       : 'bg-gray-50 dark:bg-zinc-900/60 border-gray-200 dark:border-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700'
                   }`}
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : index)}
                     aria-expanded={isOpen}
-                    className="w-full text-left p-5 md:p-6 flex justify-between items-center gap-4 font-bold text-base md:text-lg text-gray-900 dark:text-white hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors cursor-pointer group"
+                    className="w-full text-left p-5 md:p-6 flex justify-between items-center gap-4 font-bold text-base md:text-lg text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer group"
                   >
                     <div className="flex items-center gap-3.5 md:gap-4 min-w-0">
                       <div className={`shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
                         isOpen 
-                          ? 'bg-yellow-500 text-black shadow-md shadow-yellow-500/25 scale-105 border border-yellow-400' 
-                          : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 group-hover:bg-yellow-500/20 group-hover:scale-105 border border-yellow-500/15'
+                          ? 'bg-amber-500 text-zinc-950 shadow-md shadow-amber-500/25 scale-105 border border-amber-400' 
+                          : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 group-hover:bg-amber-500/20 group-hover:scale-105 border border-amber-500/15'
                       }`}>
                         <IconComponent className="w-5 h-5 stroke-[2.2]" />
                       </div>
-                      <span className={`transition-colors duration-200 leading-snug ${isOpen ? 'text-yellow-600 dark:text-yellow-400' : ''}`}>
+                      <span className={`transition-colors duration-200 leading-snug ${isOpen ? 'text-amber-700 dark:text-amber-300' : ''}`}>
                         {faq.q}
                       </span>
                     </div>
 
                     <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                       isOpen 
-                        ? 'rotate-180 bg-yellow-500 text-black shadow-sm' 
+                        ? 'rotate-180 bg-amber-500 text-zinc-950 shadow-sm' 
                         : 'rotate-0 bg-white dark:bg-zinc-800 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white'
                     }`}>
                       <ChevronDown className="w-5 h-5 transition-transform duration-300" />
@@ -2641,23 +2636,23 @@ YES BIKE SERVICE
 
       {/* FOOTER */}
       <footer className="bg-[#0A0D14] text-zinc-300 pt-14 pb-24 md:pb-16 lg:pb-20 border-t border-zinc-800/90 relative overflow-hidden shadow-2xl">
-        {/* Sleek luminous golden accent line at top */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-80 pointer-events-none"></div>
+        {/* Sleek luminous amber accent line at top */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-80 pointer-events-none"></div>
 
         {/* Subtle background ambient glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-yellow-500/[0.05] blur-[140px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/[0.05] blur-[140px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/[0.04] blur-[140px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Pre-Footer Fast-Assistance Banner */}
-          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-yellow-500/20 via-zinc-900/95 to-amber-500/20 border border-yellow-500/35 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-sm">
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/15 via-zinc-900/95 to-amber-500/15 border border-amber-500/30 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-sm">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-500 text-black flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/30">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/25">
                 <Bike className="w-7 h-7 stroke-[2.2]" />
               </div>
               <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 text-[11px] font-black uppercase tracking-wider mb-1">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-black uppercase tracking-wider mb-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                   Instant Doorstep Mechanic in Bangalore
                 </span>
@@ -2676,7 +2671,7 @@ YES BIKE SERVICE
                   const form = document.getElementById('booking-form') || document.getElementById('home');
                   if (form) form.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xs sm:text-sm font-black transition-all shadow-lg shadow-yellow-500/25 transform hover:-translate-y-0.5 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black transition-all shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <Wrench className="w-4 h-4" />
                 <span>Book your service and repair today</span>
@@ -2704,8 +2699,8 @@ YES BIKE SERVICE
                   <span className="text-2xl font-black tracking-tight text-white block leading-tight">
                     YES BIKE SERVICE
                   </span>
-                  <span className="text-xs font-black uppercase tracking-wider text-yellow-400 flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                  <span className="text-xs font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
                     Doorstep Two-Wheeler Care
                   </span>
                 </div>
@@ -2723,9 +2718,9 @@ YES BIKE SERVICE
                     const form = document.getElementById('booking-form') || document.getElementById('home');
                     if (form) form.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5 cursor-pointer"
                 >
-                  <Wrench className="w-3.5 h-3.5 text-black" />
+                  <Wrench className="w-3.5 h-3.5 text-zinc-950" />
                   Book your service and repair today
                 </button>
                 <a
@@ -2758,7 +2753,7 @@ YES BIKE SERVICE
               {/* Payment Methods Accepted */}
               <div className="pt-2 border-t border-zinc-800/80">
                 <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <Wallet className="w-3.5 h-3.5 text-yellow-400" />
+                  <Wallet className="w-3.5 h-3.5 text-amber-400" />
                   100% Pay After Service • All Modes Accepted
                 </p>
                 <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-black text-zinc-300">
@@ -2774,7 +2769,7 @@ YES BIKE SERVICE
             {/* Column 2: Quick Links (lg:col-span-3) */}
             <div className="lg:col-span-3">
               <div className="flex items-center gap-2 mb-5 pb-2 border-b border-zinc-800">
-                <span className="w-2 h-2 rounded-full bg-yellow-400 shadow-xs shadow-yellow-400/50"></span>
+                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-xs shadow-amber-400/50"></span>
                 <h4 className="font-extrabold text-white uppercase tracking-wider text-xs">
                   Quick Links
                 </h4>
@@ -2782,9 +2777,8 @@ YES BIKE SERVICE
               <ul className="space-y-3 text-sm font-medium">
                 {[
                   { label: 'Home', href: '#home' },
+                  { label: 'Service Packages', href: '#pricing' },
                   { label: 'Bike Brands', href: '#brands' },
-                  { label: 'Services', href: '#services' },
-                  { label: 'Pricing', href: '#pricing' },
                   { label: 'How It Works', href: '#how-it-works' },
                   { label: 'Customer Reviews', href: '#reviews' },
                   { label: 'FAQ', href: '#faq' }
@@ -2792,9 +2786,9 @@ YES BIKE SERVICE
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      className="group inline-flex items-center gap-2 text-zinc-400 hover:text-yellow-400 transition-all hover:translate-x-1"
+                      className="group inline-flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-all hover:translate-x-1"
                     >
-                      <span className="text-yellow-400 font-bold text-base leading-none">›</span>
+                      <span className="text-amber-400 font-bold text-base leading-none">›</span>
                       <span>{item.label}</span>
                     </a>
                   </li>
@@ -2805,14 +2799,14 @@ YES BIKE SERVICE
             {/* Column 3: Contact & Dispatch (lg:col-span-4) */}
             <div className="lg:col-span-4">
               <div className="flex items-center gap-2 mb-5 pb-2 border-b border-zinc-800">
-                <span className="w-2 h-2 rounded-full bg-yellow-400 shadow-xs shadow-yellow-400/50"></span>
+                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-xs shadow-amber-400/50"></span>
                 <h4 className="font-extrabold text-white uppercase tracking-wider text-xs">
                   Contact & Dispatch
                 </h4>
               </div>
               <ul className="space-y-3.5 text-sm">
                 <li className="flex items-start gap-3 text-zinc-300">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-500/15 text-yellow-400 flex items-center justify-center shrink-0 mt-0.5 border border-yellow-500/25">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 border border-amber-500/25">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -2822,7 +2816,7 @@ YES BIKE SERVICE
                 </li>
 
                 <li className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-500/15 text-yellow-400 flex items-center justify-center shrink-0 border border-yellow-500/25">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/25">
                     <Wrench className="w-4 h-4" />
                   </div>
                   <div>
@@ -2832,7 +2826,7 @@ YES BIKE SERVICE
                         const form = document.getElementById('booking-form') || document.getElementById('home');
                         if (form) form.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="font-black text-white hover:text-yellow-400 transition-colors block text-sm cursor-pointer text-left"
+                      className="font-black text-white hover:text-amber-400 transition-colors block text-sm cursor-pointer text-left"
                     >
                       Book your service and repair today
                     </button>
@@ -2841,13 +2835,13 @@ YES BIKE SERVICE
                 </li>
 
                 <li className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-500/15 text-yellow-400 flex items-center justify-center shrink-0 border border-yellow-500/25">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/25">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
                     <a
                       href="mailto:help@yesbikeservice.in"
-                      className="font-bold text-white hover:text-yellow-400 transition-colors block text-sm"
+                      className="font-bold text-white hover:text-amber-400 transition-colors block text-sm"
                     >
                       help@yesbikeservice.in
                     </a>
@@ -2856,7 +2850,7 @@ YES BIKE SERVICE
                 </li>
 
                 <li className="flex items-center gap-3 text-zinc-300">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-500/15 text-yellow-400 flex items-center justify-center shrink-0 border border-yellow-500/25">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/25">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
@@ -2878,7 +2872,7 @@ YES BIKE SERVICE
           <div className="mb-12 pt-8 pb-4 border-t border-zinc-800/80">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-yellow-400" />
+                <MapPin className="w-4 h-4 text-amber-400" />
                 <span className="text-xs font-black uppercase tracking-wider text-white">
                   Popular Bangalore Localities Covered (Click to Select)
                 </span>
@@ -2902,7 +2896,7 @@ YES BIKE SERVICE
                     const form = document.getElementById('booking-form') || document.getElementById('home');
                     if (form) form.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-yellow-500 hover:text-yellow-300 hover:bg-zinc-800 transition-all hover:scale-105 shadow-xs cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-amber-400 hover:text-amber-300 hover:bg-zinc-800 transition-all hover:scale-105 shadow-xs cursor-pointer"
                 >
                   📍 {locality}
                 </button>
@@ -2924,14 +2918,14 @@ YES BIKE SERVICE
               <div className="flex items-center gap-3 font-semibold">
                 <button
                   onClick={() => { setCurrentView('privacy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="text-zinc-400 hover:text-yellow-400 underline-offset-4 hover:underline transition-colors cursor-pointer"
+                  className="text-zinc-400 hover:text-amber-400 underline-offset-4 hover:underline transition-colors cursor-pointer"
                 >
                   Privacy Policy
                 </button>
                 <span className="text-zinc-700">|</span>
                 <button
                   onClick={() => { setCurrentView('terms'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="text-zinc-400 hover:text-yellow-400 underline-offset-4 hover:underline transition-colors cursor-pointer"
+                  className="text-zinc-400 hover:text-amber-400 underline-offset-4 hover:underline transition-colors cursor-pointer"
                 >
                   Terms of Service
                 </button>
@@ -2939,7 +2933,7 @@ YES BIKE SERVICE
 
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-850 hover:bg-yellow-400 hover:text-black text-zinc-200 font-bold transition-all shadow-sm border border-zinc-750 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-850 hover:bg-amber-400 hover:text-zinc-950 text-zinc-200 font-bold transition-all shadow-sm border border-zinc-750 cursor-pointer"
                 aria-label="Back to top"
               >
                 <span>Top</span>
@@ -2961,17 +2955,17 @@ YES BIKE SERVICE
                 <div className="min-w-0 flex-1">
                   <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
                   {selectedPackage && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-500/10 dark:bg-yellow-400/10 rounded-md border border-yellow-500/20 text-xs">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500/10 dark:bg-amber-400/10 rounded-md border border-amber-500/20 text-xs">
                       <span className="font-extrabold text-gray-900 dark:text-white truncate">
                         {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
                       </span>
                       {selectedPackage.name.includes("Jump Start") ? (
                         <span className="flex items-center gap-1 shrink-0">
                           <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
-                          <span className="font-black text-amber-600 dark:text-yellow-400">{selectedPackage.price}</span>
+                          <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
                         </span>
                       ) : (
-                        <span className="font-black text-amber-600 dark:text-yellow-400 shrink-0">{selectedPackage.price}</span>
+                        <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
                       )}
                     </div>
                   )}
@@ -3077,7 +3071,7 @@ YES BIKE SERVICE
                 {/* Brand & Model */}
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
                       <Tag className="h-3.5 w-3.5" />
                     </div>
                     <select 
@@ -3085,7 +3079,7 @@ YES BIKE SERVICE
                       required 
                       value={modalBrand} 
                       onChange={(e) => setModalBrand(e.target.value)} 
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
                     >
                       <option value="" disabled>Select Brand</option>
                       {Object.keys(MODELS_BY_BRAND).map(brand => (
@@ -3098,14 +3092,14 @@ YES BIKE SERVICE
                   </div>
 
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
                       <Bike className="h-3.5 w-3.5" />
                     </div>
                     <select 
                       name="model" 
                       required 
                       defaultValue="" 
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer disabled:opacity-50 truncate" 
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer disabled:opacity-50 truncate" 
                       disabled={!modalBrand}
                     >
                       <option value="" disabled>{modalBrand ? "Select Model" : "Brand First"}</option>
@@ -3122,7 +3116,7 @@ YES BIKE SERVICE
                 {/* Customer Name & Phone */}
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
                       <User className="h-3.5 w-3.5" />
                     </div>
                     <input 
@@ -3131,7 +3125,7 @@ YES BIKE SERVICE
                       required 
                       autoComplete="name"
                       placeholder="Your Name" 
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400" 
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400" 
                     />
                   </div>
                   <div className="relative group">
@@ -3157,7 +3151,7 @@ YES BIKE SERVICE
                 
                 {/* Location / Address */}
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
                     <MapPin className="h-3.5 w-3.5" />
                   </div>
                   <input 
@@ -3165,20 +3159,20 @@ YES BIKE SERVICE
                     name="location" 
                     required 
                     placeholder="Locality / Address in Bengaluru" 
-                    className="w-full h-9 sm:h-9.5 pl-7 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400"
+                    className="w-full h-9 sm:h-9.5 pl-7 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400"
                   />
                 </div>
 
                 {/* Service Dropdown */}
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-yellow-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
                     <Wrench className="h-3.5 w-3.5" />
                   </div>
                   <select 
                     name="service" 
                     required 
                     defaultValue={selectedPackage ? `${selectedPackage.name} - ${selectedPackage.price}` : ""} 
-                    className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
+                    className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
                   >
                     <option value="" disabled>Select Service Type</option>
                     {QUICK_SERVICE_OPTIONS.map((opt) => (
@@ -3194,7 +3188,7 @@ YES BIKE SERVICE
                 <div className="grid grid-cols-2 gap-2">
                   {/* Calendar Date Input */}
                   <div className="relative group min-w-0">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400 group-focus-within:text-amber-500 transition-colors">
                       <Calendar className="h-3.5 w-3.5 shrink-0" />
                     </div>
                     <input 
@@ -3204,14 +3198,14 @@ YES BIKE SERVICE
                       min={getTodayIST()}
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
                       title="Calendar (Select Service Date)"
                     />
                   </div>
 
                   {/* Time Input */}
                   <div className="relative group min-w-0">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-yellow-600 dark:text-yellow-400 group-focus-within:text-yellow-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400 group-focus-within:text-amber-500 transition-colors">
                       <Clock className="h-3.5 w-3.5 shrink-0" />
                     </div>
                     <input 
@@ -3220,7 +3214,7 @@ YES BIKE SERVICE
                       required 
                       value={bookingTime}
                       onChange={(e) => setBookingTime(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-yellow-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
                       title="Time (Select Service Time)"
                     />
                   </div>
@@ -3229,7 +3223,7 @@ YES BIKE SERVICE
               
               <button 
                 type="submit" 
-                className="w-full relative group overflow-hidden bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1.5 active:scale-[0.98]"
+                className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1.5 active:scale-[0.98]"
               >
                 <span className="relative z-10 flex items-center justify-center gap-1.5 text-center">
                   <span>Submit the booking</span>
@@ -3257,7 +3251,7 @@ YES BIKE SERVICE
           <div className="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl animate-in zoom-in-95 overflow-hidden flex flex-col max-h-[88dvh] sm:max-h-[85vh]">
             <div className="p-4 sm:p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-yellow-500/15 dark:bg-yellow-500/20 rounded-xl text-yellow-600 dark:text-yellow-400">
+                <div className="p-2.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-xl text-amber-600 dark:text-amber-400">
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
@@ -3286,7 +3280,7 @@ YES BIKE SERVICE
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="text-xs font-black tracking-wider text-gray-900 dark:text-white uppercase flex items-center gap-2">
-                      <Wrench className="w-4 h-4 text-yellow-500" /> Included Service Checklist
+                      <Wrench className="w-4 h-4 text-amber-500" /> Included Service Checklist
                     </h4>
                     <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">
                       {technicalDetailsContent.steps.length} Inspection Points
@@ -3306,7 +3300,7 @@ YES BIKE SERVICE
               {/* Genuine Spares */}
               <div>
                 <h4 className="text-xs font-black tracking-wider text-gray-900 dark:text-white uppercase mb-3 flex items-center gap-2">
-                  <Cog className="w-4 h-4 text-yellow-500" /> 100% Genuine Parts & Consumables
+                  <Cog className="w-4 h-4 text-amber-500" /> 100% Genuine Parts & Consumables
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                   <div className="p-3.5 rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50/80 dark:bg-zinc-900/50">
@@ -3331,7 +3325,7 @@ YES BIKE SERVICE
               {/* Mechanic Certification & Warranty */}
               <div>
                 <h4 className="text-xs font-black tracking-wider text-gray-900 dark:text-white uppercase mb-3 flex items-center gap-2">
-                  <User className="w-4 h-4 text-yellow-500" /> Mechanic Certification & 1-Month Warranty
+                  <User className="w-4 h-4 text-amber-500" /> Mechanic Certification & 1-Month Warranty
                 </h4>
                 <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50/60 dark:bg-emerald-900/10">
                   <ul className="space-y-2.5">
@@ -3366,7 +3360,7 @@ YES BIKE SERVICE
                   setSelectedPackage({ name: 'General Service', price: '₹699' });
                   setIsPackageModalOpen(true);
                 }}
-                className="flex-1 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
+                className="flex-1 py-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/25 cursor-pointer"
               >
                 <span>🚀 Book General Service (₹699)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -3401,7 +3395,7 @@ YES BIKE SERVICE
             {/* Modal Header */}
             <div className="p-4 sm:p-5 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between bg-gray-50/70 dark:bg-zinc-900/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-yellow-500/15 text-yellow-600 dark:text-yellow-400 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -3433,7 +3427,7 @@ YES BIKE SERVICE
                   applySameTime(timePickerTarget);
                   setIsTimePickerOpen(false);
                 }}
-                className="w-full p-3 rounded-2xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-black font-black text-xs sm:text-sm flex items-center justify-between shadow-md shadow-yellow-500/25 transition-all active:scale-[0.98] cursor-pointer group text-left border border-yellow-300"
+                className="w-full p-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm flex items-center justify-between shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer group text-left border border-amber-300"
               >
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-black/10 flex items-center justify-center shrink-0">
@@ -3460,8 +3454,8 @@ YES BIKE SERVICE
 
               {/* Feedback banner when Same Time is tapped */}
               {pickerNotice && (
-                <div className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-yellow-300 text-xs font-bold text-center flex items-center justify-center gap-1.5 animate-in fade-in duration-150">
-                  <Clock className="w-3.5 h-3.5 text-yellow-500 shrink-0" />
+                <div className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-300 text-xs font-bold text-center flex items-center justify-center gap-1.5 animate-in fade-in duration-150">
+                  <Clock className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                   <span>{pickerNotice}</span>
                 </div>
               )}
@@ -3476,7 +3470,7 @@ YES BIKE SERVICE
                     <span className="block text-[9px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">Hour</span>
                   </div>
                   
-                  <span className="text-2xl font-black text-yellow-500 animate-pulse">:</span>
+                  <span className="text-2xl font-black text-amber-500 animate-pulse">:</span>
 
                   <div className="px-3.5 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 shadow-sm text-center">
                     <span className="text-2xl sm:text-3xl font-black font-mono text-gray-900 dark:text-white tracking-tight">
@@ -3493,7 +3487,7 @@ YES BIKE SERVICE
                     onClick={() => setPickerPeriod('AM')}
                     className={`px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
                       pickerPeriod === 'AM'
-                        ? 'bg-yellow-500 text-black shadow-sm'
+                        ? 'bg-amber-500 text-zinc-950 shadow-sm'
                         : 'text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                     }`}
                   >
@@ -3504,7 +3498,7 @@ YES BIKE SERVICE
                     onClick={() => setPickerPeriod('PM')}
                     className={`px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
                       pickerPeriod === 'PM'
-                        ? 'bg-yellow-500 text-black shadow-sm'
+                        ? 'bg-amber-500 text-zinc-950 shadow-sm'
                         : 'text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                     }`}
                   >
@@ -3524,47 +3518,47 @@ YES BIKE SERVICE
                     onClick={() => {
                       applySameTime(timePickerTarget);
                     }}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-950 dark:text-yellow-300 border border-yellow-500/40 transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-950 dark:text-amber-300 border border-amber-500/40 transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shadow-2xs"
                   >
                     <span className="relative flex h-2 w-2 shrink-0">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    <Clock className="w-3 h-3 text-yellow-600 dark:text-yellow-400" />
+                    <Clock className="w-3 h-3 text-amber-600 dark:text-amber-400" />
                     <span>⚡ Simple Same Time ({liveClockTime})</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => handlePresetOffset(30)}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-yellow-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-amber-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
                   >
                     +30 Mins
                   </button>
                   <button
                     type="button"
                     onClick={() => handlePresetOffset(60)}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-yellow-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-amber-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
                   >
                     +1 Hour
                   </button>
                   <button
                     type="button"
                     onClick={() => { setPickerHour(10); setPickerMinute('00'); setPickerPeriod('AM'); }}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-yellow-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-amber-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
                   >
                     10:00 AM
                   </button>
                   <button
                     type="button"
                     onClick={() => { setPickerHour(2); setPickerMinute('00'); setPickerPeriod('PM'); }}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-yellow-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-amber-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
                   >
                     02:00 PM
                   </button>
                   <button
                     type="button"
                     onClick={() => { setPickerHour(5); setPickerMinute('00'); setPickerPeriod('PM'); }}
-                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-yellow-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-zinc-800 hover:bg-amber-500/15 text-gray-700 dark:text-zinc-300 border border-gray-200/60 dark:border-zinc-700/60 transition-all cursor-pointer"
                   >
                     05:00 PM
                   </button>
@@ -3586,7 +3580,7 @@ YES BIKE SERVICE
                         onClick={() => setPickerHour(h)}
                         className={`h-10 rounded-xl font-bold font-mono text-sm transition-all cursor-pointer flex items-center justify-center ${
                           isSelected
-                            ? 'bg-yellow-500 text-black font-black shadow-md ring-2 ring-yellow-400'
+                            ? 'bg-amber-500 text-zinc-950 font-black shadow-md ring-2 ring-amber-400'
                             : 'bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-700 border border-gray-200/40 dark:border-zinc-700/40'
                         }`}
                       >
@@ -3612,7 +3606,7 @@ YES BIKE SERVICE
                         onClick={() => setPickerMinute(m)}
                         className={`h-9 rounded-xl font-bold font-mono text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-center ${
                           isSelected
-                            ? 'bg-yellow-500 text-black font-black shadow-md ring-2 ring-yellow-400'
+                            ? 'bg-amber-500 text-zinc-950 font-black shadow-md ring-2 ring-amber-400'
                             : 'bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-700 border border-gray-200/40 dark:border-zinc-700/40'
                         }`}
                       >
@@ -3631,14 +3625,14 @@ YES BIKE SERVICE
                 <button
                   type="button"
                   onClick={handlePickerSameTime}
-                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 text-amber-900 dark:text-yellow-300 font-black text-xs sm:text-sm border border-yellow-500/40 transition-all active:scale-[0.98] cursor-pointer shadow-xs"
+                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-900 dark:text-amber-300 font-black text-xs sm:text-sm border border-amber-500/40 transition-all active:scale-[0.98] cursor-pointer shadow-xs"
                   title="Sync to current live system time"
                 >
                   <span className="relative flex h-2 w-2 shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <Clock className="w-4 h-4 text-yellow-600 dark:text-yellow-400 shrink-0" />
+                  <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span className="truncate">Simple Same Time</span>
                 </button>
 
@@ -3668,7 +3662,7 @@ YES BIKE SERVICE
                 <button
                   type="button"
                   onClick={handlePickerSet}
-                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-black text-xs sm:text-sm shadow-md shadow-yellow-500/25 transition-all active:scale-[0.98] cursor-pointer"
+                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer"
                   title="Apply and set selected time"
                 >
                   <Check className="w-4 h-4 stroke-[3] shrink-0" />
@@ -3707,7 +3701,7 @@ YES BIKE SERVICE
               }, 100);
             }
           }}
-          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight"
+          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight"
         >
           <Wrench className="w-3.5 h-3.5 shrink-0" />
           <span>Book your service and repair today</span>
@@ -3722,7 +3716,7 @@ YES BIKE SERVICE
         <main className="pt-24 sm:pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 animate-in fade-in duration-300">
           <button
             onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-yellow-400 hover:text-black dark:bg-zinc-800 dark:hover:bg-yellow-400 dark:hover:text-black text-gray-800 dark:text-zinc-200 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-amber-400 hover:text-zinc-950 dark:bg-zinc-800 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-gray-800 dark:text-zinc-200 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95"
           >
             ← Back to Home
           </button>
@@ -3740,12 +3734,12 @@ YES BIKE SERVICE
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">3. Data Protection & Security</h2>
               <p>We respect customer privacy and do not sell, rent, or trade your personal information to third parties or marketing brokers. All communication is securely handled.</p>
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">4. Contact & Inquiries</h2>
-              <p>For any privacy-related questions, reach out to our team at <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a>.</p>
+              <p>For any privacy-related questions, reach out to our team at <a href="mailto:help@yesbikeservice.in" className="text-amber-600 dark:text-amber-400 font-bold underline">help@yesbikeservice.in</a>.</p>
             </div>
             <div className="pt-4 border-t border-gray-100 dark:border-zinc-800">
               <button
                 onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-black text-sm cursor-pointer shadow-md transition-all active:scale-95"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm cursor-pointer shadow-md shadow-amber-500/25 transition-all active:scale-95"
               >
                 Return to Homepage
               </button>
@@ -3759,7 +3753,7 @@ YES BIKE SERVICE
         <main className="pt-24 sm:pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 animate-in fade-in duration-300">
           <button
             onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-yellow-400 hover:text-black dark:bg-zinc-800 dark:hover:bg-yellow-400 dark:hover:text-black text-gray-800 dark:text-zinc-200 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-amber-400 hover:text-zinc-950 dark:bg-zinc-800 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-gray-800 dark:text-zinc-200 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95"
           >
             ← Back to Home
           </button>
@@ -3777,12 +3771,12 @@ YES BIKE SERVICE
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">3. Service Warranty</h2>
               <p>Qualifying general services carry a 500 km or 1-month warranty on workmanship for inspected components. The warranty applies under standard riding conditions.</p>
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pt-2">4. Support & Rescheduling</h2>
-              <p>Need to reschedule or have questions? Email us at <a href="mailto:help@yesbikeservice.in" className="text-yellow-600 dark:text-yellow-400 font-bold underline">help@yesbikeservice.in</a> or book online anytime.</p>
+              <p>Need to reschedule or have questions? Email us at <a href="mailto:help@yesbikeservice.in" className="text-amber-600 dark:text-amber-400 font-bold underline">help@yesbikeservice.in</a> or book online anytime.</p>
             </div>
             <div className="pt-4 border-t border-gray-100 dark:border-zinc-800">
               <button
                 onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-black text-sm cursor-pointer shadow-md transition-all active:scale-95"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm cursor-pointer shadow-md shadow-amber-500/25 transition-all active:scale-95"
               >
                 Return to Homepage
               </button>

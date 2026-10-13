@@ -21,7 +21,7 @@ export const YesBikeLogo: React.FC<YesBikeLogoProps> = ({
       alt={alt}
       width={size}
       height={size}
-      className={`rounded-full object-cover shadow-sm ring-1 ring-yellow-400/40 shrink-0 select-none ${className}`}
+      className={`rounded-full object-cover shadow-sm ring-1 ring-amber-400/40 shrink-0 select-none ${className}`}
       referrerPolicy="no-referrer"
     />
   );
