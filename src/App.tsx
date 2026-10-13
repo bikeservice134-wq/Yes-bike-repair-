@@ -755,8 +755,8 @@ YES BIKE SERVICE
                   <span className="text-base font-black tracking-tight leading-tight block text-gray-900 dark:text-white">
                     <span className="text-amber-500 dark:text-amber-400">YES</span> BIKE SERVICE
                   </span>
-                  <span className="text-[11px] font-semibold text-gray-500 dark:text-zinc-400">
-                    Doorstep Two-Wheeler Care • Bengaluru
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-gray-500 dark:text-zinc-400">
+                    Bengaluru's Trusted Two-Wheeler Care • Doorstep Service
                   </span>
                 </div>
               </div>
@@ -831,11 +831,11 @@ YES BIKE SERVICE
             <FadeIn>
               <div className="max-w-xl w-full mx-auto px-3.5 relative z-10 flex flex-col items-center text-center">
                 {/* Simple Tagline */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 text-xs font-bold mb-2.5">
-                  <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-                  <span>Bengaluru's Trusted Two-Wheeler Care</span>
-                  <span className="opacity-40">•</span>
-                  <span>Doorstep Service</span>
+                <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 mb-2.5 shadow-2xs max-w-full">
+                  <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+                  <span className="text-[10px] sm:text-xs font-bold whitespace-nowrap">Bengaluru's Trusted Two-Wheeler Care</span>
+                  <span className="opacity-40 shrink-0 text-[10px] sm:text-xs">•</span>
+                  <span className="text-[9.5px] sm:text-[11px] font-semibold text-amber-700 dark:text-amber-300 shrink-0 whitespace-nowrap">Doorstep Service</span>
                 </div>
 
                 {/* Main Headline */}
