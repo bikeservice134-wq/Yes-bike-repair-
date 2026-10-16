@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
-  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send } from 'lucide-react';
+  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send,
+  ClipboardList, FileText, ListChecks
+} from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
 
 // Reusable FadeIn Component
@@ -206,7 +208,158 @@ const QUICK_SERVICE_OPTIONS = [
   { id: "Running Repair - ₹450", name: "Running Repair", price: "₹450", note: "Vehicle inspection & quick repairs at doorstep", badge: "Quick Fix" },
 ];
 
-
+const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> = {
+  'General Service': {
+    title: 'General Service (₹699)',
+    steps: [
+      'Air Filter Cleaning & Intake Inspection',
+      'Battery Voltage Check & Terminal Cleaning',
+      'Brake Check & Service (Front & Rear Shoe/Disc Inspection & Calibration)',
+      'Cables & Levers Adjustment (Clutch, Brake & Throttle Free Play)',
+      'Chain Tension Check, Slack Calibration & Synthetic Lubrication',
+      'Clutch Greasing & Smooth Engagement Calibration',
+      'Dry Wash & Exterior Detailing',
+      'Electrical Check-up (Headlight, Tail Light, Indicators & Horn Circuit)',
+      'Engine Oil Level, Viscosity & Contamination Check',
+      'Greasing & Lubrication of Vital Pivot Points & Bearings',
+      'Oil Leakage Check & Gasket/Seal Inspection',
+      'Spark Plug Cleaning, Carbon Removal & Gap Calibration'
+    ]
+  },
+  'General Service - ₹699': {
+    title: 'General Service (₹699)',
+    steps: [
+      'Air Filter Cleaning & Intake Inspection',
+      'Battery Voltage Check & Terminal Cleaning',
+      'Brake Check & Service (Front & Rear Shoe/Disc Inspection & Calibration)',
+      'Cables & Levers Adjustment (Clutch, Brake & Throttle Free Play)',
+      'Chain Tension Check, Slack Calibration & Synthetic Lubrication',
+      'Clutch Greasing & Smooth Engagement Calibration',
+      'Dry Wash & Exterior Detailing',
+      'Electrical Check-up (Headlight, Tail Light, Indicators & Horn Circuit)',
+      'Engine Oil Level, Viscosity & Contamination Check',
+      'Greasing & Lubrication of Vital Pivot Points & Bearings',
+      'Oil Leakage Check & Gasket/Seal Inspection',
+      'Spark Plug Cleaning, Carbon Removal & Gap Calibration'
+    ]
+  },
+  'General Service with Engine Oil': {
+    title: 'General Service with Engine Oil (₹1,349)',
+    steps: [
+      'Air Filter Cleaning & Intake Duct Inspection',
+      'Battery Voltage Check, Terminal Cleaning & Charging Health Test',
+      'Brake Service (Front & Rear Shoe/Disc Inspection, Pad Dusting & Free Play Adjustment)',
+      'Cables & Levers Adjustment (Clutch, Front/Rear Brake & Throttle Slack Calibration)',
+      'Chain Tension Check, Alignment & High-Tack Synthetic Chain Lubrication',
+      'Clutch Greasing & Smooth Friction Plate Engagement Check',
+      'Dry Wash & Premium Exterior Body Detailing',
+      'Electrical Check-up (Headlight, Tail/Brake Light, Indicators, Switchgears & Horn Circuit)',
+      'Engine Oil Change (Draining old degraded oil & refilling fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
+      'Greasing & Lubrication of Vital Pivot Points, Center Stand & Side Stand Bearings',
+      'Oil Leakage Check & Engine Gasket / Sump Drain Washer Inspection',
+      'Spark Plug Cleaning, Carbon Sludge Removal & Electrode Gap Calibration'
+    ]
+  },
+  'General Service with Engine Oil - ₹1,349': {
+    title: 'General Service with Engine Oil (₹1,349)',
+    steps: [
+      'Air Filter Cleaning & Intake Duct Inspection',
+      'Battery Voltage Check, Terminal Cleaning & Charging Health Test',
+      'Brake Service (Front & Rear Shoe/Disc Inspection, Pad Dusting & Free Play Adjustment)',
+      'Cables & Levers Adjustment (Clutch, Front/Rear Brake & Throttle Slack Calibration)',
+      'Chain Tension Check, Alignment & High-Tack Synthetic Chain Lubrication',
+      'Clutch Greasing & Smooth Friction Plate Engagement Check',
+      'Dry Wash & Premium Exterior Body Detailing',
+      'Electrical Check-up (Headlight, Tail/Brake Light, Indicators, Switchgears & Horn Circuit)',
+      'Engine Oil Change (Draining old degraded oil & refilling fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
+      'Greasing & Lubrication of Vital Pivot Points, Center Stand & Side Stand Bearings',
+      'Oil Leakage Check & Engine Gasket / Sump Drain Washer Inspection',
+      'Spark Plug Cleaning, Carbon Sludge Removal & Electrode Gap Calibration'
+    ]
+  },
+  'Jump Start Service': {
+    title: '⚡ Jump Start Service (/₹600/ ₹399)',
+    steps: [
+      '• Available at Your Doorstep across Bengaluru',
+      '• 30 Minutes Service Time rapid response',
+      '• Quick Battery Jump Start with commercial 12V high-cranking booster',
+      '• For Bikes & Scooters (all brands & models)',
+      'Resting Voltage & Cranking Voltage Drop Diagnostic Test',
+      'Alternator / Magneto Coil Output Voltage Evaluation at 3000 RPM',
+      'RR (Rectifier Regulator) Health & Parasitic Battery Drain Check',
+      'Terminal Sulphation & Acid Corrosion Removal',
+      'Lead Wire Re-Torque & Anti-Oxidation Protective Coating'
+    ]
+  },
+  'Jump Start Service - ₹399': {
+    title: '⚡ Jump Start Service (/₹600/ ₹399)',
+    steps: [
+      '• Available at Your Doorstep across Bengaluru',
+      '• 30 Minutes Service Time rapid response',
+      '• Quick Battery Jump Start with commercial 12V high-cranking booster',
+      '• For Bikes & Scooters (all brands & models)',
+      'Resting Voltage & Cranking Voltage Drop Diagnostic Test',
+      'Alternator / Magneto Coil Output Voltage Evaluation at 3000 RPM',
+      'RR (Rectifier Regulator) Health & Parasitic Battery Drain Check',
+      'Terminal Sulphation & Acid Corrosion Removal',
+      'Lead Wire Re-Torque & Anti-Oxidation Protective Coating'
+    ]
+  },
+  'Puncture Repair': {
+    title: 'Puncture Repair (₹599)',
+    steps: [
+      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
+      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
+      'Bubble Leak Diagnostic & Foreign Object (Nail/Glass) Removal',
+      '🛞 Complete One Tyre Puncture Repair using High-Grade Self-Vulcanizing Plug',
+      'Heavy-Duty Cold Vulcanizing Adhesive Application for Maximum Seal',
+      '➕ Transparent Rate: ₹100 Extra for Each Additional Tyre Puncture Found',
+      'Accurate Cold Tyre Pressure Inflation to OEM PSI Specs',
+      'Schrader Valve Core Tightening & Rim Bead Leak Inspection'
+    ]
+  },
+  'Puncture Repair - ₹599': {
+    title: 'Puncture Repair (₹599)',
+    steps: [
+      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
+      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
+      'Bubble Leak Diagnostic & Foreign Object (Nail/Glass) Removal',
+      '🛞 Complete One Tyre Puncture Repair using High-Grade Self-Vulcanizing Plug',
+      'Heavy-Duty Cold Vulcanizing Adhesive Application for Maximum Seal',
+      '➕ Transparent Rate: ₹100 Extra for Each Additional Tyre Puncture Found',
+      'Accurate Cold Tyre Pressure Inflation to OEM PSI Specs',
+      'Schrader Valve Core Tightening & Rim Bead Leak Inspection'
+    ]
+  },
+  'Running Repair': {
+    title: 'Running Repair (₹450)',
+    steps: [
+      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
+      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
+      '🔍 Comprehensive Multi-Point Vehicle Health Inspection',
+      'Starting Problem, Battery Voltage & Spark Diagnostic',
+      'Clutch & Throttle Free-Play Adjustment & Cable Lubrication',
+      'Front & Rear Brake Lever/Pedal Travel Inspection & Adjustment',
+      'Drive Chain Slack Check, Alignment & Lubrication',
+      'Loose Fastener, Nut & Bolt Tightening',
+      '🛠️ Transparent Pricing: Minor Adjustments Covered; Genuine Parts & Overhauls Charged with Prior Approval'
+    ]
+  },
+  'Running Repair - ₹450': {
+    title: 'Running Repair (₹450)',
+    steps: [
+      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
+      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
+      '🔍 Comprehensive Multi-Point Vehicle Health Inspection',
+      'Starting Problem, Battery Voltage & Spark Diagnostic',
+      'Clutch & Throttle Free-Play Adjustment & Cable Lubrication',
+      'Front & Rear Brake Lever/Pedal Travel Inspection & Adjustment',
+      'Drive Chain Slack Check, Alignment & Lubrication',
+      'Loose Fastener, Nut & Bolt Tightening',
+      '🛠️ Transparent Pricing: Minor Adjustments Covered; Genuine Parts & Overhauls Charged with Prior Approval'
+    ]
+  }
+};
 
 const Toast = ({ message, onClose }: { message: string, onClose: () => void }) => {
   useEffect(() => { const timer = setTimeout(onClose, 3000); return () => clearTimeout(timer); }, [onClose]);
@@ -619,7 +772,7 @@ YES BIKE SERVICE
     {
       q: "3. How do I book a doorstep bike mechanic?",
       schemaQ: "How do I book a doorstep bike mechanic?",
-      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, and click Book your service and repair today. Our certified mechanic is assigned for your selected slot.",
+      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, and click Submit the booking form. Our certified mechanic is assigned for your selected slot.",
       icon: Calendar
     },
     {
@@ -838,20 +991,49 @@ YES BIKE SERVICE
                   <span className="text-[9.5px] sm:text-[11px] font-semibold text-amber-700 dark:text-amber-300 shrink-0 whitespace-nowrap">Doorstep Service</span>
                 </div>
 
-                {/* Main Headline */}
+                {/* Animated Main Headline */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2.5">
-                  Doorstep Bike Repair &amp; Service{' '}
-                  <span className="text-amber-500 dark:text-amber-400">in Bengaluru</span>
+                  <span className="inline-block transition-transform duration-300">
+                    Doorstep Bike Repair &amp; Service
+                  </span>{' '}
+                  <span className="inline-block relative">
+                    <span className="animate-gradient-flow bg-gradient-to-r from-amber-600 via-amber-400 via-yellow-400 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:via-amber-300 dark:to-amber-400 bg-clip-text text-transparent font-black">
+                      in Bengaluru
+                    </span>
+                    {/* Live location pulse ping */}
+                    <span className="inline-flex relative ml-1 sm:ml-1.5 -top-2.5 sm:-top-3.5">
+                      <span className="animate-ping absolute inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-amber-500 shadow-sm shadow-amber-500/50"></span>
+                    </span>
+                  </span>
                 </h1>
 
-                {/* Subtitle */}
+                {/* Animated Subtitle */}
                 <div className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
-                  <p className="font-semibold text-gray-800 dark:text-zinc-200 text-sm sm:text-base">
-                    Professional bike &amp; scooter service at your home or office.
+                  <p className="font-semibold text-gray-800 dark:text-zinc-200 text-sm sm:text-base animate-subtle-float">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50/90 dark:bg-zinc-900/90 border border-gray-200/80 dark:border-zinc-800/80 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                      <span>Professional bike &amp; scooter service at your home or office.</span>
+                    </span>
                   </p>
-                  <p className="mt-1 text-gray-600 dark:text-zinc-400 font-medium">
-                    Book in 30 seconds. Get a mechanic at your doorstep.
-                  </p>
+                  
+                  {/* Animated Book in 30 seconds pill with shimmer sweep & live ping */}
+                  <div className="mt-2 inline-flex items-center justify-center relative overflow-hidden rounded-full bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-amber-500/15 dark:from-amber-400/20 dark:via-amber-400/10 dark:to-amber-400/20 border border-amber-500/30 px-3.5 sm:px-4 py-1 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200 shadow-xs shadow-amber-500/5">
+                    <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent animate-badge-shimmer pointer-events-none"></span>
+                    <span className="relative flex items-center gap-1.5 sm:gap-2">
+                      <span className="flex items-center justify-center w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black shrink-0 animate-pulse">
+                        ⚡
+                      </span>
+                      <span>
+                        <strong className="font-black text-amber-950 dark:text-amber-100">Book in 30 seconds.</strong>{' '}
+                        <span className="text-amber-900/90 dark:text-amber-300">Get a mechanic at your doorstep.</span>
+                      </span>
+                      <span className="relative flex h-2 w-2 shrink-0">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                    </span>
+                  </div>
                 </div>
 
                 {/* 4. Trust Highlights */}
@@ -1117,27 +1299,45 @@ YES BIKE SERVICE
                             </div>
                           </div>
 
-                          {/* Service Dropdown */}
-                          <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                              <Wrench className="h-3.5 w-3.5 text-amber-500" />
+                          {/* Service Dropdown & Service Details Quick Link */}
+                          <div className="space-y-1">
+                            <div className="relative group">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                                <Wrench className="h-3.5 w-3.5 text-amber-500" />
+                              </div>
+                              <select 
+                                name="service" 
+                                required 
+                                value={heroService} 
+                                onChange={(e) => setHeroService(e.target.value)} 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                              >
+                                {QUICK_SERVICE_OPTIONS.map(opt => (
+                                  <option key={opt.id} value={opt.id} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">
+                                    {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
+                                    {opt.name} ({opt.price})
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-zinc-400">
+                                <ChevronDown className="h-3 w-3" />
+                              </div>
                             </div>
-                            <select 
-                              name="service" 
-                              required 
-                              value={heroService} 
-                              onChange={(e) => setHeroService(e.target.value)} 
-                              className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-zinc-200 dark:ring-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
-                            >
-                              {QUICK_SERVICE_OPTIONS.map(opt => (
-                                <option key={opt.id} value={opt.id} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">
-                                  {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
-                                  {opt.name} ({opt.price})
-                                </option>
-                              ))}
-                            </select>
-                            <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-zinc-400">
-                              <ChevronDown className="h-3 w-3" />
+
+                            {/* Service Details Action with Icon */}
+                            <div className="flex items-center justify-end px-0.5">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const details = SERVICE_DETAILS_DATA[heroService] || SERVICE_DETAILS_DATA['General Service'];
+                                  setTechnicalDetailsContent(details);
+                                  setIsTechnicalDetailsOpen(true);
+                                }}
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group"
+                              >
+                                <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                                <span>View Service Details &amp; Checklist</span>
+                              </button>
                             </div>
                           </div>
 
@@ -1181,20 +1381,24 @@ YES BIKE SERVICE
                           <button 
                             type="submit" 
                             disabled={isSubmitting}
-                            className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[40px] sm:min-h-[44px] py-2 sm:py-2.5 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1 active:scale-[0.98]"
+                            className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
-                              <>
+                              <div className="relative z-10 flex items-center justify-center gap-2">
                                 <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
                                 <span>Sending Booking Details...</span>
-                              </>
+                              </div>
                             ) : (
-                              <>
-                                <span>Submit the booking</span>
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                              </>
+                              <div className="relative z-10 flex items-center justify-center gap-2">
+                                <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                                <span>Submit the booking form</span>
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 shrink-0" />
+                              </div>
                             )}
                           </button>
+                          <p className="text-[10px] text-center text-gray-500 dark:text-zinc-400 font-medium">
+                            ~30 min doorstep mechanic dispatch • Pay after service
+                          </p>
 
                           {heroSuccess && bookingConfirmedData && (
                             <div className="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold flex items-center justify-between gap-2 animate-in fade-in duration-200">
@@ -1346,10 +1550,11 @@ YES BIKE SERVICE
                     bookingForm.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-8 rounded-full shadow-[0_4px_14px_rgba(245,158,11,0.3)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.45)] hover:-translate-y-0.5 transition-all cursor-pointer group"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-8 rounded-full shadow-md shadow-amber-500/25 hover:-translate-y-0.5 transition-all cursor-pointer group"
               >
+                <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
                 <span>Book your service and repair today</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </div>
           </FadeIn>
@@ -1516,10 +1721,11 @@ YES BIKE SERVICE
               onClick={() => {
                 document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm tracking-wide shadow-md hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm tracking-wide shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer group"
             >
+              <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
               <span>Book your service and repair today</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
             </button>
           </div>
         </div>
@@ -1675,29 +1881,15 @@ YES BIKE SERVICE
                 <button 
                   type="button"
                   onClick={() => { 
-                    setTechnicalDetailsContent({ 
-                      title: 'General Service (₹699)', 
-                      steps: [
-                        'Air Filter Cleaning & Intake Inspection',
-                        'Battery Voltage Check & Terminal Cleaning',
-                        'Brake Check & Service (Front & Rear Shoe/Disc Inspection & Calibration)',
-                        'Cables & Levers Adjustment (Clutch, Brake & Throttle Free Play)',
-                        'Chain Tension Check, Slack Calibration & Synthetic Lubrication',
-                        'Clutch Greasing & Smooth Engagement Calibration',
-                        'Dry Wash & Exterior Detailing',
-                        'Electrical Check-up (Headlight, Tail Light, Indicators & Horn Circuit)',
-                        'Engine Oil Level, Viscosity & Contamination Check',
-                        'Greasing & Lubrication of Vital Pivot Points & Bearings',
-                        'Oil Leakage Check & Gasket/Seal Inspection',
-                        'Spark Plug Cleaning, Carbon Removal & Gap Calibration'
-                      ] 
-                    }); 
+                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['General Service']); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
-                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
+                  className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
+                  aria-label="View Service Details for General Service"
                 >
-                  <span>View All 12 Technical Points</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
+                  <span>View Service Details (12 Points)</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                 </button>
               </div>
             </div>
@@ -1847,29 +2039,15 @@ YES BIKE SERVICE
                   <button 
                     type="button"
                     onClick={() => { 
-                      setTechnicalDetailsContent({ 
-                        title: 'General Service with Engine Oil (₹1,349)', 
-                        steps: [
-                          'Air Filter Cleaning & Intake Duct Inspection',
-                          'Battery Voltage Check, Terminal Cleaning & Charging Health Test',
-                          'Brake Service (Front & Rear Shoe/Disc Inspection, Pad Dusting & Free Play Adjustment)',
-                          'Cables & Levers Adjustment (Clutch, Front/Rear Brake & Throttle Slack Calibration)',
-                          'Chain Tension Check, Alignment & High-Tack Synthetic Chain Lubrication',
-                          'Clutch Greasing & Smooth Friction Plate Engagement Check',
-                          'Dry Wash & Premium Exterior Body Detailing',
-                          'Electrical Check-up (Headlight, Tail/Brake Light, Indicators, Switchgears & Horn Circuit)',
-                          'Engine Oil Change (Draining old degraded oil & refilling fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
-                          'Greasing & Lubrication of Vital Pivot Points, Center Stand & Side Stand Bearings',
-                          'Oil Leakage Check & Engine Gasket / Sump Drain Washer Inspection',
-                          'Spark Plug Cleaning, Carbon Sludge Removal & Electrode Gap Calibration'
-                        ] 
-                      }); 
+                      setTechnicalDetailsContent(SERVICE_DETAILS_DATA['General Service with Engine Oil']); 
                       setIsTechnicalDetailsOpen(true); 
                     }} 
-                    className="w-full text-center text-xs font-bold text-gray-300 hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-center gap-1"
+                    className="w-full text-center text-xs font-bold text-gray-200 hover:text-amber-300 transition-colors py-2 rounded-lg hover:bg-white/10 cursor-pointer flex items-center justify-center gap-1.5 group/details"
+                    aria-label="View Service Details for General Service with Engine Oil"
                   >
-                    <span>View All 12 Technical Points</span>
-                    <ChevronDown className="w-3.5 h-3.5" />
+                    <ClipboardList className="w-4 h-4 text-amber-400 group-hover/details:scale-110 transition-transform shrink-0" />
+                    <span>View Service Details (12 Points)</span>
+                    <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                   </button>
                 </div>
               </div>
@@ -1989,26 +2167,15 @@ YES BIKE SERVICE
                 <button 
                   type="button"
                   onClick={() => { 
-                    setTechnicalDetailsContent({ 
-                      title: '⚡ Jump Start Service (/₹600/ ₹399)', 
-                      steps: [
-                        '• Available at Your Doorstep across Bengaluru',
-                        '• 30 Minutes Service Time rapid response',
-                        '• Quick Battery Jump Start with commercial 12V high-cranking booster',
-                        '• For Bikes & Scooters (all brands & models)',
-                        'Resting Voltage & Cranking Voltage Drop Diagnostic Test',
-                        'Alternator / Magneto Coil Output Voltage Evaluation at 3000 RPM',
-                        'RR (Rectifier Regulator) Health & Parasitic Battery Drain Check',
-                        'Terminal Sulphation & Acid Corrosion Removal',
-                        'Lead Wire Re-Torque & Anti-Oxidation Protective Coating'
-                      ] 
-                    }); 
+                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Jump Start Service']); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
-                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
+                  className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
+                  aria-label="View Service Details for Jump Start Service"
                 >
-                  <span>View Technical Details</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
+                  <span>View Service Details</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                 </button>
               </div>
             </div>
@@ -2134,25 +2301,15 @@ YES BIKE SERVICE
                 <button 
                   type="button"
                   onClick={() => { 
-                    setTechnicalDetailsContent({ 
-                      title: 'Puncture Repair (₹599)', 
-                      steps: [
-                        'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
-                        '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
-                        'Bubble Leak Diagnostic & Foreign Object (Nail/Glass) Removal',
-                        '🛞 Complete One Tyre Puncture Repair using High-Grade Self-Vulcanizing Plug',
-                        'Heavy-Duty Cold Vulcanizing Adhesive Application for Maximum Seal',
-                        '➕ Transparent Rate: ₹100 Extra for Each Additional Tyre Puncture Found',
-                        'Accurate Cold Tyre Pressure Inflation to OEM PSI Specs',
-                        'Schrader Valve Core Tightening & Rim Bead Leak Inspection'
-                      ] 
-                    }); 
+                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Puncture Repair']); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
-                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
+                  className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
+                  aria-label="View Service Details for Puncture Repair"
                 >
-                  <span>View Technical Details</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
+                  <span>View Service Details</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                 </button>
               </div>
             </div>
@@ -2278,26 +2435,15 @@ YES BIKE SERVICE
                 <button 
                   type="button"
                   onClick={() => { 
-                    setTechnicalDetailsContent({ 
-                      title: 'Running Repair (₹450)', 
-                      steps: [
-                        'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
-                        '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
-                        '🔍 Comprehensive Multi-Point Vehicle Health Inspection',
-                        'Starting Problem, Battery Voltage & Spark Diagnostic',
-                        'Clutch & Throttle Free-Play Adjustment & Cable Lubrication',
-                        'Front & Rear Brake Lever/Pedal Travel Inspection & Adjustment',
-                        'Drive Chain Slack Check, Alignment & Lubrication',
-                        'Loose Fastener, Nut & Bolt Tightening',
-                        '🛠️ Transparent Pricing: Minor Adjustments Covered; Genuine Parts & Overhauls Charged with Prior Approval'
-                      ] 
-                    }); 
+                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Running Repair']); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
-                  className="w-full text-center text-xs font-bold text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1"
+                  className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
+                  aria-label="View Service Details for Running Repair"
                 >
-                  <span>View Technical Details</span>
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
+                  <span>View Service Details</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                 </button>
               </div>
             </div>
@@ -2671,11 +2817,11 @@ YES BIKE SERVICE
                   const form = document.getElementById('booking-form') || document.getElementById('home');
                   if (form) form.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black transition-all shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black transition-all shadow-md shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer group"
               >
-                <Wrench className="w-4 h-4" />
+                <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
                 <span>Book your service and repair today</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
               <a
                 href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
@@ -2718,10 +2864,10 @@ YES BIKE SERVICE
                     const form = document.getElementById('booking-form') || document.getElementById('home');
                     if (form) form.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-extrabold transition-all shadow-md shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer group"
                 >
-                  <Wrench className="w-3.5 h-3.5 text-zinc-950" />
-                  Book your service and repair today
+                  <Wrench className="w-3.5 h-3.5 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                  <span>Book your service and repair today</span>
                 </button>
                 <a
                   href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
@@ -2826,9 +2972,10 @@ YES BIKE SERVICE
                         const form = document.getElementById('booking-form') || document.getElementById('home');
                         if (form) form.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="font-black text-white hover:text-amber-400 transition-colors block text-sm cursor-pointer text-left"
+                      className="font-black text-amber-400 hover:text-amber-300 transition-colors block text-sm cursor-pointer text-left group flex items-center gap-1.5"
                     >
-                      Book your service and repair today
+                      <span>Book your service and repair today</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
                     </button>
                     <span className="text-[11px] font-semibold text-emerald-400">Instant doorstep mechanic dispatch</span>
                   </div>
@@ -2955,18 +3102,33 @@ YES BIKE SERVICE
                 <div className="min-w-0 flex-1">
                   <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
                   {selectedPackage && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500/10 dark:bg-amber-400/10 rounded-md border border-amber-500/20 text-xs">
-                      <span className="font-extrabold text-gray-900 dark:text-white truncate">
-                        {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
-                      </span>
-                      {selectedPackage.name.includes("Jump Start") ? (
-                        <span className="flex items-center gap-1 shrink-0">
-                          <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
-                          <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 mt-1">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500/10 dark:bg-amber-400/10 rounded-md border border-amber-500/20 text-xs">
+                        <span className="font-extrabold text-gray-900 dark:text-white truncate">
+                          {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
                         </span>
-                      ) : (
-                        <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
-                      )}
+                        {selectedPackage.name.includes("Jump Start") ? (
+                          <span className="flex items-center gap-1 shrink-0">
+                            <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
+                            <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
+                          </span>
+                        ) : (
+                          <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const details = SERVICE_DETAILS_DATA[selectedPackage.name] || SERVICE_DETAILS_DATA['General Service'];
+                          setTechnicalDetailsContent(details);
+                          setIsTechnicalDetailsOpen(true);
+                        }}
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group shrink-0"
+                        title="View Service Details"
+                      >
+                        <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                        <span>Service Details</span>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -3223,13 +3385,17 @@ YES BIKE SERVICE
               
               <button 
                 type="submit" 
-                className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[38px] sm:min-h-[42px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-1.5 active:scale-[0.98]"
+                className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1.5 active:scale-[0.98]"
               >
-                <span className="relative z-10 flex items-center justify-center gap-1.5 text-center">
-                  <span>Submit the booking</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </span>
+                <div className="relative z-10 flex items-center justify-center gap-2">
+                  <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                  <span>Submit the booking form</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 shrink-0" />
+                </div>
               </button>
+              <p className="text-[10px] text-center text-gray-500 dark:text-zinc-400 font-medium mt-1">
+                ~30 min doorstep mechanic dispatch across Bengaluru • Pay after service
+              </p>
             </form>
           </div>
         </div>
@@ -3252,11 +3418,11 @@ YES BIKE SERVICE
             <div className="p-4 sm:p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-xl text-amber-600 dark:text-amber-400">
-                  <Shield className="w-5 h-5" />
+                  <ClipboardList className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-gray-900 dark:text-white">
-                    {technicalDetailsContent.title || "Service Specifications"}
+                    {technicalDetailsContent.title || "Service Details & Specifications"}
                   </h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Doorstep checklist, technical specifications & warranty terms
@@ -3701,9 +3867,9 @@ YES BIKE SERVICE
               }, 100);
             }
           }}
-          className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-black shadow-lg shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight"
+          className="flex-1 relative overflow-hidden flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-black shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight group"
         >
-          <Wrench className="w-3.5 h-3.5 shrink-0" />
+          <Wrench className="w-3.5 h-3.5 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
           <span>Book your service and repair today</span>
         </button>
       </div>
