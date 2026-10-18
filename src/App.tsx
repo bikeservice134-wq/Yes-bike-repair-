@@ -203,9 +203,9 @@ export const parseTime12Hour = (hhmm: string): { hour: number; minute: string; p
 const QUICK_SERVICE_OPTIONS = [
   { id: "General Service - ₹699", name: "General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
-  { id: "Jump Start Service - ₹399", name: "Jump Start Service", price: "₹399", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
+  { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
-  { id: "Running Repair - ₹450", name: "Running Repair", price: "₹450", note: "Vehicle inspection & quick repairs at doorstep", badge: "Quick Fix" },
+  { id: "Inspection & Repair - ₹399", name: "Inspection & Repair", price: "Starting at ₹399", note: "Professional vehicle inspection, fault diagnosis & repair advice", badge: "Starting ₹399" },
 ];
 
 const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> = {
@@ -278,7 +278,21 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Jump Start Service': {
-    title: '⚡ Jump Start Service (/₹600/ ₹399)',
+    title: '⚡ Jump Start Service (/₹600/ ₹449)',
+    steps: [
+      '• Available at Your Doorstep across Bengaluru',
+      '• 30 Minutes Service Time rapid response',
+      '• Quick Battery Jump Start with commercial 12V high-cranking booster',
+      '• For Bikes & Scooters (all brands & models)',
+      'Resting Voltage & Cranking Voltage Drop Diagnostic Test',
+      'Alternator / Magneto Coil Output Voltage Evaluation at 3000 RPM',
+      'RR (Rectifier Regulator) Health & Parasitic Battery Drain Check',
+      'Terminal Sulphation & Acid Corrosion Removal',
+      'Lead Wire Re-Torque & Anti-Oxidation Protective Coating'
+    ]
+  },
+  'Jump Start Service - ₹449': {
+    title: '⚡ Jump Start Service (/₹600/ ₹449)',
     steps: [
       '• Available at Your Doorstep across Bengaluru',
       '• 30 Minutes Service Time rapid response',
@@ -292,7 +306,7 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Jump Start Service - ₹399': {
-    title: '⚡ Jump Start Service (/₹600/ ₹399)',
+    title: '⚡ Jump Start Service (/₹600/ ₹449)',
     steps: [
       '• Available at Your Doorstep across Bengaluru',
       '• 30 Minutes Service Time rapid response',
@@ -331,32 +345,78 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
       'Schrader Valve Core Tightening & Rim Bead Leak Inspection'
     ]
   },
-  'Running Repair': {
-    title: 'Running Repair (₹450)',
+  'Inspection & Repair': {
+    title: 'Inspection & Repair (Starting at ₹399)',
     steps: [
-      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
-      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
-      '🔍 Comprehensive Multi-Point Vehicle Health Inspection',
-      'Starting Problem, Battery Voltage & Spark Diagnostic',
-      'Clutch & Throttle Free-Play Adjustment & Cable Lubrication',
-      'Front & Rear Brake Lever/Pedal Travel Inspection & Adjustment',
-      'Drive Chain Slack Check, Alignment & Lubrication',
-      'Loose Fastener, Nut & Bolt Tightening',
-      '🛠️ Transparent Pricing: Minor Adjustments Covered; Genuine Parts & Overhauls Charged with Prior Approval'
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '• Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice',
+      '• Upfront transparent estimate before any repair or parts replacement'
+    ]
+  },
+  'Inspection & Repair - ₹399': {
+    title: 'Inspection & Repair (Starting at ₹399)',
+    steps: [
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '• Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice',
+      '• Upfront transparent estimate before any repair or parts replacement'
+    ]
+  },
+  'Bike & Scooter Inspection & Repair': {
+    title: 'Inspection & Repair (Starting at ₹399)',
+    steps: [
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '• Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice',
+      '• Upfront transparent estimate before any repair or parts replacement'
+    ]
+  },
+  'Bike & Scooter Inspection & Repair - ₹399': {
+    title: 'Inspection & Repair (Starting at ₹399)',
+    steps: [
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '• Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice',
+      '• Upfront transparent estimate before any repair or parts replacement'
+    ]
+  },
+  'Running Repair': {
+    title: 'Inspection & Repair (Starting at ₹399)',
+    steps: [
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice'
     ]
   },
   'Running Repair - ₹450': {
-    title: 'Running Repair (₹450)',
+    title: 'Inspection & Repair (Starting at ₹399)',
     steps: [
-      'Doorstep Assistance at Home, Office, or Roadside in Bengaluru',
-      '⏱️ ~30 Minutes Quick Turnaround Time On-Site',
-      '🔍 Comprehensive Multi-Point Vehicle Health Inspection',
-      'Starting Problem, Battery Voltage & Spark Diagnostic',
-      'Clutch & Throttle Free-Play Adjustment & Cable Lubrication',
-      'Front & Rear Brake Lever/Pedal Travel Inspection & Adjustment',
-      'Drive Chain Slack Check, Alignment & Lubrication',
-      'Loose Fastener, Nut & Bolt Tightening',
-      '🛠️ Transparent Pricing: Minor Adjustments Covered; Genuine Parts & Overhauls Charged with Prior Approval'
+      '• YES BIKE SERVICE — Quality Bike & Scooter Care at Your Doorstep',
+      '✓ Complete Vehicle Inspection',
+      '✓ Engine & Brake Check',
+      '✓ Battery & Electrical System Check',
+      '✓ Fault Diagnosis & Troubleshooting',
+      '✓ Expert Mechanic Advice'
     ]
   }
 };
@@ -583,6 +643,8 @@ export default function App() {
   };
 
   const [modalBrand, setModalBrand] = useState("");
+  const [modalModel, setModalModel] = useState("");
+  
   const [activeLocation, setActiveLocation] = useState('Indiranagar');
 
   const dispatchBookingAutomatically = (
@@ -790,7 +852,7 @@ YES BIKE SERVICE
     {
       q: "6. What doorstep bike services are available and what are the prices?",
       schemaQ: "What doorstep bike services are available and what are the prices?",
-      a: "We offer General Service at ₹699 (discounted from ₹999), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹399, Puncture Repair at ₹599, and Running Repairs or general inspection at ₹450.",
+      a: "We offer General Service at ₹699 (discounted from ₹999), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹449, Puncture Repair at ₹599, and Inspection & Repair starting at ₹399.",
       icon: Shield
     },
     {
@@ -983,18 +1045,18 @@ YES BIKE SERVICE
             
             <FadeIn>
               <div className="max-w-xl w-full mx-auto px-3.5 relative z-10 flex flex-col items-center text-center">
-                {/* Simple Tagline */}
-                <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 mb-2.5 shadow-2xs max-w-full">
-                  <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-                  <span className="text-[10px] sm:text-xs font-bold whitespace-nowrap">Bengaluru's Trusted Two-Wheeler Care</span>
-                  <span className="opacity-40 shrink-0 text-[10px] sm:text-xs">•</span>
-                  <span className="text-[9.5px] sm:text-[11px] font-semibold text-amber-700 dark:text-amber-300 shrink-0 whitespace-nowrap">Doorstep Service</span>
+                {/* Tagline / Brand Header */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 text-amber-800 dark:text-amber-300 mb-2.5 shadow-2xs max-w-full">
+                  <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+                  <span className="text-[11px] sm:text-xs font-black tracking-wide">
+                    YES BIKE SERVICE — Quality Bike Care at Your Doorstep.
+                  </span>
                 </div>
 
-                {/* Animated Main Headline */}
+                {/* Main Headline */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2.5">
-                  <span className="inline-block transition-transform duration-300">
-                    Doorstep Bike Repair &amp; Service
+                  <span className="inline-block">
+                    Doorstep Bike Service &amp; Repair
                   </span>{' '}
                   <span className="inline-block relative">
                     <span className="animate-gradient-flow bg-gradient-to-r from-amber-600 via-amber-400 via-yellow-400 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:via-amber-300 dark:to-amber-400 bg-clip-text text-transparent font-black">
@@ -1008,56 +1070,55 @@ YES BIKE SERVICE
                   </span>
                 </h1>
 
-                {/* Animated Subtitle */}
-                <div className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
-                  <p className="font-semibold text-gray-800 dark:text-zinc-200 text-sm sm:text-base animate-subtle-float">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50/90 dark:bg-zinc-900/90 border border-gray-200/80 dark:border-zinc-800/80 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                      <span>Professional bike &amp; scooter service at your home or office.</span>
+                {/* 30-Minute Mechanic Banner Pill */}
+                <div className="mb-2.5 inline-flex items-center justify-center relative overflow-hidden rounded-full bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-amber-500/15 dark:from-amber-400/20 dark:via-amber-400/10 dark:to-amber-400/20 border border-amber-500/30 px-3.5 sm:px-4 py-1 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200 shadow-xs shadow-amber-500/5">
+                  <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent animate-badge-shimmer pointer-events-none"></span>
+                  <span className="relative flex items-center gap-1.5 sm:gap-2">
+                    <span className="flex items-center justify-center w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black shrink-0 animate-pulse">
+                      ⚡
                     </span>
-                  </p>
-                  
-                  {/* Animated Book in 30 seconds pill with shimmer sweep & live ping */}
-                  <div className="mt-2 inline-flex items-center justify-center relative overflow-hidden rounded-full bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-amber-500/15 dark:from-amber-400/20 dark:via-amber-400/10 dark:to-amber-400/20 border border-amber-500/30 px-3.5 sm:px-4 py-1 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200 shadow-xs shadow-amber-500/5">
-                    <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent animate-badge-shimmer pointer-events-none"></span>
-                    <span className="relative flex items-center gap-1.5 sm:gap-2">
-                      <span className="flex items-center justify-center w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black shrink-0 animate-pulse">
-                        ⚡
-                      </span>
-                      <span>
-                        <strong className="font-black text-amber-950 dark:text-amber-100">Book in 30 seconds.</strong>{' '}
-                        <span className="text-amber-900/90 dark:text-amber-300">Get a mechanic at your doorstep.</span>
-                      </span>
-                      <span className="relative flex h-2 w-2 shrink-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
+                    <strong className="font-black text-amber-950 dark:text-amber-100">
+                      Get a Mechanic at Your Doorstep in Just 30 Minutes!
+                    </strong>
+                    <span className="relative flex h-2 w-2 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                  </div>
+                  </span>
                 </div>
 
-                {/* 4. Trust Highlights */}
-                <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-gray-800 dark:text-zinc-200 mb-3.5">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 shadow-2xs">
+                {/* Subtitle Description */}
+                <p className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-700 dark:text-zinc-300 font-medium leading-relaxed">
+                  Professional bike and scooter servicing at your home or office. Convenient booking, transparent pricing, and reliable repairs.
+                </p>
+
+                {/* 4 Trust Highlights */}
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-gray-800 dark:text-zinc-200 mb-3.5 w-full">
+                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    Expert Mechanics
+                  </span>
+                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/20 text-amber-800 dark:text-amber-300 shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    Service at Home or Office
+                  </span>
+                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 shadow-2xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                     Verified Mechanics
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/20 text-amber-800 dark:text-amber-300 shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                    Transparent Pricing
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 text-sky-700 dark:text-sky-300 shadow-2xs">
+                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 text-sky-700 dark:text-sky-300 shadow-2xs">
                     <Shield className="w-3.5 h-3.5 text-sky-500 shrink-0" />
                     30-Day Service Warranty
                   </span>
                 </div>
 
-                {/* 5. 3 Services Selector */}
-                <div className="grid grid-cols-3 gap-1.5 w-full max-w-md mb-2.5">
+                {/* 5. Quick Services Selector - Small Size Buttons */}
+                <div className="grid grid-cols-4 gap-1 sm:gap-1.5 w-full max-w-md mb-2">
                   {[
-                    { id: "General Service - ₹699", icon: "🛠️", label: "General Service", price: "₹699" },
+                    { id: "General Service - ₹699", icon: "", label: "General Service", price: "₹699" },
                     { id: "General Service with Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
-                    { id: "Jump Start Service - ₹399", icon: "⚡", label: "Jump Start", price: "₹399" },
+                    { id: "Jump Start Service - ₹449", icon: "⚡", label: "Jump Start", price: "₹449" },
+                    { id: "Inspection & Repair - ₹399", icon: "🏍️", label: "Inspection & Repair", price: "₹399", isSmall: true },
                   ].map((srv) => {
                     const isSelected = heroService === srv.id;
                     return (
@@ -1065,15 +1126,29 @@ YES BIKE SERVICE
                         key={srv.id}
                         type="button"
                         onClick={() => setHeroService(srv.id)}
-                        className={`p-1.5 sm:p-2 rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        className={`h-[54px] sm:h-[58px] p-1 rounded-lg sm:rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-between ${
                           isSelected
-                            ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-md ring-2 ring-amber-400/50'
-                            : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-amber-400 font-semibold'
+                            ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-sm ring-1 sm:ring-2 ring-amber-400/50 scale-[1.02]'
+                            : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-amber-400 font-semibold shadow-2xs'
                         }`}
                       >
-                        <span className="text-sm sm:text-base mb-0.5">{srv.icon}</span>
-                        <span className="text-[10px] sm:text-[11px] font-bold leading-tight truncate max-w-full">{srv.label}</span>
-                        <span className={`text-[11px] sm:text-xs font-black ${isSelected ? 'text-zinc-950' : 'text-amber-600 dark:text-amber-400'}`}>
+                        <div className="h-3.5 sm:h-4 flex items-center justify-center">
+                          {srv.icon ? (
+                            <span className="text-xs sm:text-sm leading-none">{srv.icon}</span>
+                          ) : (
+                            <span className="text-xs sm:text-sm leading-none opacity-0 select-none">🛠️</span>
+                          )}
+                        </div>
+                        <span className={`leading-none text-center max-w-full px-0.5 font-bold ${
+                          srv.isSmall 
+                            ? 'text-[7.5px] sm:text-[8.5px] tracking-tight' 
+                            : 'text-[8.5px] sm:text-[9.5px]'
+                        }`}>
+                          {srv.label}
+                        </span>
+                        <span className={`font-black text-[9.5px] sm:text-[10.5px] leading-tight ${
+                          isSelected ? 'text-zinc-950' : 'text-amber-600 dark:text-amber-400'
+                        }`}>
                           {srv.price}
                         </span>
                       </button>
@@ -1314,7 +1389,7 @@ YES BIKE SERVICE
                               >
                                 {QUICK_SERVICE_OPTIONS.map(opt => (
                                   <option key={opt.id} value={opt.id} className="text-zinc-900 dark:text-white bg-white dark:bg-zinc-900">
-                                    {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : "🔧 "}
+                                    {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : opt.id.includes("Puncture") ? "🛞 " : "🏍️ "}
                                     {opt.name} ({opt.price})
                                   </option>
                                 ))}
@@ -1748,6 +1823,7 @@ YES BIKE SERVICE
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
               Choose the right service package for your bike or scooter and get expert care at your doorstep.
             </p>
+
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-4 xl:gap-4 2xl:gap-6 items-stretch">
@@ -2066,7 +2142,7 @@ YES BIKE SERVICE
                   Quick Assistance
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20">
-                  Save ₹201 (33% OFF)
+                  Save ₹151 (25% OFF)
                 </span>
               </div>
 
@@ -2081,7 +2157,7 @@ YES BIKE SERVICE
                       <span>⚡ Jump Start Service</span>
                     </h3>
                     <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
-                      Offer Price: ₹399
+                      Offer Price: ₹449
                     </div>
                   </div>
                 </div>
@@ -2090,8 +2166,8 @@ YES BIKE SERVICE
               {/* Price Banner */}
               <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-4 border-b border-gray-100 dark:border-zinc-800">
                 <span className="text-xl font-bold text-gray-400 dark:text-zinc-500 line-through tracking-tight">/₹600/</span>
-                <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</span>
-                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Save ₹201 (33% OFF)</span>
+                <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹449</span>
+                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Save ₹151 (25% OFF)</span>
               </div>
 
               {/* Key Highlights: Available at Doorstep, Quick Assistance, 30 Mins Service Time */}
@@ -2155,7 +2231,7 @@ YES BIKE SERVICE
               <div className="relative z-10 mt-auto flex flex-col gap-2.5 pt-2 border-t border-gray-100 dark:border-zinc-800">
                 <button 
                   onClick={() => { 
-                    setSelectedPackage({ name: 'Jump Start Service', price: '₹399' }); 
+                    setSelectedPackage({ name: 'Jump Start Service', price: '₹449' }); 
                     setIsPackageModalOpen(true); 
                   }} 
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
@@ -2314,7 +2390,7 @@ YES BIKE SERVICE
               </div>
             </div>
 
-            {/* Pkg 5: Running Repair */}
+            {/* Pkg 5: Inspection & Repair */}
             <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-4 sm:p-5 xl:p-4 2xl:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
                 <Wrench className="w-24 h-24 text-amber-500" />
@@ -2324,125 +2400,114 @@ YES BIKE SERVICE
               <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 font-extrabold text-[11px] uppercase tracking-wider border border-amber-400/40">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  Quick Diagnosis
+                  Doorstep Diagnosis
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20">
-                  Save ₹150 (25% OFF)
+                  Save ₹201 (33% OFF)
                 </span>
               </div>
 
               {/* Header */}
-              <div className="relative z-10 mb-3">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 bg-amber-500/15 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30">
-                    <span className="text-2xl leading-none">🔧</span>
+              <div className="relative z-10 mb-2.5">
+                <div className="flex items-center gap-3 mb-1.5">
+                  <div className="w-12 h-12 bg-amber-500/15 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30 shrink-0">
+                    <span className="text-2xl leading-none">🔍</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black tracking-tight text-gray-900 dark:text-white flex items-center gap-1.5">
-                      <span>Running Repair</span>
+                    <h3 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
+                      <span>Inspection &amp; Repair</span>
                     </h3>
-                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400">
-                      Offer Price: ₹450
+                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
+                      Starting at ₹399
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Price Banner */}
-              <div className="relative z-10 flex items-baseline gap-2.5 mb-4 pb-4 border-b border-gray-100 dark:border-zinc-800">
-                <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹450</span>
-                <span className="text-lg font-medium text-gray-400 line-through">₹600</span>
-                <span className="text-xs font-semibold text-gray-500 dark:text-zinc-400">/ doorstep inspection</span>
+              <div className="relative z-10 flex items-baseline gap-2 mb-3 pb-3 border-b border-gray-100 dark:border-zinc-800">
+                <span className="text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Starting at</span>
+                <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</span>
+                <span className="text-base font-semibold text-gray-400 line-through">₹600</span>
+                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Save ₹201 (33% OFF)</span>
               </div>
 
-              {/* Key Highlights: Available at Doorstep, 30 min service time, Vehicle Inspection */}
-              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4 sm:mb-5">
-                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                  <span className="text-base sm:text-lg mb-0.5">🏠</span>
+              {/* Description */}
+              <p className="text-xs text-gray-600 dark:text-gray-300 font-medium mb-3.5 leading-relaxed">
+                Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.
+              </p>
+
+              {/* Key Highlights: Available at Doorstep, 30 min service time, Multi-Point */}
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-4">
+                <div className="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base mb-0.5">🏠</span>
                   <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Doorstep</span>
-                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Home/Road</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Home/Office</span>
                 </div>
-                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                  <span className="text-base sm:text-lg mb-0.5">⏱️</span>
+                <div className="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base mb-0.5">⏱️</span>
                   <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">30 Mins</span>
                   <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Fast Arrival</span>
                 </div>
-                <div className="p-1.5 sm:p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                  <span className="text-base sm:text-lg mb-0.5">🔍</span>
-                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Inspection</span>
-                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Multi-Point</span>
+                <div className="p-1.5 sm:p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
+                  <span className="text-base mb-0.5">🔍</span>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Diagnosis</span>
+                  <span className="text-[8.5px] sm:text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Accurate</span>
                 </div>
               </div>
 
               {/* What's Included */}
-              <div className="relative z-10 mb-6 flex-grow">
-                <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white mb-3">
+              <div className="relative z-10 mb-4 flex-grow">
+                <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white mb-2.5">
                   <span>What's Included:</span>
-                  <span className="text-[10.5px] font-bold text-emerald-600 dark:text-emerald-400 normal-case">Quick Diagnosis</span>
+                  <span className="text-[10.5px] font-bold text-emerald-600 dark:text-emerald-400 normal-case">5 Core Checks</span>
                 </div>
-                <ul className="space-y-2.5">
-                  <li className="flex items-start gap-2.5 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-gray-900 dark:text-white font-bold text-xs block">• Available at Your Doorstep</span>
-                      <span className="text-[10.5px] text-gray-500 dark:text-zinc-400">Mechanic arrives at your doorstep across Bangalore for instant diagnosis</span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-gray-900 dark:text-white font-bold text-xs block">⏱️ 30 min service time</span>
-                      <span className="text-[10.5px] text-gray-500 dark:text-zinc-400">Prompt diagnostic evaluation and quick on-site mechanic attendance</span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-gray-900 dark:text-white font-bold text-xs block">🔍 Vehicle Inspection</span>
-                      <span className="text-[10.5px] text-gray-500 dark:text-zinc-400">Complete multi-point check of brakes, clutch, spark plug, starting & chain</span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5 p-2 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 border border-amber-400/40 dark:border-amber-400/30">
-                    <span className="text-amber-600 dark:text-amber-400 font-black text-sm shrink-0 mt-0.5">🛠️</span>
-                    <div>
-                      <span className="text-gray-900 dark:text-white font-bold text-xs block">Repairs & Parts at Additional Charges</span>
-                      <span className="text-[10.5px] text-gray-700 dark:text-zinc-300">Minor fixes included; required spare parts charged transparently with your approval</span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2.5 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-gray-900 dark:text-white font-bold text-xs block">Immediate Transparent Estimate</span>
-                      <span className="text-[10.5px] text-gray-500 dark:text-zinc-400">100% upfront quote before any parts replacement or major overhaul</span>
-                    </div>
-                  </li>
+                <ul className="space-y-2">
+                  {[
+                    "Complete Vehicle Inspection",
+                    "Engine & Brake Check",
+                    "Battery & Electrical System Check",
+                    "Fault Diagnosis & Troubleshooting",
+                    "Expert Mechanic Advice"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800/80">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <span className="text-xs font-bold text-gray-900 dark:text-white">{item}</span>
+                    </li>
+                  ))}
                 </ul>
+
+                {/* YES BIKE SERVICE Brand Card */}
+                <div className="mt-3.5 p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/25 text-center">
+                  <p className="text-[11px] font-black text-amber-800 dark:text-amber-300 tracking-wider uppercase">YES BIKE SERVICE</p>
+                  <p className="text-[10px] sm:text-[10.5px] font-semibold text-gray-700 dark:text-gray-300 mt-0.5">Quality Bike &amp; Scooter Care at Your Doorstep.</p>
+                </div>
               </div>
 
-              {/* Actions: Book Running Repair Now & View Technical Details */}
+              {/* Actions: Book Now & View Technical Details */}
               <div className="relative z-10 mt-auto flex flex-col gap-2.5 pt-2 border-t border-gray-100 dark:border-zinc-800">
                 <button 
                   onClick={() => { 
-                    setSelectedPackage({ name: 'Running Repair', price: '₹450' }); 
+                    setSelectedPackage({ name: 'Inspection & Repair', price: '₹399' }); 
                     setIsPackageModalOpen(true); 
                   }} 
                   className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-1.5 font-black">
-                    Book Running Repair now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    Book Inspection &amp; Repair now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </span>
                 </button>
                 <button 
                   type="button"
                   onClick={() => { 
-                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Running Repair']); 
+                    setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Inspection & Repair']); 
                     setIsTechnicalDetailsOpen(true); 
                   }} 
                   className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
-                  aria-label="View Service Details for Running Repair"
+                  aria-label="View Service Details for Inspection & Repair"
                 >
                   <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
-                  <span>View Service Details</span>
+                  <span>View Service Details (5 Points)</span>
                   <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                 </button>
               </div>
@@ -3260,7 +3325,8 @@ YES BIKE SERVICE
                     <select 
                       name="model" 
                       required 
-                      defaultValue="" 
+                      value={modalModel} 
+                      onChange={(e) => setModalModel(e.target.value)}
                       className="w-full h-9 sm:h-9.5 pl-7 pr-5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer disabled:opacity-50 truncate" 
                       disabled={!modalBrand}
                     >
@@ -3333,7 +3399,7 @@ YES BIKE SERVICE
                   <select 
                     name="service" 
                     required 
-                    defaultValue={selectedPackage ? `${selectedPackage.name} - ${selectedPackage.price}` : ""} 
+                    defaultValue={selectedPackage ? (QUICK_SERVICE_OPTIONS.find(o => o.name === selectedPackage.name)?.id || `${selectedPackage.name} - ${selectedPackage.price}`) : ""} 
                     className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
                   >
                     <option value="" disabled>Select Service Type</option>
