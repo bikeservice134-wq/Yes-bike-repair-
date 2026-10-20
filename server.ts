@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const isProd = process.env.NODE_ENV === 'production';
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = 3000;
 
 async function startServer() {
   const app = express();
@@ -35,7 +35,7 @@ async function startServer() {
 Analyze the user's natural language booking request and extract all details into a clean structured JSON.
 
 Available services:
-- "General Service - ₹699" (Standard 12-point doorstep service)
+- "Basic General Service - ₹699" (Standard 12-point doorstep service)
 - "General Service with Engine Oil - ₹1,349" (General service with fresh 4T engine oil replacement)
 - "Jump Start Service - ₹399" (Battery jump start emergency assistance)
 - "Puncture Repair - ₹599" (Tubeless / tube tyre puncture repair)
@@ -98,6 +98,17 @@ Return ONLY a JSON object with this exact shape:
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`YES BIKE SERVICE server running on port ${PORT}`);
   });
+
+  const altPort = process.env.PORT ? Number(process.env.PORT) : null;
+  if (altPort && altPort !== PORT) {
+    try {
+      app.listen(altPort, '0.0.0.0', () => {
+        console.log(`YES BIKE SERVICE server also listening on port ${altPort}`);
+      });
+    } catch (e) {
+      console.warn('Could not bind to alt port:', e);
+    }
+  }
 }
 
 startServer();
