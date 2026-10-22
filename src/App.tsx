@@ -956,10 +956,10 @@ YES BIKE SERVICE
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1.5">
             {[
               { label: 'Home', href: '#home' },
-              { label: 'Service Packages', href: '#pricing' },
+              { label: 'Service Packages', href: '#pricing', highlight: true },
               { label: 'Brands', href: '#brands' },
               { label: 'How It Works', href: '#how-it-works' },
               { label: 'Reviews', href: '#reviews' },
@@ -971,15 +971,19 @@ YES BIKE SERVICE
                 onClick={() => {
                   if (currentView !== 'home') setCurrentView('home');
                 }}
-                className="px-3 py-1 rounded-full text-xs font-bold text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-400/10 transition-all whitespace-nowrap"
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
+                  item.highlight
+                    ? 'text-amber-900 dark:text-amber-300 bg-amber-500/15 border border-amber-500/30 font-black hover:bg-amber-500/25'
+                    : 'text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-400/10'
+                }`}
               >
                 {item.label}
               </a>
             ))}
           </nav>
           
-          {/* Right Actions & Compact Primary CTA */}
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* Right Actions & Header Service Packages CTA */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               type="button"
               onClick={() => {
@@ -994,12 +998,11 @@ YES BIKE SERVICE
                   }, 100);
                 }
               }}
-              className="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-extrabold text-[9.5px] sm:text-[11px] lg:text-xs tracking-tight shadow-xs border border-amber-300/80 transition-all active:scale-95 min-h-[28px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
+              className="inline-flex items-center justify-center gap-1 sm:gap-1.5 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full font-black text-[10px] sm:text-[11.5px] lg:text-xs tracking-tight shadow-xs hover:shadow-md border border-amber-300/80 transition-all active:scale-95 min-h-[30px] sm:min-h-[32px] whitespace-nowrap cursor-pointer"
               aria-label="Service Packages"
             >
-              <Wrench className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-950 shrink-0" />
-              <span className="hidden sm:inline">Service Packages</span>
-              <span className="sm:hidden">Packages</span>
+              <Wrench className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-950 shrink-0" />
+              <span>Service Packages</span>
             </button>
 
             <button 
