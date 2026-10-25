@@ -200,9 +200,63 @@ export const parseTime12Hour = (hhmm: string): { hour: number; minute: string; p
   return { hour: h, minute: m, period: p };
 };
 
+export const ROYAL_ENFIELD_CATALOG = [
+  {
+    categoryTitle: "350cc–450cc Models",
+    rangeBadge: "350cc–450cc",
+    serviceName: "General Service + Engine Oil",
+    price: "₹2,399",
+    originalPrice: "₹2,999",
+    savings: "Save ₹600 (20% OFF)",
+    oilSpec: "Includes 15W-50 Semi-Synthetic Engine Oil & OEM Oil Filter",
+    features: [
+      "Doorstep Service at Home or Office across Bengaluru",
+      "Branded 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill)",
+      "New OEM Engine Oil Filter & Crush Washer Replacement",
+      "Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration",
+      "Air Filter Cleaning & Intake Duct Throttle Inspection",
+      "Heavy-Duty Chain Slack Calibration & Synthetic Chain Lubrication",
+      "Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning",
+      "500 km or 1-Month Service Warranty"
+    ],
+    models: [
+      { number: 1, name: "Classic 350", tag: "Iconic Thumper", displacement: "349cc J-Series", popular: true },
+      { number: 2, name: "Hunter 350", tag: "Urban Roadster", displacement: "349cc J-Series", popular: true },
+      { number: 3, name: "Bullet 350", tag: "Timeless Legend", displacement: "349cc J-Series", popular: false },
+      { number: 4, name: "Meteor 350", tag: "Highway Cruiser", displacement: "349cc J-Series", popular: false },
+      { number: 5, name: "Himalayan", tag: "All-Terrain Adventure", displacement: "411cc / 450cc Sherpa", popular: false },
+    ]
+  },
+  {
+    categoryTitle: "650cc Models",
+    rangeBadge: "648cc Parallel-Twin",
+    serviceName: "General Service + Engine Oil",
+    price: "₹3,999",
+    originalPrice: "₹4,999",
+    savings: "Save ₹1,000 (20% OFF)",
+    oilSpec: "Includes 100% Fully Synthetic 10W-50 Oil & Twin Filter Kit",
+    features: [
+      "Doorstep Service at Home or Office across Bengaluru",
+      "Twin-Cylinder Fully Synthetic 10W-50 Engine Oil Refill (3.1L)",
+      "OEM Spin-On Oil Filter & Copper Drain Washer Replacement",
+      "Twin Spark Plugs Inspection, Gap Calibration & Testing",
+      "Twin Throttle Body Synchronization & Cable Free Play Check",
+      "High-Performance O-Ring Chain Degrease & Synthetic Wax Lube",
+      "Brembo/ByBre Twin Caliper Brake Calibration & Fluid Check",
+      "500 km or 1-Month Service Warranty"
+    ],
+    models: [
+      { number: 6, name: "Continental GT 650", tag: "Cafe Racer Twin", displacement: "648cc Twin", popular: true },
+      { number: 7, name: "Interceptor 650", tag: "Classic Twin Roadster", displacement: "648cc Twin", popular: true },
+    ]
+  }
+];
+
 const QUICK_SERVICE_OPTIONS = [
   { id: "Basic General Service - ₹699", name: "Basic General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
+  { id: "Royal Enfield Service (350cc–450cc) - ₹2,399", name: "Royal Enfield 350cc–450cc", price: "₹2,399", note: "General Service + Semi-Synthetic Oil for Classic, Hunter, Bullet, Meteor, Himalayan", badge: "RE Special" },
+  { id: "Royal Enfield Service (650cc) - ₹3,999", name: "Royal Enfield 650cc Twin", price: "₹3,999", note: "General Service + Fully Synthetic Oil for Continental GT & Interceptor 650", badge: "650 Twins" },
   { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
   { id: "Inspection & Repair - ₹399", name: "Inspection & Repair", price: "Starting at ₹399", note: "Professional vehicle inspection, fault diagnosis & repair advice", badge: "Starting ₹399" },
@@ -480,6 +534,72 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
       '✓ Battery & Electrical System Check',
       '✓ Fault Diagnosis & Troubleshooting',
       '✓ Expert Mechanic Advice'
+    ]
+  },
+  'Royal Enfield Service (350cc–450cc)': {
+    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,399)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield Service (350cc–450cc) - ₹2,399': {
+    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,399)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield Service (650cc)': {
+    title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
+      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
+      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
+      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
+      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
+      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
+      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
+      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
+      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
+      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield Service (650cc) - ₹3,999': {
+    title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
+      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
+      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
+      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
+      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
+      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
+      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
+      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
+      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
+      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
     ]
   }
 };

@@ -37,9 +37,11 @@ Analyze the user's natural language booking request and extract all details into
 Available services:
 - "Basic General Service - ₹699" (Standard 12-point doorstep service)
 - "General Service with Engine Oil - ₹1,349" (General service with fresh 4T engine oil replacement)
-- "Jump Start Service - ₹399" (Battery jump start emergency assistance)
+- "Royal Enfield 350cc–450cc General Service + Engine Oil - ₹2,399" (For Classic 350, Hunter 350, Bullet 350, Meteor 350, Himalayan)
+- "Royal Enfield 650cc General Service + Engine Oil - ₹3,999" (For Continental GT 650, Interceptor 650)
+- "Jump Start Service - ₹449" (Battery jump start emergency assistance)
 - "Puncture Repair - ₹599" (Tubeless / tube tyre puncture repair)
-- "Running Repair - ₹450" (Breakdown diagnosis, general vehicle checkup, minor fixes)
+- "Inspection & Repair - ₹399" (Breakdown diagnosis, general vehicle checkup, minor fixes)
 
 Common vehicle brands in India: Honda, Royal Enfield, Yamaha, TVS, Bajaj, Suzuki, KTM, Hero, Ather, Ola, Jawa, Yezdi.
 Vehicle types: "Bike" or "Scooter".
