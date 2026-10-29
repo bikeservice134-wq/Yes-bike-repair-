@@ -361,35 +361,45 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
   'General Service with Engine Oil': {
     title: 'General Service with Engine Oil (₹1,349)',
     steps: [
-      'Air Filter Cleaning & Intake Duct Inspection',
-      'Battery Voltage Check, Terminal Cleaning & Charging Health Test',
-      'Brake Service (Front & Rear Shoe/Disc Inspection, Pad Dusting & Free Play Adjustment)',
-      'Cables & Levers Adjustment (Clutch, Front/Rear Brake & Throttle Slack Calibration)',
-      'Chain Tension Check, Alignment & High-Tack Synthetic Chain Lubrication',
-      'Clutch Greasing & Smooth Friction Plate Engagement Check',
-      'Dry Wash & Premium Exterior Body Detailing',
-      'Electrical Check-up (Headlight, Tail/Brake Light, Indicators, Switchgears & Horn Circuit)',
-      'Engine Oil Change (Draining old degraded oil & refilling fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
-      'Greasing & Lubrication of Vital Pivot Points, Center Stand & Side Stand Bearings',
-      'Oil Leakage Check & Engine Gasket / Sump Drain Washer Inspection',
-      'Spark Plug Cleaning, Carbon Sludge Removal & Electrode Gap Calibration'
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty',
+      '✅ Doorstep Service Available',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (Fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection'
     ]
   },
   'General Service with Engine Oil - ₹1,349': {
     title: 'General Service with Engine Oil (₹1,349)',
     steps: [
-      'Air Filter Cleaning & Intake Duct Inspection',
-      'Battery Voltage Check, Terminal Cleaning & Charging Health Test',
-      'Brake Service (Front & Rear Shoe/Disc Inspection, Pad Dusting & Free Play Adjustment)',
-      'Cables & Levers Adjustment (Clutch, Front/Rear Brake & Throttle Slack Calibration)',
-      'Chain Tension Check, Alignment & High-Tack Synthetic Chain Lubrication',
-      'Clutch Greasing & Smooth Friction Plate Engagement Check',
-      'Dry Wash & Premium Exterior Body Detailing',
-      'Electrical Check-up (Headlight, Tail/Brake Light, Indicators, Switchgears & Horn Circuit)',
-      'Engine Oil Change (Draining old degraded oil & refilling fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
-      'Greasing & Lubrication of Vital Pivot Points, Center Stand & Side Stand Bearings',
-      'Oil Leakage Check & Engine Gasket / Sump Drain Washer Inspection',
-      'Spark Plug Cleaning, Carbon Sludge Removal & Electrode Gap Calibration'
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty',
+      '✅ Doorstep Service Available',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (Fresh branded 4T 10W-30 / 20W-40 Engine Oil)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection'
     ]
   },
   'Jump Start Service': {
@@ -539,165 +549,241 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
   'Royal Enfield Service (350cc–450cc)': {
     title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield Service (350cc–450cc) - ₹2,599': {
     title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield Service (350cc–450cc) - ₹2,399': {
     title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield Service (650cc)': {
     title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
-      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
-      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
-      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
-      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
-      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
-      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
-      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
-      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
-      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield Service (650cc) - ₹3,999': {
     title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
-      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
-      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
-      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
-      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
-      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
-      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
-      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
-      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
-      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil': {
     title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Service across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)': {
     title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Service across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)': {
     title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Service across Bengaluru (Home & Office)',
-      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
-      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
-      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
-      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
-      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
-      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
-      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
-      '✨ Foam/Dry Wash & Protective Polishing Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield 650 cc General Service with Engine Oil Twin': {
     title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Service across Bengaluru (Home & Office)',
-      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
-      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
-      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
-      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
-      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
-      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
-      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
-      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
-      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   },
   'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)': {
     title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
-      '🏠 Doorstep Service across Bengaluru (Home & Office)',
-      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
-      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
-      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
-      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
-      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
-      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
-      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
-      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
-      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
-      '🛡️ 500 km or 1-Month Service Warranty'
+      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
+      '✅ Doorstep Service Available at Home & Office across Bengaluru',
+      '🛡️ 500 KM or 1 Month Service Warranty',
+      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '✓ Air Filter Cleaning',
+      '✓ Battery Voltage Check',
+      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
+      '✓ Cables & Levers Adjustment',
+      '✓ Chain Tension Check & Adjustment',
+      '✓ Clutch Cable Greasing',
+      '✓ Dry Wash',
+      '✓ Electrical System Check-up',
+      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
+      '✓ Greasing & Lubrication',
+      '✓ Engine Oil Leakage Check',
+      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
+      '• Book Your Bike Service Today!',
+      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
     ]
   }
 };
@@ -2364,16 +2450,16 @@ YES BIKE SERVICE
                       {[
                         { name: "Air Filter Cleaning", isOil: false },
                         { name: "Battery Voltage Check", isOil: false },
-                        { name: "Brake Service", isOil: false },
+                        { name: "Brake Inspection & Servicing", isOil: false },
                         { name: "Cables & Levers Adjustment", isOil: false },
-                        { name: "Chain Tension Check", isOil: false },
-                        { name: "Clutch Greasing", isOil: false },
+                        { name: "Chain Tension Check & Adjustment", isOil: false },
+                        { name: "Clutch Cable Greasing", isOil: false },
                         { name: "Dry Wash", isOil: false },
-                        { name: "Electrical Check-up", isOil: false },
-                        { name: "Engine Oil Change", isOil: true },
+                        { name: "Electrical System Check-up", isOil: false },
+                        { name: "Engine Oil Replacement", isOil: true },
                         { name: "Greasing & Lubrication", isOil: false },
-                        { name: "Oil Leakage Check", isOil: false },
-                        { name: "Spark Plug Cleaning", isOil: false },
+                        { name: "Engine Oil Leakage Check", isOil: false },
+                        { name: "Spark Plug Cleaning & Inspection", isOil: false },
                       ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2">
                           <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-400' : 'text-emerald-400'}`} />
@@ -2385,6 +2471,13 @@ YES BIKE SERVICE
                       ))}
                     </ul>
                   </div>
+                </div>
+
+                {/* Brand & Trust Banner */}
+                <div className="relative z-10 mb-3 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-center">
+                  <span className="text-[10px] font-black tracking-wide text-amber-300 uppercase block">Book Your Bike Service Today!</span>
+                  <div className="text-[11px] font-extrabold text-white">YES BIKE SERVICE — Professional Bike Care at Your Doorstep</div>
+                  <div className="text-[9.5px] text-zinc-300 font-semibold mt-0.5">🏠 Home &amp; Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty</div>
                 </div>
 
                 {/* Actions: Book Now & View Technical Details */}
@@ -2858,58 +2951,63 @@ YES BIKE SERVICE
                   </span>
                 </div>
 
-                {/* Key Spec Grid */}
+                {/* Highlights: Doorstep Available, Warranty, Interval, Oil Spec */}
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Engine Oil Refill</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">15W-50 Semi-Synthetic (1.5L–2.1L)</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Location</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">✅ Doorstep Service Available</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">OEM Filter</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Brand New Filter &amp; Drain Washer</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Warranty</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛡️ 500 KM / 1 Mo Warranty</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Warranty</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">500 km or 1-Month Warranty</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Interval</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🔧 Every 3,000 KM / 3 Mo</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Location</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Home &amp; Office across Bengaluru</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Engine Oil &amp; Filter</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛢️ 15W-50 Semi-Synth + OEM Filter</span>
                   </div>
                 </div>
 
-                {/* Core Service Inclusions (6 Key Points) */}
+                {/* What's Included in the Service (12 Core Points) */}
                 <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
                   <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
-                    <span>What's Included in ₹2,599:</span>
-                    <span className="text-amber-600 dark:text-amber-400 font-bold normal-case text-[10px]">OEM Genuine Spares</span>
+                    <span>What's Included in the Service?</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">12 Inspection Points</span>
                   </div>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-zinc-300">
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>15W-50 Semi-Synthetic Oil Refill</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>OEM Oil Filter &amp; Copper Washer</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Spark Plug De-Carbonize &amp; Gap Tuning</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Chain Slack Calibration &amp; Synthetic Lube</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Brake Pads Tuning &amp; Exterior Wash</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Zero Advance • Pay After Service</span>
-                    </li>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2 text-xs text-gray-700 dark:text-zinc-300">
+                    {[
+                      { name: "Air Filter Cleaning", isOil: false },
+                      { name: "Battery Voltage Check", isOil: false },
+                      { name: "Brake Inspection & Servicing", isOil: false },
+                      { name: "Cables & Levers Adjustment", isOil: false },
+                      { name: "Chain Tension Check & Adjustment", isOil: false },
+                      { name: "Clutch Cable Greasing", isOil: false },
+                      { name: "Dry Wash", isOil: false },
+                      { name: "Electrical System Check-up", isOil: false },
+                      { name: "Engine Oil Replacement", isOil: true, note: "15W-50 Semi-Synth" },
+                      { name: "Greasing & Lubrication", isOil: false },
+                      { name: "Engine Oil Leakage Check", isOil: false },
+                      { name: "Spark Plug Cleaning & Inspection", isOil: false },
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-1.5">
+                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-500' : 'text-emerald-500'}`} />
+                        <span className={`text-[12px] leading-snug ${item.isOil ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
+                          {item.name}
+                          {item.note && <span className="ml-1 text-[10px] text-amber-700 dark:text-amber-400 font-bold">({item.note})</span>}
+                        </span>
+                      </li>
+                    ))}
                   </ul>
+                </div>
+
+                {/* Brand & Trust Banner */}
+                <div className="mb-4 p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-center">
+                  <span className="text-[10px] font-black tracking-wide text-amber-800 dark:text-amber-300 uppercase block">Book Your Bike Service Today!</span>
+                  <div className="text-[11.5px] font-extrabold text-gray-900 dark:text-white">YES BIKE SERVICE — Professional Bike Care at Your Doorstep</div>
+                  <div className="text-[10px] text-gray-600 dark:text-zinc-400 font-semibold mt-0.5">🏠 Home &amp; Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty</div>
                 </div>
 
                 {/* Model Quick Select Pills */}
@@ -2997,7 +3095,7 @@ YES BIKE SERVICE
                     className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     <ClipboardList className="w-4 h-4 text-amber-500" />
-                    <span>View Full Service Details &amp; Checklist (10 Points)</span>
+                    <span>View Full Service Details &amp; Checklist (12 Points)</span>
                   </button>
                 </div>
               </div>
@@ -3032,58 +3130,63 @@ YES BIKE SERVICE
                   </span>
                 </div>
 
-                {/* Key Spec Grid */}
+                {/* Highlights: Doorstep Available, Warranty, Interval, Oil Spec */}
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Synthetic Oil</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">100% Fully Synthetic 10W-50 (3.1L)</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Location</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">✅ Doorstep Service Available</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Twin Filter</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Brand New Spin-On Filter Kit</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Warranty</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛡️ 500 KM / 1 Mo Warranty</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Warranty</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">500 km or 1-Month Warranty</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Interval</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🔧 Every 3,000 KM / 3 Mo</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Twin Engine Check</span>
-                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Twin Throttle Synchronization</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Engine Oil &amp; Filter</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛢️ 100% Synthetic 10W-50 + Twin Filter</span>
                   </div>
                 </div>
 
-                {/* Core Service Inclusions (6 Key Points) */}
+                {/* What's Included in the Service (12 Core Points) */}
                 <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
                   <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
-                    <span>What's Included in ₹3,999:</span>
-                    <span className="text-amber-600 dark:text-amber-400 font-bold normal-case text-[10px]">Parallel-Twin Specs</span>
+                    <span>What's Included in the Service?</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">12 Inspection Points</span>
                   </div>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-zinc-300">
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>100% Fully Synthetic 10W-50 Oil (3.1L)</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>OEM Twin Spin-On Filter &amp; Washer</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Twin Throttle Body Synchronization</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Twin Spark Plugs Calibration &amp; Test</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Brembo/ByBre Twin Caliper Tuning</span>
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      <span>Zero Advance • Pay After Service</span>
-                    </li>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2 text-xs text-gray-700 dark:text-zinc-300">
+                    {[
+                      { name: "Air Filter Cleaning", isOil: false },
+                      { name: "Battery Voltage Check", isOil: false },
+                      { name: "Brake Inspection & Servicing", isOil: false, note: "Brembo / ByBre" },
+                      { name: "Cables & Levers Adjustment", isOil: false },
+                      { name: "Chain Tension Check & Adjustment", isOil: false },
+                      { name: "Clutch Cable Greasing", isOil: false },
+                      { name: "Dry Wash", isOil: false },
+                      { name: "Electrical System Check-up", isOil: false },
+                      { name: "Engine Oil Replacement", isOil: true, note: "100% Synthetic 10W-50 3.1L" },
+                      { name: "Greasing & Lubrication", isOil: false },
+                      { name: "Engine Oil Leakage Check", isOil: false },
+                      { name: "Spark Plug Cleaning & Inspection", isOil: false, note: "Twin Plugs" },
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-1.5">
+                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-500' : 'text-emerald-500'}`} />
+                        <span className={`text-[12px] leading-snug ${item.isOil ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
+                          {item.name}
+                          {item.note && <span className="ml-1 text-[10px] text-amber-700 dark:text-amber-400 font-bold">({item.note})</span>}
+                        </span>
+                      </li>
+                    ))}
                   </ul>
+                </div>
+
+                {/* Brand & Trust Banner */}
+                <div className="mb-4 p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-center">
+                  <span className="text-[10px] font-black tracking-wide text-amber-800 dark:text-amber-300 uppercase block">Book Your Bike Service Today!</span>
+                  <div className="text-[11.5px] font-extrabold text-gray-900 dark:text-white">YES BIKE SERVICE — Professional Bike Care at Your Doorstep</div>
+                  <div className="text-[10px] text-gray-600 dark:text-zinc-400 font-semibold mt-0.5">🏠 Home &amp; Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty</div>
                 </div>
 
                 {/* Model Quick Select Pills */}
@@ -3171,7 +3274,7 @@ YES BIKE SERVICE
                     className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     <ClipboardList className="w-4 h-4 text-amber-500" />
-                    <span>View Full Service Details &amp; Checklist (10 Points)</span>
+                    <span>View Full Service Details &amp; Checklist (12 Points)</span>
                   </button>
                 </div>
               </div>
@@ -3885,7 +3988,7 @@ YES BIKE SERVICE
                       setIsTechnicalDetailsOpen(true);
                     }}
                     className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500 hover:text-zinc-950 dark:bg-amber-400/10 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-amber-800 dark:text-amber-300 border border-amber-500/30 transition-all cursor-pointer shrink-0 group shadow-2xs"
-                    title="View 10-Point Service Details Checklist"
+                    title="View 12-Point Service Details Checklist"
                   >
                     <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
                     <span>Service Details</span>
