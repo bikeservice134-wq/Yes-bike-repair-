@@ -205,9 +205,9 @@ export const ROYAL_ENFIELD_CATALOG = [
     categoryTitle: "350cc–450cc Models",
     rangeBadge: "350cc–450cc",
     serviceName: "General Service + Engine Oil",
-    price: "₹2,399",
+    price: "₹2,599",
     originalPrice: "₹2,999",
-    savings: "Save ₹600 (20% OFF)",
+    savings: "Save ₹400 (13% OFF)",
     oilSpec: "Includes 15W-50 Semi-Synthetic Engine Oil & OEM Oil Filter",
     features: [
       "Doorstep Service at Home or Office across Bengaluru",
@@ -255,7 +255,7 @@ export const ROYAL_ENFIELD_CATALOG = [
 const QUICK_SERVICE_OPTIONS = [
   { id: "Basic General Service - ₹699", name: "Basic General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
-  { id: "Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)", name: "Royal Enfield 350cc-500 cc General Service with Engine Oil", price: "₹2,399", note: "15W-50 Semi-Synthetic Oil + OEM Filter for Classic, Hunter, Bullet, Meteor, Himalayan, 500cc", badge: "RE 350-500" },
+  { id: "Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)", name: "Royal Enfield 350cc-500 cc General Service with Engine Oil", price: "₹2,599", note: "15W-50 Semi-Synthetic Oil + OEM Filter for Classic, Hunter, Bullet, Meteor, Himalayan, 500cc", badge: "RE 350-500" },
   { id: "Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)", name: "Royal Enfield 650 cc General Service with Engine Oil Twin", price: "₹3,999", note: "100% Fully Synthetic 10W-50 Oil + Twin Filter for Continental GT, Interceptor, Super Meteor 650", badge: "RE 650 Twins" },
   { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
@@ -537,7 +537,23 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Royal Enfield Service (350cc–450cc)': {
-    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,399)',
+    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield Service (350cc–450cc) - ₹2,599': {
+    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
     steps: [
       '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
       '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
@@ -553,7 +569,7 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Royal Enfield Service (350cc–450cc) - ₹2,399': {
-    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,399)',
+    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
     steps: [
       '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
       '🏠 Doorstep Assistance across Bengaluru (Home & Office)',
@@ -603,7 +619,23 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil': {
-    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Service across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)': {
+    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
     steps: [
       '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
       '🏠 Doorstep Service across Bengaluru (Home & Office)',
@@ -619,7 +651,7 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)': {
-    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
     steps: [
       '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
       '🏠 Doorstep Service across Bengaluru (Home & Office)',
@@ -2796,7 +2828,7 @@ YES BIKE SERVICE
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
-              {/* Package 1: Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399) */}
+              {/* Package 1: Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599) */}
               <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/60 dark:border-amber-500/35 hover:border-amber-500 dark:hover:border-amber-400 p-5 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/15 transition-all duration-300 relative group overflow-hidden">
                 <div className="flex items-center justify-between gap-2 mb-3.5">
                   <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
@@ -2804,13 +2836,13 @@ YES BIKE SERVICE
                     <span>350cc–500 cc Singles (J-Series &amp; UCE)</span>
                   </span>
                   <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
-                    Save ₹600 (20% OFF)
+                    Save ₹400 (13% OFF)
                   </span>
                 </div>
 
                 <div className="mb-3">
                   <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight">
-                    Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)
+                    Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1.5 font-medium leading-relaxed">
                     Specialized doorstep maintenance for Classic 350, Hunter 350, Bullet 350, Meteor 350, Himalayan, Classic 500 &amp; Bullet 500
@@ -2819,7 +2851,7 @@ YES BIKE SERVICE
 
                 {/* Price Display */}
                 <div className="flex flex-wrap items-baseline gap-2.5 mb-4 pb-3.5 border-b border-gray-100 dark:border-zinc-800">
-                  <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹2,399</span>
+                  <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹2,599</span>
                   <span className="text-base font-semibold text-gray-400 line-through">₹2,999</span>
                   <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2.5 py-1 rounded-lg border border-amber-400/30">
                     🛢️ 15W-50 Semi-Synthetic Oil + OEM Filter Included
@@ -2849,7 +2881,7 @@ YES BIKE SERVICE
                 {/* Core Service Inclusions (6 Key Points) */}
                 <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
                   <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
-                    <span>What's Included in ₹2,399:</span>
+                    <span>What's Included in ₹2,599:</span>
                     <span className="text-amber-600 dark:text-amber-400 font-bold normal-case text-[10px]">OEM Genuine Spares</span>
                   </div>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-zinc-300">
@@ -2892,8 +2924,8 @@ YES BIKE SERVICE
                         type="button"
                         onClick={() => {
                           setSelectedPackage({
-                            name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
-                            price: '₹2,399'
+                            name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+                            price: '₹2,599'
                           });
                           setModalBrand('Royal Enfield');
                           setModalModel(model);
@@ -2914,8 +2946,8 @@ YES BIKE SERVICE
                     type="button"
                     onClick={() => {
                       setSelectedPackage({
-                        name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
-                        price: '₹2,399'
+                        name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+                        price: '₹2,599'
                       });
                       setModalBrand('Royal Enfield');
                       setModalModel('Classic 350');
@@ -2932,7 +2964,7 @@ YES BIKE SERVICE
                       </span>
                     </span>
                     <span className="flex items-center gap-1.5 bg-zinc-950 text-amber-400 font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shrink-0 shadow-inner group-hover/btn:bg-zinc-900 transition-colors">
-                      <span>₹2,399</span>
+                      <span>₹2,599</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
                   </button>
@@ -2947,7 +2979,7 @@ YES BIKE SERVICE
 
                   {/* Direct WhatsApp Quick Booking */}
                   <a
-                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20350cc-500%20cc%20General%20Service%20with%20Engine%20Oil%20(₹2%2C399)%20doorstep%20service."
+                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20350cc-500%20cc%20General%20Service%20with%20Engine%20Oil%20(₹2%2C599)%20doorstep%20service."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-[#25D366]/30 transition-all cursor-pointer"
@@ -3807,13 +3839,13 @@ YES BIKE SERVICE
                           {selectedPackage.name.includes('650 cc') ? '648cc Parallel-Twin' : '350cc–500 cc Singles'}
                         </span>
                         <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25">
-                          {selectedPackage.name.includes('650 cc') ? 'Save ₹1,000 (20% OFF)' : 'Save ₹600 (20% OFF)'}
+                          {selectedPackage.name.includes('650 cc') ? 'Save ₹1,000 (20% OFF)' : 'Save ₹400 (13% OFF)'}
                         </span>
                       </div>
                       <h3 className="text-sm sm:text-base font-black tracking-tight text-gray-900 dark:text-white mt-1 leading-snug">
                         {selectedPackage.name.includes('650 cc')
                           ? 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)'
-                          : 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)'}
+                          : 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)'}
                       </h3>
                     </div>
                   </div>
@@ -3830,7 +3862,7 @@ YES BIKE SERVICE
                 <div className="flex flex-wrap items-center justify-between gap-2 bg-white/90 dark:bg-zinc-950/70 p-2.5 rounded-xl border border-amber-500/25 shadow-2xs">
                   <div className="flex items-baseline gap-2">
                     <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
-                      {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,399'}
+                      {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,599'}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
                       {selectedPackage.name.includes('650 cc') ? '₹4,999' : '₹2,999'}
