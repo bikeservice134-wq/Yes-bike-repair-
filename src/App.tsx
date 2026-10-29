@@ -90,7 +90,7 @@ const MODELS_BY_BRAND: Record<string, string[]> = {
     "Sport",
     "XL100"
   ],
-  "Royal Enfield": ["Classic 350", "Hunter 350", "Bullet 350", "Meteor 350", "Himalayan", "Continental GT 650", "Interceptor 650"],
+  "Royal Enfield": ["Classic 350", "Hunter 350", "Bullet 350", "Meteor 350", "Himalayan 450", "Himalayan 411", "Guerrilla 450", "Scram 411", "Classic 500", "Bullet 500", "Continental GT 650", "Interceptor 650", "Super Meteor 650", "Shotgun 650", "Bear 650"],
   Vespa: ["Vespa ZX 125", "Vespa VXL 150", "Vespa SXL 150"],
   Mahindra: ["Mojo 300", "Gusto 125", "Centuro", "Rodeo RZ", "Flyte"],
   Yamaha: ["FZ-S FI", "R15 V4", "MT-15 V2", "Fascino 125", "RayZR 125", "Aerox 155", "FZ 25"],
@@ -255,8 +255,8 @@ export const ROYAL_ENFIELD_CATALOG = [
 const QUICK_SERVICE_OPTIONS = [
   { id: "Basic General Service - ₹699", name: "Basic General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
-  { id: "Royal Enfield Service (350cc–450cc) - ₹2,399", name: "Royal Enfield 350cc–450cc", price: "₹2,399", note: "General Service + Semi-Synthetic Oil for Classic, Hunter, Bullet, Meteor, Himalayan", badge: "RE Special" },
-  { id: "Royal Enfield Service (650cc) - ₹3,999", name: "Royal Enfield 650cc Twin", price: "₹3,999", note: "General Service + Fully Synthetic Oil for Continental GT & Interceptor 650", badge: "650 Twins" },
+  { id: "Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)", name: "Royal Enfield 350cc-500 cc General Service with Engine Oil", price: "₹2,399", note: "15W-50 Semi-Synthetic Oil + OEM Filter for Classic, Hunter, Bullet, Meteor, Himalayan, 500cc", badge: "RE 350-500" },
+  { id: "Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)", name: "Royal Enfield 650 cc General Service with Engine Oil Twin", price: "₹3,999", note: "100% Fully Synthetic 10W-50 Oil + Twin Filter for Continental GT, Interceptor, Super Meteor 650", badge: "RE 650 Twins" },
   { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
   { id: "Inspection & Repair - ₹399", name: "Inspection & Repair", price: "Starting at ₹399", note: "Professional vehicle inspection, fault diagnosis & repair advice", badge: "Starting ₹399" },
@@ -601,6 +601,72 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
       '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
       '🛡️ 500 km or 1-Month Service Warranty'
     ]
+  },
+  'Royal Enfield 350cc-500 cc General Service with Engine Oil': {
+    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Service across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)': {
+    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Service across Bengaluru (Home & Office)',
+      '🛢️ 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill) included',
+      '🔩 Brand New OEM Engine Oil Filter & Copper Crush Washer Replacement',
+      '⚡ Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration',
+      '💨 Air Filter Cleaning & Intake Duct Throttle Inspection',
+      '⛓️ Heavy-Duty Chain Slack Calibration & High-Tack Synthetic Chain Lubrication',
+      '🛑 Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning',
+      '🔋 Battery Voltage Health, Terminals Cleaning & Charging Output Check',
+      '✨ Foam/Dry Wash & Protective Polishing Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield 650 cc General Service with Engine Oil Twin': {
+    title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Service across Bengaluru (Home & Office)',
+      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
+      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
+      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
+      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
+      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
+      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
+      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
+      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
+      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
+  },
+  'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)': {
+    title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+    steps: [
+      '• YES BIKE SERVICE — Premium Royal Enfield Care at Your Doorstep',
+      '🏠 Doorstep Service across Bengaluru (Home & Office)',
+      '🛢️ 100% Fully Synthetic 10W-50 Engine Oil Refill (3.1L) included',
+      '🔩 OEM Spin-On Oil Filter & Copper Drain Washer Replacement',
+      '⚡ Twin Spark Plugs Inspection, Gap Calibration & Testing',
+      '🔄 Twin Throttle Body Synchronization & Cable Free Play Check',
+      '💨 Dual Air Filter Cleaning & High-Flow Airbox Inspection',
+      '⛓️ High-Performance O-Ring Chain Degrease & Synthetic Wax Lube',
+      '🛑 ByBre/Brembo Twin Caliper Brake Calibration & Fluid Health Check',
+      '🔋 High-Cranking Battery Voltage & Charging Circuit Test',
+      '✨ Foam/Dry Wash & Chrome / Matte Exterior Detailing',
+      '🛡️ 500 km or 1-Month Service Warranty'
+    ]
   }
 };
 
@@ -827,7 +893,6 @@ export default function App() {
 
   const [modalBrand, setModalBrand] = useState("");
   const [modalModel, setModalModel] = useState("");
-  
   const [activeLocation, setActiveLocation] = useState('Indiranagar');
 
   const dispatchBookingAutomatically = (
@@ -2712,6 +2777,374 @@ YES BIKE SERVICE
               </div>
             </div>
           </div>
+
+          {/* ROYAL ENFIELD SERVICE PACKAGES */}
+          <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-gray-200/90 dark:border-zinc-800">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-300 text-xs font-black uppercase tracking-wider border border-amber-400/30 mb-2">
+                  <Bike className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Royal Enfield Doorstep Care • Bengaluru</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
+                  Royal Enfield Specialized Packages
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 max-w-md font-medium">
+                Doorstep maintenance with genuine OEM filters, authentic semi-synthetic &amp; fully synthetic engine oils, and certified Royal Enfield technicians.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+              {/* Package 1: Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399) */}
+              <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/60 dark:border-amber-500/35 hover:border-amber-500 dark:hover:border-amber-400 p-5 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/15 transition-all duration-300 relative group overflow-hidden">
+                <div className="flex items-center justify-between gap-2 mb-3.5">
+                  <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span>350cc–500 cc Singles (J-Series &amp; UCE)</span>
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
+                    Save ₹600 (20% OFF)
+                  </span>
+                </div>
+
+                <div className="mb-3">
+                  <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight">
+                    Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1.5 font-medium leading-relaxed">
+                    Specialized doorstep maintenance for Classic 350, Hunter 350, Bullet 350, Meteor 350, Himalayan, Classic 500 &amp; Bullet 500
+                  </p>
+                </div>
+
+                {/* Price Display */}
+                <div className="flex flex-wrap items-baseline gap-2.5 mb-4 pb-3.5 border-b border-gray-100 dark:border-zinc-800">
+                  <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹2,399</span>
+                  <span className="text-base font-semibold text-gray-400 line-through">₹2,999</span>
+                  <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2.5 py-1 rounded-lg border border-amber-400/30">
+                    🛢️ 15W-50 Semi-Synthetic Oil + OEM Filter Included
+                  </span>
+                </div>
+
+                {/* Key Spec Grid */}
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Engine Oil Refill</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">15W-50 Semi-Synthetic (1.5L–2.1L)</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">OEM Filter</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Brand New Filter &amp; Drain Washer</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Warranty</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">500 km or 1-Month Warranty</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Location</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Home &amp; Office across Bengaluru</span>
+                  </div>
+                </div>
+
+                {/* Core Service Inclusions (6 Key Points) */}
+                <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
+                    <span>What's Included in ₹2,399:</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold normal-case text-[10px]">OEM Genuine Spares</span>
+                  </div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-zinc-300">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>15W-50 Semi-Synthetic Oil Refill</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>OEM Oil Filter &amp; Copper Washer</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Spark Plug De-Carbonize &amp; Gap Tuning</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Chain Slack Calibration &amp; Synthetic Lube</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Brake Pads Tuning &amp; Exterior Wash</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Zero Advance • Pay After Service</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Model Quick Select Pills */}
+                <div className="mb-4">
+                  <span className="text-[10px] font-bold text-gray-500 dark:text-zinc-400 block mb-1.5 uppercase tracking-wide">
+                    Choose your Royal Enfield model:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['Classic 350', 'Hunter 350', 'Bullet 350', 'Meteor 350', 'Himalayan 450', 'Classic 500', 'Bullet 500'].map((model) => (
+                      <button
+                        key={model}
+                        type="button"
+                        onClick={() => {
+                          setSelectedPackage({
+                            name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+                            price: '₹2,399'
+                          });
+                          setModalBrand('Royal Enfield');
+                          setModalModel(model);
+                          setIsPackageModalOpen(true);
+                        }}
+                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-amber-400 hover:text-zinc-950 dark:bg-zinc-800 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-gray-800 dark:text-zinc-200 border border-gray-200 dark:border-zinc-700 transition-all cursor-pointer shadow-2xs hover:scale-105"
+                        title={`Book doorstep service for ${model}`}
+                      >
+                        {model}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Actions: Primary CTA, WhatsApp, & Checklist */}
+                <div className="mt-auto flex flex-col gap-2.5 pt-3.5 border-t border-gray-100 dark:border-zinc-800">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPackage({
+                        name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)',
+                        price: '₹2,399'
+                      });
+                      setModalBrand('Royal Enfield');
+                      setModalModel('Classic 350');
+                      setIsPackageModalOpen(true);
+                    }}
+                    className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:via-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-4 rounded-xl sm:rounded-2xl shadow-[0_6px_22px_rgba(245,158,11,0.38)] hover:shadow-[0_8px_28px_rgba(245,158,11,0.55)] transition-all flex items-center justify-between gap-3 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0 border border-amber-300/80"
+                  >
+                    <span className="flex items-center gap-2.5 min-w-0">
+                      <span className="w-8 h-8 rounded-xl bg-zinc-950/15 flex items-center justify-center shrink-0 border border-zinc-950/10 group-hover/btn:scale-110 transition-transform">
+                        <Bike className="w-4.5 h-4.5 text-zinc-950" />
+                      </span>
+                      <span className="font-black text-xs sm:text-sm md:text-base tracking-tight truncate text-left">
+                        Book Royal Enfield 350cc-500 cc Service now
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-1.5 bg-zinc-950 text-amber-400 font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shrink-0 shadow-inner group-hover/btn:bg-zinc-900 transition-colors">
+                      <span>₹2,399</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+
+                  <div className="flex items-center justify-center gap-2 text-[10.5px] font-bold text-gray-500 dark:text-zinc-400 text-center">
+                    <span>⚡ ~30 Min Arrival across Bengaluru</span>
+                    <span>•</span>
+                    <span>Zero Advance</span>
+                    <span>•</span>
+                    <span>Pay After Service</span>
+                  </div>
+
+                  {/* Direct WhatsApp Quick Booking */}
+                  <a
+                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20350cc-500%20cc%20General%20Service%20with%20Engine%20Oil%20(₹2%2C399)%20doorstep%20service."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-[#25D366]/30 transition-all cursor-pointer"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                    <span>Quick 1-Click WhatsApp Booking</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Royal Enfield 350cc-500 cc General Service with Engine Oil']);
+                      setIsTechnicalDetailsOpen(true);
+                    }}
+                    className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <ClipboardList className="w-4 h-4 text-amber-500" />
+                    <span>View Full Service Details &amp; Checklist (10 Points)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Package 2: Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999) */}
+              <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/60 dark:border-amber-500/35 hover:border-amber-500 dark:hover:border-amber-400 p-5 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/15 transition-all duration-300 relative group overflow-hidden">
+                <div className="flex items-center justify-between gap-2 mb-3.5">
+                  <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span>648cc Parallel-Twin (Continental GT, Interceptor, Super Meteor)</span>
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
+                    Save ₹1,000 (20% OFF)
+                  </span>
+                </div>
+
+                <div className="mb-3">
+                  <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight">
+                    Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1.5 font-medium leading-relaxed">
+                    Specialized doorstep care for Continental GT 650, Interceptor 650, Super Meteor 650, Shotgun 650 &amp; Bear 650
+                  </p>
+                </div>
+
+                {/* Price Display */}
+                <div className="flex flex-wrap items-baseline gap-2.5 mb-4 pb-3.5 border-b border-gray-100 dark:border-zinc-800">
+                  <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹3,999</span>
+                  <span className="text-base font-semibold text-gray-400 line-through">₹4,999</span>
+                  <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2.5 py-1 rounded-lg border border-amber-400/30">
+                    🛢️ 100% Fully Synthetic 10W-50 (3.1L) + Twin Filter Included
+                  </span>
+                </div>
+
+                {/* Key Spec Grid */}
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Synthetic Oil</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">100% Fully Synthetic 10W-50 (3.1L)</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Twin Filter</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Brand New Spin-On Filter Kit</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Doorstep Warranty</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">500 km or 1-Month Warranty</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
+                    <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Twin Engine Check</span>
+                    <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">Twin Throttle Synchronization</span>
+                  </div>
+                </div>
+
+                {/* Core Service Inclusions (6 Key Points) */}
+                <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
+                    <span>What's Included in ₹3,999:</span>
+                    <span className="text-amber-600 dark:text-amber-400 font-bold normal-case text-[10px]">Parallel-Twin Specs</span>
+                  </div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-zinc-300">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>100% Fully Synthetic 10W-50 Oil (3.1L)</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>OEM Twin Spin-On Filter &amp; Washer</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Twin Throttle Body Synchronization</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Twin Spark Plugs Calibration &amp; Test</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Brembo/ByBre Twin Caliper Tuning</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Zero Advance • Pay After Service</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Model Quick Select Pills */}
+                <div className="mb-4">
+                  <span className="text-[10px] font-bold text-gray-500 dark:text-zinc-400 block mb-1.5 uppercase tracking-wide">
+                    Choose your 650 Twin model:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['Interceptor 650', 'Continental GT 650', 'Super Meteor 650', 'Shotgun 650', 'Bear 650'].map((model) => (
+                      <button
+                        key={model}
+                        type="button"
+                        onClick={() => {
+                          setSelectedPackage({
+                            name: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+                            price: '₹3,999'
+                          });
+                          setModalBrand('Royal Enfield');
+                          setModalModel(model);
+                          setIsPackageModalOpen(true);
+                        }}
+                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-amber-400 hover:text-zinc-950 dark:bg-zinc-800 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-gray-800 dark:text-zinc-200 border border-gray-200 dark:border-zinc-700 transition-all cursor-pointer shadow-2xs hover:scale-105"
+                        title={`Book doorstep service for ${model}`}
+                      >
+                        {model}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Actions: Primary CTA, WhatsApp, & Checklist */}
+                <div className="mt-auto flex flex-col gap-2.5 pt-3.5 border-t border-gray-100 dark:border-zinc-800">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedPackage({
+                        name: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+                        price: '₹3,999'
+                      });
+                      setModalBrand('Royal Enfield');
+                      setModalModel('Interceptor 650');
+                      setIsPackageModalOpen(true);
+                    }}
+                    className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:via-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-4 rounded-xl sm:rounded-2xl shadow-[0_6px_22px_rgba(245,158,11,0.38)] hover:shadow-[0_8px_28px_rgba(245,158,11,0.55)] transition-all flex items-center justify-between gap-3 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0 border border-amber-300/80"
+                  >
+                    <span className="flex items-center gap-2.5 min-w-0">
+                      <span className="w-8 h-8 rounded-xl bg-zinc-950/15 flex items-center justify-center shrink-0 border border-zinc-950/10 group-hover/btn:scale-110 transition-transform">
+                        <Bike className="w-4.5 h-4.5 text-zinc-950" />
+                      </span>
+                      <span className="font-black text-xs sm:text-sm md:text-base tracking-tight truncate text-left">
+                        Book Royal Enfield 650 cc Twin Service now
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-1.5 bg-zinc-950 text-amber-400 font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shrink-0 shadow-inner group-hover/btn:bg-zinc-900 transition-colors">
+                      <span>₹3,999</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+
+                  <div className="flex items-center justify-center gap-2 text-[10.5px] font-bold text-gray-500 dark:text-zinc-400 text-center">
+                    <span>⚡ ~30 Min Arrival across Bengaluru</span>
+                    <span>•</span>
+                    <span>Zero Advance</span>
+                    <span>•</span>
+                    <span>100% Fully Synthetic Oil</span>
+                  </div>
+
+                  {/* Direct WhatsApp Quick Booking */}
+                  <a
+                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20650%20cc%20General%20Service%20with%20Engine%20Oil%20Twin%20(₹3%2C999)%20doorstep%20service."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-[#25D366]/30 transition-all cursor-pointer"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                    <span>Quick 1-Click WhatsApp Booking</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Royal Enfield 650 cc General Service with Engine Oil Twin']);
+                      setIsTechnicalDetailsOpen(true);
+                    }}
+                    className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <ClipboardList className="w-4 h-4 text-amber-500" />
+                    <span>View Full Service Details &amp; Checklist (10 Points)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -3359,52 +3792,135 @@ YES BIKE SERVICE
       {/* PACKAGE BOOKING MODAL */}
       {isPackageModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92dvh] sm:max-h-[90vh]">
-            <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
-              <div className="flex items-center gap-2.5 w-full pr-2">
-                <YesBikeLogo className="w-9 h-9 sm:w-10 sm:h-10" />
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
-                  {selectedPackage && (
-                    <div className="flex flex-wrap items-center justify-between gap-1.5 mt-1">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500/10 dark:bg-amber-400/10 rounded-md border border-amber-500/20 text-xs">
-                        <span className="font-extrabold text-gray-900 dark:text-white truncate">
-                          {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
-                        </span>
-                        {selectedPackage.name.includes("Jump Start") ? (
-                          <span className="flex items-center gap-1 shrink-0">
-                            <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
-                            <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
-                          </span>
-                        ) : (
-                          <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
-                        )}
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const details = SERVICE_DETAILS_DATA[selectedPackage.name] || SERVICE_DETAILS_DATA['General Service'];
-                          setTechnicalDetailsContent(details);
-                          setIsTechnicalDetailsOpen(true);
-                        }}
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group shrink-0"
-                        title="View Service Details"
-                      >
-                        <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
-                        <span>Service Details</span>
-                      </button>
+          <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92dvh] sm:max-h-[90vh]">
+            {selectedPackage?.name.includes('Royal Enfield') ? (
+              <div className="p-3.5 sm:p-4.5 bg-gradient-to-b from-amber-500/12 via-amber-500/5 to-transparent border-b border-gray-100 dark:border-zinc-800">
+                {/* Top Row: Icon, Badges, Title & Close Button */}
+                <div className="flex items-start justify-between gap-2.5 mb-2.5">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-400/40 shadow-xs">
+                      <Bike className="w-5 h-5 text-amber-500" />
                     </div>
-                  )}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30">
+                          {selectedPackage.name.includes('650 cc') ? '648cc Parallel-Twin' : '350cc–500 cc Singles'}
+                        </span>
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25">
+                          {selectedPackage.name.includes('650 cc') ? 'Save ₹1,000 (20% OFF)' : 'Save ₹600 (20% OFF)'}
+                        </span>
+                      </div>
+                      <h3 className="text-sm sm:text-base font-black tracking-tight text-gray-900 dark:text-white mt-1 leading-snug">
+                        {selectedPackage.name.includes('650 cc')
+                          ? 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)'
+                          : 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)'}
+                      </h3>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setIsPackageModalOpen(false)} 
+                    className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
+                    aria-label="Close modal"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Price Display & Service Details Action */}
+                <div className="flex flex-wrap items-center justify-between gap-2 bg-white/90 dark:bg-zinc-950/70 p-2.5 rounded-xl border border-amber-500/25 shadow-2xs">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
+                      {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,399'}
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
+                      {selectedPackage.name.includes('650 cc') ? '₹4,999' : '₹2,999'}
+                    </span>
+                    <span className="text-[10px] sm:text-[11px] font-extrabold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2 py-0.5 rounded-md border border-amber-500/20">
+                      {selectedPackage.name.includes('650 cc')
+                        ? '🛢️ 100% Synthetic 10W-50 + Twin Filter'
+                        : '🛢️ 15W-50 Semi-Synth + OEM Filter'}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const key = selectedPackage.name.includes('650 cc')
+                        ? 'Royal Enfield 650 cc General Service with Engine Oil Twin'
+                        : 'Royal Enfield 350cc-500 cc General Service with Engine Oil';
+                      const details = SERVICE_DETAILS_DATA[key] || SERVICE_DETAILS_DATA[selectedPackage.name] || SERVICE_DETAILS_DATA['General Service'];
+                      setTechnicalDetailsContent(details);
+                      setIsTechnicalDetailsOpen(true);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500 hover:text-zinc-950 dark:bg-amber-400/10 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-amber-800 dark:text-amber-300 border border-amber-500/30 transition-all cursor-pointer shrink-0 group shadow-2xs"
+                    title="View 10-Point Service Details Checklist"
+                  >
+                    <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                    <span>Service Details</span>
+                    <ArrowRight className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                </div>
+
+                {/* Specialist Reassurance Banner */}
+                <div className="mt-2.5 p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/25 flex items-center justify-between gap-2 text-xs">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
+                    <span className="text-gray-900 dark:text-zinc-100 font-extrabold text-[11px] sm:text-xs leading-tight">
+                      Doorstep Royal Enfield Specialist Mechanic • Genuine Engine Oil &amp; OEM Filter Included
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider shrink-0 bg-amber-500/15 px-2 py-0.5 rounded-md border border-amber-500/20">
+                    Zero Advance
+                  </span>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsPackageModalOpen(false)} 
-                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
-                aria-label="Close modal"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
+            ) : (
+              <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
+                <div className="flex items-center gap-2.5 w-full pr-2">
+                  <YesBikeLogo className="w-9 h-9 sm:w-10 sm:h-10" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-base sm:text-lg font-black tracking-tight text-gray-900 dark:text-white mb-0.5">Book Service Package</h3>
+                    {selectedPackage && (
+                      <div className="flex flex-wrap items-center justify-between gap-1.5 mt-1">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500/10 dark:bg-amber-400/10 rounded-md border border-amber-500/20 text-xs">
+                          <span className="font-extrabold text-gray-900 dark:text-white truncate">
+                            {selectedPackage.name.includes("Jump Start") ? "⚡ Jump Start Service" : selectedPackage.name}
+                          </span>
+                          {selectedPackage.name.includes("Jump Start") ? (
+                            <span className="flex items-center gap-1 shrink-0">
+                              <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
+                              <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
+                            </span>
+                          ) : (
+                            <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
+                          )}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const details = SERVICE_DETAILS_DATA[selectedPackage.name] || SERVICE_DETAILS_DATA['General Service'];
+                            setTechnicalDetailsContent(details);
+                            setIsTechnicalDetailsOpen(true);
+                          }}
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group shrink-0"
+                          title="View Service Details"
+                        >
+                          <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
+                          <span>Service Details</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsPackageModalOpen(false)} 
+                  className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
+                  aria-label="Close modal"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
             
             <form onSubmit={(e) => { 
               e.preventDefault(); 
@@ -3650,12 +4166,23 @@ YES BIKE SERVICE
               
               <button 
                 type="submit" 
-                className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1.5 active:scale-[0.98]"
+                className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:via-amber-400 hover:to-yellow-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[44px] sm:min-h-[48px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-between gap-2 cursor-pointer mt-1.5 active:scale-[0.98]"
               >
-                <div className="relative z-10 flex items-center justify-center gap-2">
-                  <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                  <span>Submit the booking form</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 shrink-0" />
+                <div className="relative z-10 flex items-center gap-2 min-w-0">
+                  <Bike className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="truncate">
+                    {selectedPackage?.name.includes('350cc-500 cc')
+                      ? 'Book Royal Enfield 350cc-500 cc Service now'
+                      : selectedPackage?.name.includes('650 cc')
+                      ? 'Book Royal Enfield 650 cc Twin Service now'
+                      : selectedPackage?.name
+                      ? `Book ${selectedPackage.name} now`
+                      : 'Submit the booking form'}
+                  </span>
+                </div>
+                <div className="relative z-10 flex items-center gap-1.5 bg-zinc-950 text-amber-400 font-black text-xs px-2.5 py-1 rounded-lg shrink-0 shadow-inner">
+                  <span>{selectedPackage?.price || 'Submit'}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
                 </div>
               </button>
               <p className="text-[10px] text-center text-gray-500 dark:text-zinc-400 font-medium mt-1">
