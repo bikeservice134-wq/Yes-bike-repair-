@@ -20,6 +20,68 @@ async function startServer() {
     },
   });
 
+  // Automatic Message & Booking Dispatch Endpoint
+  app.post('/api/send-booking', async (req, res) => {
+    try {
+      const {
+        bookingId,
+        fullName,
+        phone,
+        location,
+        vehicle,
+        service,
+        date,
+        time,
+        message,
+      } = req.body;
+
+      console.log(`[AUTOMATIC MESSAGE DISPATCH] Received booking ${bookingId} for ${fullName} (${phone})`);
+
+      // Automatically dispatch email notification in background via FormSubmit
+      try {
+        const payload = {
+          _subject: `🏍️🛵 BOOKING CONFIRMED SUCCESSFULLY! (${bookingId}) - ${fullName}`,
+          _template: 'box',
+          _captcha: 'false',
+          Booking_ID: bookingId,
+          Customer_Name: fullName,
+          Customer_Phone: phone,
+          Customer_Location: location,
+          Vehicle_Model: vehicle,
+          Service_Name: service,
+          Booking_Date: date,
+          Service_Time: time,
+          Mechanic_Status: 'Assignment in Progress',
+          Automatic_Dispatch: 'SUCCESSFUL',
+          Message: message,
+        };
+
+        await fetch('https://formsubmit.co/ajax/bikeservice134@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).catch((err) => {
+          console.warn('[FormSubmit Backend Dispatch Notice]', err?.message);
+        });
+      } catch (err) {
+        console.warn('[Backend email dispatch notice]', err);
+      }
+
+      return res.json({
+        success: true,
+        bookingId,
+        status: 'AUTOMATIC_MESSAGE_SENT',
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      console.error('Error in /api/send-booking:', err);
+      return res.status(500).json({ error: err.message || 'Dispatch failed' });
+    }
+  });
+
   app.post('/api/ai-book', async (req, res) => {
     try {
       const { userPrompt, vehiclePreference } = req.body;

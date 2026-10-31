@@ -893,10 +893,62 @@ export default function App() {
     location: string;
     service: string;
     timing: string;
+    date?: string;
+    time?: string;
+    rawMessage?: string;
     estimatedPrice: string;
     timestamp: string;
   } | null>(null);
-  const [copiedBookingId, setCopiedBookingId] = useState(false);
+
+  // Exact Booking Confirmation Message Generator
+  const generateBookingConfirmationMessage = (data: {
+    bookingId: string;
+    customerName: string;
+    phone: string;
+    location: string;
+    vehicleModel: string;
+    serviceName: string;
+    bookingDate: string;
+    serviceTime: string;
+  }) => {
+    const cleanPhone = data.phone.trim();
+    const formattedPhone = cleanPhone.startsWith('+91')
+      ? cleanPhone
+      : cleanPhone.startsWith('91') && cleanPhone.length === 12
+      ? `+${cleanPhone}`
+      : `+91 ${cleanPhone}`;
+
+    return `🏍️🛵 BOOKING CONFIRMED 
+SUCCESSFULLY!
+
+Hello ${data.customerName}! 👋
+
+Thank you for choosing YES BIKE SERVICE. Your service booking has been received successfully! ✅
+
+📋 BOOKING DETAILS
+
+🆔 Booking ID: ${data.bookingId}
+👤 Name: ${data.customerName}
+📞 Phone: ${formattedPhone}
+📍 Location: ${data.location}
+🏍️ Vehicle: ${data.vehicleModel}
+🔧 Service: ${data.serviceName}
+📅 Date: ${data.bookingDate}
+⏰ Time: ${data.serviceTime}
+
+━━━━━━━━━━━━━━━━━━
+
+🔧 MECHANIC ASSIGNMENT IN PROGRESS
+
+✅ Your booking request has been received.
+📞 Our team will contact you within 10 minutes to confirm your service and assign a mechanic.
+
+🙏 Thank you for trusting YES BIKE SERVICE!
+
+🏍️ YES BIKE SERVICE | BENGALURU
+
+⭐ Quality Bike Care at Your Doorstep.`;
+  };
 
   // Live IST Clock that ticks every 10 seconds
   const [liveClockTime, setLiveClockTime] = useState<string>(() => formatTime12Hour(getCurrentTimeHHMM()));
@@ -1026,27 +1078,56 @@ export default function App() {
       service: string;
       date: string;
       time: string;
-    }
+    },
+    preOpenedWindow?: Window | null
   ) => {
     fireLeadConversion();
 
     // 1. Automatically send booking details in background via AJAX
+    const formattedPhone = details.phone.startsWith('+91') ? details.phone : `+91 ${details.phone}`;
+    const vehicleModel = `${details.vehicle} - ${details.brand} ${details.model}`.trim();
     const payload = {
-      _subject: `🏍️ NEW BOOKING RECEIVED! (${details.bookingId}) - ${details.fullName}`,
+      _subject: `🏍️🛵 BOOKING CONFIRMED SUCCESSFULLY! (${details.bookingId}) - ${details.fullName}`,
       _template: "box",
       _captcha: "false",
-      Booking_Reference: details.bookingId,
-      Customer: details.fullName,
-      Phone: `+91 ${details.phone}`,
-      Location: details.location,
-      Vehicle: `${details.vehicle} - ${details.brand} ${details.model}`,
-      Service: details.service,
-      Date: details.date,
+      Booking_ID: details.bookingId,
+      Customer_Name: details.fullName,
+      Customer_Phone: formattedPhone,
+      Customer_Location: details.location,
+      Vehicle_Model: vehicleModel,
+      Service_Name: details.service,
+      Booking_Date: details.date,
       Service_Time: details.time,
-      Status: "DOORSTEP MECHANIC ASSIGNED",
+      Mechanic_Status: "Assignment in Progress",
       Message: message,
     };
 
+    // 1. Send automatically via server-side API endpoint
+    try {
+      fetch("/api/send-booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          bookingId: details.bookingId,
+          fullName: details.fullName,
+          phone: formattedPhone,
+          location: details.location,
+          vehicle: vehicleModel,
+          service: details.service,
+          date: details.date,
+          time: details.time,
+          message,
+        }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {
+      // Ignore network errors
+    }
+
+    // 2. Automatically send booking details via client FormSubmit AJAX
     try {
       fetch("https://formsubmit.co/ajax/bikeservice134@gmail.com", {
         method: "POST",
@@ -1061,6 +1142,7 @@ export default function App() {
       // Ignore network errors
     }
 
+    // 3. Automatically copy confirmation text to clipboard
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(message).catch(() => {});
@@ -1069,36 +1151,29 @@ export default function App() {
       // Ignore clipboard errors
     }
 
-    // 2. Immediately open WhatsApp with pre-filled booking details synchronously on user click (avoids popup blockers)
-    const whatsappNumber = "917090400617";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    const link = document.createElement("a");
-    link.href = whatsappUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // If preOpenedWindow was explicitly passed (e.g. from a form submit), navigate it to the WhatsApp page
+    if (preOpenedWindow && !preOpenedWindow.closed) {
+      try {
+        const whatsappNumber = "917090400617";
+        preOpenedWindow.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      } catch {}
+    }
   };
 
-  const handleBookService = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    const formData = new FormData(e.currentTarget);
-    const fullName = (formData.get('name') as string)?.trim() || (formData.get('fullName') as string)?.trim() || heroName || 'Rider';
-    const phone = (formData.get('phone') as string)?.trim() || heroPhone || '';
-    const brand = heroBrand || (formData.get('brand') as string) || 'Hero';
-    const model = heroModel || (formData.get('model') as string) || '';
-    const location = (formData.get('location') as string)?.trim() || locationSearch || 'Bengaluru';
-    const service = heroService || (formData.get('service') as string) || 'Basic General Service - ₹699';
-    const date = (formData.get('date') as string)?.trim() || bookingDate;
-    let time = (formData.get('time') as string)?.trim() || bookingTime;
-    const customTime = (formData.get('customTime') as string)?.trim();
-
-    if (customTime) {
-      time = customTime;
-    }
-
+  const getHeroBookingData = () => {
+    const fullName = heroName.trim() || 'Rider';
+    const cleanPhone = heroPhone.trim().replace(/\D/g, '');
+    const formattedPhone = cleanPhone.length === 10
+      ? `+91 ${cleanPhone}`
+      : cleanPhone.startsWith('91') && cleanPhone.length === 12
+      ? `+${cleanPhone}`
+      : cleanPhone ? `+91 ${cleanPhone}` : '+91 9999999999';
+    const brand = heroBrand || 'Hero';
+    const model = heroModel || 'Splendor Plus';
+    const location = locationSearch.trim() || 'Bengaluru';
+    const service = heroService || 'Basic General Service - ₹699';
+    const date = bookingDate || getTodayIST();
+    let time = bookingTime || formatTime12Hour(getCurrentTimeHHMM());
     if (time && time.includes(':') && !time.includes('AM') && !time.includes('PM')) {
       try {
         const [h, m] = time.split(':');
@@ -1106,74 +1181,127 @@ export default function App() {
         const ampm = hour >= 12 ? 'PM' : 'AM';
         const formattedHour = hour % 12 || 12;
         time = `${String(formattedHour).padStart(2, '0')}:${m} ${ampm}`;
-      } catch {
-        // keep as is
-      }
+      } catch {}
     }
-
-    const isSameTimeOrToday = isSameTimeActive || (date === getTodayIST() && (!time || time === 'ASAP' || time.includes(formatTime12Hour(getCurrentTimeHHMM()))));
-    const timingText = `${date} • ${time}${isSameTimeOrToday ? ' ⚡ (Simple Same Time / Immediate Dispatch)' : ''}`;
-
-    const selectedOpt = QUICK_SERVICE_OPTIONS.find(s => s.id === service);
-    const estimatedPrice = selectedOpt ? selectedOpt.price : '₹699';
     const bookingId = `ID-${Math.floor(10000 + Math.random() * 90000)}`;
+    const vehicleModel = `${heroVehicle} - ${brand} ${model}`.trim();
 
-    const confirmedData = {
+    const message = generateBookingConfirmationMessage({
+      bookingId,
+      customerName: fullName,
+      phone: formattedPhone,
+      location,
+      vehicleModel,
+      serviceName: service,
+      bookingDate: date,
+      serviceTime: time,
+    });
+
+    const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(message)}`;
+
+    return {
       bookingId,
       fullName,
-      phone,
-      vehicle: heroVehicle,
-      brand,
-      model: model || 'General Model',
+      phone: formattedPhone,
       location,
-      service,
-      timing: timingText,
-      estimatedPrice,
-      timestamp: getCurrentISTTime()
-    };
-
-    setBookingConfirmedData(confirmedData);
-
-    const message = `🏍️🛵 NEW BOOKING RECEIVED!
-
-Hello YES BIKE SERVICE Team 👋
-
-📋 Booking Reference: ${bookingId}
-👤 Customer: ${fullName}
-📞 Phone: +91 ${phone}
-📍 Location: ${location}
-🏍️ Vehicle: ${heroVehicle} - ${brand} ${model}
-🔧 Service: ${service}
-📅 Date: ${date}
-⏰ Service Time: ${time}
-
-✅ DOORSTEP MECHANIC ASSIGNED
-
-📞 Booking confirmed! The assigned mechanic will call the customer within 10 minutes to confirm the service.
-
-━━━━━━━━━━━━━━━━━━━━
-YES BIKE SERVICE
-🏍️ Doorstep Bike Service & Repair
-📍 Bengaluru`;
-
-    dispatchBookingAutomatically(message, {
-      bookingId,
-      fullName,
-      phone,
-      vehicle: heroVehicle,
+      vehicleModel,
       brand,
-      model: model || 'General Model',
-      location,
+      model,
       service,
       date,
       time,
-    });
+      message,
+      whatsappUrl,
+    };
+  };
 
-    setHeroSuccess(true);
-    setIsSubmitting(false);
-    setTimeout(() => {
-      setHeroSuccess(false);
-    }, 8000);
+  const handleHeroSubmitClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const cleanPhone = heroPhone.trim().replace(/\D/g, '');
+    if (!heroName.trim()) {
+      e.preventDefault();
+      const input = document.querySelector('input[name="name"]') as HTMLInputElement;
+      if (input) {
+        input.focus();
+        input.reportValidity?.();
+      }
+      return;
+    }
+
+    if (cleanPhone.length !== 10) {
+      e.preventDefault();
+      const input = document.querySelector('input[name="phone"]') as HTMLInputElement;
+      if (input) {
+        input.focus();
+        input.reportValidity?.();
+      }
+      return;
+    }
+
+    if (!heroBrand) {
+      e.preventDefault();
+      const select = document.querySelector('select[name="brand"]') as HTMLSelectElement;
+      if (select) {
+        select.focus();
+        select.reportValidity?.();
+      }
+      return;
+    }
+
+    const bookingData = getHeroBookingData();
+    
+    // Set href dynamically right at click time to open the official WhatsApp page
+    e.currentTarget.href = bookingData.whatsappUrl;
+
+    setIsSubmitting(true);
+    setTimeout(() => setIsSubmitting(false), 3000);
+
+    dispatchBookingAutomatically(bookingData.message, {
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: heroVehicle,
+      brand: heroBrand || 'Hero',
+      model: heroModel || 'Splendor Plus',
+      location: bookingData.location,
+      service: bookingData.service,
+      date: bookingData.date,
+      time: bookingData.time,
+    });
+  };
+
+  const handleBookService = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const cleanPhone = heroPhone.trim().replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      const input = document.querySelector('input[name="phone"]') as HTMLInputElement;
+      if (input) {
+        input.focus();
+        input.reportValidity?.();
+      }
+      return;
+    }
+
+    setIsSubmitting(true);
+    setTimeout(() => setIsSubmitting(false), 3000);
+
+    const bookingData = getHeroBookingData();
+
+    try {
+      window.open(bookingData.whatsappUrl, '_blank');
+    } catch {}
+
+    dispatchBookingAutomatically(bookingData.message, {
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: heroVehicle,
+      brand: heroBrand || 'Hero',
+      model: heroModel || 'Splendor Plus',
+      location: bookingData.location,
+      service: bookingData.service,
+      date: bookingData.date,
+      time: bookingData.time,
+    });
   };
   
   useEffect(() => {
@@ -1827,15 +1955,17 @@ YES BIKE SERVICE
                           </div>
 
                           {/* Submit Action Button */}
-                          <button 
-                            type="submit" 
-                            disabled={isSubmitting}
+                          <a 
+                            href={getHeroBookingData().whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={handleHeroSubmitClick}
                             className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
                               <div className="relative z-10 flex items-center justify-center gap-2">
-                                <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
-                                <span>Sending Booking Details...</span>
+                                <MessageCircle className="w-4 h-4 text-zinc-950 animate-bounce" />
+                                <span>Opening WhatsApp to Send Message...</span>
                               </div>
                             ) : (
                               <div className="relative z-10 flex items-center justify-center gap-2">
@@ -1844,31 +1974,13 @@ YES BIKE SERVICE
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 shrink-0" />
                               </div>
                             )}
-                          </button>
+                          </a>
                           <p className="text-[10px] text-center text-gray-500 dark:text-zinc-400 font-medium">
                             ~30 min doorstep mechanic dispatch • Pay after service
                           </p>
 
-                          {heroSuccess && bookingConfirmedData && (
-                            <div className="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold flex items-center justify-between gap-2 animate-in fade-in duration-200">
-                              <div className="flex items-center gap-1.5 min-w-0">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                                <span className="truncate">
-                                  Booking details sent! ({bookingConfirmedData.bookingId})
-                                </span>
-                              </div>
-                              <a
-                                href={`https://wa.me/917090400617?text=${encodeURIComponent(
-                                  `🏍️🛵 NEW BOOKING RECEIVED!\n\nHello YES BIKE SERVICE Team 👋\n\n📋 Booking Reference: ${bookingConfirmedData.bookingId}\n👤 Customer: ${bookingConfirmedData.fullName}\n📞 Phone: +91 ${bookingConfirmedData.phone}\n📍 Location: ${bookingConfirmedData.location}\n🏍️ Vehicle: ${bookingConfirmedData.vehicle} - ${bookingConfirmedData.brand} ${bookingConfirmedData.model}\n🔧 Service: ${bookingConfirmedData.service}\n📅 Date: ${bookingDate}\n⏰ Service Time: ${formatTime12Hour(bookingTime)}\n\n✅ DOORSTEP MECHANIC ASSIGNED\n\n📞 Booking confirmed! The assigned mechanic will call the customer within 10 minutes to confirm the service.\n\n━━━━━━━━━━━━━━━━━━━━\nYES BIKE SERVICE\n🏍️ Doorstep Bike Service & Repair\n📍 Bengaluru`
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-2 py-1 rounded-md bg-emerald-600 text-white text-[10px] font-black shrink-0 hover:bg-emerald-500 transition-colors"
-                              >
-                                WhatsApp ↗
-                              </a>
-                            </div>
-                          )}
+
+
                         </form>
                       </div>
                     </div>
@@ -4060,12 +4172,12 @@ YES BIKE SERVICE
             <form onSubmit={(e) => { 
               e.preventDefault(); 
               const formData = new FormData(e.currentTarget);
-              const fullName = (formData.get('fullName') as string) || 'Customer';
-              const phone = (formData.get('phone') as string) || '';
-              const location = (formData.get('location') as string) || 'Bengaluru';
+              const fullName = (formData.get('fullName') as string)?.trim() || 'Customer';
+              const phone = (formData.get('phone') as string)?.trim() || '';
+              const location = (formData.get('location') as string)?.trim() || 'Bengaluru';
               const vehicleType = (formData.get('vehicleType') as string) || 'Bike';
-              const date = (formData.get('date') as string) || 'Today';
-              const time = (formData.get('time') as string) || 'ASAP';
+              const date = (formData.get('date') as string)?.trim() || 'Today';
+              const time = (formData.get('time') as string)?.trim() || 'ASAP';
               const brand = (formData.get('brand') as string) || modalBrand || 'General';
               const model = (formData.get('model') as string) || 'Model';
               
@@ -4073,58 +4185,63 @@ YES BIKE SERVICE
               const pkgPrice = selectedPackage ? selectedPackage.price : '₹699';
               const bookingId = `ID-${Math.floor(10000 + Math.random() * 90000)}`;
               const formattedTime = formatTime12Hour(time);
+              const formattedPhone = phone.startsWith('+91') ? phone : `+91 ${phone}`;
 
               const isSameTimeOrToday = isSameTimeActive || (date === getTodayIST() && (!time || time === 'ASAP' || time.includes(formatTime12Hour(getCurrentTimeHHMM()))));
               const displayTiming = `${date} at ${formattedTime}${isSameTimeOrToday ? ' ⚡ (Simple Same Time / Immediate Dispatch)' : ''}`;
 
+              const vehicleModel = `${vehicleType} - ${brand} ${model}`.trim();
+              const serviceName = `${pkgName} (${pkgPrice})`;
+
+              const message = generateBookingConfirmationMessage({
+                bookingId,
+                customerName: fullName,
+                phone: formattedPhone,
+                location,
+                vehicleModel,
+                serviceName,
+                bookingDate: date,
+                serviceTime: formattedTime,
+              });
+
               setBookingConfirmedData({
                 bookingId,
                 fullName,
-                phone,
+                phone: formattedPhone,
                 vehicle: vehicleType,
                 brand,
                 model,
                 location,
-                service: `${pkgName} (${pkgPrice})`,
+                service: serviceName,
                 timing: `Scheduled: ${displayTiming}`,
+                date,
+                time: formattedTime,
+                rawMessage: message,
                 estimatedPrice: pkgPrice,
                 timestamp: getCurrentISTTime()
               });
               
-              const message = `🏍️🛵 NEW BOOKING RECEIVED!
-
-Hello YES BIKE SERVICE Team 👋
-
-📋 Booking Reference: ${bookingId}
-👤 Customer: ${fullName}
-📞 Phone: +91 ${phone}
-📍 Location: ${location}
-🏍️ Vehicle: ${vehicleType} - ${brand} ${model}
-🔧 Service: ${pkgName} (${pkgPrice})
-📅 Date: ${date}
-⏰ Service Time: ${formattedTime}
-
-✅ DOORSTEP MECHANIC ASSIGNED
-
-📞 Booking confirmed! The assigned mechanic will call the customer within 10 minutes to confirm the service.
-
-━━━━━━━━━━━━━━━━━━━━
-YES BIKE SERVICE
-🏍️ Doorstep Bike Service & Repair
-📍 Bengaluru`;
+              const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(message)}`;
+              try {
+                window.open(whatsappUrl, '_blank');
+              } catch {}
               
-              dispatchBookingAutomatically(message, {
-                bookingId,
-                fullName,
-                phone,
-                vehicle: vehicleType,
-                brand,
-                model,
-                location,
-                service: `${pkgName} (${pkgPrice})`,
-                date,
-                time: formattedTime,
-              });
+              dispatchBookingAutomatically(
+                message,
+                {
+                  bookingId,
+                  fullName,
+                  phone: formattedPhone,
+                  vehicle: vehicleType,
+                  brand,
+                  model,
+                  location,
+                  service: serviceName,
+                  date,
+                  time: formattedTime,
+                }
+              );
+
               setHeroSuccess(true);
               setIsPackageModalOpen(false);
             }} className="p-3 sm:p-4 space-y-2 overflow-y-auto">
@@ -4767,6 +4884,7 @@ YES BIKE SERVICE
           </div>
         </div>
       )}
+
 
       {/* MOBILE STICKY BOTTOM ACTION BAR */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
