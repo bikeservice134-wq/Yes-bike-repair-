@@ -40,7 +40,7 @@ async function startServer() {
       // Automatically dispatch email notification in background via FormSubmit
       try {
         const payload = {
-          _subject: `🏍️🛵 BOOKING CONFIRMED SUCCESSFULLY! (${bookingId}) - ${fullName}`,
+          _subject: `🏍️🛵 BOOKING CONFIRMED! (${bookingId}) - ${fullName}`,
           _template: 'box',
           _captcha: 'false',
           Booking_ID: bookingId,

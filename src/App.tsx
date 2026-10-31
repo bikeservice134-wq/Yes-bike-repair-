@@ -918,16 +918,14 @@ export default function App() {
       ? `+${cleanPhone}`
       : `+91 ${cleanPhone}`;
 
-    return `🏍️🛵 BOOKING CONFIRMED 
-SUCCESSFULLY!
+    return `🏍️🛵 BOOKING CONFIRMED!
 
 Hello ${data.customerName}! 👋
 
-Thank you for choosing YES BIKE SERVICE. Your service booking has been received successfully! ✅
+Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
 
 📋 BOOKING DETAILS
-
-🆔 Booking ID: ${data.bookingId}
+🆔 ID: ${data.bookingId}
 👤 Name: ${data.customerName}
 📞 Phone: ${formattedPhone}
 📍 Location: ${data.location}
@@ -936,17 +934,12 @@ Thank you for choosing YES BIKE SERVICE. Your service booking has been received 
 📅 Date: ${data.bookingDate}
 ⏰ Time: ${data.serviceTime}
 
-━━━━━━━━━━━━━━━━━━
-
 🔧 MECHANIC ASSIGNMENT IN PROGRESS
+📞 Our mechanic will call you within 10 minutes to confirm your service.
 
-✅ Your booking request has been received.
-📞 Our team will contact you within 10 minutes to confirm your service and assign a mechanic.
-
-🙏 Thank you for trusting YES BIKE SERVICE!
+🙏 Thank you for trusting us!
 
 🏍️ YES BIKE SERVICE | BENGALURU
-
 ⭐ Quality Bike Care at Your Doorstep.`;
   };
 
@@ -1087,7 +1080,7 @@ Thank you for choosing YES BIKE SERVICE. Your service booking has been received 
     const formattedPhone = details.phone.startsWith('+91') ? details.phone : `+91 ${details.phone}`;
     const vehicleModel = `${details.vehicle} - ${details.brand} ${details.model}`.trim();
     const payload = {
-      _subject: `🏍️🛵 BOOKING CONFIRMED SUCCESSFULLY! (${details.bookingId}) - ${details.fullName}`,
+      _subject: `🏍️🛵 BOOKING CONFIRMED! (${details.bookingId}) - ${details.fullName}`,
       _template: "box",
       _captcha: "false",
       Booking_ID: details.bookingId,
