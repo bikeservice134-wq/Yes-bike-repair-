@@ -1380,7 +1380,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1.5">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5">
             {[
               { label: 'Home', href: '#home' },
               { label: 'Service Packages', href: '#pricing', highlight: true },
@@ -1395,7 +1395,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                 onClick={() => {
                   if (currentView !== 'home') setCurrentView('home');
                 }}
-                className={`px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
+                className={`px-2.5 lg:px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
                   item.highlight
                     ? 'text-amber-900 dark:text-amber-300 bg-amber-500/15 border border-amber-500/30 font-black hover:bg-amber-500/25'
                     : 'text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-400/10'
@@ -1408,6 +1408,16 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
           
           {/* Right Actions & Header Service Packages CTA */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Desktop Direct Call Hotline */}
+            <a
+              href="tel:+917090400617"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-full text-xs font-black text-gray-800 dark:text-zinc-200 hover:text-amber-600 dark:hover:text-amber-400 bg-gray-100/90 dark:bg-zinc-800/90 border border-gray-200/70 dark:border-zinc-700/70 transition-colors shadow-2xs shrink-0 cursor-pointer"
+              title="Call Helpline"
+            >
+              <Phone className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span>+91 70904 00617</span>
+            </a>
+
             <button
               type="button"
               onClick={() => {
@@ -1440,18 +1450,18 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center shrink-0"
+              className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-gray-200/70 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-black dark:hover:text-black transition-colors cursor-pointer flex items-center justify-center shrink-0 min-h-[36px] min-w-[36px]"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation Dropdown Drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+          <div className="md:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
               {/* Mobile Drawer Brand Header */}
               <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100 dark:border-zinc-800">
@@ -1529,7 +1539,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       {currentView === "home" && (
         <main>
           {/* HERO SECTION */}
-          <section id="home" className="relative overflow-hidden pt-16 sm:pt-20 pb-10 lg:pb-16 bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300">
+          <section id="home" className="relative overflow-hidden pt-14 sm:pt-16 pb-10 lg:pb-16 bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300">
             {/* Background: Clean White Background with subtle warm accents */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
               <div className="absolute inset-0 bg-white dark:bg-zinc-950"></div>
@@ -1539,119 +1549,153 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
             </div>
             
             <FadeIn>
-              <div className="max-w-xl w-full mx-auto px-3.5 relative z-10 flex flex-col items-center text-center">
-                {/* Tagline / Brand Header - Small Size */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-900 dark:text-amber-300 mb-2 shadow-2xs max-w-full">
-                  <MapPin className="w-3 h-3 text-amber-600 dark:text-amber-400 shrink-0" />
-                  <span className="text-[9.5px] sm:text-[10.5px] font-bold tracking-wide">
-                    YES BIKE SERVICE — Quality Bike Care at Your Doorstep.
-                  </span>
-                </div>
+              <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="md:grid md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-12 md:items-start">
+                  
+                  {/* Left Column: Hero Editorial & Quick Select */}
+                  <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left mb-3 sm:mb-4 md:mb-0">
+                    {/* Tagline / Brand Header - Small Size */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-900 dark:text-amber-300 mb-2 shadow-2xs max-w-full">
+                      <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+                      <span className="text-[10px] sm:text-xs font-bold tracking-wide">
+                        YES BIKE SERVICE — Quality Bike Care at Your Doorstep.
+                      </span>
+                    </div>
 
-                {/* Main Headline */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-gray-900 dark:text-white tracking-tight leading-tight mb-2.5">
-                  <span className="inline-block">
-                    Doorstep Bike Service &amp; Repair
-                  </span>{' '}
-                  <span className="inline-block relative">
-                    <span className="animate-gradient-flow bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400 bg-clip-text text-transparent font-black">
-                      in Bengaluru
-                    </span>
-                    {/* Live location pulse ping */}
-                    <span className="inline-flex relative ml-1 sm:ml-1.5 -top-2.5 sm:-top-3.5">
-                      <span className="animate-ping absolute inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-amber-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-amber-500 shadow-sm shadow-amber-500/50"></span>
-                    </span>
-                  </span>
-                </h1>
+                    {/* Main Headline */}
+                    <h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-[42px] xl:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-tight md:leading-tight lg:leading-[1.15] mb-2.5">
+                      <span className="inline-block">
+                        Doorstep Bike Service &amp; Repair
+                      </span>{' '}
+                      <span className="inline-block relative">
+                        <span className="animate-gradient-flow bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-400 bg-clip-text text-transparent font-black">
+                          in Bengaluru
+                        </span>
+                        {/* Live location pulse ping */}
+                        <span className="inline-flex relative ml-1 sm:ml-1.5 -top-2.5 sm:-top-3.5">
+                          <span className="animate-ping absolute inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-amber-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-amber-500 shadow-sm shadow-amber-500/50"></span>
+                        </span>
+                      </span>
+                    </h1>
 
-                {/* 30-Minute Mechanic Banner Pill */}
-                <div className="mb-2.5 inline-flex items-center justify-center relative overflow-hidden rounded-full bg-amber-50 dark:bg-zinc-900/90 border border-amber-400/40 dark:border-amber-500/30 px-3.5 sm:px-4 py-1 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200 shadow-xs shadow-amber-500/5">
-                  <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-badge-shimmer pointer-events-none"></span>
-                  <span className="relative flex items-center gap-1.5 sm:gap-2">
-                    <span className="flex items-center justify-center w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black shrink-0 animate-pulse">
-                      ⚡
-                    </span>
-                    <strong className="font-black text-amber-950 dark:text-amber-100">
-                      Get a Mechanic at Your Doorstep in Just 30 Minutes!
-                    </strong>
-                    <span className="relative flex h-2 w-2 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                  </span>
-                </div>
+                    {/* 30-Minute Mechanic Banner Pill */}
+                    <div className="mb-2.5 inline-flex items-center justify-center relative overflow-hidden rounded-2xl sm:rounded-full bg-amber-50 dark:bg-zinc-900/90 border border-amber-400/40 dark:border-amber-500/30 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200 shadow-xs shadow-amber-500/5 max-w-full">
+                      <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-badge-shimmer pointer-events-none"></span>
+                      <span className="relative flex items-center gap-1.5 sm:gap-2 text-center sm:text-left">
+                        <span className="flex items-center justify-center w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black shrink-0 animate-pulse">
+                          ⚡
+                        </span>
+                        <strong className="font-black text-amber-950 dark:text-amber-100 text-[11px] sm:text-xs md:text-sm">
+                          Get a Mechanic at Your Doorstep in Just 30 Minutes!
+                        </strong>
+                        <span className="relative flex h-2 w-2 shrink-0">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                      </span>
+                    </div>
 
-                {/* Subtitle Description */}
-                <p className="max-w-lg mb-3.5 text-center text-xs sm:text-sm text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
-                  Professional bike and scooter servicing at your home or office. Convenient booking, transparent pricing, and reliable repairs.
-                </p>
+                    {/* Subtitle Description */}
+                    <p className="max-w-xl mb-3 text-center md:text-left text-xs sm:text-sm lg:text-[15px] text-gray-600 dark:text-zinc-300 font-medium leading-relaxed">
+                      Professional bike and scooter servicing at your home or office. Convenient booking, transparent pricing, and reliable repairs.
+                    </p>
 
-                {/* 4 Trust Highlights */}
-                <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold mb-3.5 w-full">
-                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 dark:border-emerald-500/25 text-emerald-800 dark:text-emerald-300 shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    Expert Mechanics
-                  </span>
-                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/20 dark:border-amber-500/25 text-amber-800 dark:text-amber-300 shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-                    Genuine Spare Parts
-                  </span>
-                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 dark:border-emerald-500/25 text-emerald-800 dark:text-emerald-300 shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    Verified Mechanics
-                  </span>
-                  <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 dark:border-sky-500/25 text-sky-800 dark:text-sky-300 shadow-2xs">
-                    <Shield className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
-                    30-Day Service Warranty
-                  </span>
-                </div>
+                    {/* 4 Trust Highlights */}
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold mb-3 w-full">
+                      <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 dark:border-emerald-500/25 text-emerald-800 dark:text-emerald-300 shadow-2xs">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                        Expert Mechanics
+                      </span>
+                      <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/20 dark:border-amber-500/25 text-amber-800 dark:text-amber-300 shadow-2xs">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+                        Genuine Spare Parts
+                      </span>
+                      <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 dark:border-emerald-500/25 text-emerald-800 dark:text-emerald-300 shadow-2xs">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                        Verified Mechanics
+                      </span>
+                      <span className="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 dark:border-sky-500/25 text-sky-800 dark:text-sky-300 shadow-2xs">
+                        <Shield className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
+                        30-Day Service Warranty
+                      </span>
+                    </div>
 
-                {/* 5. Quick Services Selector - Small Size Buttons */}
-                <div className="grid grid-cols-4 gap-1 sm:gap-1.5 w-full max-w-md mb-2">
-                  {[
-                    { id: "Basic General Service - ₹699", icon: "", label: "Basic General Service", price: "₹699", isSmall: true },
-                    { id: "General Service with Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
-                    { id: "Jump Start Service - ₹449", icon: "⚡", label: "Jump Start", price: "₹449" },
-                    { id: "Inspection & Repair - ₹399", icon: "🏍️", label: "Inspection & Repair", price: "₹399", isSmall: true },
-                  ].map((srv) => {
-                    const isSelected = heroService === srv.id;
-                    return (
-                      <button
-                        key={srv.id}
-                        type="button"
-                        onClick={() => setHeroService(srv.id)}
-                        className={`h-[54px] sm:h-[58px] p-1 rounded-lg sm:rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-between ${
-                          isSelected
-                            ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-md ring-1 sm:ring-2 ring-amber-400/50 scale-[1.02]'
-                            : 'bg-white dark:bg-zinc-900/90 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-amber-400 font-semibold shadow-xs backdrop-blur-md'
-                        }`}
-                      >
-                        <div className="h-3.5 sm:h-4 flex items-center justify-center">
-                          {srv.icon ? (
-                            <span className="text-xs sm:text-sm leading-none">{srv.icon}</span>
-                          ) : (
-                            <span className="text-xs sm:text-sm leading-none opacity-0 select-none">🛠️</span>
-                          )}
+                    {/* 5. Quick Services Selector - Small Size Buttons */}
+                    <div className="w-full max-w-md mb-2">
+                      <div className="grid grid-cols-4 gap-1 sm:gap-1.5 w-full">
+                        {[
+                          { id: "Basic General Service - ₹699", icon: "", label: "Basic General Service", price: "₹699", isSmall: true },
+                          { id: "General Service with Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
+                          { id: "Jump Start Service - ₹449", icon: "⚡", label: "Jump Start", price: "₹449" },
+                          { id: "Inspection & Repair - ₹399", icon: "🏍️", label: "Inspection & Repair", price: "₹399", isSmall: true },
+                        ].map((srv) => {
+                          const isSelected = heroService === srv.id;
+                          return (
+                            <button
+                              key={srv.id}
+                              type="button"
+                              onClick={() => setHeroService(srv.id)}
+                              className={`h-[52px] sm:h-[56px] p-1 rounded-lg sm:rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-between ${
+                                isSelected
+                                  ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-md ring-1 sm:ring-2 ring-amber-400/50 scale-[1.02]'
+                                  : 'bg-white dark:bg-zinc-900/90 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-amber-400 font-semibold shadow-xs backdrop-blur-md'
+                              }`}
+                            >
+                              <div className="h-3.5 sm:h-4 flex items-center justify-center">
+                                {srv.icon ? (
+                                  <span className="text-xs sm:text-sm leading-none">{srv.icon}</span>
+                                ) : (
+                                  <span className="text-xs sm:text-sm leading-none opacity-0 select-none">🛠️</span>
+                                )}
+                              </div>
+                              <span className={`leading-none text-center max-w-full px-0.5 font-bold ${
+                                srv.isSmall 
+                                  ? 'text-[7.5px] sm:text-[8.5px] tracking-tight' 
+                                  : 'text-[8.5px] sm:text-[9.5px]'
+                              }`}>
+                                {srv.label}
+                              </span>
+                              <span className={`font-black text-[9.5px] sm:text-[10.5px] leading-tight ${
+                                isSelected ? 'text-zinc-950' : 'text-amber-600 dark:text-amber-400'
+                              }`}>
+                                {srv.price}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Desktop Live Dispatch & Google Rating Ticker */}
+                    <div className="hidden md:flex items-center gap-3 lg:gap-4 mt-4 lg:mt-5 pt-3.5 lg:pt-4 border-t border-gray-200/80 dark:border-zinc-800/80 text-xs w-full">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex -space-x-1.5 overflow-hidden">
+                          <span className="inline-flex w-7 h-7 rounded-full ring-2 ring-white dark:ring-zinc-900 bg-amber-500 text-zinc-950 font-black text-xs items-center justify-center">★</span>
+                          <span className="inline-flex w-7 h-7 rounded-full ring-2 ring-white dark:ring-zinc-900 bg-emerald-500 text-white font-black text-xs items-center justify-center">✓</span>
+                          <span className="inline-flex w-7 h-7 rounded-full ring-2 ring-white dark:ring-zinc-900 bg-sky-500 text-white font-black text-xs items-center justify-center">⚡</span>
                         </div>
-                        <span className={`leading-none text-center max-w-full px-0.5 font-bold ${
-                          srv.isSmall 
-                            ? 'text-[7.5px] sm:text-[8.5px] tracking-tight' 
-                            : 'text-[8.5px] sm:text-[9.5px]'
-                        }`}>
-                          {srv.label}
+                        <div>
+                          <p className="font-extrabold text-gray-900 dark:text-white">4.8 / 5 Rating</p>
+                          <p className="text-[11px] text-gray-500 dark:text-zinc-400">100,000+ Happy Riders</p>
+                        </div>
+                      </div>
+                      <div className="h-7 w-px bg-gray-200 dark:bg-zinc-800"></div>
+                      <div className="flex items-center gap-2">
+                        <span className="relative flex h-2.5 w-2.5 shrink-0">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                         </span>
-                        <span className={`font-black text-[9.5px] sm:text-[10.5px] leading-tight ${
-                          isSelected ? 'text-zinc-950' : 'text-amber-600 dark:text-amber-400'
-                        }`}>
-                          {srv.price}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                        <p className="text-[11px] font-bold text-gray-700 dark:text-zinc-300">
+                          Mechanics on duty near <span className="text-amber-600 dark:text-amber-400 font-extrabold">{activeLocation || 'Bengaluru'}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-                <div id="booking-form" className="w-full max-w-md relative z-20 text-left">
+                  {/* Right Column: Sticky Booking Form Card */}
+                  <div className="md:col-span-5 w-full flex justify-center md:justify-end md:-mt-2 lg:-mt-5">
+                    <div id="booking-form" className="w-full max-w-md lg:max-w-lg md:sticky md:top-16 lg:top-18 relative z-20 text-left">
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-40"></div>
 
                   <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
@@ -1978,7 +2022,10 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                       </div>
                     </div>
                   </div>
-                </FadeIn>
+
+                </div>
+              </div>
+            </FadeIn>
           </section>
       {/* WHY CHOOSE US SECTION */}
 
@@ -2107,7 +2154,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                 className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm sm:text-base py-3.5 px-8 rounded-full shadow-md shadow-amber-500/25 hover:-translate-y-0.5 transition-all cursor-pointer group"
               >
                 <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Book your service and repair today</span>
+                <span>Book your doorstep service and repair today</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </div>
@@ -2278,7 +2325,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
               className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm tracking-wide shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer group"
             >
               <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Book your service and repair today</span>
+              <span>Book your doorstep service and repair today</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
             </button>
           </div>
@@ -3757,7 +3804,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black transition-all shadow-md shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer group"
               >
                 <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Book your service and repair today</span>
+                <span>Book your doorstep service and repair today</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
               <a
@@ -3804,7 +3851,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-extrabold transition-all shadow-md shadow-amber-500/25 transform hover:-translate-y-0.5 cursor-pointer group"
                 >
                   <Wrench className="w-3.5 h-3.5 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                  <span>Book your service and repair today</span>
+                  <span>Book your doorstep service and repair today</span>
                 </button>
                 <a
                   href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
@@ -3911,7 +3958,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                       }}
                       className="font-black text-amber-400 hover:text-amber-300 transition-colors block text-sm cursor-pointer text-left group flex items-center gap-1.5"
                     >
-                      <span>Book your service and repair today</span>
+                      <span>Book your doorstep service and repair today</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
                     </button>
                     <span className="text-[11px] font-semibold text-emerald-400">Instant doorstep mechanic dispatch</span>
@@ -4888,7 +4935,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
           className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm transition-all active:scale-[0.98] shrink-0"
           aria-label="WhatsApp"
         >
-          <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>
@@ -4905,10 +4952,10 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
               }, 100);
             }
           }}
-          className="flex-1 relative overflow-hidden flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs font-black shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight group"
+          className="flex-1 relative overflow-hidden flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight group"
         >
-          <Wrench className="w-3.5 h-3.5 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-          <span>Book your service and repair today</span>
+          <Wrench className="w-4 h-4 shrink-0 group-hover:rotate-12 transition-transform duration-300 text-zinc-950" />
+          <span>Book your doorstep service and repair today</span>
         </button>
       </div>
 
