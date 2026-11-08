@@ -6,19 +6,30 @@ import {
 } from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
 
-// Reusable FadeIn Component
+// Reusable FadeIn Component (Optimized: unobserves once visible to prevent scroll jank)
 export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => setIsVisible(entry.isIntersecting));
-    });
-    if (domRef.current) observer.observe(domRef.current);
+    const node = domRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '60px 0px' });
+    observer.observe(node);
     return () => observer.disconnect();
   }, []);
   return (
-    <div ref={domRef} className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${delay}ms` }}>
+    <div 
+      ref={domRef} 
+      className={`transition-all duration-700 ease-out will-change-[opacity,transform] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} 
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
@@ -820,6 +831,17 @@ export default function App() {
   const [isTechnicalDetailsOpen, setIsTechnicalDetailsOpen] = useState(false);
   const [showTechDetails, setShowTechDetails] = useState(false);
   const [technicalDetailsContent, setTechnicalDetailsContent] = useState({ title: '', steps: [] as string[] });
+  const [confirmedBooking, setConfirmedBooking] = useState<{
+    bookingId: string;
+    fullName: string;
+    phone: string;
+    vehicle?: string;
+    service: string;
+    date: string;
+    time: string;
+    location: string;
+    price?: string;
+  } | null>(null);
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -831,17 +853,17 @@ export default function App() {
     if (typeof window !== 'undefined') {
       if ((window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+        (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-18313979172/doJMCNeauYkdEKTK5JxE',
           'value': 1.0,
           'currency': 'INR'
         });
         (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-18313979172/_0_OCPnK0okdEKTK5JxE',
-          'value': 1.0,
-          'currency': 'INR'
-        });
-        (window as any).gtag('event', 'conversion', {
-          'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
           'value': 1.0,
           'currency': 'INR'
         });
@@ -952,7 +974,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
   useEffect(() => {
     const timer = setInterval(() => {
       setLiveClockTime(formatTime12Hour(getCurrentTimeHHMM()));
-    }, 10000);
+    }, 30000);
     return () => clearInterval(timer);
   }, []);
 
@@ -1144,13 +1166,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       // Ignore clipboard errors
     }
 
-    // If preOpenedWindow was explicitly passed (e.g. from a form submit), navigate it to the WhatsApp page
-    if (preOpenedWindow && !preOpenedWindow.closed) {
-      try {
-        const whatsappNumber = "917090400617";
-        preOpenedWindow.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      } catch {}
-    }
   };
 
   const getHeroBookingData = () => {
@@ -1190,8 +1205,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       serviceTime: time,
     });
 
-    const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(message)}`;
-
     return {
       bookingId,
       fullName,
@@ -1204,14 +1217,13 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       date,
       time,
       message,
-      whatsappUrl,
     };
   };
 
-  const handleHeroSubmitClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleHeroSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     const cleanPhone = heroPhone.trim().replace(/\D/g, '');
     if (!heroName.trim()) {
-      e.preventDefault();
       const input = document.querySelector('input[name="name"]') as HTMLInputElement;
       if (input) {
         input.focus();
@@ -1221,7 +1233,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
     }
 
     if (cleanPhone.length !== 10) {
-      e.preventDefault();
       const input = document.querySelector('input[name="phone"]') as HTMLInputElement;
       if (input) {
         input.focus();
@@ -1231,7 +1242,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
     }
 
     if (!heroBrand) {
-      e.preventDefault();
       const select = document.querySelector('select[name="brand"]') as HTMLSelectElement;
       if (select) {
         select.focus();
@@ -1241,12 +1251,9 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
     }
 
     const bookingData = getHeroBookingData();
-    
-    // Set href dynamically right at click time to open the official WhatsApp page
-    e.currentTarget.href = bookingData.whatsappUrl;
 
     setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 3000);
+    fireLeadConversion();
 
     dispatchBookingAutomatically(bookingData.message, {
       bookingId: bookingData.bookingId,
@@ -1260,6 +1267,19 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       date: bookingData.date,
       time: bookingData.time,
     });
+
+    setConfirmedBooking({
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: bookingData.vehicleModel,
+      service: bookingData.service,
+      date: bookingData.date,
+      time: bookingData.time,
+      location: bookingData.location,
+    });
+
+    setTimeout(() => setIsSubmitting(false), 500);
   };
 
   const handleBookService = (e: React.FormEvent<HTMLFormElement>) => {
@@ -1275,13 +1295,9 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
     }
 
     setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 3000);
+    fireLeadConversion();
 
     const bookingData = getHeroBookingData();
-
-    try {
-      window.open(bookingData.whatsappUrl, '_blank');
-    } catch {}
 
     dispatchBookingAutomatically(bookingData.message, {
       bookingId: bookingData.bookingId,
@@ -1295,13 +1311,26 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       date: bookingData.date,
       time: bookingData.time,
     });
+
+    setConfirmedBooking({
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: bookingData.vehicleModel,
+      service: bookingData.service,
+      date: bookingData.date,
+      time: bookingData.time,
+      location: bookingData.location,
+    });
+
+    setTimeout(() => setIsSubmitting(false), 500);
   };
   
   useEffect(() => {
     const locations = ['Indiranagar', 'Koramangala', 'HSR Layout', 'Whitefield', 'Jayanagar'];
     const interval = setInterval(() => {
       setActiveLocation(locations[Math.floor(Math.random() * locations.length)]);
-    }, 4500);
+    }, 20000);
     return () => clearInterval(interval);
   }, []);
 
@@ -1372,7 +1401,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
             }} 
             className="group flex items-center gap-2 sm:gap-2.5 text-left cursor-pointer shrink-0 focus:outline-none"
           >
-            <YesBikeLogo className="w-10 h-10 sm:w-11 sm:h-11 group-hover:scale-105 transition-transform duration-200" />
+            <YesBikeLogo priority={true} className="w-10 h-10 sm:w-11 sm:h-11 group-hover:scale-105 transition-transform duration-200" />
             <span className="text-[15px] sm:text-lg lg:text-xl font-black tracking-tight leading-none whitespace-nowrap">
               <span className="text-amber-500 dark:text-amber-400">Yes</span>{' '}
               <span className="text-gray-900 dark:text-white">Bike Service</span>
@@ -1522,13 +1551,11 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                   <ArrowRight className="w-4 h-4 text-zinc-950" />
                 </button>
                 <a
-                  href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs sm:text-sm font-black shadow-sm min-h-[46px]"
+                  href="tel:+917090400617"
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white text-xs sm:text-sm font-black border border-gray-200 dark:border-zinc-700 min-h-[46px] cursor-pointer"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp Support</span>
+                  <Phone className="w-4 h-4 text-amber-500" />
+                  <span>Call Helpline</span>
                 </a>
               </div>
             </div>
@@ -1992,26 +2019,24 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                           </div>
 
                           {/* Submit Action Button */}
-                          <a 
-                            href={getHeroBookingData().whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button 
+                            type="button"
                             onClick={handleHeroSubmitClick}
                             className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
                               <div className="relative z-10 flex items-center justify-center gap-2">
-                                <MessageCircle className="w-4 h-4 text-zinc-950 animate-bounce" />
-                                <span>Opening WhatsApp to Send Message...</span>
+                                <Check className="w-4 h-4 text-zinc-950 animate-bounce" />
+                                <span>Confirming Doorstep Booking...</span>
                               </div>
                             ) : (
                               <div className="relative z-10 flex items-center justify-center gap-2">
                                 <Wrench className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                                <span>Submit the booking form</span>
+                                <span>SUBMIT THE BOOKING FORM</span>
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 shrink-0" />
                               </div>
                             )}
-                          </a>
+                          </button>
                           <p className="text-[10px] text-center text-gray-500 dark:text-zinc-400 font-medium">
                             ~30 min doorstep mechanic dispatch • Pay after service
                           </p>
@@ -2030,7 +2055,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       {/* WHY CHOOSE US SECTION */}
 
       {/* TRUST STATS SECTION */}
-      <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 relative overflow-hidden">
+      <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 relative overflow-hidden section-auto-contain">
         {/* Subtle background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-24 bg-amber-500/5 blur-3xl pointer-events-none rounded-full"></div>
 
@@ -2113,7 +2138,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </section>
 
       {/* TRUSTED BY 100,000+ CUSTOMERS SECTION */}
-      <section id="brands" className="py-16 sm:py-20 relative bg-white dark:bg-zinc-950 overflow-hidden border-t border-gray-100 dark:border-white/5">
+      <section id="brands" className="py-16 sm:py-20 relative bg-white dark:bg-zinc-950 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.02] via-transparent to-amber-500/[0.03] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <FadeIn>
@@ -2163,7 +2188,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </section>
 
       {/* HOW IT WORKS SECTION */}
-      <section id="how-it-works" className="py-20 md:py-24 relative bg-gray-50 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
+      <section id="how-it-works" className="py-20 md:py-24 relative bg-gray-50 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Subtle decorative radial lights */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[350px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -2333,7 +2358,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </section>
 
       <div id="services"></div>
-      <section id="pricing" className="py-16 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden border-t border-gray-100 dark:border-white/5">
+      <section id="pricing" className="py-16 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
@@ -3227,17 +3252,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                     <span>Pay After Service</span>
                   </div>
 
-                  {/* Direct WhatsApp Quick Booking */}
-                  <a
-                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20350cc-500%20cc%20General%20Service%20with%20Engine%20Oil%20(₹2%2C599)%20doorstep%20service."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-[#25D366]/30 transition-all cursor-pointer"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
-                    <span>Quick 1-Click WhatsApp Booking</span>
-                  </a>
-
                   <button
                     type="button"
                     onClick={() => {
@@ -3406,17 +3420,6 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                     <span>100% Fully Synthetic Oil</span>
                   </div>
 
-                  {/* Direct WhatsApp Quick Booking */}
-                  <a
-                    href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20would%20like%20to%20book%20Royal%20Enfield%20650%20cc%20General%20Service%20with%20Engine%20Oil%20Twin%20(₹3%2C999)%20doorstep%20service."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-[#25D366]/30 transition-all cursor-pointer"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
-                    <span>Quick 1-Click WhatsApp Booking</span>
-                  </a>
-
                   <button
                     type="button"
                     onClick={() => {
@@ -3436,7 +3439,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </section>
 
       {/* CUSTOMER REVIEWS SECTION */}
-      <section id="reviews" className="py-16 sm:py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5">
+      <section id="reviews" className="py-16 sm:py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Subtle background ambient glows */}
         <div className="absolute top-1/2 left-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
         <div className="absolute top-1/3 right-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
@@ -3673,7 +3676,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </section>
 
       {/* FREQUENTLY ASKED QUESTIONS SECTION */}
-      <section id="faq" className="py-20 relative bg-white dark:bg-black overflow-hidden border-t border-gray-100 dark:border-white/5">
+      <section id="faq" className="py-20 relative bg-white dark:bg-black overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         <div className="max-w-4xl mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-4">
@@ -3808,13 +3811,11 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
               <a
-                href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5"
+                href="tel:+917090400617"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs sm:text-sm font-black transition-all border border-zinc-700/80 transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Help</span>
+                <PhoneCall className="w-4 h-4 text-amber-400" />
+                <span>Call Helpline: +91 70904 00617</span>
               </a>
             </div>
           </div>
@@ -3854,13 +3855,11 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                   <span>Book your service and repair today</span>
                 </button>
                 <a
-                  href="https://wa.me/917090400617?text=Hi%20YES%20BIKE%20SERVICE%20Team%2C%20I%20need%20doorstep%20bike%20service%20in%20Bangalore."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 hover:text-white text-emerald-400 border border-emerald-500/30 text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5"
+                  href="tel:+917090400617"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-800/90 hover:bg-zinc-800 text-zinc-200 border border-zinc-700/80 text-xs font-extrabold transition-all shadow-sm transform hover:-translate-y-0.5 cursor-pointer"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  WhatsApp Support
+                  <Phone className="w-3.5 h-3.5 text-amber-400" />
+                  Call Helpline
                 </a>
               </div>
 
@@ -4926,19 +4925,64 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       )}
 
 
-      {/* MOBILE STICKY BOTTOM ACTION BAR */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 p-2.5 px-3 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] flex items-center gap-2">
+
+
+      {/* FLOATING WHATSAPP BUTTON (DESKTOP ONLY) */}
+      <div className="hidden md:flex fixed z-[85] right-6 bottom-6 items-center">
+        {/* Desktop Help Label Bubble */}
         <a
-          href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service."
+          href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service%20in%20Bengaluru."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm transition-all active:scale-[0.98] shrink-0"
-          aria-label="WhatsApp"
+          onClick={() => fireLeadConversion()}
+          className="flex items-center gap-2 px-3.5 py-2 mr-2.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white text-xs font-black shadow-xl border border-gray-200 dark:border-zinc-800 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all cursor-pointer group hover:-translate-y-0.5"
+          title="Chat on WhatsApp (+91 7090400617)"
         >
-          <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>WhatsApp Chat</span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded-full font-extrabold border border-emerald-500/30">Online</span>
+        </a>
+
+        {/* Circular Floating WhatsApp Icon */}
+        <a
+          href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service%20in%20Bengaluru."
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => fireLeadConversion()}
+          className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-[0_4px_22px_rgba(37,211,102,0.5)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.65)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center cursor-pointer group"
+          aria-label="Chat on WhatsApp"
+          title="Chat on WhatsApp (+91 7090400617)"
+        >
+          {/* Subtle pulse ring */}
+          <span className="absolute -inset-1 rounded-full bg-[#25D366]/30 animate-pulse pointer-events-none"></span>
+          
+          <svg className="w-7 h-7 fill-current shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>
+      </div>
+
+      {/* MOBILE STICKY BOTTOM ACTION BAR (MATCHING REFERENCE EXACTLY) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/98 dark:bg-zinc-950/98 backdrop-blur-md border-t border-gray-100 dark:border-zinc-800/80 p-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-6px_25px_rgba(0,0,0,0.08)] flex items-center gap-2.5">
+        {/* Left: Green Squircle WhatsApp Icon Button */}
+        <a
+          href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service%20in%20Bengaluru."
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => fireLeadConversion()}
+          className="w-[50px] h-[50px] sm:w-[54px] sm:h-[54px] aspect-square rounded-[20px] bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-[0_4px_14px_rgba(37,211,102,0.35)] flex items-center justify-center shrink-0 cursor-pointer active:scale-95 transition-all"
+          aria-label="Chat on WhatsApp"
+          title="Chat on WhatsApp (+91 7090400617)"
+        >
+          <svg className="w-6.5 h-6.5 sm:w-7 sm:h-7 fill-white shrink-0" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+        </a>
+
+        {/* Right: Rounded Amber Button with Black Wrench & Text */}
         <button
           type="button"
           onClick={() => {
@@ -4952,10 +4996,12 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
               }, 100);
             }
           }}
-          className="flex-1 relative overflow-hidden flex items-center justify-center gap-1.5 min-h-[44px] py-2 px-2.5 sm:px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 text-xs sm:text-sm font-black shadow-md shadow-amber-500/25 transition-all active:scale-[0.98] cursor-pointer text-center leading-tight group"
+          className="flex-1 h-[50px] sm:h-[54px] px-3.5 sm:px-4 rounded-[20px] bg-gradient-to-r from-[#FFC72C] via-[#FFB800] to-[#FFA700] hover:from-[#FFD043] hover:to-[#FFB000] text-black font-black shadow-[0_4px_18px_rgba(245,158,11,0.35)] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 group"
         >
-          <Wrench className="w-4 h-4 shrink-0 group-hover:rotate-12 transition-transform duration-300 text-zinc-950" />
-          <span>Book your service and repair today</span>
+          <Wrench className="w-5 h-5 text-black shrink-0 stroke-[2.5] group-hover:rotate-12 transition-transform duration-300" />
+          <span className="text-[13px] sm:text-[14.5px] font-black text-black tracking-tight whitespace-nowrap">
+            Book your service and repair today
+          </span>
         </button>
       </div>
 

@@ -26,7 +26,7 @@ export const PrivacyPolicy = () => {
                 <li>Service and repair requirements</li>
                 <li>Booking date and preferred time</li>
                 <li>Payment and transaction information</li>
-                <li>Information you provide through WhatsApp, calls, forms, or customer support</li>
+                <li>Information you provide through phone calls, forms, or customer support</li>
               </ul>
               <p>We may also automatically collect basic technical information such as device type, browser, IP address, and website usage information.</p>
             </section>
@@ -63,9 +63,9 @@ export const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Phone Number and WhatsApp</h2>
-              <p className="mb-3">If you provide your phone number, we may use it to contact you about your booking, service status, payment, or customer support.</p>
-              <p>If you choose WhatsApp communication, your information may be processed through WhatsApp and its applicable privacy policies.</p>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Phone Number and Direct Communications</h2>
+              <p className="mb-3">If you provide your phone number, we may use it to contact you about your booking, service status, payment, or customer support via phone calls and SMS.</p>
+              <p>Your contact information is strictly handled in accordance with this privacy policy.</p>
             </section>
 
             <section>

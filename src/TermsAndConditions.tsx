@@ -22,7 +22,7 @@ export const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. Booking</h2>
-              <p className="mb-3">Customers can book a service through our website, mobile application, phone, WhatsApp, or other available booking channels.</p>
+              <p className="mb-3">Customers can book a service through our website, mobile application, phone, or other available booking channels.</p>
               <p className="mb-3">You agree to provide accurate information, including:</p>
               <ul className="list-disc pl-5 space-y-2 mb-4 marker:text-amber-500">
                 <li>Customer name and contact number</li>

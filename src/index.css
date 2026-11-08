@@ -136,3 +136,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     font-size: 16px;
   }
 }
+
+/* Off-screen rendering containment: skips layout/paint for below-the-fold sections until near viewport */
+.section-auto-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+

@@ -40,13 +40,14 @@
 
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <link rel="apple-touch-icon" href="/logo.jpg" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"></noscript>
+    <!-- Google tag (gtag.js) - Consolidated for peak load performance -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3S5MHQHB8"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17586403307"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18313979172"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -55,6 +56,14 @@
       gtag('config', 'G-P3S5MHQHB8');
       gtag('config', 'AW-17586403307');
       gtag('config', 'AW-18313979172');
+    </script>
+    <!-- Event snippet for Submit lead form conversion page (AW-17586403307/v2iuCP_DnIIdEOvv7MFB) -->
+    <script>
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
+          'value': 1.0,
+          'currency': 'INR'
+      });
     </script>
     <script>
     gtag('event', 'conversion', {
@@ -71,7 +80,7 @@
           'currency': 'INR'
       });
     </script>
-    <!-- Event snippet for Submit lead form (5) conversion page -->
+    <!-- Event snippet for Submit lead form conversion tracking -->
     <script>
     function gtag_report_conversion(url) {
       var callback = function () {
@@ -81,6 +90,12 @@
       };
       if (typeof gtag === 'function') {
         gtag('event', 'conversion', {
+            'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
+            'value': 1.0,
+            'currency': 'INR',
+            'event_callback': callback
+        });
+        gtag('event', 'conversion', {
             'send_to': 'AW-18313979172/doJMCNeauYkdEKTK5JxE',
             'value': 1.0,
             'currency': 'INR'
@@ -89,12 +104,6 @@
             'send_to': 'AW-18313979172/_0_OCPnK0okdEKTK5JxE',
             'value': 1.0,
             'currency': 'INR'
-        });
-        gtag('event', 'conversion', {
-            'send_to': 'AW-17586403307/v2iuCP_DnIIdEOvv7MFB',
-            'value': 1.0,
-            'currency': 'INR',
-            'event_callback': callback
         });
         gtag('event', 'conversion', {
             'send_to': 'AW-17586403307/EvEbCPiDm4IdEOvv7MFB',
