@@ -1546,7 +1546,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       {currentView === "home" && (
         <main>
           {/* HERO SECTION */}
-          <section id="home" className="relative overflow-hidden pt-9 sm:pt-11 md:pt-13 pb-8 lg:pb-12 bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300">
+          <section id="home" className="relative overflow-hidden pt-15 sm:pt-17 md:pt-19 pb-8 lg:pb-12 bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300">
             {/* Background: Clean White Background with subtle warm accents */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
               <div className="absolute inset-0 bg-white dark:bg-zinc-950"></div>
@@ -1561,11 +1561,18 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                   
                   {/* Left Column: Hero Editorial & Quick Select */}
                   <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left mb-2 sm:mb-2.5 md:mb-0">
-                    {/* Tagline / Brand Header - Small Size */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-900 dark:text-amber-300 mb-2 shadow-2xs max-w-full">
-                      <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-                      <span className="text-[10px] sm:text-xs font-bold tracking-wide">
-                        YES BIKE SERVICE — Quality Bike Care at Your Doorstep.
+                    {/* Tagline / Brand Header - Positioned comfortably below navbar */}
+                    <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/10 via-amber-400/15 to-yellow-500/10 dark:from-amber-500/15 dark:via-zinc-900 dark:to-amber-500/10 border border-amber-400/35 dark:border-amber-500/30 text-amber-950 dark:text-amber-200 mt-2 sm:mt-2.5 mb-2.5 shadow-xs shadow-amber-500/5 max-w-full backdrop-blur-md transition-all hover:border-amber-400/60">
+                      <span className="relative flex h-2 w-2 shrink-0">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                      </span>
+                      <span className="font-black text-[9px] sm:text-[10px] uppercase tracking-wider text-amber-950 dark:text-amber-300">
+                        YES BIKE SERVICE
+                      </span>
+                      <span className="text-amber-400 dark:text-amber-500/60 font-bold text-xs leading-none select-none">•</span>
+                      <span className="text-[9.5px] sm:text-[10.5px] font-semibold text-gray-700 dark:text-zinc-300 tracking-tight truncate">
+                        Quality Bike Care at Your Doorstep.
                       </span>
                     </div>
 
@@ -1717,12 +1724,12 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                           <p className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium truncate mt-0.5">Doorstep service across Bengaluru</p>
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
+                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
                         <span className="relative flex h-1.5 w-1.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                         </span>
-                        <span>Available Today</span>
+                        <span>Mechanic Available Today</span>
                       </div>
                     </div>
 
