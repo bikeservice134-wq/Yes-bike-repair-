@@ -1,0 +1,155 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "Customer doorstep two-wheeler service booking record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 25 },
+        "location": { "type": "string", "maxLength": 200 },
+        "addressDetails": { "type": "string", "maxLength": 500 },
+        "googleMapsUrl": { "type": "string", "maxLength": 500 },
+        "vehicleType": { "type": "string", "enum": ["Bike", "Scooter"] },
+        "brand": { "type": "string", "maxLength": 50 },
+        "model": { "type": "string", "maxLength": 100 },
+        "registrationNumber": { "type": "string", "maxLength": 30 },
+        "serviceType": { "type": "string", "maxLength": 150 },
+        "customerComplaint": { "type": "string", "maxLength": 1000 },
+        "customerNotes": { "type": "string", "maxLength": 1000 },
+        "date": { "type": "string", "maxLength": 20 },
+        "time": { "type": "string", "maxLength": 30 },
+        "mechanicId": { "type": "string", "maxLength": 50 },
+        "mechanicName": { "type": "string", "maxLength": 100 },
+        "amount": { "type": "number" },
+        "advancePaid": { "type": "number" },
+        "remainingBalance": { "type": "number" },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Unpaid", "Partial"] },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "accepted",
+            "mechanic_assigned",
+            "on_the_way",
+            "mechanic_reached",
+            "service_started",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "isNew": { "type": "boolean" }
+      },
+      "required": [
+        "id",
+        "customerName",
+        "phone",
+        "location",
+        "vehicleType",
+        "brand",
+        "model",
+        "serviceType",
+        "date",
+        "time",
+        "amount",
+        "status"
+      ]
+    },
+    "Mechanic": {
+      "title": "Mechanic",
+      "description": "Field motorcycle technician profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 25 },
+        "experience": { "type": "string", "maxLength": 50 },
+        "rating": { "type": "number" },
+        "status": { "type": "string", "enum": ["available", "on_job", "off_duty"] },
+        "activeBookingId": { "type": "string", "maxLength": 50 },
+        "completedJobs": { "type": "number" },
+        "assignedArea": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["id", "name", "phone", "status"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Doorstep service customer profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 25 },
+        "location": { "type": "string", "maxLength": 200 },
+        "totalBookings": { "type": "number" },
+        "totalSpent": { "type": "number" },
+        "lastBookingDate": { "type": "string", "maxLength": 50 },
+        "vehicle": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["id", "name", "phone", "location"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Digital tax invoice and payment record",
+      "type": "object",
+      "properties": {
+        "invoiceNumber": { "type": "string", "maxLength": 50 },
+        "bookingId": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 20 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 25 },
+        "location": { "type": "string", "maxLength": 200 },
+        "vehicle": { "type": "string", "maxLength": 150 },
+        "serviceName": { "type": "string", "maxLength": 150 },
+        "subtotal": { "type": "number" },
+        "tax": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Unpaid"] }
+      },
+      "required": ["invoiceNumber", "bookingId", "customerName", "total", "paymentStatus"]
+    },
+    "JobCard": {
+      "title": "JobCard",
+      "description": "12-point inspection technical checklist",
+      "type": "object",
+      "properties": {
+        "jobCardNumber": { "type": "string", "maxLength": 50 },
+        "bookingId": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 20 },
+        "mechanicName": { "type": "string", "maxLength": 100 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 25 },
+        "vehicle": { "type": "string", "maxLength": 150 },
+        "mechanicNotes": { "type": "string", "maxLength": 1000 },
+        "customerSignOff": { "type": "boolean" }
+      },
+      "required": ["jobCardNumber", "bookingId", "mechanicName", "customerName"]
+    }
+  },
+  "firestore": {
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Doorstep service bookings submitted by customers and managed by admins"
+    },
+    "/mechanics/{mechanicId}": {
+      "schema": "Mechanic",
+      "description": "Mechanics fleet profiles and real-time status"
+    },
+    "/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Customer profiles and lifetime service history"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": "Invoice",
+      "description": "Digital billing invoices and payment records"
+    },
+    "/jobCards/{jobCardId}": {
+      "schema": "JobCard",
+      "description": "Completed 12-point inspection job cards"
+    }
+  }
+}

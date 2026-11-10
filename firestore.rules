@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Bookings collection: Allow read (get & list) for customer tracking & admin dashboard
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow create: if isValidId(bookingId)
+        && request.resource.data.id is string
+        && request.resource.data.customerName is string
+        && request.resource.data.customerName.size() <= 100
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() <= 25
+        && request.resource.data.location is string
+        && request.resource.data.location.size() <= 200
+        && request.resource.data.serviceType is string
+        && request.resource.data.serviceType.size() <= 150
+        && request.resource.data.amount is number
+        && request.resource.data.status is string;
+      allow update: if isValidId(bookingId)
+        && request.resource.data.id == resource.data.id;
+      allow delete: if isValidId(bookingId);
+    }
+
+    // Mechanics collection: Allow read (get & list) for dispatch
+    match /mechanics/{mechanicId} {
+      allow read: if true;
+      allow create, update: if isValidId(mechanicId)
+        && request.resource.data.id is string
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.status is string;
+      allow delete: if isValidId(mechanicId);
+    }
+
+    // Customers collection: Allow read (get & list)
+    match /customers/{customerId} {
+      allow read: if true;
+      allow create, update: if isValidId(customerId)
+        && request.resource.data.id is string
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.phone is string;
+      allow delete: if isValidId(customerId);
+    }
+
+    // Invoices collection: Allow read (get & list)
+    match /invoices/{invoiceId} {
+      allow read: if true;
+      allow create, update: if isValidId(invoiceId)
+        && request.resource.data.invoiceNumber is string
+        && request.resource.data.bookingId is string
+        && request.resource.data.total is number;
+      allow delete: if isValidId(invoiceId);
+    }
+
+    // Job Cards collection: Allow read (get & list)
+    match /jobCards/{jobCardId} {
+      allow read: if true;
+      allow create, update: if isValidId(jobCardId)
+        && request.resource.data.jobCardNumber is string
+        && request.resource.data.bookingId is string;
+      allow delete: if isValidId(jobCardId);
+    }
+
+    // Connection test document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Global default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

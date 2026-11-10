@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { 
   Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
   Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send,
-  ClipboardList, FileText, ListChecks
+  ClipboardList, FileText, ListChecks, LayoutDashboard
 } from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { saveBookingPermanently, seedInitialDataIfEmpty } from './services/persistenceService';
 
 // Reusable FadeIn Component (Optimized: unobserves once visible to prevent scroll jank)
 export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
@@ -817,7 +819,7 @@ export default function App() {
   const [packageSuccess, setPackageSuccess] = useState(false);
   const [heroVehicle, setHeroVehicle] = useState("Bike");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms">("home");
+  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms" | "admin">("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -838,6 +840,26 @@ export default function App() {
     if (isDark) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
   }, [isDark]);
+
+  useEffect(() => {
+    seedInitialDataIfEmpty().catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#admin') {
+        setCurrentView('admin');
+      } else if (hash === '#privacy') {
+        setCurrentView('privacy');
+      } else if (hash === '#terms') {
+        setCurrentView('terms');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   const fireLeadConversion = () => {
     if (typeof window !== 'undefined') {
@@ -1156,6 +1178,59 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       // Ignore clipboard errors
     }
 
+    // 4. Automatically save booking into Admin Dashboard store
+    try {
+      const savedBookings = localStorage.getItem('yesbike_admin_bookings');
+      const list = savedBookings ? JSON.parse(savedBookings) : [];
+      const serviceAmount = details.service.includes('1499')
+        ? 1499
+        : details.service.includes('999')
+        ? 999
+        : details.service.includes('499')
+        ? 499
+        : 699;
+      const newBookingRecord = {
+        id: details.bookingId,
+        customerName: details.fullName,
+        phone: formattedPhone,
+        location: details.location,
+        addressDetails: `${details.location}, Bengaluru`,
+        googleMapsUrl: `https://maps.google.com/?q=${encodeURIComponent(details.location + ' Bengaluru')}`,
+        vehicleType: (details.vehicle === 'Scooter' ? 'Scooter' : 'Bike'),
+        brand: details.brand,
+        model: details.model,
+        serviceType: details.service,
+        date: details.date,
+        time: details.time,
+        amount: serviceAmount,
+        advancePaid: 0,
+        remainingBalance: serviceAmount,
+        paymentMethod: 'UPI / GPay',
+        paymentStatus: 'Unpaid',
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+        isNew: true,
+        history: [
+          {
+            timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            status: 'pending',
+            note: 'Customer submitted doorstep booking',
+            updatedBy: 'Storefront Portal'
+          }
+        ]
+      };
+      const updatedList = [newBookingRecord, ...list.filter((b: any) => b.id !== details.bookingId)];
+      localStorage.setItem('yesbike_admin_bookings', JSON.stringify(updatedList));
+      window.dispatchEvent(new Event('storage'));
+      window.dispatchEvent(new CustomEvent('yesbike_new_booking', { detail: newBookingRecord }));
+
+      // Persist permanently into Firestore database
+      saveBookingPermanently(newBookingRecord as any).catch((err) => {
+        console.warn('[Firestore] Booking persist notice:', err);
+      });
+    } catch {
+      // Ignore storage errors
+    }
   };
 
   const getHeroBookingData = () => {
@@ -1364,6 +1439,20 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       icon: MapPin
     }
   ];
+
+  if (currentView === "admin") {
+    return (
+      <AdminDashboard
+        onReturnToHome={() => {
+          if (window.location.hash === '#admin') {
+            window.history.pushState(null, '', window.location.pathname);
+          }
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
@@ -4081,6 +4170,18 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
                   className="text-zinc-400 hover:text-amber-400 underline-offset-4 hover:underline transition-colors cursor-pointer"
                 >
                   Terms of Service
+                </button>
+                <span className="text-zinc-700">|</span>
+                <button
+                  onClick={() => {
+                    setCurrentView('admin');
+                    window.location.hash = '#admin';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="text-amber-400 hover:text-amber-300 font-bold underline-offset-4 hover:underline transition-colors cursor-pointer inline-flex items-center gap-1"
+                >
+                  <LayoutDashboard className="w-3.5 h-3.5" />
+                  <span>Admin Portal</span>
                 </button>
               </div>
 

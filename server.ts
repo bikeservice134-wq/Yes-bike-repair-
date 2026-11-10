@@ -3,15 +3,55 @@ import compression from 'compression';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 dotenv.config();
 
 const isProd = process.env.NODE_ENV === 'production';
 const PORT = 3000;
+const DATA_DIR = path.join(process.cwd(), 'data');
+
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
+if (!fs.existsSync(BOOKINGS_FILE)) {
+  fs.writeFileSync(BOOKINGS_FILE, JSON.stringify([], null, 2), 'utf-8');
+}
 
 async function startServer() {
   const app = express();
   app.use(compression());
   app.use(express.json());
+
+  // Persistent Server API: Get all saved bookings
+  app.get('/api/bookings', (_req, res) => {
+    try {
+      const data = fs.readFileSync(BOOKINGS_FILE, 'utf-8');
+      return res.json(JSON.parse(data || '[]'));
+    } catch (err: any) {
+      return res.status(500).json({ error: 'Failed to read bookings', details: err.message });
+    }
+  });
+
+  // Persistent Server API: Save or update booking
+  app.post('/api/bookings', (req, res) => {
+    try {
+      const newBooking = req.body;
+      if (!newBooking || !newBooking.id) {
+        return res.status(400).json({ error: 'Valid booking object with id is required' });
+      }
+      const data = fs.readFileSync(BOOKINGS_FILE, 'utf-8');
+      const list = JSON.parse(data || '[]');
+      const filtered = list.filter((b: any) => b.id !== newBooking.id);
+      const updated = [newBooking, ...filtered];
+      fs.writeFileSync(BOOKINGS_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+      return res.json({ success: true, booking: newBooking });
+    } catch (err: any) {
+      return res.status(500).json({ error: 'Failed to save booking', details: err.message });
+    }
+  });
 
   const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -70,6 +110,34 @@ async function startServer() {
         });
       } catch (err) {
         console.warn('[Backend email dispatch notice]', err);
+      }
+
+      // Save booking permanently to server database file
+      try {
+        const raw = fs.readFileSync(BOOKINGS_FILE, 'utf-8');
+        const list = JSON.parse(raw || '[]');
+        const existingIdx = list.findIndex((b: any) => b.id === bookingId);
+        const record = {
+          id: bookingId,
+          customerName: fullName,
+          phone,
+          location,
+          vehicle,
+          service,
+          date,
+          time,
+          message,
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+        };
+        if (existingIdx >= 0) {
+          list[existingIdx] = { ...list[existingIdx], ...record };
+        } else {
+          list.unshift(record);
+        }
+        fs.writeFileSync(BOOKINGS_FILE, JSON.stringify(list, null, 2), 'utf-8');
+      } catch (fileErr) {
+        console.warn('[Server Disk DB Notice] Failed to save booking to disk:', fileErr);
       }
 
       return res.json({
