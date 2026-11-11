@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { BookingConfirmedPage } from './components/BookingConfirmedPage';
 import { saveBookingPermanently, seedInitialDataIfEmpty } from './services/persistenceService';
 
 // Reusable FadeIn Component (Optimized: unobserves once visible to prevent scroll jank)
@@ -819,7 +820,7 @@ export default function App() {
   const [packageSuccess, setPackageSuccess] = useState(false);
   const [heroVehicle, setHeroVehicle] = useState("Bike");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms" | "admin">("home");
+  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms" | "admin" | "booking-confirmed">("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -854,6 +855,8 @@ export default function App() {
         setCurrentView('privacy');
       } else if (hash === '#terms') {
         setCurrentView('terms');
+      } else if (hash === '#booking-confirmed' || hash === '#confirmed') {
+        setCurrentView('booking-confirmed');
       }
     };
     handleHash();
@@ -896,6 +899,11 @@ export default function App() {
         });
         (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-17586403307/D8AlCOPU7-scEOvv7MFB',
+          'value': 1.0,
+          'currency': 'INR'
+        });
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17586403307/_HFpCPKBlbYdEOvv7MFB',
           'value': 1.0,
           'currency': 'INR'
         });
@@ -974,7 +982,9 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
 🙏 Thank you for trusting us!
 
 🏍️ YES BIKE SERVICE | BENGALURU
-⭐ Quality Bike Care at Your Doorstep.`;
+Quality Bike Care at Your Doorstep!
+Sit back and relax. We've got your bike covered!
+WhatsApp Us: https://wa.me/917090400617`;
   };
 
   // Live IST Clock that ticks every 10 seconds
@@ -1339,6 +1349,27 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       time: bookingData.time,
     });
 
+    setBookingConfirmedData({
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: heroVehicle,
+      brand: bookingData.brand,
+      model: bookingData.model,
+      location: bookingData.location,
+      service: bookingData.service,
+      timing: `${bookingData.date} at ${bookingData.time}`,
+      date: bookingData.date,
+      time: bookingData.time,
+      rawMessage: bookingData.message,
+      estimatedPrice: (bookingData.service.match(/₹\s*(\d[\d,]*)/)?.[0] || '₹699'),
+      timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+    });
+    setHeroSuccess(true);
+    setCurrentView('booking-confirmed');
+    window.location.hash = '#booking-confirmed';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setTimeout(() => setIsSubmitting(false), 500);
   };
 
@@ -1377,6 +1408,27 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       date: bookingData.date,
       time: bookingData.time,
     });
+
+    setBookingConfirmedData({
+      bookingId: bookingData.bookingId,
+      fullName: bookingData.fullName,
+      phone: bookingData.phone,
+      vehicle: heroVehicle,
+      brand: bookingData.brand,
+      model: bookingData.model,
+      location: bookingData.location,
+      service: bookingData.service,
+      timing: `${bookingData.date} at ${bookingData.time}`,
+      date: bookingData.date,
+      time: bookingData.time,
+      rawMessage: bookingData.message,
+      estimatedPrice: (bookingData.service.match(/₹\s*(\d[\d,]*)/)?.[0] || '₹699'),
+      timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+    });
+    setHeroSuccess(true);
+    setCurrentView('booking-confirmed');
+    window.location.hash = '#booking-confirmed';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setTimeout(() => setIsSubmitting(false), 500);
   };
@@ -4407,6 +4459,9 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
 
               setHeroSuccess(true);
               setIsPackageModalOpen(false);
+              setCurrentView('booking-confirmed');
+              window.location.hash = '#booking-confirmed';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }} className="p-3 sm:p-4 space-y-2 overflow-y-auto">
               
               <div className="flex bg-gray-100 dark:bg-zinc-950 p-0.5 rounded-lg border border-gray-200 dark:border-zinc-800">
@@ -5130,6 +5185,20 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
       </div>
 
       </main>
+      )}
+
+      {/* BOOKING CONFIRMED VIEW */}
+      {currentView === "booking-confirmed" && (
+        <BookingConfirmedPage
+          data={bookingConfirmedData}
+          onReturnToHome={() => {
+            if (window.location.hash.includes('confirmed')) {
+              window.history.pushState(null, '', window.location.pathname);
+            }
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       )}
 
       {/* PRIVACY POLICY VIEW */}

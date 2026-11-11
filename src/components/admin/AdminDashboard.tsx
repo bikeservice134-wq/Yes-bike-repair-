@@ -39,7 +39,11 @@ import {
   VolumeX,
   Play,
   BellRing,
-  Sparkles
+  Sparkles,
+  Radio,
+  CheckCheck,
+  Trash2,
+  ShieldAlert
 } from 'lucide-react';
 import {
   Booking,
@@ -73,6 +77,23 @@ import { AdminLogin, AdminUser } from './AdminLogin';
 import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
 import { soundService, AlertSoundTone, SoundConfig } from '../../services/soundService';
+
+export interface LiveAlert {
+  id: string;
+  bookingId?: string;
+  customerName: string;
+  phone: string;
+  location: string;
+  vehicle: string;
+  service: string;
+  amount: number;
+  time: string;
+  timestamp: number;
+  read: boolean;
+  type: 'new_booking' | 'mechanic_assigned' | 'status_change' | 'service_completed' | 'system';
+  title: string;
+  message: string;
+}
 
 interface AdminDashboardProps {
   onReturnToHome: () => void;
@@ -182,12 +203,109 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
   const [newMechanicArea, setNewMechanicArea] = useState('Indiranagar');
   const [newMechanicSpecialty, setNewMechanicSpecialty] = useState('General Bike & Scooter Service');
 
-  // Notification alerts
-  const [notifications, setNotifications] = useState<Array<{ id: string; text: string; time: string; read: boolean; type: 'booking' | 'system' }>>([
-    { id: 'notif-1', text: 'New booking ID-11082 received from Priya Nambiar (BTM Layout)', time: 'Just now', read: false, type: 'booking' },
-    { id: 'notif-2', text: 'Mechanic Ramesh Kumar assigned to ID-11079', time: '15 mins ago', read: false, type: 'system' },
-    { id: 'notif-3', text: 'Service ID-11081 completed in Whitefield. Invoice INV-2026-0891 paid.', time: '1 hr ago', read: true, type: 'system' }
-  ]);
+  // Live Booking Alerts State
+  const [alerts, setAlerts] = useState<LiveAlert[]>(() => {
+    try {
+      const saved = localStorage.getItem('yesbike_admin_live_alerts');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {
+      // fallback
+    }
+    return [
+      {
+        id: 'alert-1',
+        bookingId: 'ID-11082',
+        customerName: 'Priya Nambiar',
+        phone: '+91 98452 77123',
+        location: 'BTM Layout',
+        vehicle: 'Honda Activa 6G',
+        service: 'Basic General Service - ₹699',
+        amount: 699,
+        time: 'Just now',
+        timestamp: Date.now() - 60000,
+        read: false,
+        type: 'new_booking',
+        title: 'New Doorstep Booking',
+        message: 'New doorstep service booked by Priya Nambiar in BTM Layout'
+      },
+      {
+        id: 'alert-2',
+        bookingId: 'ID-11079',
+        customerName: 'Vikram Joshi',
+        phone: '+91 99001 88344',
+        location: 'Koramangala',
+        vehicle: 'Royal Enfield Classic 350',
+        service: 'General Service with Engine Oil - ₹1,349',
+        amount: 1349,
+        time: '14 mins ago',
+        timestamp: Date.now() - 840000,
+        read: false,
+        type: 'mechanic_assigned',
+        title: 'Mechanic Assigned',
+        message: 'Mechanic Ramesh Kumar assigned to Royal Enfield Classic 350 (ID-11079)'
+      },
+      {
+        id: 'alert-3',
+        bookingId: 'ID-11081',
+        customerName: 'Ananya Sharma',
+        phone: '+91 97412 55990',
+        location: 'Whitefield',
+        vehicle: 'Yamaha FZ-S',
+        service: 'General Service + Oil - ₹1,349',
+        amount: 1349,
+        time: '45 mins ago',
+        timestamp: Date.now() - 2700000,
+        read: true,
+        type: 'service_completed',
+        title: 'Doorstep Service Completed',
+        message: 'Doorstep service completed in Whitefield. Invoice INV-2026-0891 paid.'
+      }
+    ];
+  });
+
+  const unreadAlertsCount = useMemo(() => alerts.filter((a) => !a.read).length, [alerts]);
+  const [alertsDropdownFilter, setAlertsDropdownFilter] = useState<'all' | 'unread' | 'bookings'>('all');
+  const [alertFilterType, setAlertFilterType] = useState<string>('all');
+  const [alertSearchQuery, setAlertSearchQuery] = useState('');
+  const [desktopPermission, setDesktopPermission] = useState<string>(() => {
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      return Notification.permission;
+    }
+    return 'default';
+  });
+
+  // Sync alerts to local storage
+  useEffect(() => {
+    try {
+      localStorage.setItem('yesbike_admin_live_alerts', JSON.stringify(alerts));
+    } catch {
+      // ignore
+    }
+  }, [alerts]);
+
+  const handleRequestDesktopPermission = async () => {
+    const res = await soundService.requestNotificationPermission();
+    setDesktopPermission(res);
+  };
+
+  const handleMarkAllAlertsRead = () => {
+    setAlerts((prev) => prev.map((a) => ({ ...a, read: true })));
+  };
+
+  const handleClearAllAlerts = () => {
+    setAlerts([]);
+  };
+
+  const handleToggleAlertRead = (alertId: string) => {
+    setAlerts((prev) => prev.map((a) => a.id === alertId ? { ...a, read: !a.read } : a));
+  };
+
+  const handleDeleteAlert = (alertId: string) => {
+    setAlerts((prev) => prev.filter((a) => a.id !== alertId));
+  };
 
   // Audio Notification Settings & State
   const [soundConfig, setSoundConfig] = useState<SoundConfig>(() => soundService.getConfig());
@@ -214,6 +332,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
   const handleTestSound = (tone?: AlertSoundTone) => {
     soundService.playNewBookingSound(tone);
+  };
+
+  const createAlertForBooking = (b: Booking) => {
+    const newAlert: LiveAlert = {
+      id: `alert-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      bookingId: b.id,
+      customerName: b.customerName,
+      phone: b.phone,
+      location: b.location,
+      vehicle: `${b.brand} ${b.model}`,
+      service: b.serviceType,
+      amount: b.amount,
+      time: 'Just now',
+      timestamp: Date.now(),
+      read: false,
+      type: 'new_booking',
+      title: 'New Doorstep Booking',
+      message: `${b.customerName} booked ${b.serviceType} for ${b.brand} ${b.model} in ${b.location}`
+    };
+
+    setAlerts((prev) => [newAlert, ...prev]);
+    soundService.playNewBookingSound();
+    soundService.triggerDesktopNotification(
+      `🔔 YES BIKE: New Booking from ${b.customerName}`,
+      `${b.brand} ${b.model} • ${b.serviceType} (${b.location})`
+    );
+    setNewBookingToast(b);
   };
 
   const handleSimulateNewBooking = () => {
@@ -259,18 +404,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
     setBookings((prev) => [simulatedBooking, ...prev]);
     knownBookingIdsRef.current.add(simulatedBooking.id);
-    soundService.playNewBookingSound();
-    setNewBookingToast(simulatedBooking);
-    setNotifications((prev) => [
-      {
-        id: `notif-${Date.now()}`,
-        text: `New booking ${simulatedBooking.id} received from ${simulatedBooking.customerName} (${simulatedBooking.location})`,
-        time: 'Just now',
-        read: false,
-        type: 'booking'
-      },
-      ...prev
-    ]);
+    createAlertForBooking(simulatedBooking);
   };
 
   // Sync to local storage
@@ -325,18 +459,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
         if (brandNewBookings.length > 0) {
           const latest = brandNewBookings[0];
-          soundService.playNewBookingSound();
-          setNewBookingToast(latest);
-          setNotifications((prev) => [
-            {
-              id: `notif-${Date.now()}`,
-              text: `New booking ${latest.id} received from ${latest.customerName} (${latest.location})`,
-              time: 'Just now',
-              read: false,
-              type: 'booking'
-            },
-            ...prev
-          ]);
+          createAlertForBooking(latest);
         }
       }
     });
@@ -345,18 +468,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
       const newBooking = e.detail;
       if (newBooking) {
         knownBookingIdsRef.current.add(newBooking.id);
-        soundService.playNewBookingSound();
-        setNewBookingToast(newBooking);
-        setNotifications((prev) => [
-          {
-            id: `notif-${Date.now()}`,
-            text: `New booking ${newBooking.id} received from ${newBooking.customerName} (${newBooking.location})`,
-            time: 'Just now',
-            read: false,
-            type: 'booking'
-          },
-          ...prev
-        ]);
+        createAlertForBooking(newBooking);
       }
     };
     window.addEventListener('yesbike_new_booking', handleCustomNewBooking);
@@ -804,6 +916,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  // WhatsApp Mechanic helper ("WhatsApp mechanic send")
+  const handleWhatsAppMechanic = (booking: Booking) => {
+    const mech = mechanics.find(m => m.id === booking.mechanicId || m.name === booking.mechanicName);
+    const targetPhone = mech?.phone || '917090400617';
+    const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
+    const phoneWithCountry = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+    const msg = `🏍️🛵 *YES BIKE SERVICE — DOORSTEP MECHANIC DISPATCH*\n\nQuality Bike Care at Your Doorstep!\nSit back and relax. We've got your bike covered!\n\n📋 *JOB DISPATCH DETAILS:*\n🆔 *Booking ID:* #${booking.id}\n👤 *Customer:* ${booking.customerName}\n📞 *Customer Phone:* ${booking.phone}\n📍 *Location:* ${booking.location}\n🗺️ *Google Maps:* https://maps.google.com/?q=${encodeURIComponent(booking.location + ' Bengaluru')}\n🏍️ *Vehicle:* ${booking.brand} ${booking.model}\n🔧 *Package:* ${booking.serviceType}\n📅 *Date:* ${booking.date}\n⏰ *Time:* ${booking.time}\n💰 *Amount:* ₹${booking.amount} (${booking.paymentStatus})\n👷 *Assigned Mechanic:* ${booking.mechanicName || 'On Duty Technician'}\n\n*Action:* Please confirm job acceptance and proceed with standard tool kit and genuine consumables.`;
+    const url = `https://wa.me/${phoneWithCountry}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   if (!adminUser) {
     return (
       <AdminLogin
@@ -971,43 +1094,259 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
             )}
           </div>
 
-          {/* Notification Button */}
+          {/* Live Booking Alerts Notification Button & Dropdown */}
           <div className="relative">
             <button
               onClick={() => setShowNotificationCenter(!showNotificationCenter)}
-              className="relative p-2 rounded-lg bg-[#1A1A1A] border border-white/10 hover:border-[#FFC107]/50 text-[#B0B0B0] hover:text-white transition-colors cursor-pointer"
-              title="Notifications"
+              className={`relative p-2 rounded-lg border transition-all flex items-center justify-center cursor-pointer ${
+                unreadAlertsCount > 0
+                  ? 'bg-[#1A1A1A] border-[#FFC107]/50 text-[#FFC107] shadow-sm'
+                  : 'bg-[#1A1A1A] border-white/10 text-[#B0B0B0] hover:text-white'
+              }`}
+              title="Live Booking Alerts Center"
             >
               <Bell className="w-4 h-4" />
-              {notifications.some((n) => !n.read) && (
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#FFC107] ring-2 ring-[#151515]"></span>
+              {unreadAlertsCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#EF4444] text-[10px] font-black flex items-center justify-center text-white ring-2 ring-[#151515] animate-pulse">
+                  {unreadAlertsCount}
+                </span>
               )}
             </button>
 
-            {/* Notification Dropdown */}
+            {/* Enhanced Live Booking Alerts Dropdown Panel */}
             {showNotificationCenter && (
-              <div className="absolute right-0 mt-2 w-80 bg-[#1A1A1A] border border-white/10 rounded-xl shadow-2xl z-50 p-3">
-                <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">Live Booking Alerts</span>
+              <div className="absolute right-0 mt-2 w-88 sm:w-96 bg-[#1A1A1A] border border-white/15 rounded-2xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+                {/* Header */}
+                <div className="p-3.5 bg-[#151515] border-b border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#22C55E] animate-ping" />
+                    <span className="text-xs font-black text-white uppercase tracking-wider">Live Booking Alerts</span>
+                    {unreadAlertsCount > 0 && (
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#FFC107] text-black">
+                        {unreadAlertsCount} New
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px]">
+                    <button
+                      onClick={handleMarkAllAlertsRead}
+                      className="text-[#FFC107] hover:underline font-bold cursor-pointer"
+                    >
+                      Mark all read
+                    </button>
+                    <span className="text-white/20">|</span>
+                    <button
+                      onClick={handleClearAllAlerts}
+                      className="text-gray-400 hover:text-white cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                    <button
+                      onClick={() => setShowNotificationCenter(false)}
+                      className="text-gray-400 hover:text-white ml-1 p-0.5"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filter Tabs */}
+                <div className="px-3 py-2 bg-[#171717] border-b border-white/5 flex items-center gap-1.5 text-[10px]">
                   <button
-                    onClick={() => setNotifications((prev) => prev.map((n) => ({ ...n, read: true })))}
-                    className="text-[10px] text-[#FFC107] hover:underline cursor-pointer"
+                    onClick={() => setAlertsDropdownFilter('all')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      alertsDropdownFilter === 'all'
+                        ? 'bg-[#FFC107] text-black shadow-xs'
+                        : 'text-[#B0B0B0] hover:text-white bg-[#1A1A1A]'
+                    }`}
                   >
-                    Mark all read
+                    All ({alerts.length})
+                  </button>
+                  <button
+                    onClick={() => setAlertsDropdownFilter('unread')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      alertsDropdownFilter === 'unread'
+                        ? 'bg-[#FFC107] text-black shadow-xs'
+                        : 'text-[#B0B0B0] hover:text-white bg-[#1A1A1A]'
+                    }`}
+                  >
+                    Unread ({unreadAlertsCount})
+                  </button>
+                  <button
+                    onClick={() => setAlertsDropdownFilter('bookings')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      alertsDropdownFilter === 'bookings'
+                        ? 'bg-[#FFC107] text-black shadow-xs'
+                        : 'text-[#B0B0B0] hover:text-white bg-[#1A1A1A]'
+                    }`}
+                  >
+                    Bookings ({alerts.filter((a) => a.type === 'new_booking').length})
                   </button>
                 </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
-                  {notifications.map((n) => (
-                    <div
-                      key={n.id}
-                      className={`p-2.5 rounded-lg text-xs border ${
-                        n.read ? 'bg-[#151515]/50 border-white/5 text-[#B0B0B0]' : 'bg-[#FFC107]/10 border-[#FFC107]/30 text-white'
-                      }`}
-                    >
-                      <p className="font-medium leading-relaxed">{n.text}</p>
-                      <span className="text-[10px] text-[#B0B0B0] mt-1 block">{n.time}</span>
+
+                {/* Alert Cards Feed */}
+                <div className="divide-y divide-white/5 max-h-80 overflow-y-auto p-1.5 space-y-1.5">
+                  {alerts
+                    .filter((a) => {
+                      if (alertsDropdownFilter === 'unread') return !a.read;
+                      if (alertsDropdownFilter === 'bookings') return a.type === 'new_booking';
+                      return true;
+                    })
+                    .map((alert) => {
+                      const relatedBooking = bookings.find((b) => b.id === alert.bookingId);
+                      return (
+                        <div
+                          key={alert.id}
+                          className={`p-3 rounded-xl transition-all border ${
+                            alert.read
+                              ? 'bg-[#151515]/60 border-white/5'
+                              : 'bg-[#FFC107]/8 border-[#FFC107]/40 shadow-xs'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <div className="flex items-center gap-1.5">
+                              {alert.type === 'new_booking' ? (
+                                <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#FFC107] text-black">
+                                  New Booking
+                                </span>
+                              ) : alert.type === 'mechanic_assigned' ? (
+                                <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                                  Assigned
+                                </span>
+                              ) : (
+                                <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#22C55E]/20 text-[#22C55E] border border-[#22C55E]/30">
+                                  Completed
+                                </span>
+                              )}
+                              {alert.bookingId && (
+                                <span className="font-mono text-[10px] text-gray-400 font-bold">
+                                  {alert.bookingId}
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-[10px] text-[#B0B0B0] whitespace-nowrap">{alert.time}</span>
+                          </div>
+
+                          <p className="text-xs font-bold text-white leading-snug">{alert.message}</p>
+
+                          {alert.vehicle && (
+                            <div className="mt-1 flex items-center gap-2 text-[10px] text-[#B0B0B0]">
+                              <span>🏍️ {alert.vehicle}</span>
+                              <span>•</span>
+                              <span>📍 {alert.location}</span>
+                              {alert.amount > 0 && (
+                                <>
+                                  <span>•</span>
+                                  <span className="text-[#FFC107] font-bold">₹{alert.amount}</span>
+                                </>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Quick Interactive Actions */}
+                          <div className="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between">
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (relatedBooking) {
+                                    setSelectedBooking(relatedBooking);
+                                  } else {
+                                    handleSimulateNewBooking();
+                                  }
+                                  handleToggleAlertRead(alert.id);
+                                  setShowNotificationCenter(false);
+                                }}
+                                className="px-2 py-1 rounded bg-[#FFC107] text-black text-[10px] font-black hover:bg-[#FFC107]/90 transition-all flex items-center gap-1 cursor-pointer"
+                              >
+                                <Eye className="w-3 h-3" />
+                                <span>View</span>
+                              </button>
+
+                              {relatedBooking && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setShowAssignModal(relatedBooking);
+                                    handleToggleAlertRead(alert.id);
+                                    setShowNotificationCenter(false);
+                                  }}
+                                  className="px-2 py-1 rounded bg-[#1A1A1A] border border-white/10 hover:border-[#FFC107] text-white text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                                >
+                                  <UserCheck className="w-3 h-3 text-[#FFC107]" />
+                                  <span>Assign</span>
+                                </button>
+                              )}
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  handleWhatsAppCustomer({
+                                    id: alert.bookingId || 'ID-BOOKING',
+                                    customerName: alert.customerName,
+                                    phone: alert.phone,
+                                    location: alert.location,
+                                    brand: alert.vehicle.split(' ')[0] || 'Vehicle',
+                                    model: alert.vehicle.split(' ').slice(1).join(' ') || 'Two Wheeler',
+                                    serviceType: alert.service,
+                                    date: 'Today',
+                                    time: alert.time
+                                  } as any);
+                                }}
+                                className="p-1 rounded bg-[#1A1A1A] border border-white/10 hover:border-[#22C55E] text-[#22C55E] transition-all cursor-pointer"
+                                title="WhatsApp Customer"
+                              >
+                                <MessageCircle className="w-3 h-3" />
+                              </button>
+                            </div>
+
+                            <div className="flex items-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => handleTestSound()}
+                                className="p-1 rounded text-[#B0B0B0] hover:text-[#FFC107] transition-colors cursor-pointer"
+                                title="Replay Alert Chime"
+                              >
+                                <Volume2 className="w-3 h-3" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteAlert(alert.id)}
+                                className="p-1 rounded text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
+                                title="Dismiss Alert"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                  {alerts.length === 0 && (
+                    <div className="py-8 text-center text-xs text-[#B0B0B0]">
+                      <BellRing className="w-8 h-8 text-gray-600 mx-auto mb-2 animate-pulse" />
+                      <p className="font-bold text-white">No alerts at the moment</p>
+                      <p className="text-[11px] mt-1 text-[#B0B0B0]">
+                        The system is actively listening for live customer bookings across Bengaluru.
+                      </p>
                     </div>
-                  ))}
+                  )}
+                </div>
+
+                {/* Dropdown Footer */}
+                <div className="p-2.5 bg-[#151515] border-t border-white/10 text-center">
+                  <button
+                    onClick={() => {
+                      setActiveTab('notifications');
+                      setShowNotificationCenter(false);
+                    }}
+                    className="w-full py-1.5 rounded-lg bg-white/5 hover:bg-[#FFC107] hover:text-black text-xs font-black text-white transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Radio className="w-3.5 h-3.5" />
+                    <span>Open Live Alerts Stream Hub</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
             )}
@@ -1056,16 +1395,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         </div>
       </header>
 
-      {/* Floating New Booking Audio & Visual Alert Banner */}
+      {/* Floating New Booking Audio & Visual Alert Banner with Direct Action Hotline */}
       {newBookingToast && (
-        <div className="fixed top-20 right-4 sm:right-6 z-50 max-w-md w-full bg-[#1A1A1A] border-2 border-[#FFC107] rounded-2xl p-4 shadow-2xl shadow-[#FFC107]/20 animate-in slide-in-from-top-4 duration-300">
+        <div className="fixed top-20 right-4 sm:right-6 z-50 max-w-md w-full bg-[#1A1A1A] border-2 border-[#FFC107] rounded-2xl p-4 shadow-2xl shadow-[#FFC107]/25 animate-in slide-in-from-top-4 duration-300">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#FFC107] text-black flex items-center justify-center shrink-0 font-black shadow-md shadow-[#FFC107]/30">
               <BellRing className="w-5 h-5 animate-bounce" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#FFC107] bg-[#FFC107]/15 px-2 py-0.5 rounded border border-[#FFC107]/30">
+                <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[#FFC107] bg-[#FFC107]/15 px-2 py-0.5 rounded border border-[#FFC107]/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-ping" />
                   New Doorstep Booking Alert
                 </span>
                 <button
@@ -1076,12 +1416,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                 </button>
               </div>
               <h4 className="text-sm font-black text-white mt-1.5 truncate">
-                {newBookingToast.customerName} • {newBookingToast.phone}
+                {newBookingToast.customerName} • <span className="text-[#FFC107]">{newBookingToast.phone}</span>
               </h4>
               <p className="text-xs text-[#B0B0B0] mt-0.5 truncate">
                 {newBookingToast.vehicleType}: {newBookingToast.brand} {newBookingToast.model} • {newBookingToast.serviceType}
               </p>
-              <div className="mt-3 flex items-center gap-2">
+              <div className="mt-1 text-[11px] text-[#B0B0B0] flex items-center gap-2">
+                <span>📍 {newBookingToast.location}</span>
+                <span>•</span>
+                <span className="text-[#FFC107] font-bold">₹{newBookingToast.amount}</span>
+              </div>
+
+              {/* Action Buttons Row */}
+              <div className="mt-3 flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -1102,17 +1449,38 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                   className="px-3 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-white text-xs font-bold hover:bg-white/10 transition-all flex items-center gap-1 cursor-pointer"
                 >
                   <UserCheck className="w-3.5 h-3.5 text-[#FFC107]" />
-                  <span>Assign Mechanic</span>
+                  <span>Assign</span>
                 </button>
                 <button
                   type="button"
+                  onClick={() => handleWhatsAppCustomer(newBookingToast)}
+                  className="px-2.5 py-1.5 rounded-lg bg-[#22C55E]/15 border border-[#22C55E]/40 text-[#22C55E] hover:bg-[#22C55E] hover:text-black text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                  title="WhatsApp Customer"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </button>
+                <a
+                  href={`tel:${newBookingToast.phone.replace(/[^0-9+]/g, '')}`}
+                  className="px-2 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-[#B0B0B0] hover:text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                  title="Call Customer"
+                >
+                  <Phone className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Call</span>
+                </a>
+                <button
+                  type="button"
                   onClick={() => handleTestSound()}
-                  className="px-2.5 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-[#B0B0B0] hover:text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                  className="px-2 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-[#B0B0B0] hover:text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
                   title="Replay Alert Sound"
                 >
                   <Volume2 className="w-3.5 h-3.5 text-[#FFC107]" />
-                  <span className="text-[10px]">Replay</span>
                 </button>
+              </div>
+
+              {/* Progress dismiss bar */}
+              <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden mt-3">
+                <div className="h-full bg-[#FFC107] w-full animate-pulse" />
               </div>
             </div>
           </div>
@@ -1306,6 +1674,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                   <span>Reports & Analytics</span>
                 </div>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+              </button>
+
+              <button
+                onClick={() => setActiveTab('notifications')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                  activeTab === 'notifications'
+                    ? 'bg-[#FFC107] text-black shadow-md'
+                    : 'text-[#B0B0B0] hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Bell className="w-4 h-4" />
+                  <span>Live Booking Alerts</span>
+                </div>
+                {unreadAlertsCount > 0 ? (
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#EF4444] text-white animate-pulse">
+                    {unreadAlertsCount}
+                  </span>
+                ) : (
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                    activeTab === 'notifications' ? 'bg-black/20 text-black' : 'bg-white/10 text-white'
+                  }`}>
+                    {alerts.length}
+                  </span>
+                )}
               </button>
 
               <button
@@ -2446,6 +2839,408 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
             </div>
           )}
 
+          {/* VIEW: NOTIFICATIONS / LIVE BOOKING ALERTS STREAM */}
+          {activeTab === 'notifications' && (
+            <div className="space-y-5">
+              {/* Header & Controls */}
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] animate-ping" />
+                    <h1 className="text-xl font-black text-white tracking-wide">
+                      LIVE BOOKING ALERTS & DISPATCH STREAM
+                    </h1>
+                  </div>
+                  <p className="text-xs text-[#B0B0B0] mt-0.5">
+                    Real-time incoming customer booking feed with instant mechanic dispatch, customer contacts, and audio monitoring.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleTestSound()}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1A1A] hover:bg-[#FFC107]/15 border border-[#FFC107]/40 text-xs font-bold text-[#FFC107] transition-all cursor-pointer shadow-xs"
+                    title="Play alert chime test"
+                  >
+                    <Volume2 className="w-3.5 h-3.5 text-[#FFC107]" />
+                    <span>Test Sound</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleSimulateNewBooking}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FFC107] hover:bg-[#FFC107]/90 text-black text-xs font-black transition-all cursor-pointer shadow-md shadow-[#FFC107]/10"
+                    title="Simulate receiving a new booking to test alert sound and stream"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-black" />
+                    <span>Simulate Live Booking</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleMarkAllAlertsRead}
+                    disabled={unreadAlertsCount === 0}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1A1A] hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-colors cursor-pointer disabled:opacity-40"
+                  >
+                    <CheckCheck className="w-3.5 h-3.5 text-[#22C55E]" />
+                    <span>Mark All Read</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleClearAllAlerts}
+                    disabled={alerts.length === 0}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1A1A] hover:bg-red-500/10 border border-white/10 hover:border-red-500/40 text-xs font-semibold text-gray-400 hover:text-red-400 transition-colors cursor-pointer disabled:opacity-40"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Clear All</span>
+                  </button>
+
+                  {desktopPermission !== 'granted' && (
+                    <button
+                      type="button"
+                      onClick={handleRequestDesktopPermission}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1A1A] hover:bg-[#FFC107]/10 border border-[#FFC107]/30 text-xs font-bold text-[#FFC107] transition-colors cursor-pointer"
+                    >
+                      <BellRing className="w-3.5 h-3.5 text-[#FFC107]" />
+                      <span>Enable Browser Alerts</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* 4 Status Summary Cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div className="bg-[#1A1A1A] p-4 rounded-xl border border-white/10">
+                  <div className="flex items-center justify-between text-xs text-[#B0B0B0]">
+                    <span>Total Alerts Logged</span>
+                    <Radio className="w-4 h-4 text-[#22C55E]" />
+                  </div>
+                  <div className="text-2xl font-black text-white mt-1">{alerts.length}</div>
+                  <div className="text-[10px] text-[#22C55E] mt-1 flex items-center gap-1 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-ping" />
+                    Live Firestore Stream Connected
+                  </div>
+                </div>
+
+                <div className="bg-[#1A1A1A] p-4 rounded-xl border border-white/10">
+                  <div className="flex items-center justify-between text-xs text-[#B0B0B0]">
+                    <span>Unread Alerts</span>
+                    <Bell className="w-4 h-4 text-[#EF4444]" />
+                  </div>
+                  <div className={`text-2xl font-black mt-1 ${unreadAlertsCount > 0 ? 'text-[#EF4444]' : 'text-white'}`}>
+                    {unreadAlertsCount}
+                  </div>
+                  <div className="text-[10px] text-[#B0B0B0] mt-1">
+                    {unreadAlertsCount > 0 ? 'Needs dispatcher action' : 'All alerts caught up'}
+                  </div>
+                </div>
+
+                <div className="bg-[#1A1A1A] p-4 rounded-xl border border-white/10">
+                  <div className="flex items-center justify-between text-xs text-[#B0B0B0]">
+                    <span>New Bookings Ingested</span>
+                    <Sparkles className="w-4 h-4 text-[#FFC107]" />
+                  </div>
+                  <div className="text-2xl font-black text-[#FFC107] mt-1">
+                    {alerts.filter((a) => a.type === 'new_booking').length}
+                  </div>
+                  <div className="text-[10px] text-[#B0B0B0] mt-1">
+                    Doorstep service requests
+                  </div>
+                </div>
+
+                <div className="bg-[#1A1A1A] p-4 rounded-xl border border-white/10">
+                  <div className="flex items-center justify-between text-xs text-[#B0B0B0]">
+                    <span>Audio Alert Chime</span>
+                    <Volume2 className="w-4 h-4 text-[#FFC107]" />
+                  </div>
+                  <div className="text-base font-black text-white mt-1">
+                    {soundConfig.enabled ? 'Chime Active' : 'Muted'}
+                  </div>
+                  <div className="text-[10px] text-[#FFC107] mt-1 font-medium truncate">
+                    Tone: {soundConfig.tone} • Vol: {Math.round(soundConfig.volume * 100)}%
+                  </div>
+                </div>
+              </div>
+
+              {/* Filter & Search Bar */}
+              <div className="p-3.5 bg-[#1A1A1A] rounded-xl border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex items-center gap-1.5 text-[#B0B0B0] mr-2">
+                    <Filter className="w-3.5 h-3.5 text-[#FFC107]" />
+                    <span className="font-bold">Filter By:</span>
+                  </div>
+
+                  {[
+                    { id: 'all', label: `All (${alerts.length})` },
+                    { id: 'new_booking', label: `New Bookings (${alerts.filter((a) => a.type === 'new_booking').length})` },
+                    { id: 'mechanic_assigned', label: `Assigned (${alerts.filter((a) => a.type === 'mechanic_assigned').length})` },
+                    { id: 'service_completed', label: `Completed (${alerts.filter((a) => a.type === 'service_completed').length})` }
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      type="button"
+                      onClick={() => setAlertFilterType(f.id)}
+                      className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
+                        alertFilterType === f.id
+                          ? 'bg-[#FFC107] text-black shadow-xs'
+                          : 'bg-[#151515] border border-white/5 text-[#B0B0B0] hover:text-white'
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="relative w-full sm:w-64">
+                  <Search className="w-3.5 h-3.5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={alertSearchQuery}
+                    onChange={(e) => setAlertSearchQuery(e.target.value)}
+                    placeholder="Search alerts by customer, bike, area..."
+                    className="w-full bg-[#151515] border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#FFC107]"
+                  />
+                  {alertSearchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setAlertSearchQuery('')}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Alert Feed Cards Stream */}
+              <div className="space-y-3">
+                {alerts
+                  .filter((a) => {
+                    if (alertFilterType !== 'all' && a.type !== alertFilterType) return false;
+                    if (alertSearchQuery) {
+                      const q = alertSearchQuery.toLowerCase();
+                      const matchText = `${a.customerName} ${a.phone} ${a.location} ${a.vehicle} ${a.service} ${a.bookingId || ''}`.toLowerCase();
+                      return matchText.includes(q);
+                    }
+                    return true;
+                  })
+                  .map((alert) => {
+                    const relatedBooking = bookings.find((b) => b.id === alert.bookingId);
+                    return (
+                      <div
+                        key={alert.id}
+                        className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                          alert.read
+                            ? 'bg-[#1A1A1A] border-white/10'
+                            : 'bg-[#1A1A1A] border-[#FFC107]/60 shadow-lg shadow-[#FFC107]/5 ring-1 ring-[#FFC107]/20'
+                        }`}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-white/5">
+                          <div className="flex flex-wrap items-center gap-2">
+                            {alert.type === 'new_booking' ? (
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#FFC107] text-black shadow-xs flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-black animate-ping" />
+                                New Booking
+                              </span>
+                            ) : alert.type === 'mechanic_assigned' ? (
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center gap-1">
+                                <UserCheck className="w-3 h-3" />
+                                Mechanic Assigned
+                              </span>
+                            ) : (
+                              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#22C55E]/20 text-[#22C55E] border border-[#22C55E]/30 flex items-center gap-1">
+                                <CheckCircle2 className="w-3 h-3" />
+                                Service Completed
+                              </span>
+                            )}
+
+                            {alert.bookingId && (
+                              <span className="font-mono text-xs font-bold text-[#FFC107] bg-white/5 px-2 py-0.5 rounded">
+                                {alert.bookingId}
+                              </span>
+                            )}
+
+                            <span className="text-xs text-[#B0B0B0] flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-[#B0B0B0]" />
+                              {alert.time}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => handleToggleAlertRead(alert.id)}
+                              className={`text-[11px] font-bold px-2 py-0.5 rounded transition-colors cursor-pointer ${
+                                alert.read
+                                  ? 'text-[#B0B0B0] hover:text-white bg-white/5'
+                                  : 'text-[#FFC107] bg-[#FFC107]/10'
+                              }`}
+                            >
+                              {alert.read ? 'Mark Unread' : 'Mark Read'}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteAlert(alert.id)}
+                              className="text-gray-500 hover:text-red-400 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer"
+                              title="Delete this alert"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Customer & Booking Details Card Content */}
+                        <div className="py-3.5 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                          <div>
+                            <span className="text-[10px] font-bold text-[#B0B0B0] uppercase block">Customer Details</span>
+                            <div className="text-sm font-black text-white mt-0.5">{alert.customerName}</div>
+                            <div className="text-[#FFC107] font-mono mt-0.5 font-bold">{alert.phone}</div>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] font-bold text-[#B0B0B0] uppercase block">Vehicle & Area</span>
+                            <div className="text-sm font-bold text-white mt-0.5 flex items-center gap-1.5">
+                              <Wrench className="w-3.5 h-3.5 text-[#FFC107]" />
+                              <span>{alert.vehicle}</span>
+                            </div>
+                            <div className="text-[#B0B0B0] mt-0.5 flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-amber-400" />
+                              <span>{alert.location}, Bengaluru</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] font-bold text-[#B0B0B0] uppercase block">Service Package & Bill</span>
+                            <div className="text-xs font-bold text-white mt-0.5 truncate">{alert.service}</div>
+                            {alert.amount > 0 && (
+                              <div className="text-base font-black text-[#22C55E] mt-0.5">
+                                ₹{alert.amount}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Bottom Actions Row */}
+                        <div className="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2.5">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (relatedBooking) {
+                                  setSelectedBooking(relatedBooking);
+                                } else {
+                                  setSelectedBooking({
+                                    id: alert.bookingId || `ID-${Date.now()}`,
+                                    customerName: alert.customerName,
+                                    phone: alert.phone,
+                                    location: alert.location,
+                                    addressDetails: `${alert.location}, Bengaluru`,
+                                    googleMapsUrl: `https://maps.google.com/?q=${encodeURIComponent(alert.location + ' Bengaluru')}`,
+                                    vehicleType: alert.vehicle.toLowerCase().includes('scooter') ? 'Scooter' : 'Bike',
+                                    brand: alert.vehicle.split(' ')[0] || 'Honda',
+                                    model: alert.vehicle.split(' ').slice(1).join(' ') || 'Model',
+                                    serviceType: alert.service,
+                                    date: new Date().toISOString().split('T')[0],
+                                    time: 'Today',
+                                    amount: alert.amount,
+                                    advancePaid: 0,
+                                    remainingBalance: alert.amount,
+                                    paymentMethod: 'UPI / GPay',
+                                    paymentStatus: 'Unpaid',
+                                    status: 'pending',
+                                    createdAt: new Date(alert.timestamp).toISOString(),
+                                    isNew: true
+                                  });
+                                }
+                              }}
+                              className="px-3 py-1.5 rounded-lg bg-[#FFC107] text-black text-xs font-black hover:bg-[#FFC107]/90 transition-all flex items-center gap-1 cursor-pointer shadow-xs"
+                            >
+                              <Eye className="w-3.5 h-3.5" />
+                              <span>View Booking Details</span>
+                            </button>
+
+                            {relatedBooking && (
+                              <button
+                                type="button"
+                                onClick={() => setShowAssignModal(relatedBooking)}
+                                className="px-3 py-1.5 rounded-lg bg-[#151515] border border-white/10 hover:border-[#FFC107] text-white text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                              >
+                                <UserCheck className="w-3.5 h-3.5 text-[#FFC107]" />
+                                <span>Assign Mechanic</span>
+                              </button>
+                            )}
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                handleWhatsAppCustomer({
+                                  id: alert.bookingId || 'ID-BOOKING',
+                                  customerName: alert.customerName,
+                                  phone: alert.phone,
+                                  location: alert.location,
+                                  brand: alert.vehicle.split(' ')[0] || 'Vehicle',
+                                  model: alert.vehicle.split(' ').slice(1).join(' ') || 'Two Wheeler',
+                                  serviceType: alert.service,
+                                  date: 'Today',
+                                  time: alert.time
+                                } as any);
+                              }}
+                              className="px-3 py-1.5 rounded-lg bg-[#22C55E]/15 border border-[#22C55E]/40 text-[#22C55E] hover:bg-[#22C55E] hover:text-black text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>WhatsApp</span>
+                            </button>
+
+                            <a
+                              href={`tel:${alert.phone.replace(/[^0-9+]/g, '')}`}
+                              className="px-3 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-white hover:text-[#FFC107] hover:border-[#FFC107] text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                            >
+                              <Phone className="w-3.5 h-3.5 text-amber-400" />
+                              <span>Call Customer</span>
+                            </a>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => handleTestSound()}
+                              className="px-2.5 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-[#B0B0B0] hover:text-[#FFC107] text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                              title="Replay Alert Sound"
+                            >
+                              <Volume2 className="w-3.5 h-3.5 text-[#FFC107]" />
+                              <span>Replay Chime</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                {alerts.length === 0 && (
+                  <div className="py-16 text-center bg-[#1A1A1A] rounded-2xl border border-white/10 p-8 space-y-3">
+                    <div className="w-14 h-14 rounded-2xl bg-[#151515] border border-white/10 text-gray-500 flex items-center justify-center mx-auto">
+                      <BellRing className="w-7 h-7 text-[#FFC107] animate-pulse" />
+                    </div>
+                    <h3 className="text-base font-black text-white">No Live Booking Alerts In Log</h3>
+                    <p className="text-xs text-[#B0B0B0] max-w-md mx-auto">
+                      The dispatch system is actively connected to the live database and monitoring for customer bookings across Bengaluru.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleSimulateNewBooking}
+                      className="px-4 py-2 rounded-lg bg-[#FFC107] text-black font-black text-xs hover:bg-[#FFC107]/90 transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-md shadow-[#FFC107]/15"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-black" />
+                      <span>Simulate A Test Booking</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* VIEW: SETTINGS */}
           {activeTab === 'settings' && (
             <div className="space-y-6">
@@ -2687,9 +3482,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
               <button
                 onClick={() => handleWhatsAppCustomer(selectedBooking)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 hover:text-black text-xs text-emerald-400 font-semibold transition-colors"
+                title="Message Customer via WhatsApp"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 WhatsApp Message
+              </button>
+              <button
+                onClick={() => handleWhatsAppMechanic(selectedBooking)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#22C55E]/20 hover:bg-[#22C55E] hover:text-black text-xs text-[#22C55E] font-semibold transition-colors"
+                title="WhatsApp mechanic send"
+              >
+                <Wrench className="w-3.5 h-3.5" />
+                WhatsApp mechanic send
               </button>
               {selectedBooking.googleMapsUrl && (
                 <a

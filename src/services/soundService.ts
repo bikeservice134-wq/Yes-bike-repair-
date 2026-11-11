@@ -55,6 +55,36 @@ class SoundService {
   }
 
   /**
+   * Request browser desktop notification permission
+   */
+  public async requestNotificationPermission(): Promise<NotificationPermission> {
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      try {
+        return await Notification.requestPermission();
+      } catch {
+        return 'denied';
+      }
+    }
+    return 'denied';
+  }
+
+  /**
+   * Display native desktop notification when document is not in focus
+   */
+  public triggerDesktopNotification(title: string, body: string) {
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+      try {
+        new Notification(title, {
+          body,
+          icon: '/favicon.ico'
+        });
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  /**
    * Listen for user interaction to resume AudioContext (browser autoplay policy)
    */
   private initInteractionListener() {
