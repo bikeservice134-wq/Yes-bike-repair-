@@ -282,16 +282,6 @@ export const BookingConfirmedPage: React.FC<BookingConfirmedPageProps> = ({
                 <MessageCircle className="w-3.5 h-3.5" />
                 <span>WhatsApp mechanic send</span>
               </a>
-
-              <a
-                href={supportWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-950/85 hover:bg-zinc-950 text-white font-black text-xs shadow-md shadow-black/15 active:scale-95 transition-all cursor-pointer"
-                title="Customer WhatsApp Support"
-              >
-                <span>WhatsApp Us</span>
-              </a>
             </div>
           </div>
 

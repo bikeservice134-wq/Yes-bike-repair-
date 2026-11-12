@@ -907,6 +907,11 @@ export default function App() {
           'value': 1.0,
           'currency': 'INR'
         });
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17586403307/Cz5lCL23i7cdEOvv7MFB',
+          'value': 1.0,
+          'currency': 'INR'
+        });
       }
       if ((window as any).gtag_report_conversion) {
         (window as any).gtag_report_conversion();
@@ -983,8 +988,7 @@ Thank you for choosing YES BIKE SERVICE. Your booking has been received! ✅
 
 🏍️ YES BIKE SERVICE | BENGALURU
 Quality Bike Care at Your Doorstep!
-Sit back and relax. We've got your bike covered!
-WhatsApp Us: https://wa.me/917090400617`;
+Sit back and relax. We've got your bike covered!`;
   };
 
   // Live IST Clock that ticks every 10 seconds
