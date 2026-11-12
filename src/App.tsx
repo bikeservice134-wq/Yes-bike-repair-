@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
 import { AdminDashboard } from './components/admin/AdminDashboard';
-import { BookingConfirmedPage } from './components/BookingConfirmedPage';
 import { saveBookingPermanently, seedInitialDataIfEmpty } from './services/persistenceService';
 
 // Reusable FadeIn Component (Optimized: unobserves once visible to prevent scroll jank)
@@ -820,7 +819,7 @@ export default function App() {
   const [packageSuccess, setPackageSuccess] = useState(false);
   const [heroVehicle, setHeroVehicle] = useState("Bike");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms" | "admin" | "booking-confirmed">("home");
+  const [currentView, setCurrentView] = useState<"home" | "privacy" | "terms" | "admin">("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -855,8 +854,6 @@ export default function App() {
         setCurrentView('privacy');
       } else if (hash === '#terms') {
         setCurrentView('terms');
-      } else if (hash === '#booking-confirmed' || hash === '#confirmed') {
-        setCurrentView('booking-confirmed');
       }
     };
     handleHash();
@@ -935,22 +932,6 @@ export default function App() {
   const [modalWatchTime, setModalWatchTime] = useState(() => getCurrentTimeHHMM());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
-  const [bookingConfirmedData, setBookingConfirmedData] = useState<{
-    bookingId: string;
-    fullName: string;
-    phone: string;
-    vehicle: string;
-    brand: string;
-    model: string;
-    location: string;
-    service: string;
-    timing: string;
-    date?: string;
-    time?: string;
-    rawMessage?: string;
-    estimatedPrice: string;
-    timestamp: string;
-  } | null>(null);
 
   // Exact Booking Confirmation Message Generator
   const generateBookingConfirmationMessage = (data: {
@@ -1358,27 +1339,7 @@ Sit back and relax. We've got your bike covered!`;
       time: bookingData.time,
     });
 
-    setBookingConfirmedData({
-      bookingId: bookingData.bookingId,
-      fullName: bookingData.fullName,
-      phone: bookingData.phone,
-      vehicle: heroVehicle,
-      brand: bookingData.brand,
-      model: bookingData.model,
-      location: bookingData.location,
-      service: bookingData.service,
-      timing: `${bookingData.date} at ${bookingData.time}`,
-      date: bookingData.date,
-      time: bookingData.time,
-      rawMessage: bookingData.message,
-      estimatedPrice: (bookingData.service.match(/₹\s*(\d[\d,]*)/)?.[0] || '₹699'),
-      timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-    });
     setHeroSuccess(true);
-    setCurrentView('booking-confirmed');
-    window.location.hash = '#booking-confirmed';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
     setTimeout(() => setIsSubmitting(false), 500);
   };
 
@@ -1418,27 +1379,7 @@ Sit back and relax. We've got your bike covered!`;
       time: bookingData.time,
     });
 
-    setBookingConfirmedData({
-      bookingId: bookingData.bookingId,
-      fullName: bookingData.fullName,
-      phone: bookingData.phone,
-      vehicle: heroVehicle,
-      brand: bookingData.brand,
-      model: bookingData.model,
-      location: bookingData.location,
-      service: bookingData.service,
-      timing: `${bookingData.date} at ${bookingData.time}`,
-      date: bookingData.date,
-      time: bookingData.time,
-      rawMessage: bookingData.message,
-      estimatedPrice: (bookingData.service.match(/₹\s*(\d[\d,]*)/)?.[0] || '₹699'),
-      timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-    });
     setHeroSuccess(true);
-    setCurrentView('booking-confirmed');
-    window.location.hash = '#booking-confirmed';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
     setTimeout(() => setIsSubmitting(false), 500);
   };
   
@@ -4427,23 +4368,6 @@ Sit back and relax. We've got your bike covered!`;
                 bookingDate: date,
                 serviceTime: formattedTime,
               });
-
-              setBookingConfirmedData({
-                bookingId,
-                fullName,
-                phone: formattedPhone,
-                vehicle: vehicleType,
-                brand,
-                model,
-                location,
-                service: serviceName,
-                timing: `Scheduled: ${displayTiming}`,
-                date,
-                time: formattedTime,
-                rawMessage: message,
-                estimatedPrice: pkgPrice,
-                timestamp: getCurrentISTTime()
-              });
               
               const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(message)}`;
               try {
@@ -4468,9 +4392,6 @@ Sit back and relax. We've got your bike covered!`;
 
               setHeroSuccess(true);
               setIsPackageModalOpen(false);
-              setCurrentView('booking-confirmed');
-              window.location.hash = '#booking-confirmed';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
             }} className="p-3 sm:p-4 space-y-2 overflow-y-auto">
               
               <div className="flex bg-gray-100 dark:bg-zinc-950 p-0.5 rounded-lg border border-gray-200 dark:border-zinc-800">
@@ -5196,20 +5117,6 @@ Sit back and relax. We've got your bike covered!`;
       </main>
       )}
 
-      {/* BOOKING CONFIRMED VIEW */}
-      {currentView === "booking-confirmed" && (
-        <BookingConfirmedPage
-          data={bookingConfirmedData}
-          onReturnToHome={() => {
-            if (window.location.hash.includes('confirmed')) {
-              window.history.pushState(null, '', window.location.pathname);
-            }
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      )}
-
       {/* PRIVACY POLICY VIEW */}
       {currentView === "privacy" && (
         <main className="pt-24 sm:pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 animate-in fade-in duration-300">
@@ -5282,6 +5189,14 @@ Sit back and relax. We've got your bike covered!`;
             </div>
           </div>
         </main>
+      )}
+
+      {/* Toast Notification */}
+      {heroSuccess && (
+        <Toast
+          message="Booking confirmed! Our team will call you within 10 minutes."
+          onClose={() => setHeroSuccess(false)}
+        />
       )}
     </div>
   );
