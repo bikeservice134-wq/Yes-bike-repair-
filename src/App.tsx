@@ -912,6 +912,11 @@ export default function App() {
           'value': 1.0,
           'currency': 'INR'
         });
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17586403307/OiHRCN6ImbcdEOvv7MFB',
+          'value': 1.0,
+          'currency': 'INR'
+        });
       }
       if ((window as any).gtag_report_conversion) {
         (window as any).gtag_report_conversion();
