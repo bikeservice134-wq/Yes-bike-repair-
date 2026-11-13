@@ -910,7 +910,7 @@ export default function App() {
           'currency': 'INR'
         });
         (window as any).gtag('event', 'conversion', {
-          'send_to': 'AW-17586403307/OiHRCN6ImbcdEOvv7MFB',
+          'send_to': 'AW-17586403307/1aw0CNu6xLcdEOvv7MFB',
           'value': 1.0,
           'currency': 'INR'
         });

@@ -96,19 +96,14 @@
           'currency': 'INR'
       });
     </script>
-    <!-- Event snippet for Submit lead form 16 conversion page -->
-    <script>
-      gtag('event', 'conversion', {
-          'send_to': 'AW-17586403307/OiHRCN6ImbcdEOvv7MFB',
-          'value': 1.0,
-          'currency': 'INR'
-      });
-    </script>
+    <!-- Event snippet for Submit lead form 17 conversion page -->
     <!-- Event snippet for Submit lead form conversion tracking -->
     <script>
     function gtag_report_conversion(url) {
+      var navigated = false;
       var callback = function () {
-        if (typeof(url) != 'undefined') {
+        if (!navigated && typeof(url) != 'undefined') {
+          navigated = true;
           window.location = url;
         }
       };
@@ -160,9 +155,10 @@
             'currency': 'INR'
         });
         gtag('event', 'conversion', {
-            'send_to': 'AW-17586403307/OiHRCN6ImbcdEOvv7MFB',
+            'send_to': 'AW-17586403307/1aw0CNu6xLcdEOvv7MFB',
             'value': 1.0,
-            'currency': 'INR'
+            'currency': 'INR',
+            'event_callback': callback
         });
       }
       return false;
