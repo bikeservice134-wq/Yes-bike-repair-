@@ -833,7 +833,6 @@ export default function App() {
   const [isTechnicalDetailsOpen, setIsTechnicalDetailsOpen] = useState(false);
   const [showTechDetails, setShowTechDetails] = useState(false);
   const [technicalDetailsContent, setTechnicalDetailsContent] = useState({ title: '', steps: [] as string[] });
-  const [packageCategory, setPackageCategory] = useState<'all' | 'maintenance' | 'breakdown' | 'royalenfield'>('all');
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -2452,64 +2451,10 @@ Sit back and relax. We've got your bike covered!`;
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
               Choose the right service package for your bike or scooter and get expert care at your doorstep.
             </p>
-
-            {/* Interactive Category Filter Tabs */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              {[
-                { id: 'all', label: 'All Packages', count: '7', icon: '⭐' },
-                { id: 'maintenance', label: 'Periodic Maintenance', count: '2', icon: '🏍️' },
-                { id: 'breakdown', label: 'Breakdown & Rescue', count: '3', icon: '⚡' },
-                { id: 'royalenfield', label: 'Royal Enfield Care', count: '2', icon: '👑' },
-              ].map((tab) => {
-                const isActive = packageCategory === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => setPackageCategory(tab.id as any)}
-                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-200 cursor-pointer ${
-                      isActive
-                        ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 text-zinc-950 shadow-[0_4px_16px_rgba(245,158,11,0.35)] scale-105 border border-amber-300'
-                        : 'bg-white dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 border border-gray-200 dark:border-zinc-800 hover:border-amber-400/60 dark:hover:border-amber-500/50 hover:text-amber-600 dark:hover:text-amber-400 shadow-xs'
-                    }`}
-                  >
-                    <span>{tab.icon}</span>
-                    <span>{tab.label}</span>
-                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-black ${
-                      isActive ? 'bg-zinc-950 text-amber-400' : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400'
-                    }`}>
-                      {tab.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
           </div>
 
           {/* CATEGORY 1: PERIODIC MAINTENANCE (₹699 & ₹1,349) */}
-          {(packageCategory === 'all' || packageCategory === 'maintenance') && (
-            <div className="mb-14 sm:mb-18">
-              {packageCategory === 'all' && (
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-b border-gray-200/80 dark:border-zinc-800">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-9 h-9 rounded-xl bg-amber-500/15 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30">
-                      <Wrench className="w-5 h-5" />
-                    </span>
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">
-                        Periodic Doorstep Maintenance
-                      </h3>
-                      <p className="text-xs text-gray-500 dark:text-zinc-400 font-medium">
-                        Comprehensive 12-point service for all bikes &amp; scooters • 500 KM / 1-Month Warranty
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 self-start sm:self-auto">
-                    ⭐ 2 Comprehensive Options
-                  </span>
-                </div>
-              )}
-
+          <div className="mb-14 sm:mb-18">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
                 {/* Pkg 1: Basic General Service */}
                 <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/90 dark:border-zinc-800 hover:border-amber-400/80 dark:hover:border-amber-500/50 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
@@ -2819,13 +2764,10 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
             </div>
-          )}
 
           {/* CATEGORY 2: BREAKDOWN & RESCUE (₹449, ₹599, ₹399) */}
-          {(packageCategory === 'all' || packageCategory === 'breakdown') && (
-            <div className="mb-14 sm:mb-18">
-              {packageCategory === 'all' && (
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-t border-gray-200/80 dark:border-zinc-800 pt-8 sm:pt-10">
+          <div className="mb-14 sm:mb-18">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-t border-gray-200/80 dark:border-zinc-800 pt-8 sm:pt-10">
                   <div className="flex items-center gap-2.5">
                     <span className="w-9 h-9 rounded-xl bg-amber-500/15 dark:bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30">
                       <Zap className="w-5 h-5" />
@@ -2843,7 +2785,6 @@ Sit back and relax. We've got your bike covered!`;
                     ⚡ ~30 Min Arrival
                   </span>
                 </div>
-              )}
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
                 {/* Pkg 3: Jump Start Service */}
@@ -3204,11 +3145,9 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
             </div>
-          )}
 
           {/* CATEGORY 3: ROYAL ENFIELD SPECIALIZED PACKAGES (₹2,599 & ₹3,999) */}
-          {(packageCategory === 'all' || packageCategory === 'royalenfield') && (
-            <div className="pt-2">
+          <div className="pt-2">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-t border-gray-200/80 dark:border-zinc-800 pt-8 sm:pt-10">
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-300 text-xs font-black uppercase tracking-wider border border-amber-400/30 mb-2">
@@ -3548,7 +3487,6 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
             </div>
-          )}
         </div>
       </section>
 
