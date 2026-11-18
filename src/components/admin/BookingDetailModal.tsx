@@ -18,6 +18,7 @@ import {
 import { Booking, BookingStatus, Mechanic } from '../../types/admin';
 import {
   BOOKING_STATUS_META,
+  ServicePackageItem,
   buildCustomerWhatsAppUrl,
   buildMechanicWhatsAppUrl
 } from './adminConstants';
@@ -25,6 +26,7 @@ import {
 interface BookingDetailModalProps {
   booking: Booking | null;
   mechanics: Mechanic[];
+  packages: ServicePackageItem[];
   fallbackWhatsApp: string;
   onClose: () => void;
   onUpdateStatus: (bookingId: string, newStatus: BookingStatus, note?: string) => void;
@@ -48,6 +50,7 @@ const WORKFLOW_STAGES: BookingStatus[] = [
 export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
   booking,
   mechanics,
+  packages,
   fallbackWhatsApp,
   onClose,
   onUpdateStatus,
@@ -62,6 +65,7 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
   const [customNote, setCustomNote] = useState('');
 
   // Editable fields
+  const [editServiceType, setEditServiceType] = useState('');
   const [editDate, setEditDate] = useState('');
   const [editTime, setEditTime] = useState('');
   const [editAmount, setEditAmount] = useState(0);
@@ -72,6 +76,7 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
 
   useEffect(() => {
     if (!booking) return;
+    setEditServiceType(booking.serviceType);
     setEditDate(booking.date);
     setEditTime(booking.time);
     setEditAmount(booking.amount);
@@ -90,6 +95,9 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
   const customerWaUrl = buildCustomerWhatsAppUrl(booking);
   const mechanicWaUrl = buildMechanicWhatsAppUrl(booking, mechanics, fallbackWhatsApp);
 
+  const formatPackageLabel = (pkg: ServicePackageItem) =>
+    `${pkg.name} (${pkg.priceLabel || `₹${pkg.price.toLocaleString('en-IN')}`})`;
+
   const handleSaveEdits = () => {
     const safeAmount = Math.max(0, Number(editAmount) || 0);
     const safeAdvance = Math.min(safeAmount, Math.max(0, Number(editAdvance) || 0));
@@ -100,6 +108,7 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
     onUpdateBooking(
       booking.id,
       {
+        serviceType: editServiceType || booking.serviceType,
         date: editDate,
         time: editTime,
         amount: safeAmount,
@@ -110,7 +119,7 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
         customerComplaint: editComplaint.trim() || undefined,
         customerNotes: editNotes.trim() || undefined
       },
-      `Updated schedule/billing (₹${safeAmount}, ${paymentStatus})`
+      `Updated package/schedule/billing (₹${safeAmount}, ${paymentStatus})`
     );
     setIsEditing(false);
   };
@@ -262,6 +271,31 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
                 >
                   Cancel
                 </button>
+              </div>
+              <div>
+                <label className="block text-zinc-400 mb-1">Service Package</label>
+                <select
+                  value={editServiceType}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setEditServiceType(val);
+                    const matched = packages.find((p) => formatPackageLabel(p) === val);
+                    if (matched) setEditAmount(matched.price);
+                  }}
+                  className="w-full bg-[#141417] border border-white/10 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-[#FFC107]"
+                >
+                  {!packages.some((p) => formatPackageLabel(p) === editServiceType) && editServiceType && (
+                    <option value={editServiceType}>{editServiceType}</option>
+                  )}
+                  {packages.map((p) => {
+                    const label = formatPackageLabel(p);
+                    return (
+                      <option key={p.id} value={label}>
+                        {label}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>

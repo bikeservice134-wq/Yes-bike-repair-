@@ -31,8 +31,11 @@ export const NewBookingModal: React.FC<NewBookingModalProps> = ({
   const [brand, setBrand] = useState('Honda');
   const [model, setModel] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
+  const formatPackageLabel = (pkg: ServicePackageItem) =>
+    `${pkg.name} (${pkg.priceLabel || `₹${pkg.price.toLocaleString('en-IN')}`})`;
+
   const [serviceName, setServiceName] = useState(
-    defaultPkg ? `${defaultPkg.name} - ₹${defaultPkg.price}` : 'Basic General Service - ₹699'
+    defaultPkg ? formatPackageLabel(defaultPkg) : 'Basic General Service (₹699)'
   );
   const [amount, setAmount] = useState<number>(defaultPkg ? defaultPkg.price : 699);
   const [advancePaid, setAdvancePaid] = useState<number>(0);
@@ -45,7 +48,7 @@ export const NewBookingModal: React.FC<NewBookingModalProps> = ({
 
   useEffect(() => {
     if (preselectedPackage) {
-      setServiceName(`${preselectedPackage.name} - ₹${preselectedPackage.price}`);
+      setServiceName(formatPackageLabel(preselectedPackage));
       setAmount(preselectedPackage.price);
     }
   }, [preselectedPackage]);
@@ -54,7 +57,7 @@ export const NewBookingModal: React.FC<NewBookingModalProps> = ({
 
   const handlePackageSelect = (val: string) => {
     setServiceName(val);
-    const matched = packages.find((p) => `${p.name} - ₹${p.price}` === val);
+    const matched = packages.find((p) => formatPackageLabel(p) === val);
     if (matched) {
       setAmount(matched.price);
     }
@@ -278,11 +281,14 @@ export const NewBookingModal: React.FC<NewBookingModalProps> = ({
                   onChange={(e) => handlePackageSelect(e.target.value)}
                   className="w-full bg-[#0B0B0D] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#FFC107]"
                 >
-                  {packages.map((p) => (
-                    <option key={p.id} value={`${p.name} - ₹${p.price}`}>
-                      {p.name} — ₹{p.price}
-                    </option>
-                  ))}
+                  {packages.map((p) => {
+                    const label = formatPackageLabel(p);
+                    return (
+                      <option key={p.id} value={label}>
+                        {label}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

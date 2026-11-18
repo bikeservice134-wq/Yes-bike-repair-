@@ -4,6 +4,7 @@ export interface ServicePackageItem {
   id: string;
   name: string;
   price: number;
+  priceLabel?: string;
   duration: string;
   category: 'Periodic' | 'Breakdown' | 'Royal Enfield';
   popular?: boolean;
@@ -30,85 +31,107 @@ export const DEFAULT_SERVICE_PACKAGES: ServicePackageItem[] = [
     id: 'pkg-basic',
     name: 'Basic General Service',
     price: 699,
+    priceLabel: '₹699',
     duration: '45 - 60 Mins',
-    category: 'Periodic',
-    items: [
-      '12-Point Safety Inspection',
-      'Chain Cleaning & Lubrication',
-      'Brake Adjustment & Cable Tuning',
-      'Tyre Pressure Calibration',
-      'Spark Plug Cleaning'
-    ]
-  },
-  {
-    id: 'pkg-standard',
-    name: 'Standard General Service',
-    price: 999,
-    duration: '60 - 90 Mins',
     category: 'Periodic',
     popular: true,
     items: [
-      'Everything in Basic Service',
-      'Engine Oil Drain & Refill Labor',
-      'Carburetor / Throttle Body Tuning',
-      'Battery & Terminal Cleaning',
-      'Clutch Play & Cable Lubrication'
+      '12-Point Doorstep Safety Inspection',
+      'Air Filter Cleaning & Intake Inspection',
+      'Brake Check, Adjustment & Cable Tuning',
+      'Chain Tensioning & Synthetic Lubrication',
+      'Dry Wash & 1-Month / 500 KM Warranty'
     ]
   },
   {
     id: 'pkg-oil',
     name: 'General Service with Engine Oil',
     price: 1349,
+    priceLabel: '₹1,349',
     duration: '60 - 90 Mins',
     category: 'Periodic',
+    popular: true,
     items: [
-      '12-Point Doorstep Periodic Check',
-      'Premium 10W30 / 20W40 Engine Oil Included',
-      'Air Filter Cleaning & Spark Plug Check',
-      'Brake Pad Degreasing & Adjustment',
-      'Chain Tensioning & Lube'
+      'Complete 12-Point Doorstep General Service',
+      'Engine Oil Replacement Included (10W-30 / 20W-40)',
+      'Air Filter Cleaning & Spark Plug Service',
+      'Front & Rear Brake Adjustment & Degreasing',
+      'Dry Wash & 1-Month / 500 KM Warranty'
     ]
   },
   {
-    id: 'pkg-comprehensive',
-    name: 'Comprehensive Full Service',
-    price: 1499,
-    duration: '90 - 120 Mins',
-    category: 'Periodic',
-    items: [
-      'Everything in Standard Service',
-      'Complete Waterless Eco Wash & Polish',
-      'Brake Caliper Deep Cleaning & Degreasing',
-      'Air Filter Cleaning / Replacement Labor',
-      'Cone Set & Fork Inspection'
-    ]
-  },
-  {
-    id: 'pkg-re',
-    name: 'Royal Enfield Precision Care',
-    price: 1499,
+    id: 'pkg-re-350-500',
+    name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil',
+    price: 2599,
+    priceLabel: '₹2,599',
     duration: '90 - 120 Mins',
     category: 'Royal Enfield',
     items: [
-      '15W50 Semi-Synthetic Oil Service',
-      'Heavy Chain Slack & Sprocket Lube',
-      'Tappet & Idle RPM Precision Check',
-      'Disc Caliper & Pad Service',
-      'Complete Chrome & Chassis Torque Check'
+      '15W-50 Semi-Synthetic Engine Oil Included',
+      'OEM Oil Filter Replacement (Classic, Hunter, Bullet, Meteor, Himalayan, 500cc)',
+      'Heavy-Duty Chain Slack Calibration & Lube',
+      'Disc Caliper Cleaning & Brake Calibration',
+      'Tappet, Idle RPM & Chassis Torque Check'
     ]
   },
   {
-    id: 'pkg-breakdown',
-    name: 'Breakdown & Emergency Rescue',
-    price: 499,
+    id: 'pkg-re-650-twin',
+    name: 'Royal Enfield 650 cc General Service with Engine Oil Twin',
+    price: 3999,
+    priceLabel: '₹3,999',
+    duration: '90 - 120 Mins',
+    category: 'Royal Enfield',
+    items: [
+      '100% Fully Synthetic 10W-50 Engine Oil Included',
+      'OEM Twin Oil Filter Replacement (Interceptor, Continental GT, Super Meteor 650)',
+      'Twin-Cylinder Throttle & Clutch Calibration',
+      'Front & Rear Disc Pad & Fluid Inspection',
+      'Chain Degreasing, Alignment & Torque Check'
+    ]
+  },
+  {
+    id: 'pkg-jump-start',
+    name: 'Jump Start Service',
+    price: 449,
+    priceLabel: '₹449',
+    duration: '30 Mins',
+    category: 'Breakdown',
+    items: [
+      'Express 30-Min Doorstep / Roadside Arrival',
+      'Safe 12V Portable Battery Jump Start (Bikes & Scooters)',
+      'Battery Voltage & Charging Coil Health Test',
+      'Battery Terminal Cleaning & Rust Removal',
+      'Starter Relay & Fuse Continuity Check'
+    ]
+  },
+  {
+    id: 'pkg-puncture',
+    name: 'Puncture Repair',
+    price: 599,
+    priceLabel: '₹599',
     duration: '30 - 45 Mins',
     category: 'Breakdown',
     items: [
-      'Rapid Doorstep / Roadside Callout',
-      'Jump Start & Battery Voltage Check',
-      'Clutch / Accelerator Cable Replacement Labor',
-      'Spark Plug / Fuse Diagnostics',
-      'Instant Puncture & Tubeless Fix'
+      'On-Spot Doorstep / Roadside Tyre Puncture Fix',
+      'Tubeless Plug / Tube Patch Repair',
+      'Valve Pin & Rim Bead Leak Check',
+      'Cold Tyre Pressure Calibration (Front & Rear)',
+      'Tread Wear & Safety Inspection'
+    ]
+  },
+  {
+    id: 'pkg-inspection',
+    name: 'Inspection & Repair',
+    price: 399,
+    priceLabel: 'Starting at ₹399',
+    duration: '30 - 60 Mins',
+    category: 'Breakdown',
+    items: [
+      'Doorstep Multi-Point Fault Diagnosis',
+      'Starting Trouble, Electrical & Braking Checks',
+      'Minor Adjustments & Cable Fixes On-Spot',
+      'Transparent Spare Parts & Repair Estimate',
+      'Zero Hidden Charges · Pay After Service'
     ]
   }
 ];

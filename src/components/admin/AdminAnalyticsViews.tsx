@@ -346,9 +346,14 @@ export const AdminServicesView: React.FC<ServicesViewProps> = ({
   };
 
   const saveEdit = (pkg: ServicePackageItem) => {
+    const nextPrice = Math.max(0, Number(editPrice) || pkg.price);
+    const isStarting = pkg.priceLabel?.toLowerCase().startsWith('starting');
     onUpdatePackage({
       ...pkg,
-      price: Math.max(0, Number(editPrice) || pkg.price),
+      price: nextPrice,
+      priceLabel: isStarting
+        ? `Starting at ₹${nextPrice.toLocaleString('en-IN')}`
+        : `₹${nextPrice.toLocaleString('en-IN')}`,
       duration: editDuration.trim() || pkg.duration
     });
     setEditingId(null);
@@ -423,9 +428,9 @@ export const AdminServicesView: React.FC<ServicesViewProps> = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-baseline gap-3">
+                  <div className="flex flex-wrap items-baseline gap-3">
                     <span className="text-2xl font-black text-[#FFC107] font-mono tabular-nums">
-                      ₹{pkg.price.toLocaleString('en-IN')}
+                      {pkg.priceLabel || `₹${pkg.price.toLocaleString('en-IN')}`}
                     </span>
                     <span className="text-xs text-zinc-400 inline-flex items-center gap-1">
                       <Clock className="w-3 h-3" /> {pkg.duration}

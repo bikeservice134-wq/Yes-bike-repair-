@@ -207,7 +207,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
   const [servicePackages, setServicePackages] = useState<ServicePackageItem[]>(() => {
     try {
-      const saved = localStorage.getItem('yesbike_admin_packages');
+      const saved = localStorage.getItem('yesbike_admin_packages_v2');
       if (saved) return JSON.parse(saved);
     } catch {
       // fallback
@@ -415,7 +415,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
   useEffect(() => {
     try {
-      localStorage.setItem('yesbike_admin_packages', JSON.stringify(servicePackages));
+      localStorage.setItem('yesbike_admin_packages_v2', JSON.stringify(servicePackages));
     } catch {
       // ignore
     }
@@ -977,15 +977,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         phone: '+91 98452 11980',
         loc: 'Indiranagar, Bengaluru',
         bike: 'Royal Enfield Classic 350',
-        svc: 'Royal Enfield Precision Care - ₹1499',
-        amt: 1499
+        svc: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+        amt: 2599
+      },
+      {
+        name: 'Siddharth Nair',
+        phone: '+91 99002 55410',
+        loc: 'Koramangala, Bengaluru',
+        bike: 'Royal Enfield Interceptor 650',
+        svc: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+        amt: 3999
       },
       {
         name: 'Sneha Rao',
         phone: '+91 97422 66311',
         loc: 'Koramangala, Bengaluru',
         bike: 'Yamaha FZ-S',
-        svc: 'General Service with Engine Oil - ₹1349',
+        svc: 'General Service with Engine Oil (₹1,349)',
         amt: 1349
       },
       {
@@ -993,16 +1001,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         phone: '+91 96118 44023',
         loc: 'Whitefield, Bengaluru',
         bike: 'TVS Jupiter 125',
-        svc: 'Basic General Service - ₹699',
+        svc: 'Basic General Service (₹699)',
         amt: 699
       },
       {
         name: 'Vikram Seth',
         phone: '+91 98860 32145',
         loc: 'HSR Layout, Bengaluru',
+        bike: 'Honda Activa 6G',
+        svc: 'Jump Start Service (₹449)',
+        amt: 449
+      },
+      {
+        name: 'Meera Menon',
+        phone: '+91 98451 77230',
+        loc: 'BTM Layout, Bengaluru',
+        bike: 'Suzuki Access 125',
+        svc: 'Puncture Repair (₹599)',
+        amt: 599
+      },
+      {
+        name: 'Rohan Deshmukh',
+        phone: '+91 97391 22018',
+        loc: 'Jayanagar, Bengaluru',
         bike: 'KTM Duke 250',
-        svc: 'Breakdown & Emergency Rescue - ₹499',
-        amt: 499
+        svc: 'Inspection & Repair (Starting at ₹399)',
+        amt: 399
       }
     ];
     const picked = mockCandidates[Math.floor(Math.random() * mockCandidates.length)];
@@ -2284,12 +2308,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                   className="bg-[#0B0B0D] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#FFC107]"
                 >
                   <option value="all">All Packages</option>
-                  <option value="Basic">Basic General</option>
-                  <option value="Standard">Standard General</option>
-                  <option value="Engine Oil">Service + Oil</option>
-                  <option value="Comprehensive">Comprehensive</option>
-                  <option value="Royal Enfield">Royal Enfield Care</option>
-                  <option value="Breakdown">Breakdown & Rescue</option>
+                  <option value="Basic General Service">Basic General Service (₹699)</option>
+                  <option value="General Service with Engine Oil">General Service with Engine Oil (₹1,349)</option>
+                  <option value="Royal Enfield 350cc">Royal Enfield 350cc-500 cc (₹2,599)</option>
+                  <option value="Royal Enfield 650">Royal Enfield 650 cc Twin (₹3,999)</option>
+                  <option value="Jump Start">Jump Start Service (₹449)</option>
+                  <option value="Puncture Repair">Puncture Repair (₹599)</option>
+                  <option value="Inspection & Repair">Inspection & Repair (Starting at ₹399)</option>
                 </select>
 
                 <input
@@ -3389,6 +3414,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
       <BookingDetailModal
         booking={selectedBooking}
         mechanics={mechanics}
+        packages={servicePackages}
         fallbackWhatsApp={businessSettings.whatsappNumber}
         onClose={() => setSelectedBooking(null)}
         onUpdateStatus={handleUpdateStatus}
