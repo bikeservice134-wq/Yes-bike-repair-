@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Lock,
-  Mail,
-  KeyRound,
   ShieldCheck,
-  ArrowRight,
+  Lock,
+  AlertTriangle,
   Eye,
   EyeOff,
-  AlertCircle,
-  CheckCircle2,
-  ShieldAlert,
-  Clock
+  ArrowLeft,
+  Loader2,
+  KeyRound,
+  CheckCircle2
 } from 'lucide-react';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 export interface AdminUser {
   email: string;
-  displayName: string;
-  role: 'super_admin' | 'dispatch_manager';
-  loginMethod: 'google' | 'passcode';
+  name: string;
+  role: 'super_admin' | 'dispatcher';
+  loginTime: string;
+  authMethod: 'google' | 'passcode';
   avatarUrl?: string;
 }
 
@@ -28,302 +27,265 @@ interface AdminLoginProps {
   onReturnToHome: () => void;
 }
 
+const AUTHORIZED_EMAILS = ['bikeservice134@gmail.com', 'admin@yesbikeservice.in'];
+
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onReturnToHome }) => {
-  const [emailInput, setEmailInput] = useState('bikeservice134@gmail.com');
-  const [passcodeInput, setPasscodeInput] = useState('');
+  const [passcode, setPasscode] = useState('');
   const [showPasscode, setShowPasscode] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  // Security: Brute-force lockout prevention
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [failedAttempts, setFailedAttempts] = useState(0);
-  const [lockoutSeconds, setLockoutSeconds] = useState(0);
+  const [lockedUntil, setLockedUntil] = useState<number | null>(null);
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
 
-  // Lockout countdown timer
   useEffect(() => {
-    if (lockoutSeconds <= 0) return;
+    if (!lockedUntil) return;
     const interval = setInterval(() => {
-      setLockoutSeconds((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          setFailedAttempts(0);
-          setErrorMsg(null);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+      const rem = Math.ceil((lockedUntil - Date.now()) / 1000);
+      if (rem <= 0) {
+        setLockedUntil(null);
+        setRemainingSeconds(0);
+        setFailedAttempts(0);
+        setError(null);
+      } else {
+        setRemainingSeconds(rem);
+      }
+    }, 500);
     return () => clearInterval(interval);
-  }, [lockoutSeconds]);
+  }, [lockedUntil]);
 
-  // Authenticate with Google Popup (Firebase Auth)
-  const handleGoogleLogin = async () => {
-    if (lockoutSeconds > 0) return;
-    setLoading(true);
-    setErrorMsg(null);
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    setIsLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      const email = (user.email || '').toLowerCase();
 
-      const adminProfile: AdminUser = {
+      if (!AUTHORIZED_EMAILS.includes(email)) {
+        setError(
+          `Access Denied: "${email}" is not an authorized administrator. Sign in with bikeservice134@gmail.com.`
+        );
+        setIsLoading(false);
+        return;
+      }
+
+      const adminSession: AdminUser = {
         email: user.email || 'bikeservice134@gmail.com',
-        displayName: user.displayName || 'Authorized Administrator',
+        name: user.displayName || 'YES BIKE Master Admin',
         role: 'super_admin',
-        loginMethod: 'google',
+        loginTime: new Date().toISOString(),
+        authMethod: 'google',
         avatarUrl: user.photoURL || undefined
       };
 
-      localStorage.setItem('yesbike_admin_session', JSON.stringify(adminProfile));
-      onLoginSuccess(adminProfile);
+      try {
+        localStorage.setItem('yesbike_admin_session', JSON.stringify(adminSession));
+      } catch {
+        // ignore storage restrictions
+      }
+      onLoginSuccess(adminSession);
     } catch (err: any) {
-      console.warn('Google popup notice:', err);
-      if (err.code === 'auth/popup-blocked') {
-        setErrorMsg('Popup was blocked by your browser. Please allow popups or use your administrator password below.');
-      } else if (err.code === 'auth/cancelled-popup-request' || err.code === 'auth/popup-closed-by-user') {
-        setErrorMsg('Google sign-in cancelled.');
+      if (err?.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in popup was closed before completing authentication.');
+      } else if (err?.code === 'auth/unauthorized-domain') {
+        setError('Domain authorization pending. Please use Admin Passcode below for instant sign-in.');
       } else {
-        setErrorMsg(err.message || 'Google authentication failed. Please enter your administrator password below.');
+        setError(err?.message || 'Google authentication failed. You can sign in with your Admin Passcode below.');
       }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  // Authenticate via Secure Admin Passcode / Password
   const handlePasscodeLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (lockoutSeconds > 0) return;
+    if (lockedUntil && Date.now() < lockedUntil) return;
 
-    setLoading(true);
-    setErrorMsg(null);
+    setError(null);
+    const trimmed = passcode.trim();
 
-    const trimmedPasscode = passcodeInput.trim();
-    const trimmedEmail = emailInput.trim();
-
-    // Secure authentication check
-    const isAuthorized =
-      trimmedPasscode === '7090' ||
-      trimmedPasscode === 'admin123' ||
-      trimmedPasscode === 'yesbike2026' ||
-      trimmedPasscode === 'admin';
-
-    if (isAuthorized) {
-      const adminProfile: AdminUser = {
-        email: trimmedEmail || 'bikeservice134@gmail.com',
-        displayName: 'YES BIKE Operations Dispatcher',
-        role: 'dispatch_manager',
-        loginMethod: 'passcode'
+    if (trimmed === '7090' || trimmed === 'admin123' || trimmed === 'yesbike2026' || trimmed === 'admin') {
+      const adminSession: AdminUser = {
+        email: 'bikeservice134@gmail.com',
+        name: 'YES BIKE Admin',
+        role: 'super_admin',
+        loginTime: new Date().toISOString(),
+        authMethod: 'passcode'
       };
-
-      localStorage.setItem('yesbike_admin_session', JSON.stringify(adminProfile));
-      setFailedAttempts(0);
-      setTimeout(() => {
-        setLoading(false);
-        onLoginSuccess(adminProfile);
-      }, 300);
+      try {
+        localStorage.setItem('yesbike_admin_session', JSON.stringify(adminSession));
+      } catch {
+        // ignore
+      }
+      onLoginSuccess(adminSession);
     } else {
-      const newAttempts = failedAttempts + 1;
-      setFailedAttempts(newAttempts);
-      setLoading(false);
-
-      if (newAttempts >= 5) {
-        setLockoutSeconds(30);
-        setErrorMsg('Security lockout triggered: 5 failed attempts. Please wait 30 seconds before retrying.');
+      const nextAttempts = failedAttempts + 1;
+      setFailedAttempts(nextAttempts);
+      if (nextAttempts >= 5) {
+        setLockedUntil(Date.now() + 30000);
+        setRemainingSeconds(30);
+        setError('Too many failed attempts. Passcode login locked for 30 seconds.');
       } else {
-        setErrorMsg(`Access denied: Invalid administrator credentials. (${5 - newAttempts} attempts remaining)`);
+        setError(`Invalid passcode. ${5 - nextAttempts} attempts remaining.`);
       }
     }
   };
 
+  const isLocked = Boolean(lockedUntil && Date.now() < lockedUntil);
+
   return (
-    <div className="min-h-screen bg-[#0D0D0D] text-white flex flex-col justify-between font-sans selection:bg-[#FFC107] selection:text-black">
-      {/* Top Brand Bar */}
-      <div className="h-16 px-6 border-b border-white/10 flex items-center justify-between">
+    <div className="min-h-screen bg-[#0B0B0D] text-white flex flex-col justify-between p-4 sm:p-6 font-sans antialiased selection:bg-[#FFC107] selection:text-black">
+      {/* Top Bar */}
+      <div className="w-full max-w-5xl mx-auto flex items-center justify-between pt-2">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#FFC107] text-black font-black flex items-center justify-center text-lg shadow-md shadow-[#FFC107]/20">
+          <div className="w-9 h-9 rounded-lg bg-[#FFC107] text-black font-black flex items-center justify-center text-sm tracking-tight">
             YB
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-white text-base tracking-wide">YES BIKE SERVICE</span>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#FFC107]/15 text-[#FFC107] border border-[#FFC107]/30 uppercase tracking-wider">
-                Admin Gateway
-              </span>
-            </div>
-            <p className="text-[11px] text-[#B0B0B0]">Bengaluru Central Dispatch Center</p>
+          <div className="leading-tight">
+            <span className="font-extrabold text-white text-sm tracking-wide block">YES BIKE SERVICE</span>
+            <span className="text-[11px] text-zinc-400">Bengaluru Operations Console</span>
           </div>
         </div>
 
         <button
+          type="button"
           onClick={onReturnToHome}
-          className="text-xs font-semibold text-[#B0B0B0] hover:text-white flex items-center gap-1.5 transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#141417] hover:bg-zinc-800 border border-white/10 text-xs font-semibold text-zinc-300 hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC107]"
         >
-          <span>Return to Website</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5 text-[#FFC107]" />
+          <span>Back to Website</span>
         </button>
       </div>
 
-      {/* Center Login Box */}
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-[#151515] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-          {/* Subtle gold halo glow */}
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[#FFC107]/5 rounded-full blur-3xl pointer-events-none"></div>
-
+      {/* Main Auth Container */}
+      <div className="w-full max-w-md mx-auto my-8">
+        <div className="bg-[#141417] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
           {/* Header */}
-          <div className="text-center space-y-2 mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-[#1A1A1A] border border-[#FFC107]/40 text-[#FFC107] flex items-center justify-center mx-auto shadow-lg shadow-[#FFC107]/10">
-              <ShieldCheck className="w-7 h-7 stroke-[2.2]" />
+          <div className="space-y-2">
+            <div className="w-11 h-11 rounded-xl bg-[#FFC107]/10 border border-[#FFC107]/25 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-[#FFC107]" />
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              ADMIN CONTROL PANEL
+              Admin Sign In
             </h1>
-            <p className="text-xs text-[#B0B0B0]">
-              Secure authentication gateway for authorized dispatch managers and technicians.
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Sign in with your authorized workspace account or dispatch passcode to manage bookings, mechanics, and invoices.
             </p>
           </div>
 
-          {/* Security Lockout Banner */}
-          {lockoutSeconds > 0 && (
-            <div className="mb-5 p-3.5 rounded-xl bg-[#EF4444]/15 border border-[#EF4444]/40 flex items-center gap-3 text-xs text-[#EF4444]">
-              <Clock className="w-5 h-5 shrink-0 animate-pulse" />
-              <div>
-                <strong className="block font-bold">Security Lockout Active</strong>
-                <span>Try again in {lockoutSeconds} seconds.</span>
-              </div>
-            </div>
-          )}
-
-          {/* Error Message */}
-          {errorMsg && lockoutSeconds <= 0 && (
-            <div className="mb-5 p-3 rounded-xl bg-[#EF4444]/15 border border-[#EF4444]/30 flex items-start gap-2.5 text-xs text-[#EF4444]">
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-              <div className="leading-relaxed flex-1">{errorMsg}</div>
-            </div>
-          )}
-
-          {/* Method 1: Google Sign-In */}
-          <div className="space-y-4">
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              disabled={loading || lockoutSeconds > 0}
-              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-[#1A1A1A] hover:bg-white/10 border border-white/15 text-white text-xs sm:text-sm font-bold transition-all shadow-md hover:border-[#FFC107]/50 active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+          {/* Error Notice */}
+          {error && (
+            <div
+              role="alert"
+              className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-xs text-red-300"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {/* Google Sign-In */}
+          <button
+            type="button"
+            disabled={isLoading}
+            onClick={handleGoogleSignIn}
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-white text-zinc-950 hover:bg-zinc-100 font-bold text-sm transition-colors cursor-pointer disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC107] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141417]"
+          >
+            {isLoading ? (
+              <Loader2 className="w-4 h-4 animate-spin text-zinc-900" />
+            ) : (
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fill="#4285F4"
-                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 />
                 <path
                   fill="#34A853"
-                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
                 />
                 <path
                   fill="#FBBC05"
-                  d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
                 />
                 <path
                   fill="#EA4335"
-                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              <span>Sign in with Google ({emailInput})</span>
-            </button>
+            )}
+            <span>Continue with Google</span>
+          </button>
 
-            {/* Divider */}
-            <div className="relative flex items-center justify-center my-4">
-              <div className="border-t border-white/10 w-full"></div>
-              <span className="bg-[#151515] px-3 text-[11px] font-bold text-[#B0B0B0] uppercase tracking-wider relative">
-                Or Admin Password
-              </span>
-            </div>
-
-            {/* Method 2: Secure Password Form */}
-            <form onSubmit={handlePasscodeLogin} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-[#B0B0B0] mb-1.5">
-                  Admin Email / Dispatch ID
-                </label>
-                <div className="relative">
-                  <Mail className="w-4 h-4 text-[#B0B0B0] absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="email"
-                    required
-                    autoComplete="username"
-                    disabled={lockoutSeconds > 0}
-                    value={emailInput}
-                    onChange={(e) => setEmailInput(e.target.value)}
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FFC107] disabled:opacity-50"
-                    placeholder="admin@yesbikeservice.in"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold text-[#B0B0B0]">
-                    Administrator Password
-                  </label>
-                  <span className="text-[10px] text-[#22C55E] flex items-center gap-1 font-semibold">
-                    <CheckCircle2 className="w-3 h-3" /> Encrypted
-                  </span>
-                </div>
-                <div className="relative">
-                  <KeyRound className="w-4 h-4 text-[#B0B0B0] absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type={showPasscode ? 'text' : 'password'}
-                    required
-                    autoComplete="current-password"
-                    disabled={lockoutSeconds > 0}
-                    value={passcodeInput}
-                    onChange={(e) => setPasscodeInput(e.target.value)}
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl pl-9 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FFC107] disabled:opacity-50"
-                    placeholder="Enter admin password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPasscode(!showPasscode)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#B0B0B0] hover:text-white"
-                  >
-                    {showPasscode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={loading || !passcodeInput.trim() || lockoutSeconds > 0}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFC107] text-black text-xs sm:text-sm font-black hover:bg-[#FFC107]/90 transition-all shadow-lg shadow-[#FFC107]/15 active:scale-[0.99] disabled:opacity-50 cursor-pointer mt-3"
-              >
-                <Lock className="w-4 h-4" />
-                <span>{loading ? 'Verifying Credentials...' : 'Sign In to Operations Panel'}</span>
-              </button>
-            </form>
+          {/* Divider */}
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+              or passcode
+            </span>
+            <div className="flex-1 h-px bg-white/10" />
           </div>
 
-          {/* Security Note Footer */}
-          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-[#B0B0B0]">
-            <span className="flex items-center gap-1.5 text-[#22C55E]">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>TLS 256-Bit Encrypted</span>
-            </span>
+          {/* Passcode Form */}
+          <form onSubmit={handlePasscodeLogin} className="space-y-4">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label htmlFor="admin-passcode" className="text-xs font-semibold text-zinc-300">
+                  Admin Passcode
+                </label>
+                <span className="text-[11px] text-zinc-500 font-mono">bikeservice134@gmail.com</span>
+              </div>
+
+              <div className="relative">
+                <KeyRound className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  id="admin-passcode"
+                  type={showPasscode ? 'text' : 'password'}
+                  required
+                  disabled={isLocked}
+                  autoComplete="current-password"
+                  placeholder="Enter admin passcode"
+                  value={passcode}
+                  onChange={(e) => setPasscode(e.target.value)}
+                  className="w-full bg-[#0B0B0D] border border-white/10 rounded-xl pl-10 pr-11 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#FFC107] focus:ring-1 focus:ring-[#FFC107] disabled:opacity-50 font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasscode(!showPasscode)}
+                  aria-label={showPasscode ? 'Hide passcode' : 'Show passcode'}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-zinc-500 hover:text-white cursor-pointer"
+                >
+                  {showPasscode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
             <button
-              onClick={onReturnToHome}
-              className="text-[#B0B0B0] hover:text-[#FFC107] underline underline-offset-2 transition-colors"
+              type="submit"
+              disabled={isLocked || !passcode.trim()}
+              className="w-full py-3 rounded-xl bg-[#FFC107] hover:bg-amber-300 text-black font-black text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC107] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141417]"
             >
-              Exit to Homepage
+              <Lock className="w-4 h-4" />
+              <span>{isLocked ? `Locked (${remainingSeconds}s)` : 'Unlock Admin Panel'}</span>
             </button>
+          </form>
+
+          {/* Authorized Capabilities Footer */}
+          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-zinc-500">
+            <span className="inline-flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              Real-time Firestore sync
+            </span>
+            <span>Bengaluru Dispatch Hub</span>
           </div>
         </div>
       </div>
 
-      {/* Footer Info */}
-      <div className="h-12 border-t border-white/5 px-6 flex items-center justify-between text-xs text-[#B0B0B0]/60">
-        <span>YES BIKE SERVICE • Bengaluru Fleet Dispatch v2.4</span>
-        <span>Secure Operations Gateway</span>
+      {/* Footer */}
+      <div className="w-full max-w-5xl mx-auto text-center text-[11px] text-zinc-600 pb-2">
+        YES BIKE SERVICE · Bengaluru Doorstep Operations
       </div>
     </div>
   );
