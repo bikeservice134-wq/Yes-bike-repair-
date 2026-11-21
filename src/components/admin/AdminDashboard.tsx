@@ -207,7 +207,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
   const [servicePackages, setServicePackages] = useState<ServicePackageItem[]>(() => {
     try {
-      const saved = localStorage.getItem('yesbike_admin_packages_v2');
+      const saved = localStorage.getItem('yesbike_admin_packages_v5');
       if (saved) return JSON.parse(saved);
     } catch {
       // fallback
@@ -415,7 +415,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
 
   useEffect(() => {
     try {
-      localStorage.setItem('yesbike_admin_packages_v2', JSON.stringify(servicePackages));
+      localStorage.setItem('yesbike_admin_packages_v5', JSON.stringify(servicePackages));
     } catch {
       // ignore
     }
@@ -977,8 +977,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         phone: '+91 98452 11980',
         loc: 'Indiranagar, Bengaluru',
         bike: 'Royal Enfield Classic 350',
-        svc: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
-        amt: 2599
+        svc: 'Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+        amt: 2399
       },
       {
         name: 'Siddharth Nair',
@@ -2310,7 +2310,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                   <option value="all">All Packages</option>
                   <option value="Basic General Service">Basic General Service (₹699)</option>
                   <option value="General Service with Engine Oil">General Service with Engine Oil (₹1,349)</option>
-                  <option value="Royal Enfield 350cc">Royal Enfield 350cc-500 cc (₹2,599)</option>
+                  <option value="Royal Enfield 350cc">Royal Enfield 350cc–500cc with Engine Oil (₹2,399/-)</option>
                   <option value="Royal Enfield 650">Royal Enfield 650 cc Twin (₹3,999)</option>
                   <option value="Jump Start">Jump Start Service (₹449)</option>
                   <option value="Puncture Repair">Puncture Repair (₹599)</option>

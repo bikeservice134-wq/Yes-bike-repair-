@@ -215,22 +215,23 @@ export const parseTime12Hour = (hhmm: string): { hour: number; minute: string; p
 
 export const ROYAL_ENFIELD_CATALOG = [
   {
-    categoryTitle: "350cc–450cc Models",
-    rangeBadge: "350cc–450cc",
-    serviceName: "General Service + Engine Oil",
-    price: "₹2,599",
+    categoryTitle: "350cc–500cc Models",
+    rangeBadge: "350cc–500cc",
+    serviceName: "Royal Enfield 350cc–500cc General Service with Engine Oil",
+    price: "₹2,399/-",
     originalPrice: "₹2,999",
-    savings: "Save ₹400 (13% OFF)",
-    oilSpec: "Includes 15W-50 Semi-Synthetic Engine Oil & OEM Oil Filter",
+    savings: "Save ₹600 (20% OFF)",
+    oilSpec: "Includes Engine Oil Replacement & Oil Filter Cleaning / Replacement",
     features: [
-      "Doorstep Service at Home or Office across Bengaluru",
-      "Branded 15W-50 Semi-Synthetic Engine Oil (1.5L - 2.1L Refill)",
-      "New OEM Engine Oil Filter & Crush Washer Replacement",
-      "Spark Plug Cleaning, De-Carbonizing & Electrode Gap Calibration",
-      "Air Filter Cleaning & Intake Duct Throttle Inspection",
-      "Heavy-Duty Chain Slack Calibration & Synthetic Chain Lubrication",
-      "Front & Rear Disc/Drum Brake Pad Inspection & Caliper Tuning",
-      "500 km or 1-Month Service Warranty"
+      "Engine Oil Replacement",
+      "Oil Filter Cleaning / Replacement",
+      "Air Filter Cleaning & Spark Plug Cleaning",
+      "Brake Inspection & Adjustment",
+      "Clutch Adjustment & Cable & Lever Adjustment",
+      "Chain Cleaning & Lubrication & Chain Tension Adjustment",
+      "Battery Check-up & Electrical Check-up",
+      "Nut & Bolt Tightening, Engine Leakage & Full Bike Inspection",
+      "General Lubrication & Dry Wash"
     ],
     models: [
       { number: 1, name: "Classic 350", tag: "Iconic Thumper", displacement: "349cc J-Series", popular: true },
@@ -243,20 +244,19 @@ export const ROYAL_ENFIELD_CATALOG = [
   {
     categoryTitle: "650cc Models",
     rangeBadge: "648cc Parallel-Twin",
-    serviceName: "General Service + Engine Oil",
+    serviceName: "Royal Enfield 650 cc General Service with Engine Oil Twin",
     price: "₹3,999",
     originalPrice: "₹4,999",
     savings: "Save ₹1,000 (20% OFF)",
-    oilSpec: "Includes 100% Fully Synthetic 10W-50 Oil & Twin Filter Kit",
+    oilSpec: "16-Point Service Includes Engine Oil Replacement & Twin Filter Care",
     features: [
-      "Doorstep Service at Home or Office across Bengaluru",
-      "Twin-Cylinder Fully Synthetic 10W-50 Engine Oil Refill (3.1L)",
-      "OEM Spin-On Oil Filter & Copper Drain Washer Replacement",
-      "Twin Spark Plugs Inspection, Gap Calibration & Testing",
-      "Twin Throttle Body Synchronization & Cable Free Play Check",
-      "High-Performance O-Ring Chain Degrease & Synthetic Wax Lube",
-      "Brembo/ByBre Twin Caliper Brake Calibration & Fluid Check",
-      "500 km or 1-Month Service Warranty"
+      "Engine Oil Replacement & Oil Filter Cleaning / Replacement",
+      "Air Filter Cleaning & Spark Plug Cleaning",
+      "Brake Inspection & Adjustment & Clutch Adjustment",
+      "Chain Cleaning & Lubrication & Chain Tension Adjustment",
+      "Battery Check-up, Electrical Check-up & Cable & Lever Adjustment",
+      "Nut & Bolt Tightening & Engine Leakage Inspection",
+      "General Lubrication, Full Bike Inspection & Dry Wash"
     ],
     models: [
       { number: 6, name: "Continental GT 650", tag: "Cafe Racer Twin", displacement: "648cc Twin", popular: true },
@@ -268,8 +268,8 @@ export const ROYAL_ENFIELD_CATALOG = [
 const QUICK_SERVICE_OPTIONS = [
   { id: "Basic General Service - ₹699", name: "Basic General Service", price: "₹699", note: "12-point doorstep service, dry wash & warranty", badge: "Most Popular" },
   { id: "General Service with Engine Oil - ₹1,349", name: "General Service with Engine Oil", price: "₹1,349", note: "Doorstep service, 500 Kms/1 Mo warranty, 12 checks + oil", badge: "Best Value" },
-  { id: "Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)", name: "Royal Enfield 350cc-500 cc General Service with Engine Oil", price: "₹2,599", note: "15W-50 Semi-Synthetic Oil + OEM Filter for Classic, Hunter, Bullet, Meteor, Himalayan, 500cc", badge: "RE 350-500" },
-  { id: "Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)", name: "Royal Enfield 650 cc General Service with Engine Oil Twin", price: "₹3,999", note: "100% Fully Synthetic 10W-50 Oil + Twin Filter for Continental GT, Interceptor, Super Meteor 650", badge: "RE 650 Twins" },
+  { id: "Royal Enfield 350cc–500cc General Service with Engine Oil - ₹2,399", name: "Royal Enfield 350cc–500cc General Service with Engine Oil", price: "₹2,399/-", note: "16-Point Service: Engine Oil & Filter, Air Filter, Spark Plug, Brake, Clutch, Chain, Battery & Dry Wash", badge: "RE 350-500" },
+  { id: "Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)", name: "Royal Enfield 650 cc General Service with Engine Oil Twin", price: "₹3,999", note: "16-Point Service: Engine Oil & Filter, Air Filter, Spark Plug, Brake, Clutch, Chain, Battery & Dry Wash", badge: "RE 650 Twins" },
   { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
   { id: "Inspection & Repair - ₹399", name: "Inspection & Repair", price: "Starting at ₹399", note: "Professional vehicle inspection, fault diagnosis & repair advice", badge: "Starting ₹399" },
@@ -560,243 +560,334 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
     ]
   },
   'Royal Enfield Service (350cc–450cc)': {
-    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
       '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
     ]
   },
   'Royal Enfield Service (350cc–450cc) - ₹2,599': {
-    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
-      '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash'
     ]
   },
   'Royal Enfield Service (350cc–450cc) - ₹2,399': {
-    title: 'Royal Enfield 350cc–450cc General Service + Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
-      '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash'
     ]
   },
   'Royal Enfield Service (650cc)': {
-    title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
+    title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
       '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
     ]
   },
   'Royal Enfield Service (650cc) - ₹3,999': {
-    title: 'Royal Enfield 650 Twins General Service + Engine Oil (₹3,999)',
+    title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
       '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
+    ]
+  },
+  'Royal Enfield 350cc–500cc General Service with Engine Oil': {
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
+    steps: [
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
+      '✓ Air Filter Cleaning',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
+    ]
+  },
+  'Royal Enfield 350cc–500cc General Service with Engine Oil - ₹2,399': {
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
+    steps: [
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
+      '✓ Air Filter Cleaning',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
+    ]
+  },
+  'Royal Enfield 350cc–500cc General Service': {
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
+    steps: [
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
+      '✓ Air Filter Cleaning',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
+    ]
+  },
+  'Royal Enfield 350cc–500cc General Service - ₹2,399': {
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
+    steps: [
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
+      '✓ Air Filter Cleaning',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash',
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil': {
-    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
-      '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)': {
-    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
-      '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash'
     ]
   },
   'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,399)': {
-    title: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
+    title: 'Royal Enfield 350cc–500cc General Service with Engine Oil — ₹2,399/-',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
-      '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (15W-50 Semi-Synthetic Oil + Brand New OEM Filter Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
+      '✓ Dry Wash'
     ]
   },
   'Royal Enfield 650 cc General Service with Engine Oil Twin': {
     title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
       '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
     ]
   },
   'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)': {
     title: 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
     steps: [
-      '🏍️ Professional Bike & Scooter Servicing at Your Doorstep',
-      '✅ Doorstep Service Available at Home & Office across Bengaluru',
-      '🛡️ 500 KM or 1 Month Service Warranty',
-      '🔧 Recommended Service Interval: Every 3,000 KM or 3 Months',
+      '🏍️ YES BIKE SERVICE — Doorstep Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)',
+      '✅ Service Includes (16 Points):',
+      '✓ Engine Oil Replacement',
+      '✓ Oil Filter Cleaning / Replacement',
       '✓ Air Filter Cleaning',
-      '✓ Battery Voltage Check',
-      '✓ Brake Inspection & Servicing (Brembo / ByBre Twin Calipers)',
-      '✓ Cables & Levers Adjustment',
-      '✓ Chain Tension Check & Adjustment',
-      '✓ Clutch Cable Greasing',
+      '✓ Spark Plug Cleaning',
+      '✓ Brake Inspection & Adjustment',
+      '✓ Clutch Adjustment',
+      '✓ Chain Cleaning & Lubrication',
+      '✓ Chain Tension Adjustment',
+      '✓ Battery Check-up',
+      '✓ Electrical Check-up',
+      '✓ Cable & Lever Adjustment',
+      '✓ Nut & Bolt Tightening',
+      '✓ Engine Leakage Inspection',
+      '✓ General Lubrication',
+      '✓ Full Bike Inspection',
       '✓ Dry Wash',
-      '✓ Electrical System Check-up',
-      '✓ Engine Oil Replacement (100% Fully Synthetic 10W-50 3.1L + Twin Filter Kit Included)',
-      '✓ Greasing & Lubrication',
-      '✓ Engine Oil Leakage Check',
-      '✓ Spark Plug Cleaning & Inspection (Twin Plugs Calibration)',
-      '• Book Your Bike Service Today!',
-      '• YES BIKE SERVICE — Professional Bike Care at Your Doorstep',
-      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ Service Warranty'
+      '• 🏠 Home & Office Service | 🔧 Expert Mechanics | 🛡️ 500 KM / 1 Month Warranty'
     ]
   }
 };
@@ -1181,13 +1272,8 @@ Sit back and relax. We've got your bike covered!`;
     try {
       const savedBookings = localStorage.getItem('yesbike_admin_bookings');
       const list = savedBookings ? JSON.parse(savedBookings) : [];
-      const serviceAmount = details.service.includes('1499')
-        ? 1499
-        : details.service.includes('999')
-        ? 999
-        : details.service.includes('499')
-        ? 499
-        : 699;
+      const priceMatch = details.service.replace(/,/g, '').match(/₹\s*(\d+)/);
+      const serviceAmount = priceMatch ? parseInt(priceMatch[1], 10) : 699;
       const newBookingRecord = {
         id: details.bookingId,
         customerName: details.fullName,
@@ -1346,7 +1432,8 @@ Sit back and relax. We've got your bike covered!`;
     e.preventDefault();
     const cleanPhone = heroPhone.trim().replace(/\D/g, '');
     if (cleanPhone.length !== 10) {
-      const input = document.querySelector('input[name="phone"]') as HTMLInputElement;
+      const formEl = e.currentTarget;
+      const input = formEl.querySelector('input[name="phone"]') as HTMLInputElement;
       if (input) {
         input.focus();
         input.reportValidity?.();
@@ -1808,10 +1895,10 @@ Sit back and relax. We've got your bike covered!`;
                       <div className="flex items-center gap-2 min-w-0">
                         <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9" />
                         <div className="min-w-0">
-                          <h2 className="text-sm sm:text-base font-black text-gray-900 dark:text-white tracking-tight leading-none truncate">
-                            Quick Booking
+                          <h2 className="text-xs sm:text-sm font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                            Quick &amp; Easy Booking
                           </h2>
-                          <p className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium truncate mt-0.5">Doorstep service across Bengaluru</p>
+                          <p className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium leading-tight mt-0.5">Doorstep Bike &amp; Scooter Service Across Bengaluru.</p>
                         </div>
                       </div>
                       <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
@@ -3146,7 +3233,7 @@ Sit back and relax. We've got your bike covered!`;
               </div>
             </div>
 
-          {/* CATEGORY 3: ROYAL ENFIELD SPECIALIZED PACKAGES (₹2,599 & ₹3,999) */}
+          {/* CATEGORY 3: ROYAL ENFIELD SPECIALIZED PACKAGES (₹2,399/- & ₹3,999) */}
           <div className="pt-2">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-t border-gray-200/80 dark:border-zinc-800 pt-8 sm:pt-10">
                 <div>
@@ -3164,21 +3251,21 @@ Sit back and relax. We've got your bike covered!`;
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
-                {/* Package 1: Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599) */}
+                {/* Package 1: Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-) */}
                 <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/60 dark:border-amber-500/35 hover:border-amber-500 dark:hover:border-amber-400 p-6 sm:p-7 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/15 transition-all duration-300 relative group overflow-hidden">
                   <div className="flex items-center justify-between gap-2 mb-3.5">
                     <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
                       <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                      <span>350cc–500 cc Singles (J-Series &amp; UCE)</span>
+                      <span>350cc–500cc Singles (J-Series &amp; UCE)</span>
                     </span>
                     <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-extrabold text-[11px] border border-emerald-500/20">
-                      Save ₹400 (13% OFF)
+                      Save ₹600 (20% OFF)
                     </span>
                   </div>
 
                   <div className="mb-3">
                     <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight">
-                      Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)
+                      Royal Enfield 350cc–500cc General Service with Engine Oil
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1.5 font-medium leading-relaxed">
                       Specialized doorstep maintenance for Classic 350, Hunter 350, Bullet 350, Meteor 350, Himalayan, Classic 500 &amp; Bullet 500
@@ -3187,14 +3274,12 @@ Sit back and relax. We've got your bike covered!`;
 
                   {/* Price Display */}
                   <div className="flex flex-wrap items-baseline gap-2.5 mb-4 pb-3.5 border-b border-gray-100 dark:border-zinc-800">
-                    <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹2,599</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-400">Service Price:</span>
+                    <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹2,399/-</span>
                     <span className="text-base font-semibold text-gray-400 line-through">₹2,999</span>
-                    <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2.5 py-1 rounded-lg border border-amber-400/30">
-                      🛢️ 15W-50 Semi-Synthetic Oil + OEM Filter Included
-                    </span>
                   </div>
 
-                  {/* Highlights: Doorstep Available, Warranty, Interval, Oil Spec */}
+                  {/* Highlights */}
                   <div className="grid grid-cols-2 gap-2 mb-4">
                     <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
                       <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Location</span>
@@ -3204,42 +3289,37 @@ Sit back and relax. We've got your bike covered!`;
                       <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Warranty</span>
                       <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛡️ 500 KM / 1 Mo Warranty</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                      <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Interval</span>
-                      <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🔧 Every 3,000 KM / 3 Mo</span>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-400/5 border border-amber-500/20 text-xs">
-                      <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400 block mb-0.5">Engine Oil &amp; Filter</span>
-                      <span className="font-extrabold text-gray-900 dark:text-white leading-tight block">🛢️ 15W-50 Semi-Synth + OEM Filter</span>
-                    </div>
                   </div>
 
-                  {/* What's Included in the Service (12 Core Points) */}
+                  {/* Service Includes (16 Points) */}
                   <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
                     <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
-                      <span>What's Included in the Service?</span>
-                      <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">12 Inspection Points</span>
+                      <span>Service Includes</span>
+                      <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">16-Point Care</span>
                     </div>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2 text-xs text-gray-700 dark:text-zinc-300">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 text-xs text-gray-700 dark:text-zinc-300">
                       {[
-                        { name: "Air Filter Cleaning", isOil: false },
-                        { name: "Battery Voltage Check", isOil: false },
-                        { name: "Brake Inspection & Servicing", isOil: false },
-                        { name: "Cables & Levers Adjustment", isOil: false },
-                        { name: "Chain Tension Check & Adjustment", isOil: false },
-                        { name: "Clutch Cable Greasing", isOil: false },
-                        { name: "Dry Wash", isOil: false },
-                        { name: "Electrical System Check-up", isOil: false },
-                        { name: "Engine Oil Replacement", isOil: true, note: "15W-50 Semi-Synth" },
-                        { name: "Greasing & Lubrication", isOil: false },
-                        { name: "Engine Oil Leakage Check", isOil: false },
-                        { name: "Spark Plug Cleaning & Inspection", isOil: false },
+                        { name: "Engine Oil Replacement", highlight: true },
+                        { name: "Oil Filter Cleaning / Replacement", highlight: true },
+                        { name: "Air Filter Cleaning", highlight: false },
+                        { name: "Spark Plug Cleaning", highlight: false },
+                        { name: "Brake Inspection & Adjustment", highlight: false },
+                        { name: "Clutch Adjustment", highlight: false },
+                        { name: "Chain Cleaning & Lubrication", highlight: false },
+                        { name: "Chain Tension Adjustment", highlight: false },
+                        { name: "Battery Check-up", highlight: false },
+                        { name: "Electrical Check-up", highlight: false },
+                        { name: "Cable & Lever Adjustment", highlight: false },
+                        { name: "Nut & Bolt Tightening", highlight: false },
+                        { name: "Engine Leakage Inspection", highlight: false },
+                        { name: "General Lubrication", highlight: false },
+                        { name: "Full Bike Inspection", highlight: false },
+                        { name: "Dry Wash", highlight: false },
                       ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-500' : 'text-emerald-500'}`} />
-                          <span className={`text-[12px] leading-snug ${item.isOil ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
+                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.highlight ? 'text-amber-500' : 'text-emerald-500'}`} />
+                          <span className={`text-[12px] leading-snug ${item.highlight ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
                             {item.name}
-                            {item.note && <span className="ml-1 text-[10px] text-amber-700 dark:text-amber-400 font-bold">({item.note})</span>}
                           </span>
                         </li>
                       ))}
@@ -3258,8 +3338,8 @@ Sit back and relax. We've got your bike covered!`;
                           type="button"
                           onClick={() => {
                             setSelectedPackage({
-                              name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
-                              price: '₹2,599'
+                              name: 'Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+                              price: '₹2,399/-'
                             });
                             setModalBrand('Royal Enfield');
                             setModalModel(model);
@@ -3274,14 +3354,14 @@ Sit back and relax. We've got your bike covered!`;
                     </div>
                   </div>
 
-                  {/* Actions: Primary CTA, WhatsApp, & Checklist */}
+                  {/* Actions */}
                   <div className="mt-auto flex flex-col gap-2.5 pt-3.5 border-t border-gray-100 dark:border-zinc-800">
                     <button
                       type="button"
                       onClick={() => {
                         setSelectedPackage({
-                          name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)',
-                          price: '₹2,599'
+                          name: 'Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)',
+                          price: '₹2,399/-'
                         });
                         setModalBrand('Royal Enfield');
                         setModalModel('Classic 350');
@@ -3294,11 +3374,11 @@ Sit back and relax. We've got your bike covered!`;
                           <Bike className="w-4.5 h-4.5 text-zinc-950" />
                         </span>
                         <span className="font-black text-xs sm:text-sm md:text-base tracking-tight truncate text-left">
-                          Book Royal Enfield 350cc-500 cc Service now
+                          Book Royal Enfield 350cc–500cc Service
                         </span>
                       </span>
                       <span className="flex items-center gap-1.5 bg-zinc-950 text-amber-400 font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shrink-0 shadow-inner group-hover/btn:bg-zinc-900 transition-colors">
-                        <span>₹2,599</span>
+                        <span>₹2,399/-</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                       </span>
                     </button>
@@ -3314,13 +3394,13 @@ Sit back and relax. We've got your bike covered!`;
                     <button
                       type="button"
                       onClick={() => {
-                        setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Royal Enfield 350cc-500 cc General Service with Engine Oil']);
+                        setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Royal Enfield 350cc–500cc General Service with Engine Oil']);
                         setIsTechnicalDetailsOpen(true);
                       }}
                       className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
                     >
                       <ClipboardList className="w-4 h-4 text-amber-500" />
-                      <span>View Full Service Details &amp; Checklist (12 Points)</span>
+                      <span>View Service Includes &amp; Checklist (16 Points)</span>
                     </button>
                   </div>
                 </div>
@@ -3375,32 +3455,35 @@ Sit back and relax. We've got your bike covered!`;
                     </div>
                   </div>
 
-                  {/* What's Included in the Service (12 Core Points) */}
+                  {/* Service Includes (16 Points) */}
                   <div className="mb-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800">
                     <div className="text-[11px] font-black uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-2.5 flex items-center justify-between">
-                      <span>What's Included in the Service?</span>
-                      <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">12 Inspection Points</span>
+                      <span>Service Includes</span>
+                      <span className="text-amber-600 dark:text-amber-400 font-extrabold normal-case text-[11px]">16-Point Care</span>
                     </div>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2 text-xs text-gray-700 dark:text-zinc-300">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 text-xs text-gray-700 dark:text-zinc-300">
                       {[
-                        { name: "Air Filter Cleaning", isOil: false },
-                        { name: "Battery Voltage Check", isOil: false },
-                        { name: "Brake Inspection & Servicing", isOil: false, note: "Brembo / ByBre" },
-                        { name: "Cables & Levers Adjustment", isOil: false },
-                        { name: "Chain Tension Check & Adjustment", isOil: false },
-                        { name: "Clutch Cable Greasing", isOil: false },
-                        { name: "Dry Wash", isOil: false },
-                        { name: "Electrical System Check-up", isOil: false },
-                        { name: "Engine Oil Replacement", isOil: true, note: "100% Synthetic 10W-50 3.1L" },
-                        { name: "Greasing & Lubrication", isOil: false },
-                        { name: "Engine Oil Leakage Check", isOil: false },
-                        { name: "Spark Plug Cleaning & Inspection", isOil: false, note: "Twin Plugs" },
+                        { name: "Engine Oil Replacement", highlight: true },
+                        { name: "Oil Filter Cleaning / Replacement", highlight: true },
+                        { name: "Air Filter Cleaning", highlight: false },
+                        { name: "Spark Plug Cleaning", highlight: false },
+                        { name: "Brake Inspection & Adjustment", highlight: false },
+                        { name: "Clutch Adjustment", highlight: false },
+                        { name: "Chain Cleaning & Lubrication", highlight: false },
+                        { name: "Chain Tension Adjustment", highlight: false },
+                        { name: "Battery Check-up", highlight: false },
+                        { name: "Electrical Check-up", highlight: false },
+                        { name: "Cable & Lever Adjustment", highlight: false },
+                        { name: "Nut & Bolt Tightening", highlight: false },
+                        { name: "Engine Leakage Inspection", highlight: false },
+                        { name: "General Lubrication", highlight: false },
+                        { name: "Full Bike Inspection", highlight: false },
+                        { name: "Dry Wash", highlight: false },
                       ].map((item, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.isOil ? 'text-amber-500' : 'text-emerald-500'}`} />
-                          <span className={`text-[12px] leading-snug ${item.isOil ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
+                          <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${item.highlight ? 'text-amber-500' : 'text-emerald-500'}`} />
+                          <span className={`text-[12px] leading-snug ${item.highlight ? 'font-black text-gray-900 dark:text-white' : 'font-medium'}`}>
                             {item.name}
-                            {item.note && <span className="ml-1 text-[10px] text-amber-700 dark:text-amber-400 font-bold">({item.note})</span>}
                           </span>
                         </li>
                       ))}
@@ -3481,7 +3564,7 @@ Sit back and relax. We've got your bike covered!`;
                       className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-1.5 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5"
                     >
                       <ClipboardList className="w-4 h-4 text-amber-500" />
-                      <span>View Full Service Details &amp; Checklist (12 Points)</span>
+                      <span>View Full Service Details &amp; Checklist (16 Points)</span>
                     </button>
                   </div>
                 </div>
@@ -3817,7 +3900,308 @@ Sit back and relax. We've got your bike covered!`;
         </div>
       </section>
 
+      {/* DEDICATED QUICK & EASY BOOKING SECTION (COMPACT) */}
+      <section id="quick-booking" className="py-8 sm:py-10 relative bg-gray-50 dark:bg-zinc-950 overflow-hidden border-t border-gray-200/80 dark:border-white/5 section-auto-contain">
+        <div className="max-w-3xl mx-auto px-4 relative z-10">
+          <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-lg border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+            {/* Compact Header */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-gray-100 dark:border-zinc-800">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9 shrink-0" />
+                <div className="min-w-0">
+                  <h2 className="text-sm sm:text-base font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                    Quick &amp; Easy Booking
+                  </h2>
+                  <p className="text-[11px] sm:text-xs text-gray-500 dark:text-zinc-400 font-medium leading-tight mt-0.5">
+                    Doorstep Bike &amp; Scooter Service Across Bengaluru.
+                  </p>
+                </div>
+              </div>
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                <span>Mechanic Available Today</span>
+              </div>
+            </div>
 
+            <form className="space-y-2.5 relative z-10" onSubmit={handleBookService}>
+              {/* Vehicle Type Switch + Popular Areas Quick Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800/90 rounded-lg border border-gray-200/80 dark:border-zinc-700/60 w-full sm:w-52">
+                  <button
+                    type="button"
+                    onClick={() => setHeroVehicle('Bike')}
+                    className={`flex-1 text-xs font-bold py-1.5 min-h-[30px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                      heroVehicle === 'Bike'
+                        ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
+                        : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <span className="text-sm">🏍️</span> <span>Bike</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHeroVehicle('Scooter')}
+                    className={`flex-1 text-xs font-bold py-1.5 min-h-[30px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                      heroVehicle === 'Scooter'
+                        ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
+                        : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <span className="text-sm">🛵</span> <span>Scooter</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1 overflow-x-auto scrollbar-none max-w-full">
+                  {POPULAR_BENGALURU_AREAS.slice(0, 4).map((area) => (
+                    <button
+                      key={area}
+                      type="button"
+                      onClick={() => setLocationSearch(`${area}, Bengaluru`)}
+                      className={`px-2 py-0.5 rounded-md text-[10px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                        locationSearch.includes(area)
+                          ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold'
+                          : 'bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300 border-gray-200/80 dark:border-zinc-700/80 hover:border-amber-400'
+                      }`}
+                    >
+                      {area}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Compact 4-Column Row 1: Name, Phone, Brand, Model */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <User className="h-3.5 w-3.5" />
+                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={heroName}
+                    onChange={(e) => setHeroName(e.target.value)}
+                    placeholder="Your Name"
+                    autoComplete="name"
+                    className="w-full h-9 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                  />
+                </div>
+
+                <div className="relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                    <span className="flex items-center gap-0.5 text-[10px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-200 dark:border-zinc-700">
+                      <span>+91</span>
+                    </span>
+                  </div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    value={heroPhone}
+                    onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    placeholder="Phone number"
+                    className={`w-full h-9 pl-[38px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-semibold placeholder:text-gray-400 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                      heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
+                    }`}
+                  />
+                  {heroPhone.length === 10 && (
+                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    </div>
+                  )}
+                </div>
+
+                <div className="relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Tag className="h-3.5 w-3.5" />
+                  </div>
+                  <select
+                    name="brand"
+                    required
+                    value={heroBrand}
+                    onChange={(e) => {
+                      setHeroBrand(e.target.value);
+                      setHeroModel("");
+                    }}
+                    className="w-full h-9 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer truncate transition-shadow"
+                  >
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
+                    {Object.keys(MODELS_BY_BRAND).map(brand => (
+                      <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </div>
+
+                <div className="relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Bike className="h-3.5 w-3.5" />
+                  </div>
+                  <select
+                    name="model"
+                    required
+                    value={heroModel}
+                    onChange={(e) => setHeroModel(e.target.value)}
+                    className="w-full h-9 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
+                    disabled={!heroBrand}
+                  >
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">{heroBrand ? "Select Model" : "Brand First"}</option>
+                    {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
+                      <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Compact Row 2: Service, Locality + GPS, Date & Time */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                <div className="sm:col-span-5 relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-500">
+                    <Wrench className="h-3.5 w-3.5" />
+                  </div>
+                  <select
+                    name="service"
+                    required
+                    value={heroService}
+                    onChange={(e) => setHeroService(e.target.value)}
+                    className="w-full h-9 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer truncate transition-shadow"
+                  >
+                    {QUICK_SERVICE_OPTIONS.map(opt => (
+                      <option key={opt.id} value={opt.id} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">
+                        {opt.id.includes("Engine Oil") ? "🛢️ " : opt.id.startsWith("General Service") ? "🛠️ " : opt.id.startsWith("Jump Start") ? "⚡ " : opt.id.includes("Puncture") ? "🛞 " : "🏍️ "}
+                        {opt.name} ({opt.price})
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-3 w-3" />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-3 relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-500">
+                    <MapPin className="h-3.5 w-3.5" />
+                  </div>
+                  <input
+                    type="text"
+                    name="location"
+                    required
+                    placeholder="Area, Bengaluru"
+                    className="w-full h-9 pl-7 pr-12 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                    value={locationSearch}
+                    onChange={(e) => setLocationSearch(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDetectingLocation(true);
+                      if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                          () => {
+                            setIsDetectingLocation(false);
+                            setLocationSearch(`${activeLocation}, Bengaluru`);
+                          },
+                          () => {
+                            setIsDetectingLocation(false);
+                            setLocationSearch(`${activeLocation}, Bengaluru`);
+                          },
+                          { timeout: 3000 }
+                        );
+                      } else {
+                        setIsDetectingLocation(false);
+                        setLocationSearch(`${activeLocation}, Bengaluru`);
+                      }
+                    }}
+                    className="absolute right-1 top-1 bottom-1 px-1.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-0.5 cursor-pointer transition-all border border-amber-500/30"
+                    title="Auto-fill locality"
+                  >
+                    <Navigation className={`w-2.5 h-2.5 ${isDetectingLocation ? 'animate-spin' : ''}`} />
+                    <span>GPS</span>
+                  </button>
+                </div>
+
+                <div className="sm:col-span-2 relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-600 dark:text-amber-400">
+                    <Calendar className="h-3 w-3 shrink-0" />
+                  </div>
+                  <input
+                    type="date"
+                    name="date"
+                    required
+                    min={getTodayIST()}
+                    value={bookingDate}
+                    onChange={(e) => setBookingDate(e.target.value)}
+                    className="w-full h-9 pl-6 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold cursor-pointer transition-shadow"
+                  />
+                </div>
+
+                <div className="sm:col-span-2 relative group min-w-0">
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-500">
+                    <Clock className="h-3 w-3 shrink-0" />
+                  </div>
+                  <input
+                    type="time"
+                    name="time"
+                    required
+                    value={bookingTime}
+                    onChange={(e) => setBookingTime(e.target.value)}
+                    className="w-full h-9 pl-6 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold cursor-pointer transition-shadow"
+                  />
+                </div>
+              </div>
+
+              {/* Compact Footer Bar: Checklist Link + Submit CTA */}
+              <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center justify-between sm:justify-start gap-3 text-[11px] text-gray-500 dark:text-zinc-400 font-medium">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const details = SERVICE_DETAILS_DATA[heroService] || SERVICE_DETAILS_DATA['General Service'];
+                      setTechnicalDetailsContent(details);
+                      setIsTechnicalDetailsOpen(true);
+                    }}
+                    className="inline-flex items-center gap-1 font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors cursor-pointer"
+                  >
+                    <ClipboardList className="w-3.5 h-3.5" />
+                    <span>View Service Checklist</span>
+                  </button>
+                  <span>• Pay After Service</span>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto sm:min-w-[240px] relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs uppercase tracking-wider min-h-[38px] py-2 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-zinc-950 animate-bounce" />
+                      <span>Confirming Booking...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-1.5">
+                      <Wrench className="w-3.5 h-3.5 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                      <span>SUBMIT THE BOOKING FORM</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
+                    </div>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
 
       {/* FOOTER */}
       <footer className="bg-[#0A0D14] text-zinc-300 pt-14 pb-24 md:pb-16 lg:pb-20 border-t border-zinc-800/90 relative overflow-hidden shadow-2xl">
@@ -4154,16 +4538,16 @@ Sit back and relax. We've got your bike covered!`;
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5 flex-wrap">
                         <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-900 dark:text-amber-300 border border-amber-500/30">
-                          {selectedPackage.name.includes('650 cc') ? '648cc Parallel-Twin' : '350cc–500 cc Singles'}
+                          {selectedPackage.name.includes('650 cc') ? '648cc Parallel-Twin' : '350cc–500cc Singles'}
                         </span>
                         <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25">
-                          {selectedPackage.name.includes('650 cc') ? 'Save ₹1,000 (20% OFF)' : 'Save ₹400 (13% OFF)'}
+                          {selectedPackage.name.includes('650 cc') ? 'Save ₹1,000 (20% OFF)' : 'Save ₹600 (20% OFF)'}
                         </span>
                       </div>
                       <h3 className="text-sm sm:text-base font-black tracking-tight text-gray-900 dark:text-white mt-1 leading-snug">
                         {selectedPackage.name.includes('650 cc')
                           ? 'Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)'
-                          : 'Royal Enfield 350cc-500 cc General Service with Engine Oil (₹2,599)'}
+                          : 'Royal Enfield 350cc–500cc General Service with Engine Oil (₹2,399/-)'}
                       </h3>
                     </div>
                   </div>
@@ -4180,15 +4564,13 @@ Sit back and relax. We've got your bike covered!`;
                 <div className="flex flex-wrap items-center justify-between gap-2 bg-white/90 dark:bg-zinc-950/70 p-2.5 rounded-xl border border-amber-500/25 shadow-2xs">
                   <div className="flex items-baseline gap-2">
                     <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
-                      {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,599'}
+                      {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,399/-'}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
                       {selectedPackage.name.includes('650 cc') ? '₹4,999' : '₹2,999'}
                     </span>
                     <span className="text-[10px] sm:text-[11px] font-extrabold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2 py-0.5 rounded-md border border-amber-500/20">
-                      {selectedPackage.name.includes('650 cc')
-                        ? '🛢️ 100% Synthetic 10W-50 + Twin Filter'
-                        : '🛢️ 15W-50 Semi-Synth + OEM Filter'}
+                      🛢️ 16-Point Service + Oil &amp; Filter
                     </span>
                   </div>
 
@@ -4197,13 +4579,13 @@ Sit back and relax. We've got your bike covered!`;
                     onClick={() => {
                       const key = selectedPackage.name.includes('650 cc')
                         ? 'Royal Enfield 650 cc General Service with Engine Oil Twin'
-                        : 'Royal Enfield 350cc-500 cc General Service with Engine Oil';
+                        : 'Royal Enfield 350cc–500cc General Service with Engine Oil';
                       const details = SERVICE_DETAILS_DATA[key] || SERVICE_DETAILS_DATA[selectedPackage.name] || SERVICE_DETAILS_DATA['General Service'];
                       setTechnicalDetailsContent(details);
                       setIsTechnicalDetailsOpen(true);
                     }}
                     className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500 hover:text-zinc-950 dark:bg-amber-400/10 dark:hover:bg-amber-400 dark:hover:text-zinc-950 text-amber-800 dark:text-amber-300 border border-amber-500/30 transition-all cursor-pointer shrink-0 group shadow-2xs"
-                    title="View 12-Point Service Details Checklist"
+                    title="View 16-Point Service Details Checklist"
                   >
                     <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
                     <span>Service Details</span>
@@ -4509,8 +4891,8 @@ Sit back and relax. We've got your bike covered!`;
                 <div className="relative z-10 flex items-center gap-2 min-w-0">
                   <Bike className="w-4 h-4 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
                   <span className="truncate">
-                    {selectedPackage?.name.includes('350cc-500 cc')
-                      ? 'Book Royal Enfield 350cc-500 cc Service now'
+                    {selectedPackage?.name.includes('350cc')
+                      ? 'Book Royal Enfield 350cc–500cc Service'
                       : selectedPackage?.name.includes('650 cc')
                       ? 'Book Royal Enfield 650 cc Twin Service now'
                       : selectedPackage?.name

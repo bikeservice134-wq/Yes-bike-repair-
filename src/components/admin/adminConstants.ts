@@ -61,17 +61,28 @@ export const DEFAULT_SERVICE_PACKAGES: ServicePackageItem[] = [
   },
   {
     id: 'pkg-re-350-500',
-    name: 'Royal Enfield 350cc-500 cc General Service with Engine Oil',
-    price: 2599,
-    priceLabel: '₹2,599',
+    name: 'Royal Enfield 350cc–500cc General Service with Engine Oil',
+    price: 2399,
+    priceLabel: '₹2,399/-',
     duration: '90 - 120 Mins',
     category: 'Royal Enfield',
     items: [
-      '15W-50 Semi-Synthetic Engine Oil Included',
-      'OEM Oil Filter Replacement (Classic, Hunter, Bullet, Meteor, Himalayan, 500cc)',
-      'Heavy-Duty Chain Slack Calibration & Lube',
-      'Disc Caliper Cleaning & Brake Calibration',
-      'Tappet, Idle RPM & Chassis Torque Check'
+      'Engine Oil Replacement',
+      'Oil Filter Cleaning / Replacement',
+      'Air Filter Cleaning',
+      'Spark Plug Cleaning',
+      'Brake Inspection & Adjustment',
+      'Clutch Adjustment',
+      'Chain Cleaning & Lubrication',
+      'Chain Tension Adjustment',
+      'Battery Check-up',
+      'Electrical Check-up',
+      'Cable & Lever Adjustment',
+      'Nut & Bolt Tightening',
+      'Engine Leakage Inspection',
+      'General Lubrication',
+      'Full Bike Inspection',
+      'Dry Wash'
     ]
   },
   {
@@ -82,11 +93,22 @@ export const DEFAULT_SERVICE_PACKAGES: ServicePackageItem[] = [
     duration: '90 - 120 Mins',
     category: 'Royal Enfield',
     items: [
-      '100% Fully Synthetic 10W-50 Engine Oil Included',
-      'OEM Twin Oil Filter Replacement (Interceptor, Continental GT, Super Meteor 650)',
-      'Twin-Cylinder Throttle & Clutch Calibration',
-      'Front & Rear Disc Pad & Fluid Inspection',
-      'Chain Degreasing, Alignment & Torque Check'
+      'Engine Oil Replacement',
+      'Oil Filter Cleaning / Replacement',
+      'Air Filter Cleaning',
+      'Spark Plug Cleaning',
+      'Brake Inspection & Adjustment',
+      'Clutch Adjustment',
+      'Chain Cleaning & Lubrication',
+      'Chain Tension Adjustment',
+      'Battery Check-up',
+      'Electrical Check-up',
+      'Cable & Lever Adjustment',
+      'Nut & Bolt Tightening',
+      'Engine Leakage Inspection',
+      'General Lubrication',
+      'Full Bike Inspection',
+      'Dry Wash'
     ]
   },
   {
