@@ -1884,27 +1884,29 @@ Sit back and relax. We've got your bike covered!`;
                     </div>
                   </div>
 
-                  {/* Right Column: Sticky Booking Form Card */}
+                  {/* Right Column: Compact Sticky Booking Form Card */}
                   <div className="md:col-span-5 w-full flex justify-center md:justify-end -mt-2 sm:-mt-3 md:-mt-8 lg:-mt-12 xl:-mt-14">
-                    <div id="booking-form" className="w-full max-w-md lg:max-w-lg md:sticky md:top-13 lg:top-15 relative z-20 text-left">
+                    <div id="booking-form" className="w-full max-w-sm lg:max-w-md md:sticky md:top-13 lg:top-15 relative z-20 text-left">
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-40"></div>
 
-                  <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
-                    {/* Compact Card Header */}
-                    <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9" />
+                  <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2.5 sm:p-3.5 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+                    {/* Small Compact Card Header */}
+                    <div className="flex items-center justify-between gap-2 pb-1.5 mb-2 border-b border-gray-100 dark:border-zinc-800">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <YesBikeLogo className="w-7 h-7 shrink-0" />
                         <div className="min-w-0">
-                          <h2 className="text-xs sm:text-sm font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                          <h2 className="text-[11px] sm:text-xs font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                             Quick &amp; Easy Booking
                           </h2>
-                          <p className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium leading-tight mt-0.5">Doorstep Bike &amp; Scooter Service Across Bengaluru.</p>
+                          <p className="text-[9px] sm:text-[10px] text-gray-500 dark:text-zinc-400 font-medium leading-tight">
+                            Doorstep Bike &amp; Scooter Service Across Bengaluru
+                          </p>
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
-                        <span className="relative flex h-1.5 w-1.5">
+                      <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[8px] sm:text-[9px] font-bold shrink-0 whitespace-nowrap leading-none">
+                        <span className="relative flex h-1 w-1 shrink-0">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                          <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500"></span>
                         </span>
                         <span>Mechanic Available Today</span>
                       </div>
@@ -3900,57 +3902,57 @@ Sit back and relax. We've got your bike covered!`;
         </div>
       </section>
 
-      {/* DEDICATED QUICK & EASY BOOKING SECTION (COMPACT) */}
-      <section id="quick-booking" className="py-8 sm:py-10 relative bg-gray-50 dark:bg-zinc-950 overflow-hidden border-t border-gray-200/80 dark:border-white/5 section-auto-contain">
-        <div className="max-w-3xl mx-auto px-4 relative z-10">
-          <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-lg border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
-            {/* Compact Header */}
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-gray-100 dark:border-zinc-800">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <YesBikeLogo className="w-8 h-8 sm:w-9 sm:h-9 shrink-0" />
+      {/* DEDICATED QUICK & EASY BOOKING SECTION (SMALL COMPACT) */}
+      <section id="quick-booking" className="py-5 sm:py-6 relative bg-gray-50 dark:bg-zinc-950 overflow-hidden border-t border-gray-200/80 dark:border-white/5 section-auto-contain">
+        <div className="max-w-xl mx-auto px-3 sm:px-4 relative z-10">
+          <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-xl p-3 sm:p-3.5 shadow-md border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+            {/* Small Header */}
+            <div className="flex flex-wrap items-center justify-between gap-1.5 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
+              <div className="flex items-center gap-2 min-w-0">
+                <YesBikeLogo className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" />
                 <div className="min-w-0">
-                  <h2 className="text-sm sm:text-base font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                  <h2 className="text-[11px] sm:text-xs font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                     Quick &amp; Easy Booking
                   </h2>
-                  <p className="text-[11px] sm:text-xs text-gray-500 dark:text-zinc-400 font-medium leading-tight mt-0.5">
-                    Doorstep Bike &amp; Scooter Service Across Bengaluru.
+                  <p className="text-[9px] sm:text-[10px] text-gray-500 dark:text-zinc-400 font-medium leading-tight">
+                    Doorstep Bike &amp; Scooter Service Across Bengaluru
                   </p>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold shrink-0">
-                <span className="relative flex h-1.5 w-1.5">
+              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-700 dark:text-emerald-400 text-[8px] sm:text-[9px] font-bold shrink-0 whitespace-nowrap leading-none">
+                <span className="relative flex h-1 w-1 shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                  <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500"></span>
                 </span>
                 <span>Mechanic Available Today</span>
               </div>
             </div>
 
-            <form className="space-y-2.5 relative z-10" onSubmit={handleBookService}>
-              {/* Vehicle Type Switch + Popular Areas Quick Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800/90 rounded-lg border border-gray-200/80 dark:border-zinc-700/60 w-full sm:w-52">
+            <form className="space-y-1.5 relative z-10" onSubmit={handleBookService}>
+              {/* Vehicle Type Switch + Quick Area Chips */}
+              <div className="flex flex-wrap items-center justify-between gap-1.5">
+                <div className="flex p-0.5 bg-gray-100 dark:bg-zinc-800/90 rounded-lg border border-gray-200/80 dark:border-zinc-700/60 w-full sm:w-44">
                   <button
                     type="button"
                     onClick={() => setHeroVehicle('Bike')}
-                    className={`flex-1 text-xs font-bold py-1.5 min-h-[30px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                    className={`flex-1 text-[11px] font-bold py-1 min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
                       heroVehicle === 'Bike'
                         ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                         : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
                     }`}
                   >
-                    <span className="text-sm">🏍️</span> <span>Bike</span>
+                    <span className="text-xs">🏍️</span> <span>Bike</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setHeroVehicle('Scooter')}
-                    className={`flex-1 text-xs font-bold py-1.5 min-h-[30px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                    className={`flex-1 text-[11px] font-bold py-1 min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
                       heroVehicle === 'Scooter'
                         ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                         : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
                     }`}
                   >
-                    <span className="text-sm">🛵</span> <span>Scooter</span>
+                    <span className="text-xs">🛵</span> <span>Scooter</span>
                   </button>
                 </div>
 
@@ -3960,7 +3962,7 @@ Sit back and relax. We've got your bike covered!`;
                       key={area}
                       type="button"
                       onClick={() => setLocationSearch(`${area}, Bengaluru`)}
-                      className={`px-2 py-0.5 rounded-md text-[10px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                      className={`px-1.5 py-0.5 rounded text-[9px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
                         locationSearch.includes(area)
                           ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold'
                           : 'bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300 border-gray-200/80 dark:border-zinc-700/80 hover:border-amber-400'
@@ -3972,11 +3974,11 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
 
-              {/* Compact 4-Column Row 1: Name, Phone, Brand, Model */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {/* Small Row 1: Name, Phone, Brand, Model */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                    <User className="h-3.5 w-3.5" />
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <User className="h-3 w-3" />
                   </div>
                   <input
                     type="text"
@@ -3986,14 +3988,14 @@ Sit back and relax. We've got your bike covered!`;
                     onChange={(e) => setHeroName(e.target.value)}
                     placeholder="Your Name"
                     autoComplete="name"
-                    className="w-full h-9 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                    className="w-full h-8 pl-6 pr-2 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
                   />
                 </div>
 
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <span className="flex items-center gap-0.5 text-[10px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-200 dark:border-zinc-700">
-                      <span>+91</span>
+                  <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none">
+                    <span className="flex items-center text-[9px] font-bold text-gray-600 dark:text-zinc-300 pr-1 border-r border-gray-200 dark:border-zinc-700">
+                      +91
                     </span>
                   </div>
                   <input
@@ -4006,21 +4008,21 @@ Sit back and relax. We've got your bike covered!`;
                     maxLength={10}
                     value={heroPhone}
                     onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                    placeholder="Phone number"
-                    className={`w-full h-9 pl-[38px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-semibold placeholder:text-gray-400 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
-                      heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
+                    placeholder="Phone"
+                    className={`w-full h-8 pl-[34px] py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold placeholder:text-gray-400 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                      heroPhone.length === 10 ? 'pr-5 ring-emerald-500/50' : 'pr-1.5'
                     }`}
                   />
                   {heroPhone.length === 10 && (
-                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    <div className="absolute inset-y-0 right-0 pr-1 flex items-center pointer-events-none">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-500" />
                     </div>
                   )}
                 </div>
 
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                    <Tag className="h-3.5 w-3.5" />
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Tag className="h-3 w-3" />
                   </div>
                   <select
                     name="brand"
@@ -4030,53 +4032,53 @@ Sit back and relax. We've got your bike covered!`;
                       setHeroBrand(e.target.value);
                       setHeroModel("");
                     }}
-                    className="w-full h-9 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer truncate transition-shadow"
+                    className="w-full h-8 pl-6 pr-4 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                   >
-                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Brand</option>
                     {Object.keys(MODELS_BY_BRAND).map(brand => (
                       <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                    <ChevronDown className="h-3 w-3" />
+                  <div className="absolute inset-y-0 right-0 pr-1 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-2.5 w-2.5" />
                   </div>
                 </div>
 
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                    <Bike className="h-3.5 w-3.5" />
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Bike className="h-3 w-3" />
                   </div>
                   <select
                     name="model"
                     required
                     value={heroModel}
                     onChange={(e) => setHeroModel(e.target.value)}
-                    className="w-full h-9 pl-7 pr-5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
+                    className="w-full h-8 pl-6 pr-4 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
                     disabled={!heroBrand}
                   >
-                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">{heroBrand ? "Select Model" : "Brand First"}</option>
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">{heroBrand ? "Model" : "Brand First"}</option>
                     {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
                       <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                    <ChevronDown className="h-3 w-3" />
+                  <div className="absolute inset-y-0 right-0 pr-1 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-2.5 w-2.5" />
                   </div>
                 </div>
               </div>
 
-              {/* Compact Row 2: Service, Locality + GPS, Date & Time */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
+              {/* Small Row 2: Service, Locality + GPS, Date & Time */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-1.5">
                 <div className="sm:col-span-5 relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-500">
-                    <Wrench className="h-3.5 w-3.5" />
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-500">
+                    <Wrench className="h-3 w-3" />
                   </div>
                   <select
                     name="service"
                     required
                     value={heroService}
                     onChange={(e) => setHeroService(e.target.value)}
-                    className="w-full h-9 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium appearance-none cursor-pointer truncate transition-shadow"
+                    className="w-full h-8 pl-6 pr-5 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                   >
                     {QUICK_SERVICE_OPTIONS.map(opt => (
                       <option key={opt.id} value={opt.id} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">
@@ -4085,21 +4087,21 @@ Sit back and relax. We've got your bike covered!`;
                       </option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                    <ChevronDown className="h-3 w-3" />
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-2.5 w-2.5" />
                   </div>
                 </div>
 
                 <div className="sm:col-span-3 relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-500">
-                    <MapPin className="h-3.5 w-3.5" />
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-500">
+                    <MapPin className="h-3 w-3" />
                   </div>
                   <input
                     type="text"
                     name="location"
                     required
                     placeholder="Area, Bengaluru"
-                    className="w-full h-9 pl-7 pr-12 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                    className="w-full h-8 pl-6 pr-10 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
                     value={locationSearch}
                     onChange={(e) => setLocationSearch(e.target.value)}
                   />
@@ -4124,7 +4126,7 @@ Sit back and relax. We've got your bike covered!`;
                         setLocationSearch(`${activeLocation}, Bengaluru`);
                       }
                     }}
-                    className="absolute right-1 top-1 bottom-1 px-1.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-0.5 cursor-pointer transition-all border border-amber-500/30"
+                    className="absolute right-1 top-1 bottom-1 px-1 rounded bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[9px] font-bold flex items-center gap-0.5 cursor-pointer transition-all border border-amber-500/30"
                     title="Auto-fill locality"
                   >
                     <Navigation className={`w-2.5 h-2.5 ${isDetectingLocation ? 'animate-spin' : ''}`} />
@@ -4133,8 +4135,8 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
 
                 <div className="sm:col-span-2 relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-600 dark:text-amber-400">
-                    <Calendar className="h-3 w-3 shrink-0" />
+                  <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400">
+                    <Calendar className="h-2.5 w-2.5 shrink-0" />
                   </div>
                   <input
                     type="date"
@@ -4143,13 +4145,13 @@ Sit back and relax. We've got your bike covered!`;
                     min={getTodayIST()}
                     value={bookingDate}
                     onChange={(e) => setBookingDate(e.target.value)}
-                    className="w-full h-9 pl-6 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold cursor-pointer transition-shadow"
+                    className="w-full h-8 pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[10px] font-semibold cursor-pointer transition-shadow"
                   />
                 </div>
 
                 <div className="sm:col-span-2 relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-500">
-                    <Clock className="h-3 w-3 shrink-0" />
+                  <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-amber-500">
+                    <Clock className="h-2.5 w-2.5 shrink-0" />
                   </div>
                   <input
                     type="time"
@@ -4157,14 +4159,14 @@ Sit back and relax. We've got your bike covered!`;
                     required
                     value={bookingTime}
                     onChange={(e) => setBookingTime(e.target.value)}
-                    className="w-full h-9 pl-6 pr-1 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold cursor-pointer transition-shadow"
+                    className="w-full h-8 pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[10px] font-semibold cursor-pointer transition-shadow"
                   />
                 </div>
               </div>
 
-              {/* Compact Footer Bar: Checklist Link + Submit CTA */}
-              <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center justify-between sm:justify-start gap-3 text-[11px] text-gray-500 dark:text-zinc-400 font-medium">
+              {/* Compact Footer Bar: Checklist Link + Small Submit CTA */}
+              <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                <div className="flex items-center justify-between sm:justify-start gap-2 text-[10px] text-gray-500 dark:text-zinc-400 font-medium">
                   <button
                     type="button"
                     onClick={() => {
@@ -4174,7 +4176,7 @@ Sit back and relax. We've got your bike covered!`;
                     }}
                     className="inline-flex items-center gap-1 font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors cursor-pointer"
                   >
-                    <ClipboardList className="w-3.5 h-3.5" />
+                    <ClipboardList className="w-3 h-3" />
                     <span>View Service Checklist</span>
                   </button>
                   <span>• Pay After Service</span>
@@ -4182,18 +4184,18 @@ Sit back and relax. We've got your bike covered!`;
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto sm:min-w-[240px] relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs uppercase tracking-wider min-h-[38px] py-2 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
+                  className="w-full sm:w-auto sm:min-w-[200px] relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-[11px] uppercase tracking-wider min-h-[34px] py-1.5 px-3.5 rounded-lg shadow-sm shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
                 >
                   {isSubmitting ? (
-                    <div className="flex items-center justify-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-zinc-950 animate-bounce" />
-                      <span>Confirming Booking...</span>
+                    <div className="flex items-center justify-center gap-1">
+                      <Check className="w-3 h-3 text-zinc-950 animate-bounce" />
+                      <span>Confirming...</span>
                     </div>
                   ) : (
                     <div className="flex items-center justify-center gap-1.5">
-                      <Wrench className="w-3.5 h-3.5 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
+                      <Wrench className="w-3 h-3 text-zinc-950 shrink-0 group-hover:rotate-12 transition-transform duration-300" />
                       <span>SUBMIT THE BOOKING FORM</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
                     </div>
                   )}
                 </button>
