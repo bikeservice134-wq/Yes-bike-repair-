@@ -1997,58 +1997,50 @@ Sit back and relax. We've got your bike covered!`;
                           {/* Brand & Model in 2-Columns */}
                           <div className="grid grid-cols-2 gap-1.5">
                             <div className="relative group min-w-0">
-                              <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                                Choose Your Bike Brand
-                              </label>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                                  <Tag className="h-3 w-3" />
-                                </div>
-                                <select 
-                                  name="brand" 
-                                  required 
-                                  value={heroBrand} 
-                                  onChange={(e) => {
-                                    setHeroBrand(e.target.value);
-                                    setHeroModel("");
-                                  }} 
-                                  className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
-                                >
-                                  <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
-                                  {Object.keys(MODELS_BY_BRAND).map(brand => (
-                                    <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
-                                  ))}
-                                </select>
-                                <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                                  <ChevronDown className="h-3 w-3" />
-                                </div>
+                              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                                <Tag className="h-3 w-3" />
+                              </div>
+                              <select 
+                                name="brand" 
+                                aria-label="Select Brand"
+                                required 
+                                value={heroBrand} 
+                                onChange={(e) => {
+                                  setHeroBrand(e.target.value);
+                                  setHeroModel("");
+                                }} 
+                                className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
+                              >
+                                <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
+                                {Object.keys(MODELS_BY_BRAND).map(brand => (
+                                  <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
+                                ))}
+                              </select>
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                                <ChevronDown className="h-3 w-3" />
                               </div>
                             </div>
 
                             <div className="relative group min-w-0">
-                              <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                                Select Your Vehicle Model
-                              </label>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                                  <Bike className="h-3 w-3" />
-                                </div>
-                                <select 
-                                  name="model" 
-                                  required 
-                                  value={heroModel} 
-                                  onChange={(e) => setHeroModel(e.target.value)} 
-                                  className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
-                                  disabled={!heroBrand}
-                                >
-                                  <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
-                                  {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
-                                    <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
-                                  ))}
-                                </select>
-                                <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                                  <ChevronDown className="h-3 w-3" />
-                                </div>
+                              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                                <Bike className="h-3 w-3" />
+                              </div>
+                              <select 
+                                name="model" 
+                                aria-label="Select Model"
+                                required 
+                                value={heroModel} 
+                                onChange={(e) => setHeroModel(e.target.value)} 
+                                className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
+                                disabled={!heroBrand}
+                              >
+                                <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
+                                {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
+                                  <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
+                                ))}
+                              </select>
+                              <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                                <ChevronDown className="h-3 w-3" />
                               </div>
                             </div>
                           </div>
@@ -4031,61 +4023,53 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
 
-              {/* Row 1B: Choose Your Bike Brand & Select Your Vehicle Model */}
+              {/* Row 1B: Select Brand & Select Model */}
               <div className="grid grid-cols-2 gap-1.5">
                 <div className="relative group min-w-0">
-                  <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                    Choose Your Bike Brand
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                      <Tag className="h-3 w-3" />
-                    </div>
-                    <select
-                      name="brand"
-                      required
-                      value={heroBrand}
-                      onChange={(e) => {
-                        setHeroBrand(e.target.value);
-                        setHeroModel("");
-                      }}
-                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
-                    >
-                      <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
-                      {Object.keys(MODELS_BY_BRAND).map(brand => (
-                        <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                      <ChevronDown className="h-3 w-3" />
-                    </div>
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Tag className="h-3 w-3" />
+                  </div>
+                  <select
+                    name="brand"
+                    aria-label="Select Brand"
+                    required
+                    value={heroBrand}
+                    onChange={(e) => {
+                      setHeroBrand(e.target.value);
+                      setHeroModel("");
+                    }}
+                    className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
+                  >
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
+                    {Object.keys(MODELS_BY_BRAND).map(brand => (
+                      <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-3 w-3" />
                   </div>
                 </div>
 
                 <div className="relative group min-w-0">
-                  <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                    Select Your Vehicle Model
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                      <Bike className="h-3 w-3" />
-                    </div>
-                    <select
-                      name="model"
-                      required
-                      value={heroModel}
-                      onChange={(e) => setHeroModel(e.target.value)}
-                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
-                      disabled={!heroBrand}
-                    >
-                      <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
-                      {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
-                        <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
-                      <ChevronDown className="h-3 w-3" />
-                    </div>
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                    <Bike className="h-3 w-3" />
+                  </div>
+                  <select
+                    name="model"
+                    aria-label="Select Model"
+                    required
+                    value={heroModel}
+                    onChange={(e) => setHeroModel(e.target.value)}
+                    className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
+                    disabled={!heroBrand}
+                  >
+                    <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
+                    {heroBrand && MODELS_BY_BRAND[heroBrand]?.map(model => (
+                      <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                    <ChevronDown className="h-3 w-3" />
                   </div>
                 </div>
               </div>
@@ -4758,58 +4742,50 @@ Sit back and relax. We've got your bike covered!`;
                 {/* Brand & Model */}
                 <div className="grid grid-cols-2 gap-1.5">
                   <div className="relative group min-w-0">
-                    <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                      Choose Your Bike Brand
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
-                        <Tag className="h-3 w-3" />
-                      </div>
-                      <select 
-                        name="brand" 
-                        required 
-                        value={modalBrand} 
-                        onChange={(e) => {
-                          setModalBrand(e.target.value);
-                          setModalModel("");
-                        }} 
-                        className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate"
-                      >
-                        <option value="" disabled>Select Brand</option>
-                        {Object.keys(MODELS_BY_BRAND).map(brand => (
-                          <option key={brand} value={brand}>{brand}</option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
-                        <ChevronDown className="h-3 w-3" />
-                      </div>
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                      <Tag className="h-3 w-3" />
+                    </div>
+                    <select 
+                      name="brand" 
+                      aria-label="Select Brand"
+                      required 
+                      value={modalBrand} 
+                      onChange={(e) => {
+                        setModalBrand(e.target.value);
+                        setModalModel("");
+                      }} 
+                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate"
+                    >
+                      <option value="" disabled>Select Brand</option>
+                      {Object.keys(MODELS_BY_BRAND).map(brand => (
+                        <option key={brand} value={brand}>{brand}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                      <ChevronDown className="h-3 w-3" />
                     </div>
                   </div>
 
                   <div className="relative group min-w-0">
-                    <label className="block text-[9px] sm:text-[10px] font-semibold text-gray-500 dark:text-zinc-400 mb-0.5 leading-none tracking-tight truncate">
-                      Select Your Vehicle Model
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
-                        <Bike className="h-3 w-3" />
-                      </div>
-                      <select 
-                        name="model" 
-                        required 
-                        value={modalModel} 
-                        onChange={(e) => setModalModel(e.target.value)} 
-                        className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate" 
-                        disabled={!modalBrand}
-                      >
-                        <option value="" disabled>Select Model</option>
-                        {modalBrand && MODELS_BY_BRAND[modalBrand]?.map(model => (
-                          <option key={model} value={model}>{model}</option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
-                        <ChevronDown className="h-3 w-3" />
-                      </div>
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                      <Bike className="h-3 w-3" />
+                    </div>
+                    <select 
+                      name="model" 
+                      aria-label="Select Model"
+                      required 
+                      value={modalModel} 
+                      onChange={(e) => setModalModel(e.target.value)} 
+                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate" 
+                      disabled={!modalBrand}
+                    >
+                      <option value="" disabled>Select Model</option>
+                      {modalBrand && MODELS_BY_BRAND[modalBrand]?.map(model => (
+                        <option key={model} value={model}>{model}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                      <ChevronDown className="h-3 w-3" />
                     </div>
                   </div>
                 </div>
