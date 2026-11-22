@@ -2045,18 +2045,18 @@ Sit back and relax. We've got your bike covered!`;
                             </div>
                           </div>
                           
-                          {/* Location Input with Auto-Fill (Small Size) */}
-                          <div className="space-y-1">
+                          {/* Location Input with Auto-Fill */}
+                          <div className="space-y-1.5">
                             <div className="relative group">
-                              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
-                                <MapPin className="h-3 w-3 text-amber-500" />
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                                <MapPin className="h-4 w-4 text-amber-500" />
                               </div>
                               <input 
                                 type="text" 
                                 name="location" 
                                 required 
                                 placeholder="Enter Your Location in Bengaluru" 
-                                className="w-full h-7 sm:h-7.5 pl-6 pr-12 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[10px] sm:text-[11px] font-medium placeholder:text-[10px] sm:placeholder:text-[11px] placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow" 
+                                className="w-full h-10 sm:h-10.5 pl-8 pr-16 py-2 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow" 
                                 value={locationSearch} 
                                 onChange={(e) => setLocationSearch(e.target.value)} 
                               />
@@ -2081,22 +2081,22 @@ Sit back and relax. We've got your bike covered!`;
                                     setLocationSearch(`${activeLocation}, Bengaluru`);
                                   }
                                 }}
-                                className="absolute right-0.5 top-0.5 bottom-0.5 px-1.5 rounded bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.96] text-amber-800 dark:text-amber-300 text-[9px] font-bold flex items-center gap-0.5 cursor-pointer transition-all border border-amber-500/30"
+                                className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.96] text-amber-800 dark:text-amber-300 text-[10.5px] font-bold flex items-center gap-1 cursor-pointer transition-all border border-amber-500/30"
                                 title="Auto-fill locality"
                               >
-                                <Navigation className={`w-2.5 h-2.5 ${isDetectingLocation ? 'animate-spin' : ''}`} />
+                                <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
                                 <span>GPS</span>
                               </button>
                             </div>
 
-                            {/* Quick locality chips (Small Size) */}
-                            <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none text-[9px] -mx-1 px-1 touch-pan-x overscroll-x-contain">
+                            {/* Quick locality chips */}
+                            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-[10.5px] -mx-1 px-1 touch-pan-x overscroll-x-contain">
                               {POPULAR_BENGALURU_AREAS.slice(0, 5).map((area) => (
                                 <button
                                   key={area}
                                   type="button"
                                   onClick={() => setLocationSearch(`${area}, Bengaluru`)}
-                                  className={`px-1.5 py-0.5 min-h-[18px] rounded text-[9px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                                  className={`px-2.5 py-1 min-h-[24px] rounded-md text-[10.5px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
                                     locationSearch.includes(area)
                                       ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold shadow-2xs'
                                       : 'bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300 border-gray-200/80 dark:border-zinc-700/80 hover:border-amber-400'
@@ -4074,9 +4074,52 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
 
-              {/* Small Row 2: Service, Locality + GPS, Date & Time */}
+              {/* Location Row (Larger Size) */}
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-amber-500">
+                  <MapPin className="h-4 w-4" />
+                </div>
+                <input
+                  type="text"
+                  name="location"
+                  required
+                  placeholder="Enter Your Location in Bengaluru"
+                  className="w-full h-9.5 sm:h-10 pl-8 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsDetectingLocation(true);
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(
+                        () => {
+                          setIsDetectingLocation(false);
+                          setLocationSearch(`${activeLocation}, Bengaluru`);
+                        },
+                        () => {
+                          setIsDetectingLocation(false);
+                          setLocationSearch(`${activeLocation}, Bengaluru`);
+                        },
+                        { timeout: 3000 }
+                      );
+                    } else {
+                      setIsDetectingLocation(false);
+                      setLocationSearch(`${activeLocation}, Bengaluru`);
+                    }
+                  }}
+                  className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all border border-amber-500/30"
+                  title="Auto-fill locality"
+                >
+                  <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
+                  <span>GPS</span>
+                </button>
+              </div>
+
+              {/* Row 2: Service, Date & Time */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-1.5">
-                <div className="sm:col-span-4 relative group min-w-0">
+                <div className="sm:col-span-6 relative group min-w-0">
                   <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-amber-500">
                     <Wrench className="h-3 w-3" />
                   </div>
@@ -4099,51 +4142,7 @@ Sit back and relax. We've got your bike covered!`;
                   </div>
                 </div>
 
-                <div className="sm:col-span-4 relative group min-w-0 flex items-center">
-                  <div className="relative w-full">
-                    <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-amber-500">
-                      <MapPin className="h-2.5 w-2.5" />
-                    </div>
-                    <input
-                      type="text"
-                      name="location"
-                      required
-                      placeholder="Enter Your Location in Bengaluru"
-                      className="w-full h-7 pl-5 pr-9 py-0.5 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[9.5px] sm:text-[10px] font-medium placeholder:text-[9.5px] sm:placeholder:text-[10px] placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
-                      value={locationSearch}
-                      onChange={(e) => setLocationSearch(e.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsDetectingLocation(true);
-                        if (navigator.geolocation) {
-                          navigator.geolocation.getCurrentPosition(
-                            () => {
-                              setIsDetectingLocation(false);
-                              setLocationSearch(`${activeLocation}, Bengaluru`);
-                            },
-                            () => {
-                              setIsDetectingLocation(false);
-                              setLocationSearch(`${activeLocation}, Bengaluru`);
-                            },
-                            { timeout: 3000 }
-                          );
-                        } else {
-                          setIsDetectingLocation(false);
-                          setLocationSearch(`${activeLocation}, Bengaluru`);
-                        }
-                      }}
-                      className="absolute right-0.5 top-0.5 bottom-0.5 px-1 rounded bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[8.5px] font-bold flex items-center gap-0.5 cursor-pointer transition-all border border-amber-500/30"
-                      title="Auto-fill locality"
-                    >
-                      <Navigation className={`w-2.5 h-2.5 ${isDetectingLocation ? 'animate-spin' : ''}`} />
-                      <span>GPS</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="sm:col-span-2 relative group min-w-0">
+                <div className="sm:col-span-3 relative group min-w-0">
                   <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-amber-600 dark:text-amber-400">
                     <Calendar className="h-2.5 w-2.5 shrink-0" />
                   </div>
@@ -4158,7 +4157,7 @@ Sit back and relax. We've got your bike covered!`;
                   />
                 </div>
 
-                <div className="sm:col-span-2 relative group min-w-0">
+                <div className="sm:col-span-3 relative group min-w-0">
                   <div className="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-amber-500">
                     <Clock className="h-2.5 w-2.5 shrink-0" />
                   </div>
@@ -4828,17 +4827,17 @@ Sit back and relax. We've got your bike covered!`;
                   </div>
                 </div>
                 
-                {/* Location / Address (Small Size) */}
+                {/* Location / Address */}
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
-                    <MapPin className="h-3 w-3" />
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                    <MapPin className="h-4 w-4" />
                   </div>
                   <input 
                     type="text"
                     name="location" 
                     required 
                     placeholder="Enter Your Location in Bengaluru" 
-                    className="w-full h-7 sm:h-7.5 pl-6 pr-2.5 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[10px] sm:text-[11px] font-medium placeholder:text-[10px] sm:placeholder:text-[11px] placeholder:text-gray-400"
+                    className="w-full h-10 sm:h-10.5 pl-8 pr-3 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400"
                   />
                 </div>
 
