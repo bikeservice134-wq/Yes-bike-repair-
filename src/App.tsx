@@ -31,7 +31,7 @@ export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, del
   return (
     <div 
       ref={domRef} 
-      className={`transition-all duration-700 ease-out ${!isVisible ? 'will-change-[opacity,transform] opacity-0 translate-y-6' : 'opacity-100 translate-y-0'}`} 
+      className={`transition-[opacity,transform] duration-700 ease-out ${!isVisible ? 'will-change-[opacity,transform] opacity-0 translate-y-6' : 'opacity-100 translate-y-0'}`} 
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -1106,10 +1106,17 @@ Sit back and relax. We've got your bike covered!`;
   const [sameTimeNotice, setSameTimeNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setLiveClockTime(formatTime12Hour(getCurrentTimeHHMM()));
-    }, 30000);
-    return () => clearInterval(timer);
+    const updateClock = () => {
+      if (!document.hidden) {
+        setLiveClockTime(formatTime12Hour(getCurrentTimeHHMM()));
+      }
+    };
+    const timer = setInterval(updateClock, 30000);
+    document.addEventListener('visibilitychange', updateClock);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', updateClock);
+    };
   }, []);
 
   // Time Picker Modal State (Mobile-responsive dialog with Same Time, Clear, Cancel, Set)
@@ -1507,7 +1514,9 @@ Sit back and relax. We've got your bike covered!`;
   useEffect(() => {
     const locations = ['Indiranagar', 'Koramangala', 'HSR Layout', 'Whitefield', 'Jayanagar'];
     const interval = setInterval(() => {
-      setActiveLocation(locations[Math.floor(Math.random() * locations.length)]);
+      if (!document.hidden) {
+        setActiveLocation(locations[Math.floor(Math.random() * locations.length)]);
+      }
     }, 20000);
     return () => clearInterval(interval);
   }, []);
@@ -1589,7 +1598,7 @@ Sit back and relax. We've got your bike covered!`;
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
       
       {/* HEADER */}
-      <header className="fixed top-0 w-full z-50 bg-white/95 dark:bg-zinc-950/95 border-b border-gray-200/80 dark:border-zinc-800/80 backdrop-blur-xl shadow-xs">
+      <header className="fixed top-0 w-full z-50 bg-white/95 dark:bg-zinc-950/95 border-b border-gray-200/80 dark:border-zinc-800/80 md:backdrop-blur-xl shadow-xs">
         <div className="max-w-7xl mx-auto px-3 sm:px-5 h-13 sm:h-14 flex items-center justify-between gap-2">
           {/* Brand Logo Lockup */}
           <button 
@@ -1690,7 +1699,7 @@ Sit back and relax. We've got your bike covered!`;
 
         {/* Mobile Navigation Dropdown Drawer */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+          <div className="md:hidden border-t border-gray-200 dark:border-zinc-800 bg-white/98 dark:bg-zinc-950/98 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain animate-in slide-in-from-top-2 duration-200 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-3">
               {/* Mobile Drawer Brand Header */}
               <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100 dark:border-zinc-800">
@@ -1771,18 +1780,17 @@ Sit back and relax. We've got your bike covered!`;
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
               <div className="absolute inset-0 bg-white dark:bg-zinc-950"></div>
               <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.04] via-transparent to-amber-500/[0.02] dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950"></div>
-              <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-400/[0.07] blur-[120px] rounded-full pointer-events-none"></div>
-              <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-yellow-400/[0.07] blur-[120px] rounded-full pointer-events-none"></div>
+              <div className="hidden md:block absolute top-0 right-1/4 w-96 h-96 bg-amber-400/[0.07] blur-[120px] rounded-full pointer-events-none"></div>
+              <div className="hidden md:block absolute bottom-0 left-1/4 w-96 h-96 bg-yellow-400/[0.07] blur-[120px] rounded-full pointer-events-none"></div>
             </div>
             
-            <FadeIn>
-              <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="md:grid md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-12 md:items-start">
-                  
-                  {/* Left Column: Hero Editorial & Quick Select */}
-                  <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left mb-2 sm:mb-2.5 md:mb-0">
-                    {/* Tagline / Brand Header - Positioned comfortably below navbar */}
-                    <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/10 via-amber-400/15 to-yellow-500/10 dark:from-amber-500/15 dark:via-zinc-900 dark:to-amber-500/10 border border-amber-400/35 dark:border-amber-500/30 text-amber-950 dark:text-amber-200 mt-2 sm:mt-2.5 mb-2.5 shadow-xs shadow-amber-500/5 max-w-full backdrop-blur-md transition-all hover:border-amber-400/60">
+            <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="md:grid md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-12 md:items-start">
+                
+                {/* Left Column: Hero Editorial & Quick Select */}
+                <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left mb-2 sm:mb-2.5 md:mb-0">
+                  {/* Tagline / Brand Header - Positioned comfortably below navbar */}
+                  <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/10 via-amber-400/15 to-yellow-500/10 dark:from-amber-500/15 dark:via-zinc-900 dark:to-amber-500/10 border border-amber-400/35 dark:border-amber-500/30 text-amber-950 dark:text-amber-200 mt-2 sm:mt-2.5 mb-2.5 shadow-xs shadow-amber-500/5 max-w-full md:backdrop-blur-md transition-colors hover:border-amber-400/60">
                       <span className="relative flex h-2 w-2 shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
@@ -1873,7 +1881,7 @@ Sit back and relax. We've got your bike covered!`;
                               className={`h-[52px] sm:h-[56px] p-1 rounded-lg sm:rounded-xl text-center border transition-all cursor-pointer flex flex-col items-center justify-between ${
                                 isSelected
                                   ? 'bg-amber-500 text-zinc-950 border-amber-500 font-black shadow-md ring-1 sm:ring-2 ring-amber-400/50 scale-[1.02]'
-                                  : 'bg-white dark:bg-zinc-900/90 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-amber-400 font-semibold shadow-xs backdrop-blur-md'
+                                  : 'bg-white dark:bg-zinc-900/95 border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 hover:border-amber-400 font-semibold shadow-xs md:backdrop-blur-md'
                               }`}
                             >
                               <div className="h-3.5 sm:h-4 flex items-center justify-center">
@@ -1930,9 +1938,9 @@ Sit back and relax. We've got your bike covered!`;
                   {/* Right Column: Compact Sticky Booking Form Card */}
                   <div className="md:col-span-5 w-full flex justify-center md:justify-end -mt-2 sm:-mt-3 md:-mt-8 lg:-mt-12 xl:-mt-14">
                     <div id="booking-form" className="w-full max-w-sm lg:max-w-md md:sticky md:top-13 lg:top-15 relative z-20 text-left">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-40"></div>
+                  <div className="hidden md:block absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-yellow-600/10 blur-xl rounded-2xl pointer-events-none opacity-40"></div>
 
-                  <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2.5 sm:p-3.5 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+                  <div className="bg-white dark:bg-zinc-900/95 md:backdrop-blur-xl rounded-2xl p-2.5 sm:p-3.5 shadow-xl border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
                     {/* Small Compact Card Header */}
                     <div className="flex items-center justify-between gap-2 pb-1.5 mb-2 border-b border-gray-100 dark:border-zinc-800">
                       <div className="flex items-center gap-1.5 min-w-0">
@@ -1961,7 +1969,7 @@ Sit back and relax. We've got your bike covered!`;
                             <button
                               type="button"
                               onClick={() => setHeroVehicle('Bike')}
-                              className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                              className={`flex-1 text-xs font-bold py-1.5 min-h-[38px] sm:min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-[0.99] ${
                                 heroVehicle === 'Bike'
                                   ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                                   : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
@@ -1972,7 +1980,7 @@ Sit back and relax. We've got your bike covered!`;
                             <button
                               type="button"
                               onClick={() => setHeroVehicle('Scooter')}
-                              className={`flex-1 text-xs font-bold py-1.5 min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                              className={`flex-1 text-xs font-bold py-1.5 min-h-[38px] sm:min-h-[32px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-[0.99] ${
                                 heroVehicle === 'Scooter'
                                   ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                                   : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
@@ -1993,11 +2001,12 @@ Sit back and relax. We've got your bike covered!`;
                                 name="name" 
                                 aria-label="Your Name"
                                 required 
+                                enterKeyHint="next"
                                 value={heroName} 
                                 onChange={(e) => setHeroName(e.target.value)} 
                                 placeholder="Your Name" 
                                 autoComplete="name" 
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
+                                className="w-full h-10.5 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
                               />
                             </div>
                             
@@ -2014,13 +2023,14 @@ Sit back and relax. We've got your bike covered!`;
                                 aria-label="10-digit mobile number"
                                 required 
                                 inputMode="numeric"
+                                enterKeyHint="next"
                                 autoComplete="tel"
                                 pattern="[0-9]{10}"
                                 maxLength={10}
                                 value={heroPhone}
                                 onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                 placeholder="Phone number" 
-                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                                className={`w-full h-10.5 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
                                   heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
                                 }`}
                               />
@@ -2054,7 +2064,7 @@ Sit back and relax. We've got your bike covered!`;
                                   setHeroBrand(e.target.value);
                                   setHeroModel("");
                                 }} 
-                                className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
+                                className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
                               >
                                 <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
                                 {Object.keys(MODELS_BY_BRAND).map(brand => (
@@ -2076,7 +2086,7 @@ Sit back and relax. We've got your bike covered!`;
                                 required 
                                 value={heroModel} 
                                 onChange={(e) => setHeroModel(e.target.value)} 
-                                className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
+                                className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow" 
                                 disabled={!heroBrand}
                               >
                                 <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
@@ -2101,8 +2111,9 @@ Sit back and relax. We've got your bike covered!`;
                                 name="location" 
                                 aria-label="Enter Your Location in Bengaluru"
                                 required 
+                                enterKeyHint="done"
                                 placeholder="Enter Your Location in Bengaluru" 
-                                className="w-full h-10 sm:h-10.5 pl-8 pr-16 py-2 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
+                                className="w-full h-11 sm:h-10.5 pl-8 pr-16 py-2 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
                                 value={locationSearch} 
                                 onChange={(e) => setLocationSearch(e.target.value)} 
                               />
@@ -2121,14 +2132,14 @@ Sit back and relax. We've got your bike covered!`;
                                         setIsDetectingLocation(false);
                                         setLocationSearch(`${activeLocation}, Bengaluru`);
                                       },
-                                      { timeout: 3000 }
+                                      { enableHighAccuracy: false, timeout: 1500, maximumAge: 60000 }
                                     );
                                   } else {
                                     setIsDetectingLocation(false);
                                     setLocationSearch(`${activeLocation}, Bengaluru`);
                                   }
                                 }}
-                                className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.96] text-amber-800 dark:text-amber-300 text-[10.5px] font-bold flex items-center gap-1 cursor-pointer transition-all border border-amber-500/30"
+                                className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.96] text-amber-800 dark:text-amber-300 text-[10.5px] font-bold flex items-center gap-1 cursor-pointer touch-manipulation transition-all border border-amber-500/30"
                                 title="Auto-fill locality"
                               >
                                 <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
@@ -2143,7 +2154,7 @@ Sit back and relax. We've got your bike covered!`;
                                   key={area}
                                   type="button"
                                   onClick={() => setLocationSearch(`${area}, Bengaluru`)}
-                                  className={`px-2.5 py-1 min-h-[24px] rounded-md text-[10.5px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                                  className={`px-2.5 py-1 min-h-[34px] sm:min-h-[24px] rounded-md text-[10.5px] border transition-all shrink-0 cursor-pointer touch-manipulation active:scale-[0.97] ${
                                     locationSearch.includes(area)
                                       ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold shadow-2xs'
                                       : 'bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300 border-gray-200/80 dark:border-zinc-700/80 hover:border-amber-400'
@@ -2167,7 +2178,7 @@ Sit back and relax. We've got your bike covered!`;
                                 required 
                                 value={heroService} 
                                 onChange={(e) => setHeroService(e.target.value)} 
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                                className="w-full h-10.5 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                               >
                                 {QUICK_SERVICE_OPTIONS.map(opt => (
                                   <option key={opt.id} value={opt.id} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">
@@ -2213,7 +2224,7 @@ Sit back and relax. We've got your bike covered!`;
                                 min={getTodayIST()}
                                 value={bookingDate}
                                 onChange={(e) => setBookingDate(e.target.value)}
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
+                                className="w-full h-10.5 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
                                 title="Calendar (Select Service Date)"
                               />
                             </div>
@@ -2230,7 +2241,7 @@ Sit back and relax. We've got your bike covered!`;
                                 required 
                                 value={bookingTime}
                                 onChange={(e) => setBookingTime(e.target.value)}
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
+                                className="w-full h-10.5 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold cursor-pointer transition-shadow" 
                                 title="Time (Select Service Time)"
                               />
                             </div>
@@ -2240,7 +2251,7 @@ Sit back and relax. We've got your bike covered!`;
                           <button 
                             type="button"
                             onClick={handleHeroSubmitClick}
-                            className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[42px] sm:min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1 active:scale-[0.98]"
+                            className="w-full relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-sm uppercase tracking-wider min-h-[46px] py-2 sm:py-2.5 px-4 rounded-xl shadow-md shadow-amber-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer touch-manipulation mt-1 active:scale-[0.98]"
                           >
                             {isSubmitting ? (
                               <div className="relative z-10 flex items-center justify-center gap-2">
@@ -2266,16 +2277,15 @@ Sit back and relax. We've got your bike covered!`;
                     </div>
                   </div>
 
-                </div>
               </div>
-            </FadeIn>
+            </div>
           </section>
       {/* WHY CHOOSE US SECTION */}
 
       {/* TRUST STATS SECTION */}
       <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 relative overflow-hidden section-auto-contain">
         {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-24 bg-amber-500/5 blur-3xl pointer-events-none rounded-full"></div>
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-24 bg-amber-500/5 blur-3xl pointer-events-none rounded-full"></div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -2408,7 +2418,7 @@ Sit back and relax. We've got your bike covered!`;
       {/* HOW IT WORKS SECTION */}
       <section id="how-it-works" className="py-20 md:py-24 relative bg-gray-50 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Subtle decorative radial lights */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[350px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[350px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Section Header */}
@@ -2578,8 +2588,8 @@ Sit back and relax. We've got your bike covered!`;
       <div id="services"></div>
       <section id="pricing" className="py-16 sm:py-24 relative bg-gray-50 dark:bg-zinc-950/50 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Background Accents */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -3630,8 +3640,8 @@ Sit back and relax. We've got your bike covered!`;
       {/* CUSTOMER REVIEWS SECTION */}
       <section id="reviews" className="py-16 sm:py-24 relative bg-gray-50/70 dark:bg-zinc-950/60 overflow-hidden border-t border-gray-100 dark:border-white/5 section-auto-contain">
         {/* Subtle background ambient glows */}
-        <div className="absolute top-1/2 left-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="hidden md:block absolute top-1/2 left-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="hidden md:block absolute top-1/3 right-0 w-80 h-80 bg-amber-500/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
@@ -3938,7 +3948,7 @@ Sit back and relax. We've got your bike covered!`;
       {/* DEDICATED QUICK & EASY BOOKING SECTION (SMALL COMPACT) */}
       <section id="quick-booking" className="py-5 sm:py-6 relative bg-gray-50 dark:bg-zinc-950 overflow-hidden border-t border-gray-200/80 dark:border-white/5 section-auto-contain">
         <div className="max-w-xl mx-auto px-3 sm:px-4 relative z-10">
-          <div className="bg-white dark:bg-zinc-900/95 backdrop-blur-xl rounded-xl p-3 sm:p-3.5 shadow-md border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
+          <div className="bg-white dark:bg-zinc-900/95 md:backdrop-blur-xl rounded-xl p-3 sm:p-3.5 shadow-md border border-gray-200/90 dark:border-zinc-800 relative overflow-hidden">
             {/* Small Header */}
             <div className="flex flex-wrap items-center justify-between gap-1.5 pb-2 mb-2 border-b border-gray-100 dark:border-zinc-800">
               <div className="flex items-center gap-2 min-w-0">
@@ -3968,7 +3978,7 @@ Sit back and relax. We've got your bike covered!`;
                   <button
                     type="button"
                     onClick={() => setHeroVehicle('Bike')}
-                    className={`flex-1 text-[11px] font-bold py-1 min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                    className={`flex-1 text-[11px] font-bold py-1 min-h-[38px] sm:min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-[0.99] ${
                       heroVehicle === 'Bike'
                         ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                         : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
@@ -3979,7 +3989,7 @@ Sit back and relax. We've got your bike covered!`;
                   <button
                     type="button"
                     onClick={() => setHeroVehicle('Scooter')}
-                    className={`flex-1 text-[11px] font-bold py-1 min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-[0.99] ${
+                    className={`flex-1 text-[11px] font-bold py-1 min-h-[38px] sm:min-h-[26px] rounded-md transition-all flex items-center justify-center gap-1 cursor-pointer touch-manipulation active:scale-[0.99] ${
                       heroVehicle === 'Scooter'
                         ? 'bg-amber-500 text-zinc-950 font-black shadow-xs'
                         : 'text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white'
@@ -3989,13 +3999,13 @@ Sit back and relax. We've got your bike covered!`;
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1 overflow-x-auto scrollbar-none max-w-full">
+                <div className="flex items-center gap-1 overflow-x-auto scrollbar-none max-w-full overscroll-x-contain touch-pan-x">
                   {POPULAR_BENGALURU_AREAS.slice(0, 4).map((area) => (
                     <button
                       key={area}
                       type="button"
                       onClick={() => setLocationSearch(`${area}, Bengaluru`)}
-                      className={`px-1.5 py-0.5 rounded text-[9px] border transition-all shrink-0 cursor-pointer active:scale-[0.97] ${
+                      className={`px-2 sm:px-1.5 py-1 sm:py-0.5 min-h-[30px] sm:min-h-0 rounded text-[10px] sm:text-[9px] border transition-all shrink-0 cursor-pointer touch-manipulation active:scale-[0.97] ${
                         locationSearch.includes(area)
                           ? 'bg-amber-500 text-zinc-950 border-amber-500 font-bold'
                           : 'bg-gray-100 dark:bg-zinc-800/90 text-gray-700 dark:text-zinc-300 border-gray-200/80 dark:border-zinc-700/80 hover:border-amber-400'
@@ -4018,11 +4028,12 @@ Sit back and relax. We've got your bike covered!`;
                     name="name"
                     aria-label="Your Name"
                     required
+                    enterKeyHint="next"
                     value={heroName}
                     onChange={(e) => setHeroName(e.target.value)}
                     placeholder="Your Name"
                     autoComplete="name"
-                    className="w-full h-8 pl-6 pr-2 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
+                    className="w-full h-10.5 sm:h-8 pl-6 pr-2 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[11px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
                   />
                 </div>
 
@@ -4038,13 +4049,14 @@ Sit back and relax. We've got your bike covered!`;
                     aria-label="10-digit mobile number"
                     required
                     inputMode="numeric"
+                    enterKeyHint="next"
                     autoComplete="tel"
                     pattern="[0-9]{10}"
                     maxLength={10}
                     value={heroPhone}
                     onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     placeholder="Phone"
-                    className={`w-full h-8 pl-[34px] py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                    className={`w-full h-10.5 sm:h-8 pl-[34px] py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[11px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
                       heroPhone.length === 10 ? 'pr-5 ring-emerald-500/50' : 'pr-1.5'
                     }`}
                   />
@@ -4071,7 +4083,7 @@ Sit back and relax. We've got your bike covered!`;
                       setHeroBrand(e.target.value);
                       setHeroModel("");
                     }}
-                    className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
+                    className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs leading-tight font-medium appearance-none cursor-pointer truncate transition-shadow"
                   >
                     <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Brand</option>
                     {Object.keys(MODELS_BY_BRAND).map(brand => (
@@ -4093,7 +4105,7 @@ Sit back and relax. We've got your bike covered!`;
                     required
                     value={heroModel}
                     onChange={(e) => setHeroModel(e.target.value)}
-                    className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
+                    className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate transition-shadow"
                     disabled={!heroBrand}
                   >
                     <option value="" disabled className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-white">Select Model</option>
@@ -4117,8 +4129,9 @@ Sit back and relax. We've got your bike covered!`;
                   name="location"
                   aria-label="Enter Your Location in Bengaluru"
                   required
+                  enterKeyHint="done"
                   placeholder="Enter Your Location in Bengaluru"
-                  className="w-full h-9.5 sm:h-10 pl-8 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
+                  className="w-full h-11 sm:h-10 pl-8 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
                   value={locationSearch}
                   onChange={(e) => setLocationSearch(e.target.value)}
                 />
@@ -4137,14 +4150,14 @@ Sit back and relax. We've got your bike covered!`;
                           setIsDetectingLocation(false);
                           setLocationSearch(`${activeLocation}, Bengaluru`);
                         },
-                        { timeout: 3000 }
+                        { enableHighAccuracy: false, timeout: 1500, maximumAge: 60000 }
                       );
                     } else {
                       setIsDetectingLocation(false);
                       setLocationSearch(`${activeLocation}, Bengaluru`);
                     }
                   }}
-                  className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-all border border-amber-500/30"
+                  className="absolute right-1 top-1 bottom-1 px-2.5 rounded-md bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-1 cursor-pointer touch-manipulation transition-all border border-amber-500/30"
                   title="Auto-fill locality"
                 >
                   <Navigation className={`w-3 h-3 ${isDetectingLocation ? 'animate-spin' : ''}`} />
@@ -4164,7 +4177,7 @@ Sit back and relax. We've got your bike covered!`;
                     required
                     value={heroService}
                     onChange={(e) => setHeroService(e.target.value)}
-                    className="w-full h-8 pl-6 pr-5 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium appearance-none cursor-pointer truncate transition-shadow"
+                    className="w-full h-10.5 sm:h-8 pl-6 pr-5 py-1.5 sm:py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[11px] font-medium appearance-none cursor-pointer truncate transition-shadow"
                   >
                     {QUICK_SERVICE_OPTIONS.map(opt => (
                       <option key={opt.id} value={opt.id} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">
@@ -4190,7 +4203,7 @@ Sit back and relax. We've got your bike covered!`;
                     min={getTodayIST()}
                     value={bookingDate}
                     onChange={(e) => setBookingDate(e.target.value)}
-                    className="w-full h-8 pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[10px] font-semibold cursor-pointer transition-shadow"
+                    className="w-full h-10.5 sm:h-8 pl-6 sm:pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[10px] font-semibold cursor-pointer transition-shadow"
                   />
                 </div>
 
@@ -4205,7 +4218,7 @@ Sit back and relax. We've got your bike covered!`;
                     required
                     value={bookingTime}
                     onChange={(e) => setBookingTime(e.target.value)}
-                    className="w-full h-8 pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[10px] font-semibold cursor-pointer transition-shadow"
+                    className="w-full h-10.5 sm:h-8 pl-6 sm:pl-5 pr-1 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[10px] font-semibold cursor-pointer transition-shadow"
                   />
                 </div>
               </div>
@@ -4230,7 +4243,7 @@ Sit back and relax. We've got your bike covered!`;
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto sm:min-w-[200px] relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-[11px] uppercase tracking-wider min-h-[34px] py-1.5 px-3.5 rounded-lg shadow-sm shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
+                  className="w-full sm:w-auto sm:min-w-[200px] relative group overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-xs sm:text-[11px] uppercase tracking-wider min-h-[44px] sm:min-h-[34px] py-1.5 px-3.5 rounded-lg shadow-sm shadow-amber-500/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation active:scale-[0.98]"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center gap-1">
@@ -4257,13 +4270,13 @@ Sit back and relax. We've got your bike covered!`;
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-80 pointer-events-none"></div>
 
         {/* Subtle background ambient glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/[0.05] blur-[140px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/[0.04] blur-[140px] rounded-full pointer-events-none"></div>
+        <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/[0.05] blur-[140px] rounded-full pointer-events-none"></div>
+        <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/[0.04] blur-[140px] rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Pre-Footer Fast-Assistance Banner */}
-          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/15 via-zinc-900/95 to-amber-500/15 border border-amber-500/30 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-sm">
+          <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/15 via-zinc-900/95 to-amber-500/15 border border-amber-500/30 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 md:backdrop-blur-sm">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-zinc-950 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/25">
                 <Bike className="w-7 h-7 stroke-[2.2]" />
@@ -4767,18 +4780,18 @@ Sit back and relax. We've got your bike covered!`;
 
               setHeroSuccess(true);
               setIsPackageModalOpen(false);
-            }} className="p-3 sm:p-4 space-y-2 overflow-y-auto">
+            }} className="p-3 sm:p-4 space-y-2 overflow-y-auto overscroll-contain">
               
               <div className="flex bg-gray-100 dark:bg-zinc-950 p-0.5 rounded-lg border border-gray-200 dark:border-zinc-800">
-                <label className="flex-1 text-center cursor-pointer">
+                <label className="flex-1 text-center cursor-pointer touch-manipulation">
                   <input type="radio" name="vehicleType" value="Bike" defaultChecked className="peer sr-only" />
-                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
+                  <div className="py-2 sm:py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🏍️ Bike
                   </div>
                 </label>
-                <label className="flex-1 text-center cursor-pointer">
+                <label className="flex-1 text-center cursor-pointer touch-manipulation">
                   <input type="radio" name="vehicleType" value="Scooter" className="peer sr-only" />
-                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
+                  <div className="py-2 sm:py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🛵 Scooter
                   </div>
                 </label>
@@ -4800,7 +4813,7 @@ Sit back and relax. We've got your bike covered!`;
                         setModalBrand(e.target.value);
                         setModalModel("");
                       }} 
-                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer truncate"
+                      className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs leading-tight font-medium appearance-none cursor-pointer truncate"
                     >
                       <option value="" disabled>Select Brand</option>
                       {Object.keys(MODELS_BY_BRAND).map(brand => (
@@ -4822,7 +4835,7 @@ Sit back and relax. We've got your bike covered!`;
                       required 
                       value={modalModel} 
                       onChange={(e) => setModalModel(e.target.value)} 
-                      className="w-full h-8 sm:h-8.5 pl-6 pr-4 py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-[11px] sm:text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate" 
+                      className="w-full h-10.5 sm:h-8.5 pl-6 pr-5 py-1.5 sm:py-1 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs leading-tight font-medium appearance-none cursor-pointer disabled:opacity-50 truncate" 
                       disabled={!modalBrand}
                     >
                       <option value="" disabled>Select Model</option>
@@ -4847,9 +4860,10 @@ Sit back and relax. We've got your bike covered!`;
                       name="fullName" 
                       aria-label="Your Name"
                       required 
+                      enterKeyHint="next"
                       autoComplete="name"
                       placeholder="Your Name" 
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
+                      className="w-full h-10.5 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
                     />
                   </div>
                   <div className="relative group">
@@ -4865,11 +4879,12 @@ Sit back and relax. We've got your bike covered!`;
                       aria-label="10-digit mobile number"
                       required 
                       inputMode="numeric"
+                      enterKeyHint="next"
                       autoComplete="tel"
                       pattern="[0-9]{10}" 
                       maxLength={10}
                       placeholder="Phone number" 
-                      className="w-full h-9 sm:h-9.5 pl-[46px] pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white dark:focus:bg-zinc-800 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide" 
+                      className="w-full h-10.5 sm:h-9.5 pl-[46px] pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white dark:focus:bg-zinc-800 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide" 
                     />
                   </div>
                 </div>
@@ -4884,8 +4899,9 @@ Sit back and relax. We've got your bike covered!`;
                     name="location" 
                     aria-label="Enter Your Location in Bengaluru"
                     required 
+                    enterKeyHint="done"
                     placeholder="Enter Your Location in Bengaluru" 
-                    className="w-full h-10 sm:h-10.5 pl-8 pr-3 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
+                    className="w-full h-11 sm:h-10.5 pl-8 pr-3 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
                   />
                 </div>
 
@@ -4899,7 +4915,7 @@ Sit back and relax. We've got your bike covered!`;
                     aria-label="Select Service Package"
                     required 
                     defaultValue={selectedPackage ? (QUICK_SERVICE_OPTIONS.find(o => o.name === selectedPackage.name)?.id || `${selectedPackage.name} - ${selectedPackage.price}`) : ""} 
-                    className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
+                    className="w-full h-10.5 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
                   >
                     <option value="" disabled>Select Service Type</option>
                     {QUICK_SERVICE_OPTIONS.map((opt) => (
@@ -4926,7 +4942,7 @@ Sit back and relax. We've got your bike covered!`;
                       min={getTodayIST()}
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
+                      className="w-full h-10.5 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
                       title="Calendar (Select Service Date)"
                     />
                   </div>
@@ -4943,7 +4959,7 @@ Sit back and relax. We've got your bike covered!`;
                       required 
                       value={bookingTime}
                       onChange={(e) => setBookingTime(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
+                      className="w-full h-10.5 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
                       title="Time (Select Service Time)"
                     />
                   </div>
@@ -5025,7 +5041,7 @@ Sit back and relax. We've got your bike covered!`;
               </button>
             </div>
             
-            <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6">
+            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-5 sm:space-y-6">
               {/* If package specific steps exist */}
               {technicalDetailsContent.steps && technicalDetailsContent.steps.length > 0 && (
                 <div>
@@ -5174,7 +5190,7 @@ Sit back and relax. We've got your bike covered!`;
             </div>
 
             {/* Modal Body */}
-            <div className="p-4 sm:p-5 overflow-y-auto space-y-4">
+            <div className="p-4 sm:p-5 overflow-y-auto overscroll-contain space-y-4">
               
               {/* Fast-Track Instant Simple Same Time Banner */}
               <button
@@ -5473,18 +5489,18 @@ Sit back and relax. We've got your bike covered!`;
       </div>
 
       {/* MOBILE STICKY BOTTOM ACTION BAR (MATCHING REFERENCE EXACTLY) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/98 dark:bg-zinc-950/98 backdrop-blur-md border-t border-gray-100 dark:border-zinc-800/80 p-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-6px_25px_rgba(0,0,0,0.08)] flex items-center gap-2.5">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-white/98 dark:bg-zinc-950/98 border-t border-gray-100 dark:border-zinc-800/80 py-2 px-3 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-6px_25px_rgba(0,0,0,0.08)] flex items-center gap-2.5">
         {/* Left: Green Squircle WhatsApp Icon Button */}
         <a
           href="https://wa.me/917090400617?text=Hi%20Yes%20Bike%20Service,%20I%20need%20doorstep%20mechanic%20service%20in%20Bengaluru."
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => fireLeadConversion()}
-          className="w-[50px] h-[50px] sm:w-[54px] sm:h-[54px] aspect-square rounded-[20px] bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-[0_4px_14px_rgba(37,211,102,0.35)] flex items-center justify-center shrink-0 cursor-pointer active:scale-95 transition-all"
+          className="w-[46px] h-[46px] sm:w-[50px] sm:h-[50px] aspect-square rounded-[16px] bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-[0_4px_14px_rgba(37,211,102,0.35)] flex items-center justify-center shrink-0 cursor-pointer touch-manipulation active:scale-95 transition-all"
           aria-label="Chat on WhatsApp"
           title="Chat on WhatsApp (+91 7090400617)"
         >
-          <svg aria-hidden="true" className="w-6.5 h-6.5 sm:w-7 sm:h-7 fill-white shrink-0" viewBox="0 0 24 24">
+          <svg aria-hidden="true" className="w-6 h-6 sm:w-6.5 sm:h-6.5 fill-white shrink-0" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>
@@ -5493,19 +5509,33 @@ Sit back and relax. We've got your bike covered!`;
         <button
           type="button"
           onClick={() => {
-            const el = document.getElementById('booking-form');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
+            const focusHeroForm = () => {
+              const el = document.getElementById('booking-form');
+              if (!el) return;
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => {
+                const nameInput = el.querySelector('input[name="name"]') as HTMLInputElement | null;
+                const phoneInput = el.querySelector('input[name="phone"]') as HTMLInputElement | null;
+                const locInput = el.querySelector('input[name="location"]') as HTMLInputElement | null;
+                if (nameInput && !nameInput.value.trim()) {
+                  nameInput.focus({ preventScroll: true });
+                } else if (phoneInput && !phoneInput.value.trim()) {
+                  phoneInput.focus({ preventScroll: true });
+                } else if (locInput) {
+                  locInput.focus({ preventScroll: true });
+                }
+              }, 350);
+            };
+            if (document.getElementById('booking-form')) {
+              focusHeroForm();
             } else {
               setCurrentView('home');
-              setTimeout(() => {
-                document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
-              }, 100);
+              setTimeout(focusHeroForm, 100);
             }
           }}
-          className="flex-1 h-[50px] sm:h-[54px] px-3.5 sm:px-4 rounded-[20px] bg-gradient-to-r from-[#FFC72C] via-[#FFB800] to-[#FFA700] hover:from-[#FFD043] hover:to-[#FFB000] text-black font-black shadow-[0_4px_18px_rgba(245,158,11,0.35)] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 group"
+          className="flex-1 h-[46px] sm:h-[50px] px-3.5 sm:px-4 rounded-[16px] bg-gradient-to-r from-[#FFC72C] via-[#FFB800] to-[#FFA700] hover:from-[#FFD043] hover:to-[#FFB000] text-black font-black shadow-[0_4px_18px_rgba(245,158,11,0.35)] active:scale-[0.98] transition-all cursor-pointer touch-manipulation flex items-center justify-center gap-2 group"
         >
-          <Wrench className="w-5 h-5 text-black shrink-0 stroke-[2.5] group-hover:rotate-12 transition-transform duration-300" />
+          <Wrench className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-black shrink-0 stroke-[2.5] group-hover:rotate-12 transition-transform duration-300" />
           <span className="text-[13px] sm:text-[14.5px] font-black text-black tracking-tight whitespace-nowrap">
             Book your service and repair today
           </span>
