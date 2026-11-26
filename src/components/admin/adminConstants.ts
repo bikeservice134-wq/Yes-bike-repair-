@@ -279,3 +279,14 @@ export const buildMechanicWhatsAppUrl = (
   const msg = `🏍️🛵 *YES BIKE SERVICE — DOORSTEP MECHANIC DISPATCH*\n\nQuality Bike Care at Your Doorstep!\nSit back and relax. We've got your bike covered!\n\n📋 *JOB DISPATCH DETAILS:*\n🆔 *Booking ID:* #${booking.id}\n👤 *Customer:* ${booking.customerName}\n📞 *Customer Phone:* ${booking.phone}\n📍 *Location:* ${booking.location}\n🗺️ *Google Maps:* ${booking.googleMapsUrl || `https://maps.google.com/?q=${encodeURIComponent(booking.location + ' Bengaluru')}`}\n🏍️ *Vehicle:* ${booking.brand} ${booking.model}${booking.registrationNumber ? ` (${booking.registrationNumber})` : ''}\n🔧 *Package:* ${booking.serviceType}\n📅 *Date:* ${booking.date}\n⏰ *Time:* ${booking.time}\n💰 *Amount:* ₹${booking.amount} (${booking.paymentStatus})\n👷 *Assigned Mechanic:* ${booking.mechanicName || 'On Duty Technician'}\n\n*Action:* Please confirm job acceptance and proceed with standard tool kit and genuine consumables.`;
   return `https://wa.me/${phoneWithCountry}?text=${encodeURIComponent(msg)}`;
 };
+
+export const ADMIN_NEW_BOOKING_ALERT = {
+  title: '🔔 NEW BOOKING RECEIVED!',
+  greeting: 'Hello Admin! 👋',
+  headline: 'You have received a new bike service booking.',
+  banner: '📢 A new customer booking has arrived.',
+  cta: 'Please check the Admin Panel and accept the booking.',
+  fullText:
+    '🔔 NEW BOOKING RECEIVED!\n\nHello Admin! 👋\n\nYou have received a new bike service booking.\n\n📢 A new customer booking has arrived.\n\nPlease check the Admin Panel and accept the booking.'
+} as const;
+

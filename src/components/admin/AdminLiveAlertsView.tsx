@@ -57,6 +57,7 @@ interface AdminLiveAlertsViewProps {
   onDeleteAlert: (id: string) => void;
   onOpenBooking: (booking: Booking) => void;
   onOpenAssign: (booking: Booking) => void;
+  onAcceptBooking?: (booking: Booking) => void;
 }
 
 export const AdminLiveAlertsView: React.FC<AdminLiveAlertsViewProps> = ({
@@ -79,7 +80,8 @@ export const AdminLiveAlertsView: React.FC<AdminLiveAlertsViewProps> = ({
   onToggleAlertRead,
   onDeleteAlert,
   onOpenBooking,
-  onOpenAssign
+  onOpenAssign,
+  onAcceptBooking
 }) => {
   const filteredAlerts = alerts.filter((a) => {
     if (filterType === 'unread' && a.read) return false;
@@ -353,6 +355,19 @@ export const AdminLiveAlertsView: React.FC<AdminLiveAlertsViewProps> = ({
                   <div className="flex flex-wrap items-center gap-2 shrink-0">
                     {relatedBooking && (
                       <>
+                        {relatedBooking.status === 'pending' && onAcceptBooking && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              onAcceptBooking(relatedBooking);
+                              if (!alert.read) onToggleAlertRead(alert.id);
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black cursor-pointer transition-colors"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <span>Accept Booking</span>
+                          </button>
+                        )}
                         <button
                           type="button"
                           onClick={() => {

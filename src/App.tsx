@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { 
-  Wrench, Clock, Shield, ThumbsUp, MousePointerClick, Star, CheckCircle2, ChevronDown, ChevronUp, MapPin, 
-  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowDown, ArrowUp, Mail, Instagram, Facebook, Twitter, Sun, Moon, Map, MessageCircle, Calendar, Banknote, Wallet, Zap, Cog, Copy, Check, Navigation, Disc, Home, Quote, RotateCcw, Search, Menu, Bot, Sparkles, Send,
-  ClipboardList, FileText, ListChecks, LayoutDashboard
+  Wrench, Clock, Shield, ThumbsUp, Star, CheckCircle2, ChevronDown, MapPin, 
+  Phone, PhoneCall, User, Smartphone, Settings, Tag, Bike, X, ArrowRight, ArrowUp, Mail, Sun, Moon, Calendar, Banknote, Wallet, Zap, Cog, Check, Navigation, Disc, Home, Quote, RotateCcw, Menu, Send,
+  ClipboardList, LayoutDashboard
 } from 'lucide-react';
 import { YesBikeLogo } from './components/YesBikeLogo';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { saveBookingPermanently, seedInitialDataIfEmpty } from './services/persistenceService';
 
-// Reusable FadeIn Component (Optimized: unobserves once visible to prevent scroll jank)
+const AdminDashboard = React.lazy(() =>
+  import('./components/admin/AdminDashboard').then((m) => ({ default: m.AdminDashboard }))
+);
+
+// Reusable FadeIn Component (Optimized: unobserves once visible & drops will-change to avoid GPU layer bloat)
 export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = React.useRef<HTMLDivElement>(null);
@@ -29,7 +31,7 @@ export const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, del
   return (
     <div 
       ref={domRef} 
-      className={`transition-all duration-700 ease-out will-change-[opacity,transform] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} 
+      className={`transition-all duration-700 ease-out ${!isVisible ? 'will-change-[opacity,transform] opacity-0 translate-y-6' : 'opacity-100 translate-y-0'}`} 
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -895,10 +897,16 @@ const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> =
 const Toast = ({ message, onClose }: { message: string, onClose: () => void }) => {
   useEffect(() => { const timer = setTimeout(onClose, 3000); return () => clearTimeout(timer); }, [onClose]);
   return (
-    <div className="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 z-50">
-      <CheckCircle2 className="w-5 h-5 text-green-400" />
+    <div
+      role="status"
+      aria-live="polite"
+      className="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 z-50"
+    >
+      <CheckCircle2 className="w-5 h-5 text-green-400" aria-hidden="true" />
       <span className="font-semibold text-sm">{message}</span>
-      <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>
+      <button type="button" onClick={onClose} aria-label="Dismiss notification" className="text-gray-300 hover:text-white cursor-pointer">
+        <X className="w-4 h-4" />
+      </button>
     </div>
   );
 };
@@ -932,7 +940,31 @@ export default function App() {
   }, [isDark]);
 
   useEffect(() => {
-    seedInitialDataIfEmpty().catch(() => {});
+    const runIdleSeed = () => {
+      import('./services/persistenceService')
+        .then(({ seedInitialDataIfEmpty }) => seedInitialDataIfEmpty())
+        .catch(() => {});
+    };
+    if ('requestIdleCallback' in window) {
+      const id = (window as any).requestIdleCallback(runIdleSeed, { timeout: 3000 });
+      return () => (window as any).cancelIdleCallback?.(id);
+    }
+    const timer = setTimeout(runIdleSeed, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsPackageModalOpen(false);
+        setShowTechDetails(false);
+        setIsTechnicalDetailsOpen(false);
+        setIsTimePickerOpen(false);
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -1204,9 +1236,10 @@ Sit back and relax. We've got your bike covered!`;
     const formattedPhone = details.phone.startsWith('+91') ? details.phone : `+91 ${details.phone}`;
     const vehicleModel = `${details.vehicle} - ${details.brand} ${details.model}`.trim();
     const payload = {
-      _subject: `🏍️🛵 BOOKING CONFIRMED! (${details.bookingId}) - ${details.fullName}`,
+      _subject: `🔔 NEW BOOKING RECEIVED! (${details.bookingId}) - ${details.fullName}`,
       _template: "box",
       _captcha: "false",
+      Admin_Notification: "🔔 NEW BOOKING RECEIVED! Hello Admin! 👋 You have received a new bike service booking. 📢 A new customer booking has arrived. Please check the Admin Panel and accept the booking.",
       Booking_ID: details.bookingId,
       Customer_Name: details.fullName,
       Customer_Phone: formattedPhone,
@@ -1309,10 +1342,12 @@ Sit back and relax. We've got your bike covered!`;
       window.dispatchEvent(new Event('storage'));
       window.dispatchEvent(new CustomEvent('yesbike_new_booking', { detail: newBookingRecord }));
 
-      // Persist permanently into Firestore database
-      saveBookingPermanently(newBookingRecord as any).catch((err) => {
-        console.warn('[Firestore] Booking persist notice:', err);
-      });
+      // Persist permanently into Firestore database (dynamically loaded to keep initial JS slim)
+      import('./services/persistenceService')
+        .then(({ saveBookingPermanently }) => saveBookingPermanently(newBookingRecord as any))
+        .catch((err) => {
+          console.warn('[Firestore] Booking persist notice:', err);
+        });
     } catch {
       // Ignore storage errors
     }
@@ -1408,7 +1443,7 @@ Sit back and relax. We've got your bike covered!`;
     // Automatic message WhatsApp send
     const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(bookingData.message)}`;
     try {
-      window.open(whatsappUrl, '_blank');
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     } catch {}
 
     dispatchBookingAutomatically(bookingData.message, {
@@ -1449,7 +1484,7 @@ Sit back and relax. We've got your bike covered!`;
     // Automatic message WhatsApp send
     const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(bookingData.message)}`;
     try {
-      window.open(whatsappUrl, '_blank');
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     } catch {}
 
     dispatchBookingAutomatically(bookingData.message, {
@@ -1530,15 +1565,23 @@ Sit back and relax. We've got your bike covered!`;
 
   if (currentView === "admin") {
     return (
-      <AdminDashboard
-        onReturnToHome={() => {
-          if (window.location.hash === '#admin') {
-            window.history.pushState(null, '', window.location.pathname);
-          }
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-amber-400 font-bold text-sm">
+            Loading Admin Portal...
+          </div>
+        }
+      >
+        <AdminDashboard
+          onReturnToHome={() => {
+            if (window.location.hash === '#admin') {
+              window.history.pushState(null, '', window.location.pathname);
+            }
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      </Suspense>
     );
   }
 
@@ -1948,12 +1991,13 @@ Sit back and relax. We've got your bike covered!`;
                               <input 
                                 type="text" 
                                 name="name" 
+                                aria-label="Your Name"
                                 required 
                                 value={heroName} 
                                 onChange={(e) => setHeroName(e.target.value)} 
                                 placeholder="Your Name" 
                                 autoComplete="name" 
-                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow" 
+                                className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
                               />
                             </div>
                             
@@ -1967,6 +2011,7 @@ Sit back and relax. We've got your bike covered!`;
                               <input 
                                 type="tel" 
                                 name="phone" 
+                                aria-label="10-digit mobile number"
                                 required 
                                 inputMode="numeric"
                                 autoComplete="tel"
@@ -1975,7 +2020,7 @@ Sit back and relax. We've got your bike covered!`;
                                 value={heroPhone}
                                 onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                 placeholder="Phone number" 
-                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-400 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                                className={`w-full h-9 sm:h-9.5 pl-[46px] py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
                                   heroPhone.length === 10 ? 'pr-6 ring-emerald-500/50' : 'pr-2'
                                 }`}
                               />
@@ -2054,14 +2099,16 @@ Sit back and relax. We've got your bike covered!`;
                               <input 
                                 type="text" 
                                 name="location" 
+                                aria-label="Enter Your Location in Bengaluru"
                                 required 
                                 placeholder="Enter Your Location in Bengaluru" 
-                                className="w-full h-10 sm:h-10.5 pl-8 pr-16 py-2 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow" 
+                                className="w-full h-10 sm:h-10.5 pl-8 pr-16 py-2 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow" 
                                 value={locationSearch} 
                                 onChange={(e) => setLocationSearch(e.target.value)} 
                               />
                               <button
                                 type="button"
+                                aria-label="Auto-fill current location using GPS"
                                 onClick={() => {
                                   setIsDetectingLocation(true);
                                   if (navigator.geolocation) {
@@ -2111,11 +2158,12 @@ Sit back and relax. We've got your bike covered!`;
                           {/* Service Dropdown & Service Details Quick Link */}
                           <div className="space-y-1">
                             <div className="relative group">
-                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                              <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                                 <Wrench className="h-3.5 w-3.5 text-amber-500" />
                               </div>
                               <select 
                                 name="service" 
+                                aria-label="Select Service Package"
                                 required 
                                 value={heroService} 
                                 onChange={(e) => setHeroService(e.target.value)} 
@@ -2128,7 +2176,7 @@ Sit back and relax. We've got your bike covered!`;
                                   </option>
                                 ))}
                               </select>
-                              <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                              <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                                 <ChevronDown className="h-3 w-3" />
                               </div>
                             </div>
@@ -2142,7 +2190,7 @@ Sit back and relax. We've got your bike covered!`;
                                   setTechnicalDetailsContent(details);
                                   setIsTechnicalDetailsOpen(true);
                                 }}
-                                className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group"
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 dark:text-amber-400 hover:text-amber-600 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group"
                               >
                                 <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
                                 <span>View Service Details &amp; Checklist</span>
@@ -2160,6 +2208,7 @@ Sit back and relax. We've got your bike covered!`;
                               <input 
                                 type="date" 
                                 name="date" 
+                                aria-label="Preferred Service Date"
                                 required 
                                 min={getTodayIST()}
                                 value={bookingDate}
@@ -2177,6 +2226,7 @@ Sit back and relax. We've got your bike covered!`;
                               <input 
                                 type="time" 
                                 name="time" 
+                                aria-label="Preferred Service Time"
                                 required 
                                 value={bookingTime}
                                 onChange={(e) => setBookingTime(e.target.value)}
@@ -2244,13 +2294,13 @@ Sit back and relax. We've got your bike covered!`;
                     Google Reviews
                   </span>
                 </div>
-                <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                <p className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                   4.8/5 <span className="text-base sm:text-lg font-bold text-gray-700 dark:text-zinc-300">Customer Rating</span>
-                </h4>
+                </p>
                 <p className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 mt-0.5 flex items-center gap-1.5">
                   <span>From 5,000+ reviews</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-500"></span>
-                  <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">98% 5★</span>
+                  <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold">98% 5★</span>
                 </p>
               </div>
             </div>
@@ -2267,13 +2317,13 @@ Sit back and relax. We've got your bike covered!`;
                     Trusted Service
                   </span>
                 </div>
-                <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                <p className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                   100,000+ <span className="text-base sm:text-lg font-bold text-gray-700 dark:text-zinc-300">Customers</span>
-                </h4>
+                </p>
                 <p className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 mt-0.5 flex items-center gap-1.5">
                   <span>Trusted across India</span>
                   <span className="w-1 h-1 rounded-full bg-amber-500"></span>
-                  <span className="text-[11px] text-gray-500 dark:text-zinc-400 font-bold">Doorstep Care</span>
+                  <span className="text-[11px] text-gray-600 dark:text-zinc-400 font-bold">Doorstep Care</span>
                 </p>
               </div>
             </div>
@@ -2290,9 +2340,9 @@ Sit back and relax. We've got your bike covered!`;
                     Rapid On-Site Doorstep
                   </span>
                 </div>
-                <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                <p className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                   Verified Mechanics
-                </h4>
+                </p>
                 <p className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 mt-0.5 flex items-center gap-1.5">
                   <span>Fastest in the city</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-500"></span>
@@ -3639,7 +3689,7 @@ Sit back and relax. We've got your bike covered!`;
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-medium text-gray-400 dark:text-zinc-500">2 days ago</span>
+                  <span className="text-[11px] font-medium text-gray-500 dark:text-zinc-400">2 days ago</span>
                 </div>
 
                 {/* Quote Content */}
@@ -3655,12 +3705,12 @@ Sit back and relax. We've got your bike covered!`;
                     RM
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                       Rahul M.
                       <span className="inline-flex items-center text-emerald-500" title="Verified Customer">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </span>
-                    </h4>
+                    </h3>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Royal Enfield Owner</p>
                   </div>
                 </div>
@@ -3695,7 +3745,7 @@ Sit back and relax. We've got your bike covered!`;
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-medium text-gray-400 dark:text-zinc-500">4 days ago</span>
+                  <span className="text-[11px] font-medium text-gray-500 dark:text-zinc-400">4 days ago</span>
                 </div>
 
                 {/* Quote Content */}
@@ -3711,12 +3761,12 @@ Sit back and relax. We've got your bike covered!`;
                     SK
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                       Sneha K.
                       <span className="inline-flex items-center text-emerald-500" title="Verified Customer">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </span>
-                    </h4>
+                    </h3>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Honda Activa Rider</p>
                   </div>
                 </div>
@@ -3751,7 +3801,7 @@ Sit back and relax. We've got your bike covered!`;
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-medium text-gray-400 dark:text-zinc-500">1 week ago</span>
+                  <span className="text-[11px] font-medium text-gray-500 dark:text-zinc-400">1 week ago</span>
                 </div>
 
                 {/* Quote Content */}
@@ -3767,12 +3817,12 @@ Sit back and relax. We've got your bike covered!`;
                     VS
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                       Vikram S.
                       <span className="inline-flex items-center text-emerald-500" title="Verified Customer">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </span>
-                    </h4>
+                    </h3>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">KTM Duke Owner</p>
                   </div>
                 </div>
@@ -3825,25 +3875,6 @@ Sit back and relax. We've got your bike covered!`;
               Everything you need to know about our doorstep service.
             </p>
           </div>
-
-          {/* JSON-LD FAQ Schema Markup for Search Engine Crawlers & Rich Snippets */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": faqItems.map((faq) => ({
-                  "@type": "Question",
-                  "name": faq.schemaQ,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": faq.a
-                  }
-                }))
-              })
-            }}
-          />
 
           <div className="space-y-4">
             {faqItems.map((faq, index) => {
@@ -3985,12 +4016,13 @@ Sit back and relax. We've got your bike covered!`;
                   <input
                     type="text"
                     name="name"
+                    aria-label="Your Name"
                     required
                     value={heroName}
                     onChange={(e) => setHeroName(e.target.value)}
                     placeholder="Your Name"
                     autoComplete="name"
-                    className="w-full h-8 pl-6 pr-2 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                    className="w-full h-8 pl-6 pr-2 py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
                   />
                 </div>
 
@@ -4003,6 +4035,7 @@ Sit back and relax. We've got your bike covered!`;
                   <input
                     type="tel"
                     name="phone"
+                    aria-label="10-digit mobile number"
                     required
                     inputMode="numeric"
                     autoComplete="tel"
@@ -4011,7 +4044,7 @@ Sit back and relax. We've got your bike covered!`;
                     value={heroPhone}
                     onChange={(e) => setHeroPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     placeholder="Phone"
-                    className={`w-full h-8 pl-[34px] py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold placeholder:text-gray-400 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
+                    className={`w-full h-8 pl-[34px] py-1 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-[11px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide transition-shadow ${
                       heroPhone.length === 10 ? 'pr-5 ring-emerald-500/50' : 'pr-1.5'
                     }`}
                   />
@@ -4026,7 +4059,7 @@ Sit back and relax. We've got your bike covered!`;
               {/* Row 1B: Select Brand & Select Model */}
               <div className="grid grid-cols-2 gap-1.5">
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                     <Tag className="h-3 w-3" />
                   </div>
                   <select
@@ -4045,13 +4078,13 @@ Sit back and relax. We've got your bike covered!`;
                       <option key={brand} value={brand} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{brand}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                     <ChevronDown className="h-3 w-3" />
                   </div>
                 </div>
 
                 <div className="relative group min-w-0">
-                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                     <Bike className="h-3 w-3" />
                   </div>
                   <select
@@ -4068,7 +4101,7 @@ Sit back and relax. We've got your bike covered!`;
                       <option key={model} value={model} className="text-gray-900 bg-white dark:text-white dark:bg-zinc-900">{model}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                     <ChevronDown className="h-3 w-3" />
                   </div>
                 </div>
@@ -4082,14 +4115,16 @@ Sit back and relax. We've got your bike covered!`;
                 <input
                   type="text"
                   name="location"
+                  aria-label="Enter Your Location in Bengaluru"
                   required
                   placeholder="Enter Your Location in Bengaluru"
-                  className="w-full h-9.5 sm:h-10 pl-8 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400 dark:placeholder:text-zinc-400 transition-shadow"
+                  className="w-full h-9.5 sm:h-10 pl-8 pr-14 py-1.5 rounded-lg border-0 ring-1 ring-gray-200/90 dark:ring-zinc-700/80 bg-gray-50 dark:bg-zinc-800/80 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-shadow"
                   value={locationSearch}
                   onChange={(e) => setLocationSearch(e.target.value)}
                 />
                 <button
                   type="button"
+                  aria-label="Auto-fill current location using GPS"
                   onClick={() => {
                     setIsDetectingLocation(true);
                     if (navigator.geolocation) {
@@ -4125,6 +4160,7 @@ Sit back and relax. We've got your bike covered!`;
                   </div>
                   <select
                     name="service"
+                    aria-label="Select Service Package"
                     required
                     value={heroService}
                     onChange={(e) => setHeroService(e.target.value)}
@@ -4137,7 +4173,7 @@ Sit back and relax. We've got your bike covered!`;
                       </option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400 dark:text-zinc-400">
+                  <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                     <ChevronDown className="h-2.5 w-2.5" />
                   </div>
                 </div>
@@ -4149,6 +4185,7 @@ Sit back and relax. We've got your bike covered!`;
                   <input
                     type="date"
                     name="date"
+                    aria-label="Preferred Service Date"
                     required
                     min={getTodayIST()}
                     value={bookingDate}
@@ -4164,6 +4201,7 @@ Sit back and relax. We've got your bike covered!`;
                   <input
                     type="time"
                     name="time"
+                    aria-label="Preferred Service Time"
                     required
                     value={bookingTime}
                     onChange={(e) => setBookingTime(e.target.value)}
@@ -4345,9 +4383,9 @@ Sit back and relax. We've got your bike covered!`;
             <div className="lg:col-span-3">
               <div className="flex items-center gap-2 mb-5 pb-2 border-b border-zinc-800">
                 <span className="w-2 h-2 rounded-full bg-amber-400 shadow-xs shadow-amber-400/50"></span>
-                <h4 className="font-extrabold text-white uppercase tracking-wider text-xs">
+                <h3 className="font-extrabold text-white uppercase tracking-wider text-xs">
                   Quick Links
-                </h4>
+                </h3>
               </div>
               <ul className="space-y-3 text-sm font-medium">
                 {[
@@ -4375,9 +4413,9 @@ Sit back and relax. We've got your bike covered!`;
             <div className="lg:col-span-4">
               <div className="flex items-center gap-2 mb-5 pb-2 border-b border-zinc-800">
                 <span className="w-2 h-2 rounded-full bg-amber-400 shadow-xs shadow-amber-400/50"></span>
-                <h4 className="font-extrabold text-white uppercase tracking-wider text-xs">
-                  Contact & Dispatch
-                </h4>
+                <h3 className="font-extrabold text-white uppercase tracking-wider text-xs">
+                  Contact &amp; Dispatch
+                </h3>
               </div>
               <ul className="space-y-3.5 text-sm">
                 <li className="flex items-start gap-3 text-zinc-300">
@@ -4535,7 +4573,12 @@ Sit back and relax. We've got your bike covered!`;
       {/* QUICK CONTACT BOTTOM BAR (MOBILE) */}
       {/* PACKAGE BOOKING MODAL */}
       {isPackageModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Book Service Package"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
+        >
           <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-gray-200/80 dark:border-zinc-800 flex flex-col max-h-[92dvh] sm:max-h-[90vh]">
             {selectedPackage?.name.includes('Royal Enfield') ? (
               <div className="p-3.5 sm:p-4.5 bg-gradient-to-b from-amber-500/12 via-amber-500/5 to-transparent border-b border-gray-100 dark:border-zinc-800">
@@ -4562,8 +4605,9 @@ Sit back and relax. We've got your bike covered!`;
                     </div>
                   </div>
                   <button 
+                    type="button"
                     onClick={() => setIsPackageModalOpen(false)} 
-                    className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
+                    className="text-gray-500 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-white transition-colors bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
                     aria-label="Close modal"
                   >
                     <X className="w-4 h-4" />
@@ -4576,7 +4620,7 @@ Sit back and relax. We've got your bike covered!`;
                     <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
                       {selectedPackage.name.includes('650 cc') ? '₹3,999' : '₹2,399/-'}
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-gray-400 line-through">
+                    <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-zinc-400 line-through">
                       {selectedPackage.name.includes('650 cc') ? '₹4,999' : '₹2,999'}
                     </span>
                     <span className="text-[10px] sm:text-[11px] font-extrabold text-amber-800 dark:text-amber-300 bg-amber-500/15 px-2 py-0.5 rounded-md border border-amber-500/20">
@@ -4630,11 +4674,11 @@ Sit back and relax. We've got your bike covered!`;
                           </span>
                           {selectedPackage.name.includes("Jump Start") ? (
                             <span className="flex items-center gap-1 shrink-0">
-                              <span className="line-through text-gray-400 font-semibold text-[10px]">/₹600/</span>
-                              <span className="font-black text-amber-600 dark:text-amber-400">{selectedPackage.price}</span>
+                              <span className="line-through text-gray-500 dark:text-zinc-400 font-semibold text-[10px]">/₹600/</span>
+                              <span className="font-black text-amber-700 dark:text-amber-400">{selectedPackage.price}</span>
                             </span>
                           ) : (
-                            <span className="font-black text-amber-600 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
+                            <span className="font-black text-amber-700 dark:text-amber-400 shrink-0">{selectedPackage.price}</span>
                           )}
                         </div>
                         <button
@@ -4644,7 +4688,7 @@ Sit back and relax. We've got your bike covered!`;
                             setTechnicalDetailsContent(details);
                             setIsTechnicalDetailsOpen(true);
                           }}
-                          className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group shrink-0"
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 dark:text-amber-400 hover:text-amber-600 dark:hover:text-amber-300 transition-colors cursor-pointer py-0.5 group shrink-0"
                           title="View Service Details"
                         >
                           <ClipboardList className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform" />
@@ -4655,8 +4699,9 @@ Sit back and relax. We've got your bike covered!`;
                   </div>
                 </div>
                 <button 
+                  type="button"
                   onClick={() => setIsPackageModalOpen(false)} 
-                  className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
+                  className="text-gray-500 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-white transition-colors self-start bg-gray-100 dark:bg-zinc-800 p-1.5 rounded-full cursor-pointer shrink-0"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
@@ -4701,7 +4746,7 @@ Sit back and relax. We've got your bike covered!`;
               
               const whatsappUrl = `https://wa.me/917090400617?text=${encodeURIComponent(message)}`;
               try {
-                window.open(whatsappUrl, '_blank');
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
               } catch {}
               
               dispatchBookingAutomatically(
@@ -4727,13 +4772,13 @@ Sit back and relax. We've got your bike covered!`;
               <div className="flex bg-gray-100 dark:bg-zinc-950 p-0.5 rounded-lg border border-gray-200 dark:border-zinc-800">
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Bike" defaultChecked className="peer sr-only" />
-                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
+                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🏍️ Bike
                   </div>
                 </label>
                 <label className="flex-1 text-center cursor-pointer">
                   <input type="radio" name="vehicleType" value="Scooter" className="peer sr-only" />
-                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-500 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
+                  <div className="py-1.5 text-xs font-bold rounded-md transition-all text-gray-600 dark:text-zinc-400 peer-checked:bg-white peer-checked:dark:bg-zinc-800 peer-checked:text-gray-900 peer-checked:dark:text-white peer-checked:shadow-xs">
                     🛵 Scooter
                   </div>
                 </label>
@@ -4743,7 +4788,7 @@ Sit back and relax. We've got your bike covered!`;
                 {/* Brand & Model */}
                 <div className="grid grid-cols-2 gap-1.5">
                   <div className="relative group min-w-0">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                       <Tag className="h-3 w-3" />
                     </div>
                     <select 
@@ -4762,13 +4807,13 @@ Sit back and relax. We've got your bike covered!`;
                         <option key={brand} value={brand}>{brand}</option>
                       ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                       <ChevronDown className="h-3 w-3" />
                     </div>
                   </div>
 
                   <div className="relative group min-w-0">
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                       <Bike className="h-3 w-3" />
                     </div>
                     <select 
@@ -4785,7 +4830,7 @@ Sit back and relax. We've got your bike covered!`;
                         <option key={model} value={model}>{model}</option>
                       ))}
                     </select>
-                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-400">
+                    <div className="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                       <ChevronDown className="h-3 w-3" />
                     </div>
                   </div>
@@ -4794,16 +4839,17 @@ Sit back and relax. We've got your bike covered!`;
                 {/* Customer Name & Phone */}
                 <div className="grid grid-cols-2 gap-2">
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                       <User className="h-3.5 w-3.5" />
                     </div>
                     <input 
                       type="text" 
                       name="fullName" 
+                      aria-label="Your Name"
                       required 
                       autoComplete="name"
                       placeholder="Your Name" 
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400" 
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
                     />
                   </div>
                   <div className="relative group">
@@ -4816,38 +4862,41 @@ Sit back and relax. We've got your bike covered!`;
                     <input 
                       type="tel" 
                       name="phone" 
+                      aria-label="10-digit mobile number"
                       required 
                       inputMode="numeric"
                       autoComplete="tel"
                       pattern="[0-9]{10}" 
                       maxLength={10}
                       placeholder="Phone number" 
-                      className="w-full h-9 sm:h-9.5 pl-[46px] pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white dark:focus:bg-zinc-800 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-400 tracking-wide" 
+                      className="w-full h-9 sm:h-9.5 pl-[46px] pr-2 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white dark:focus:bg-zinc-800 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-gray-500 dark:placeholder:text-zinc-400 tracking-wide" 
                     />
                   </div>
                 </div>
                 
                 {/* Location / Address */}
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                     <MapPin className="h-4 w-4" />
                   </div>
                   <input 
-                    type="text"
+                    type="text" 
                     name="location" 
+                    aria-label="Enter Your Location in Bengaluru"
                     required 
                     placeholder="Enter Your Location in Bengaluru" 
-                    className="w-full h-10 sm:h-10.5 pl-8 pr-3 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-400"
+                    className="w-full h-10 sm:h-10.5 pl-8 pr-3 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold placeholder:text-xs sm:placeholder:text-[13px] placeholder:font-medium placeholder:text-gray-500 dark:placeholder:text-zinc-400" 
                   />
                 </div>
 
                 {/* Service Dropdown */}
                 <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-amber-500 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400 group-focus-within:text-amber-500 transition-colors">
                     <Wrench className="h-3.5 w-3.5" />
                   </div>
                   <select 
                     name="service" 
+                    aria-label="Select Service Package"
                     required 
                     defaultValue={selectedPackage ? (QUICK_SERVICE_OPTIONS.find(o => o.name === selectedPackage.name)?.id || `${selectedPackage.name} - ${selectedPackage.price}`) : ""} 
                     className="w-full h-9 sm:h-9.5 pl-7 pr-6 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold appearance-none cursor-pointer truncate"
@@ -4857,7 +4906,7 @@ Sit back and relax. We've got your bike covered!`;
                       <option key={opt.id} value={opt.id}>{opt.name} - {opt.price}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-400">
+                  <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-gray-500 dark:text-zinc-400">
                     <ChevronDown className="h-3.5 w-3.5" />
                   </div>
                 </div>
@@ -4872,11 +4921,12 @@ Sit back and relax. We've got your bike covered!`;
                     <input 
                       type="date" 
                       name="date" 
+                      aria-label="Preferred Service Date"
                       required 
                       min={getTodayIST()}
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
                       title="Calendar (Select Service Date)"
                     />
                   </div>
@@ -4889,10 +4939,11 @@ Sit back and relax. We've got your bike covered!`;
                     <input 
                       type="time" 
                       name="time" 
+                      aria-label="Preferred Service Time"
                       required 
                       value={bookingTime}
                       onChange={(e) => setBookingTime(e.target.value)}
-                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer"
+                      className="w-full h-9 sm:h-9.5 pl-7 pr-1.5 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50/90 dark:bg-zinc-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-amber-500 transition-all text-xs sm:text-[13px] font-semibold cursor-pointer" 
                       title="Time (Select Service Time)"
                     />
                   </div>
@@ -4930,7 +4981,12 @@ Sit back and relax. We've got your bike covered!`;
       
       {/* TECHNICAL DETAILS MODAL */}
       {(showTechDetails || isTechnicalDetailsOpen) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={technicalDetailsContent.title || "Service Details & Specifications"}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in"
@@ -4957,11 +5013,13 @@ Sit back and relax. We've got your bike covered!`;
                 </div>
               </div>
               <button 
+                type="button"
+                aria-label="Close service details modal"
                 onClick={() => {
                   setShowTechDetails(false);
                   setIsTechnicalDetailsOpen(false);
                 }}
-                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
+                className="p-2 text-gray-500 hover:text-gray-700 dark:text-zinc-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -5074,7 +5132,12 @@ Sit back and relax. We've got your bike covered!`;
       
       {/* MOBILE RESPONSIVE TIME PICKER MODAL */}
       {isTimePickerOpen && (
-        <div className="fixed inset-0 z-[120] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Select Service Time"
+          className="fixed inset-0 z-[120] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200"
+        >
           {/* Backdrop dismiss */}
           <div 
             className="absolute inset-0"
@@ -5103,7 +5166,7 @@ Sit back and relax. We've got your bike covered!`;
               <button
                 type="button"
                 onClick={handlePickerCancel}
-                className="w-8 h-8 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 flex items-center justify-center text-gray-500 dark:text-zinc-400 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 flex items-center justify-center text-gray-600 dark:text-zinc-400 transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X className="w-4 h-4" />
@@ -5160,7 +5223,7 @@ Sit back and relax. We've got your bike covered!`;
                     <span className="text-2xl sm:text-3xl font-black font-mono text-gray-900 dark:text-white tracking-tight">
                       {String(pickerHour).padStart(2, '0')}
                     </span>
-                    <span className="block text-[9px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">Hour</span>
+                    <span className="block text-[9px] font-bold text-gray-600 dark:text-zinc-400 uppercase tracking-widest">Hour</span>
                   </div>
                   
                   <span className="text-2xl font-black text-amber-500 animate-pulse">:</span>
@@ -5169,7 +5232,7 @@ Sit back and relax. We've got your bike covered!`;
                     <span className="text-2xl sm:text-3xl font-black font-mono text-gray-900 dark:text-white tracking-tight">
                       {pickerMinute}
                     </span>
-                    <span className="block text-[9px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">Min</span>
+                    <span className="block text-[9px] font-bold text-gray-600 dark:text-zinc-400 uppercase tracking-widest">Min</span>
                   </div>
                 </div>
 
@@ -5181,7 +5244,7 @@ Sit back and relax. We've got your bike covered!`;
                     className={`px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
                       pickerPeriod === 'AM'
                         ? 'bg-amber-500 text-zinc-950 shadow-sm'
-                        : 'text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                        : 'text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                     }`}
                   >
                     AM
@@ -5192,7 +5255,7 @@ Sit back and relax. We've got your bike covered!`;
                     className={`px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
                       pickerPeriod === 'PM'
                         ? 'bg-amber-500 text-zinc-950 shadow-sm'
-                        : 'text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                        : 'text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                     }`}
                   >
                     PM
@@ -5202,7 +5265,7 @@ Sit back and relax. We've got your bike covered!`;
 
               {/* Quick Presets */}
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block mb-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600 dark:text-zinc-400 block mb-2">
                   Quick Shortcuts
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -5260,7 +5323,7 @@ Sit back and relax. We've got your bike covered!`;
 
               {/* Hour Selection (1 to 12) */}
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block mb-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600 dark:text-zinc-400 block mb-1.5">
                   Select Hour
                 </span>
                 <div className="grid grid-cols-6 gap-1.5">
@@ -5286,7 +5349,7 @@ Sit back and relax. We've got your bike covered!`;
 
               {/* Minute Selection */}
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block mb-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600 dark:text-zinc-400 block mb-1.5">
                   Select Minutes
                 </span>
                 <div className="grid grid-cols-4 sm:grid-cols-6 gap-1.5">
@@ -5387,7 +5450,7 @@ Sit back and relax. We've got your bike covered!`;
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           <span>WhatsApp Chat</span>
-          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded-full font-extrabold border border-emerald-500/30">Online</span>
+          <span className="text-[10px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded-full font-extrabold border border-emerald-500/30">Online</span>
         </a>
 
         {/* Circular Floating WhatsApp Icon */}
@@ -5403,7 +5466,7 @@ Sit back and relax. We've got your bike covered!`;
           {/* Subtle pulse ring */}
           <span className="absolute -inset-1 rounded-full bg-[#25D366]/30 animate-pulse pointer-events-none"></span>
           
-          <svg className="w-7 h-7 fill-current shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <svg aria-hidden="true" className="w-7 h-7 fill-current shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>
@@ -5421,7 +5484,7 @@ Sit back and relax. We've got your bike covered!`;
           aria-label="Chat on WhatsApp"
           title="Chat on WhatsApp (+91 7090400617)"
         >
-          <svg className="w-6.5 h-6.5 sm:w-7 sm:h-7 fill-white shrink-0" viewBox="0 0 24 24">
+          <svg aria-hidden="true" className="w-6.5 h-6.5 sm:w-7 sm:h-7 fill-white shrink-0" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
         </a>

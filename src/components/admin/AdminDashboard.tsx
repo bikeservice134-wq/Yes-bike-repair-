@@ -79,6 +79,7 @@ import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
 import { soundService, AlertSoundTone, SoundConfig } from '../../services/soundService';
 import {
+  ADMIN_NEW_BOOKING_ALERT,
   AdminBusinessSettings,
   BENGALURU_ZONES,
   BOOKING_STATUS_META,
@@ -311,8 +312,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         timestamp: Date.now() - 60000,
         read: false,
         type: 'new_booking',
-        title: 'New Doorstep Booking',
-        message: 'Priya Nambiar booked Basic General Service in BTM Layout'
+        title: ADMIN_NEW_BOOKING_ALERT.title,
+        message: `${ADMIN_NEW_BOOKING_ALERT.greeting} ${ADMIN_NEW_BOOKING_ALERT.headline} ${ADMIN_NEW_BOOKING_ALERT.banner} ${ADMIN_NEW_BOOKING_ALERT.cta} (Priya Nambiar · Basic General Service in BTM Layout)`
       },
       {
         id: 'alert-2',
@@ -444,15 +445,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
       timestamp: Date.now(),
       read: false,
       type: 'new_booking',
-      title: 'New Doorstep Booking',
-      message: `${b.customerName} booked ${b.serviceType} for ${b.brand} ${b.model} in ${b.location}`
+      title: ADMIN_NEW_BOOKING_ALERT.title,
+      message: `${ADMIN_NEW_BOOKING_ALERT.greeting} ${ADMIN_NEW_BOOKING_ALERT.headline} ${ADMIN_NEW_BOOKING_ALERT.banner} ${ADMIN_NEW_BOOKING_ALERT.cta} (${b.customerName} · ${b.brand} ${b.model} in ${b.location})`
     };
 
     setAlerts((prev) => [newAlert, ...prev]);
     soundService.playNewBookingSound();
     soundService.triggerDesktopNotification(
-      `YES BIKE: New Booking from ${b.customerName}`,
-      `${b.brand} ${b.model} · ${b.serviceType} (${b.location})`
+      ADMIN_NEW_BOOKING_ALERT.title,
+      `${ADMIN_NEW_BOOKING_ALERT.greeting}\n${ADMIN_NEW_BOOKING_ALERT.headline}\n${ADMIN_NEW_BOOKING_ALERT.banner}\n${ADMIN_NEW_BOOKING_ALERT.cta}\n\n${b.customerName} · ${b.brand} ${b.model} · ${b.serviceType} (${b.location})`
     );
     setNewBookingToast(b);
   };
@@ -1691,6 +1692,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                               <div className="flex items-center gap-1.5">
                                 {rel && (
                                   <>
+                                    {rel.status === 'pending' && (
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          handleUpdateStatus(rel.id, 'accepted', 'Accepted via Admin Notification Center');
+                                          setAlerts((prev) =>
+                                            prev.map((x) => (x.id === alert.id ? { ...x, read: true } : x))
+                                          );
+                                          setShowNotificationCenter(false);
+                                        }}
+                                        className="px-2 py-1 rounded bg-emerald-500 text-black text-[10px] font-black cursor-pointer"
+                                      >
+                                        Accept
+                                      </button>
+                                    )}
                                     <button
                                       type="button"
                                       onClick={() => {
@@ -1785,9 +1801,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                 <BellRing className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#FFC107]">
-                    New Doorstep Booking
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-[#FFC107]">
+                    {ADMIN_NEW_BOOKING_ALERT.title}
                   </span>
                   <button
                     type="button"
@@ -1797,16 +1813,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <h4 className="text-sm font-black text-white mt-1 truncate">
+                <div className="mt-1.5 space-y-0.5 text-[11px] text-zinc-200 leading-snug">
+                  <p className="font-bold text-white">{ADMIN_NEW_BOOKING_ALERT.greeting}</p>
+                  <p>{ADMIN_NEW_BOOKING_ALERT.headline}</p>
+                  <p className="text-amber-300 font-semibold">{ADMIN_NEW_BOOKING_ALERT.banner}</p>
+                  <p className="text-zinc-400">{ADMIN_NEW_BOOKING_ALERT.cta}</p>
+                </div>
+                <h4 className="text-xs font-black text-white mt-2 truncate pt-1.5 border-t border-white/10">
                   {newBookingToast.customerName} ·{' '}
                   <span className="font-mono text-[#FFC107]">{newBookingToast.phone}</span>
                 </h4>
-                <p className="text-xs text-zinc-400 truncate mt-0.5">
+                <p className="text-[11px] text-zinc-400 truncate mt-0.5">
                   {newBookingToast.brand} {newBookingToast.model} · {newBookingToast.location} · ₹
                   {newBookingToast.amount}
                 </p>
 
                 <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleUpdateStatus(newBookingToast.id, 'accepted', 'Accepted via Live Alert Banner');
+                      setNewBookingToast(null);
+                    }}
+                    className="px-2.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black cursor-pointer transition-colors"
+                  >
+                    Accept Booking
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
@@ -3195,6 +3227,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
               onDeleteAlert={(id) => setAlerts((prev) => prev.filter((a) => a.id !== id))}
               onOpenBooking={(b) => setSelectedBooking(b)}
               onOpenAssign={(b) => setShowAssignModal(b)}
+              onAcceptBooking={(b) => handleUpdateStatus(b.id, 'accepted', 'Accepted via Live Alerts Hub')}
             />
           )}
 

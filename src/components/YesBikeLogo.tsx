@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import yesBikeLogoImg from '../assets/images/yes_bike_service_logo_1791192452539.jpg';
+import yesBikeLogoImg from '../assets/images/yes_bike_service_logo.webp';
 
 interface YesBikeLogoProps {
   className?: string;
@@ -19,7 +19,13 @@ export const YesBikeLogo: React.FC<YesBikeLogoProps> = ({
   return (
     <img 
       src={imgSrc}
-      onError={() => setImgSrc('/logo.jpg')}
+      onError={() => {
+        if (imgSrc !== '/logo.webp' && imgSrc !== '/logo.jpg') {
+          setImgSrc('/logo.webp');
+        } else if (imgSrc === '/logo.webp') {
+          setImgSrc('/logo.jpg');
+        }
+      }}
       alt={alt}
       width={size}
       height={size}

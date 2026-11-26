@@ -22,6 +22,22 @@ if (!fs.existsSync(BOOKINGS_FILE)) {
 
 async function startServer() {
   const app = express();
+  app.disable('x-powered-by');
+  app.use((_req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), payment=(), geolocation=(self)');
+    next();
+  });
+  app.use((req, res, next) => {
+    if (/\.(webp|jpg|jpeg|png|svg|ico|woff2)$/i.test(req.path)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+    } else if (/^\/(robots\.txt|sitemap\.xml)$/i.test(req.path)) {
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+    next();
+  });
   app.use(compression());
   app.use(express.json());
 
@@ -82,9 +98,11 @@ async function startServer() {
       // Automatically dispatch email notification in background via FormSubmit
       try {
         const payload = {
-          _subject: `🏍️🛵 BOOKING CONFIRMED! (${bookingId}) - ${fullName}`,
+          _subject: `🔔 NEW BOOKING RECEIVED! (${bookingId}) - ${fullName}`,
           _template: 'box',
           _captcha: 'false',
+          Admin_Notification:
+            '🔔 NEW BOOKING RECEIVED!\n\nHello Admin! 👋\n\nYou have received a new bike service booking.\n\n📢 A new customer booking has arrived.\n\nPlease check the Admin Panel and accept the booking.',
           Booking_ID: bookingId,
           Customer_Name: fullName,
           Customer_Phone: phone,
@@ -226,9 +244,12 @@ Return ONLY a JSON object with this exact shape:
     app.use(express.static('dist', {
       maxAge: '1y',
       immutable: true,
+      etag: true,
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {
           res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        } else if (/\.(jpg|jpeg|png|webp|svg|txt|xml)$/i.test(filePath) && !filePath.includes('/assets/')) {
+          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
         }
       }
     }));

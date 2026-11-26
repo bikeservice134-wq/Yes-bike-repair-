@@ -76,7 +76,7 @@ class SoundService {
       try {
         new Notification(title, {
           body,
-          icon: '/favicon.ico'
+          icon: '/logo.jpg'
         });
       } catch {
         // ignore
