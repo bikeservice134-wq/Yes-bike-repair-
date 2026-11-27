@@ -1020,14 +1020,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
         bike: 'Suzuki Access 125',
         svc: 'Puncture Repair (₹599)',
         amt: 599
-      },
-      {
-        name: 'Rohan Deshmukh',
-        phone: '+91 97391 22018',
-        loc: 'Jayanagar, Bengaluru',
-        bike: 'KTM Duke 250',
-        svc: 'Inspection & Repair (Starting at ₹399)',
-        amt: 399
       }
     ];
     const picked = mockCandidates[Math.floor(Math.random() * mockCandidates.length)];
@@ -2346,7 +2338,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onReturnToHome }
                   <option value="Royal Enfield 650">Royal Enfield 650 cc Twin (₹3,999)</option>
                   <option value="Jump Start">Jump Start Service (₹449)</option>
                   <option value="Puncture Repair">Puncture Repair (₹599)</option>
-                  <option value="Inspection & Repair">Inspection & Repair (Starting at ₹399)</option>
                 </select>
 
                 <input

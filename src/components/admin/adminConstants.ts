@@ -140,21 +140,6 @@ export const DEFAULT_SERVICE_PACKAGES: ServicePackageItem[] = [
       'Cold Tyre Pressure Calibration (Front & Rear)',
       'Tread Wear & Safety Inspection'
     ]
-  },
-  {
-    id: 'pkg-inspection',
-    name: 'Inspection & Repair',
-    price: 399,
-    priceLabel: 'Starting at ₹399',
-    duration: '30 - 60 Mins',
-    category: 'Breakdown',
-    items: [
-      'Doorstep Multi-Point Fault Diagnosis',
-      'Starting Trouble, Electrical & Braking Checks',
-      'Minor Adjustments & Cable Fixes On-Spot',
-      'Transparent Spare Parts & Repair Estimate',
-      'Zero Hidden Charges · Pay After Service'
-    ]
   }
 ];
 

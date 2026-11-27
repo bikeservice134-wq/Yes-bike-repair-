@@ -269,7 +269,6 @@ const QUICK_SERVICE_OPTIONS = [
   { id: "Royal Enfield 650 cc General Service with Engine Oil Twin (₹3,999)", name: "Royal Enfield 650 cc General Service with Engine Oil Twin", price: "₹3,999", note: "16-Point Service: Engine Oil & Filter, Air Filter, Spark Plug, Brake, Clutch, Chain, Battery & Dry Wash", badge: "RE 650 Twins" },
   { id: "Jump Start Service - ₹449", name: "Jump Start Service", price: "₹449", note: "Available at Doorstep • 30 Mins • For Bikes & Scooters", badge: "Express" },
   { id: "Puncture Repair - ₹599", name: "Puncture Repair", price: "₹599", note: "Doorstep tyre puncture fix at your location", badge: "Express" },
-  { id: "Inspection & Repair - ₹399", name: "Inspection & Repair", price: "Starting at ₹399", note: "Professional vehicle inspection, fault diagnosis & repair advice", badge: "Starting ₹399" },
 ];
 
 const SERVICE_DETAILS_DATA: Record<string, { title: string; steps: string[] }> = {
@@ -1541,7 +1540,7 @@ Sit back and relax. We've got your bike covered!`;
     {
       q: "6. What doorstep bike services are available and what are the prices?",
       schemaQ: "What doorstep bike services are available and what are the prices?",
-      a: "We offer Basic General Service at ₹699 (discounted from ₹899), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹449, Puncture Repair at ₹599, and Inspection & Repair starting at ₹399.",
+      a: "We offer Basic General Service at ₹699 (discounted from ₹899), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹449, and Puncture Repair at ₹599.",
       icon: Shield
     },
     {
@@ -1857,7 +1856,7 @@ Sit back and relax. We've got your bike covered!`;
                           { id: "Basic General Service - ₹699", icon: "", label: "Basic General Service", price: "₹699", isSmall: true },
                           { id: "General Service with Engine Oil - ₹1,349", icon: "🛢️", label: "Service + Oil", price: "₹1,349" },
                           { id: "Jump Start Service - ₹449", icon: "⚡", label: "Jump Start", price: "₹449" },
-                          { id: "Inspection & Repair - ₹399", icon: "🏍️", label: "Inspection & Repair", price: "₹399", isSmall: true },
+                          { id: "Puncture Repair - ₹599", icon: "🛞", label: "Puncture Repair", price: "₹599", isSmall: true },
                         ].map((srv) => {
                           const isSelected = heroService === srv.id;
                           return (
@@ -2900,7 +2899,7 @@ Sit back and relax. We've got your bike covered!`;
               </div>
             </div>
 
-          {/* CATEGORY 2: BREAKDOWN & RESCUE (₹449, ₹599, ₹399) */}
+          {/* CATEGORY 2: BREAKDOWN & RESCUE (₹449 & ₹599) */}
           <div className="mb-14 sm:mb-18">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8 pb-3 border-t border-gray-200/80 dark:border-zinc-800 pt-8 sm:pt-10">
                   <div className="flex items-center gap-2.5">
@@ -2921,7 +2920,7 @@ Sit back and relax. We've got your bike covered!`;
                   </span>
                 </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
                 {/* Pkg 3: Jump Start Service */}
                 <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-5 sm:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
                   <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
@@ -3157,123 +3156,6 @@ Sit back and relax. We've got your bike covered!`;
                     >
                       <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
                       <span>View Service Details (8 Points)</span>
-                      <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Pkg 5: Inspection & Repair */}
-                <div className="bg-white dark:bg-zinc-900 rounded-3xl border-2 border-amber-400/80 dark:border-amber-500/40 p-5 sm:p-6 flex flex-col shadow-xl hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 h-full relative group hover:-translate-y-1 overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
-                    <Wrench className="w-24 h-24 text-amber-500" />
-                  </div>
-
-                  {/* Floating Top Badges */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 font-extrabold text-[11px] uppercase tracking-wider border border-amber-400/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                      Doorstep Diagnosis
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20">
-                      Save ₹201 (33% OFF)
-                    </span>
-                  </div>
-
-                  {/* Header */}
-                  <div className="relative z-10 mb-2.5">
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <div className="w-12 h-12 bg-amber-500/15 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-400/30 shrink-0">
-                        <span className="text-2xl leading-none">🔍</span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
-                          <span>Inspection &amp; Repair</span>
-                        </h3>
-                        <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
-                          Starting at ₹399
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Price Banner */}
-                  <div className="relative z-10 flex items-baseline gap-2 mb-3 pb-3 border-b border-gray-100 dark:border-zinc-800">
-                    <span className="text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Starting at</span>
-                    <span className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">₹399</span>
-                    <span className="text-base font-semibold text-gray-400 line-through">₹600</span>
-                    <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Save ₹201 (33% OFF)</span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-xs text-gray-600 dark:text-gray-300 font-medium mb-3.5 leading-relaxed">
-                    Professional bike and scooter inspection, accurate fault diagnosis, and expert repair recommendations at your doorstep.
-                  </p>
-
-                  {/* Key Highlights */}
-                  <div className="grid grid-cols-3 gap-2 mb-4">
-                    <div className="p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                      <span className="text-base mb-0.5">🏠</span>
-                      <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Doorstep</span>
-                      <span className="text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Home/Office</span>
-                    </div>
-                    <div className="p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                      <span className="text-base mb-0.5">⏱️</span>
-                      <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">30 Mins</span>
-                      <span className="text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Fast Arrival</span>
-                    </div>
-                    <div className="p-2 rounded-xl bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 dark:border-amber-400/20 text-center flex flex-col items-center justify-center min-w-0">
-                      <span className="text-base mb-0.5">🔍</span>
-                      <span className="text-[11px] font-bold text-gray-900 dark:text-white leading-tight truncate max-w-full">Diagnosis</span>
-                      <span className="text-[9.5px] text-gray-500 dark:text-zinc-400 truncate max-w-full">Accurate</span>
-                    </div>
-                  </div>
-
-                  {/* What's Included */}
-                  <div className="relative z-10 mb-4 flex-grow">
-                    <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white mb-2.5">
-                      <span>What's Included:</span>
-                      <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 normal-case">5 Core Checks</span>
-                    </div>
-                    <ul className="space-y-1.5">
-                      {[
-                        "Complete Vehicle Inspection",
-                        "Engine & Brake Check",
-                        "Battery & Electrical System Check",
-                        "Fault Diagnosis & Troubleshooting",
-                        "Expert Mechanic Advice"
-                      ].map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-2 p-2 rounded-xl bg-gray-50/80 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800/80">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                          <span className="text-xs font-bold text-gray-900 dark:text-white">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Actions: Book Now & View Technical Details */}
-                  <div className="relative z-10 mt-auto flex flex-col gap-2.5 pt-2 border-t border-gray-100 dark:border-zinc-800">
-                    <button 
-                      onClick={() => { 
-                        setSelectedPackage({ name: 'Inspection & Repair', price: '₹399' }); 
-                        setIsPackageModalOpen(true); 
-                      }} 
-                      className="w-full relative group/btn overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-zinc-950 font-black text-sm py-3.5 px-4 rounded-xl shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      <span className="relative z-10 flex items-center justify-center gap-1.5 font-black">
-                        Book Inspection &amp; Repair now <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
-                      </span>
-                    </button>
-                    <button 
-                      type="button"
-                      onClick={() => { 
-                        setTechnicalDetailsContent(SERVICE_DETAILS_DATA['Inspection & Repair']); 
-                        setIsTechnicalDetailsOpen(true); 
-                      }} 
-                      className="w-full text-center text-xs font-bold text-gray-700 hover:text-amber-600 dark:text-gray-200 dark:hover:text-amber-400 transition-colors py-2 rounded-lg hover:bg-gray-100/70 dark:hover:bg-zinc-800 cursor-pointer flex items-center justify-center gap-1.5 group/details"
-                      aria-label="View Service Details for Inspection & Repair"
-                    >
-                      <ClipboardList className="w-4 h-4 text-amber-500 group-hover/details:scale-110 transition-transform shrink-0" />
-                      <span>View Service Details (5 Points)</span>
                       <ChevronDown className="w-3.5 h-3.5 opacity-60 group-hover/details:translate-y-0.5 transition-transform shrink-0" />
                     </button>
                   </div>
