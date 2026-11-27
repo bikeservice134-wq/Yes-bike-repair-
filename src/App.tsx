@@ -1049,6 +1049,56 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
 
+  // SEO Deep-Linking & Dynamic Title for Bengaluru Local Search Intent (?area=, ?brand=, ?service=, ?q=)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const areaParam = params.get('area')?.trim();
+    const brandParam = params.get('brand')?.trim();
+    const serviceParam = params.get('service')?.trim();
+    const qParam = params.get('q')?.trim();
+
+    if (areaParam) {
+      setLocationSearch(`${areaParam}, Bengaluru`);
+      setActiveLocation(areaParam);
+    }
+    if (brandParam) {
+      const matchedBrand = Object.keys(MODELS_BY_BRAND).find(
+        (b) => b.toLowerCase() === brandParam.toLowerCase()
+      );
+      if (matchedBrand) setHeroBrand(matchedBrand);
+    }
+    if (serviceParam) {
+      const matchedOpt = QUICK_SERVICE_OPTIONS.find(
+        (o) =>
+          o.id.toLowerCase().includes(serviceParam.toLowerCase()) ||
+          o.name.toLowerCase().includes(serviceParam.toLowerCase())
+      );
+      if (matchedOpt) setHeroService(matchedOpt.id);
+    }
+    if (qParam && !areaParam && !brandParam) {
+      setLocationSearch(qParam);
+    }
+  }, []);
+
+  useEffect(() => {
+    const cleanArea = locationSearch.split(',')[0].trim();
+    if (currentView === 'admin') {
+      document.title = 'Admin Portal | Yes Bike Service Bengaluru';
+    } else if (currentView === 'privacy') {
+      document.title = 'Privacy Policy | Yes Bike Service Bengaluru';
+    } else if (currentView === 'terms') {
+      document.title = 'Terms of Service | Yes Bike Service Bengaluru';
+    } else if (cleanArea && heroBrand) {
+      document.title = `${heroBrand} Service in ${cleanArea}, Bengaluru | Yes Bike Service`;
+    } else if (cleanArea) {
+      document.title = `Doorstep Bike Service in ${cleanArea}, Bengaluru | Yes Bike Service`;
+    } else if (heroBrand) {
+      document.title = `${heroBrand} Doorstep Service in Bengaluru | Yes Bike Service`;
+    } else {
+      document.title = 'Yes Bike Service – Doorstep Bike Service in Bengaluru';
+    }
+  }, [currentView, locationSearch, heroBrand]);
+
   // Exact Booking Confirmation Message Generator
   const generateBookingConfirmationMessage = (data: {
     bookingId: string;
@@ -1510,19 +1560,19 @@ Sit back and relax. We've got your bike covered!`;
     {
       q: "1. What is doorstep bike service?",
       schemaQ: "What is doorstep bike service?",
-      a: "Doorstep bike service brings certified two-wheeler mechanics directly to your home, office, or roadside across Bengaluru. Mechanics arrive fully equipped with professional tools, diagnostic equipment, and genuine spare parts.",
+      a: "Doorstep bike service brings certified two-wheeler mechanics directly to your home, office, or roadside across Bengaluru. Mechanics arrive in ~30 minutes fully equipped with professional tools, diagnostic equipment, and genuine spare parts.",
       icon: Home
     },
     {
-      q: "2. Which two-wheeler brands do you service?",
-      schemaQ: "Which two-wheeler brands do you service?",
-      a: "We service all major brands in Bengaluru including Royal Enfield, Honda, Yamaha, KTM, Bajaj, TVS, Suzuki, Hero, Jawa, Yezdi, and electric scooters like Ather and Ola Electric.",
+      q: "2. Which two-wheeler brands do you service in Bengaluru?",
+      schemaQ: "Which two-wheeler brands do you service in Bengaluru?",
+      a: "We service all major bike and scooter brands in Bengaluru including Honda (Activa, Dio, Shine), Royal Enfield (Classic 350, Hunter 350, Interceptor 650), TVS (Jupiter, Ntorq, Apache), Bajaj (Pulsar, Dominar), Yamaha, Suzuki (Access 125), Hero, KTM, Ather, and Ola Electric.",
       icon: Bike
     },
     {
-      q: "3. How do I book a doorstep bike mechanic?",
-      schemaQ: "How do I book a doorstep bike mechanic?",
-      a: "Simply fill out our online booking form with your vehicle details, preferred date, time slot, and Bengaluru location, and click Submit the booking form. Our certified mechanic is assigned for your selected slot.",
+      q: "3. How do I book a doorstep bike mechanic in Bengaluru?",
+      schemaQ: "How do I book a doorstep bike mechanic in Bengaluru?",
+      a: "Simply enter your name, phone number, bike brand and model, Bengaluru locality, and preferred date and time in our booking form, then submit to schedule a verified mechanic at your doorstep.",
       icon: Calendar
     },
     {
@@ -1540,19 +1590,19 @@ Sit back and relax. We've got your bike covered!`;
     {
       q: "6. What doorstep bike services are available and what are the prices?",
       schemaQ: "What doorstep bike services are available and what are the prices?",
-      a: "We offer Basic General Service at ₹699 (discounted from ₹899), General Service with Engine Oil replacement at ₹1,349, Jump Start Service at ₹449, and Puncture Repair at ₹599.",
+      a: "We offer Basic General Service at ₹699, General Service with Engine Oil at ₹1,349, Royal Enfield 350cc–500cc General Service at ₹2,399/-, Royal Enfield 650cc Twin Service at ₹3,999, Jump Start Service at ₹449, and Puncture Repair at ₹599.",
       icon: Shield
     },
     {
       q: "7. Is there any advance payment required?",
       schemaQ: "Is there any advance payment required?",
-      a: "No advance payment is required. You pay only after the bike service is completed to your complete satisfaction.",
+      a: "No advance payment is required. You pay via UPI, Google Pay, PhonePe, Paytm, or cash only after your bike or scooter service is completed with a 30-day / 500 km warranty.",
       icon: CheckCircle2
     },
     {
       q: "8. Which areas in Bengaluru do you cover?",
       schemaQ: "Which areas in Bengaluru do you cover?",
-      a: "We cover all major locations across Bengaluru including Koramangala, Indiranagar, HSR Layout, Whitefield, Marathahalli, Bellandur, Electronic City, Jayanagar, JP Nagar, BTM Layout, Hebbal, Yelahanka, and surrounding areas.",
+      a: "We cover all major Bengaluru localities including Koramangala, Indiranagar, HSR Layout, Whitefield, Marathahalli, Bellandur, Electronic City, Jayanagar, JP Nagar, BTM Layout, Hebbal, Yelahanka, Malleshwaram, Rajajinagar, Banashankari, Sarjapur Road, and KR Puram.",
       icon: MapPin
     }
   ];
@@ -2374,6 +2424,56 @@ Sit back and relax. We've got your bike covered!`;
               <p className="text-base sm:text-lg md:text-xl font-black text-gray-900 dark:text-white leading-relaxed tracking-wide">
                 100,000+ Customers · Verified Mechanics · Trusted Service
               </p>
+            </div>
+
+            {/* Interactive Brand Coverage Grid for Bengaluru Local SEO & Quick Brand Booking */}
+            <div className="max-w-5xl mx-auto mb-8">
+              <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-center text-gray-600 dark:text-zinc-400 mb-4">
+                Two-Wheeler Brands We Service at Your Doorstep in Bengaluru (Tap a Brand to Book)
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-3">
+                {[
+                  { brand: 'Honda', models: 'Activa • Dio • Shine' },
+                  { brand: 'Royal Enfield', models: 'Classic 350 • Hunter' },
+                  { brand: 'TVS', models: 'Jupiter • Ntorq • Apache' },
+                  { brand: 'Bajaj', models: 'Pulsar • Dominar • Chetak' },
+                  { brand: 'Yamaha', models: 'FZ • R15 • Fascino' },
+                  { brand: 'Suzuki', models: 'Access 125 • Burgman' },
+                  { brand: 'Hero', models: 'Splendor • Xtreme • Destini' },
+                  { brand: 'KTM', models: 'Duke • RC • Adventure' },
+                  { brand: 'Ather', models: '450X • 450S • Rizta' },
+                  { brand: 'Ola Electric', models: 'S1 Pro • S1 Air' },
+                  { brand: 'Vespa', models: 'ZX 125 • VXL 150' },
+                  { brand: 'Jawa', models: 'Classic • 42 • Perak' }
+                ].map((item) => {
+                  const isActive = heroBrand === item.brand;
+                  return (
+                    <button
+                      key={item.brand}
+                      type="button"
+                      onClick={() => {
+                        setHeroBrand(item.brand);
+                        setHeroModel('');
+                        const bookingForm = document.getElementById('booking-form') || document.getElementById('home');
+                        if (bookingForm) bookingForm.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      title={`Book ${item.brand} doorstep service in Bengaluru`}
+                      className={`p-3 rounded-2xl border text-left transition-all cursor-pointer group ${
+                        isActive
+                          ? 'bg-amber-500/15 border-amber-500 shadow-sm ring-1 ring-amber-400/50'
+                          : 'bg-gray-50/80 dark:bg-zinc-900/80 border-gray-200/80 dark:border-zinc-800 hover:border-amber-400 hover:bg-amber-500/5'
+                      }`}
+                    >
+                      <span className="block text-xs sm:text-sm font-black text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors truncate">
+                        {item.brand}
+                      </span>
+                      <span className="block text-[10px] font-medium text-gray-500 dark:text-zinc-400 mt-0.5 truncate">
+                        {item.models}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* CTA Button */}
@@ -4373,18 +4473,23 @@ Sit back and relax. We've got your bike covered!`;
 
             <div className="flex flex-wrap gap-2">
               {[
-                "Indiranagar", "Koramangala", "HSR Layout", "Whitefield", 
-                "Jayanagar", "Electronic City", "Marathahalli", "BTM Layout", 
-                "Bellandur", "Hebbal", "JP Nagar", "Malleshwaram", 
-                "Bannerghatta Road", "Sarjapur Road", "Yelahanka"
+                "Indiranagar", "Koramangala", "HSR Layout", "Whitefield",
+                "Jayanagar", "Electronic City", "Marathahalli", "BTM Layout",
+                "Bellandur", "Hebbal", "JP Nagar", "Malleshwaram",
+                "Bannerghatta Road", "Sarjapur Road", "Yelahanka", "Rajajinagar",
+                "Banashankari", "Vijayanagar", "KR Puram", "Madiwala",
+                "Ulsoor", "Basavanagudi", "RT Nagar", "Kengeri"
               ].map((locality) => (
                 <button
                   key={locality}
+                  type="button"
                   onClick={() => {
-                    setLocationSearch(locality);
+                    setLocationSearch(`${locality}, Bengaluru`);
+                    setActiveLocation(locality);
                     const form = document.getElementById('booking-form') || document.getElementById('home');
                     if (form) form.scrollIntoView({ behavior: 'smooth' });
                   }}
+                  title={`Book doorstep bike service in ${locality}, Bengaluru`}
                   className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-amber-400 hover:text-amber-300 hover:bg-zinc-800 transition-all hover:scale-105 shadow-xs cursor-pointer"
                 >
                   📍 {locality}

@@ -1,6 +1,7 @@
-# Robots.txt for Yes Bike Service
+# Robots.txt for Yes Bike Service (yesbikeservice.in)
 User-agent: *
 Allow: /
+Disallow: /api/
 
 # Sitemap
 Sitemap: https://yesbikeservice.in/sitemap.xml
